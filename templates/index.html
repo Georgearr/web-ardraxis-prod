@@ -10,6 +10,7 @@
     />
   </head>
   <body>
+    <!-- Navbar Section -->
     <div class="navbar">
       <div class="nav-logo">
         <img src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}" alt="ARDRAXIS">
@@ -22,5 +23,24 @@
         <a href="#">TRY D'RAX</a>
       </div>
     </div>
+    <!-- End Navbar Section -->
+
+    <!-- About Section -->
+    <div class="bg-wrap">
+    <section class="about">
+        <div class="about-text">
+        <h1 class="text-shadow hidden">ARDRAXIS</h1>
+        <p class="text-shadow hidden" style="color: white;">
+            Ardraxis merupakan nama kabinet OSIS SMA IGS periode 2025/2026. Ardraxis
+            berarti "semangat dan inti" yang bermakna bahwa OSIS SMA IGS
+            adalah organisasi yang gagah dan tegar dalam menghadapi berbagai macam
+            masalah atau konflik apapun. Dan organisasi yang berani untuk bekerja,
+            berani untuk lelah, dan berani untuk bertanggung jawab.
+        </p>
+        </div>
+         <img src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}" alt="ARDRAXIS">
+    </section>
+    </div>
+    <!-- End About Section -->
   </body>
 </html>
