@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ARDRAXIS</title>
     <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='style.css') }}"
-    />
+      rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/animations.min.css' rel='stylesheet'>
+    <link href='https://cdn.boxicons.com/fonts/transformations.min.css' rel='stylesheet'>
   </head>
   <body>
     <!-- Navbar Section -->
@@ -42,5 +43,68 @@
     </section>
     </div>
     <!-- End About Section -->
+
+    <!-- Footer Section -->
+        <footer class="footer reveal-on-scroll">
+        <div class="footerbawah">
+            <div class="footerkiri">
+                <div class="footerkiriutama">
+                    <div class="footerkiriatas">
+                        <img src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}" alt="ARDRAXIS">
+                    </div>
+                    <div class="footerkiritengah">
+                        <h1>Ardraxis</h1>
+                    </div>
+                    <div class="footerkiribawah">
+                        <p>Kabinet OSIS SMA Ignatius Global <br>
+                           School periode 2025/2026</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footertengah">
+                <div class="footertengah1">
+                </div>
+                <div class="footertengah2">
+                    <div class="footertengah2-atas">
+                        <i class='bxr  bx-location'  style='color:white; font-size: 70px;'></i> 
+                    </div>
+                    <div class="footertengah2-bawah">
+                        <p>
+                            Jl. Mayor Ruslan No. 118, 20 Ilir I, Kec. Ilir Timur I, <br>Palembang
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="footerkanan">
+                <div class="footerkanan-isi">
+                    <div class="isi1">
+                        <a href="https://www.instagram.com/osis.smaigs/"><img src="{{ url_for('static', filename='img/instagram.png') }}" alt="Instagram Logo"></a>
+                        <p>Instagram</p>
+                    </div>
+                      <div class="isi1">
+                        <a href="https://x.com/osis_smaigs?t=L-SgwLESUY_a6ViBCYIlTw&s=09"><img src="{{ url_for('static', filename='img/twitter.png') }}" alt="Instagram Logo"></a>
+                        <p>Twitter</p>
+                    </div>
+                      <div class="isi1">
+                        <a href="https://www.tiktok.com/@osis.smaigs"><img src="{{ url_for('static', filename='img/tiktok.png') }}" alt="Instagram Logo"></a>
+                        <p>Tiktok</p>
+                    </div>
+                      <div class="isi1">
+                        <a href="https://line.me/R/ti/p/@053dzdrl?from=page"><img src="{{ url_for('static', filename='img/line.png') }}" alt="Instagram Logo" style="height: 5vh;"></a>
+                        <p style="margin-left: 20px;">Line</p>
+                    </div>
+                    <div class="isi1">
+                        <a href="https://www.youtube.com/channel/UCJcG1VCjXHNig5JIDEgYH7w"><img src="{{ url_for('static', filename='img/youtube.png') }}" alt="Instagram Logo"></a>
+                        <p>Youtube</p>
+                    </div>
+                    <div class="isi1">
+                        <a href="https://github.com/OSISSMAIGS"><img src="{{ url_for('static', filename='img/github.png') }}" alt="Instagram Logo"></a>
+                        <p>Github</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- End Footer Section -->
   </body>
 </html>

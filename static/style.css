@@ -167,7 +167,6 @@ section.about .about-text {
 section.about h1 {
     letter-spacing: 3px;
     color: #F3DE74;
-    text-shadow: 0 0 60px rgb(255, 178, 45), 0 0 25px rgb(255, 178, 45);
     font-family: 'Anton', sans-serif;
     font-size: 80px;
     color: rgb(255, 178, 45);
@@ -195,3 +194,137 @@ section.about img {
     filter: 0px 0px 3px #FFF;
 }
 /* END ABOUT SECTION */
+
+/* FOOTER SECTION */
+.footer{
+    width: 100%;
+    height: 60vh;
+    position: relative; /* Tambahkan untuk z-index */
+    z-index: 1; /* Lapisan 3: Di atas partikel (Perbaikan) */
+    text-shadow: 0 0 20px white;
+}
+.footeratas{
+    width: 100%;
+    height: 25vh;
+}
+.footerbawah{
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    color: white;
+    background: linear-gradient(to bottom, rgb(29, 105, 110), rgb(48, 171, 180));
+    overflow: hidden;
+    position: absolute;
+}
+.footerkiri{
+    width: 33%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.footerkiriutama{
+    width: 60%;
+    height: 80%;
+    margin-top: 7rem;
+}
+.footerkiriatas{
+    width: 100%;
+    height: 60%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.footerkiriatas img{
+    width: auto;
+    height: 100%;
+}
+.footerkiritengah{
+    width: 100%;
+    height: 17%;
+    text-align: center;
+    align-items: center;
+    font-size: 20px;
+}
+.footerkiribawah{
+    width: 100%;
+    height: 23%;
+    font-size: 18px;
+    text-align: center;
+}
+.footertengah{
+    width: 34%;
+    height: 100%;
+}
+.footertengah1{
+    width: 100%;
+    height: 50%;
+}
+.footertengah2{
+    width: 100%;
+    height: 50%;
+}
+.footertengah2-atas{
+    width: 100%;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.footertengah2-atas img{
+    width: 15%;
+    height: 70%;
+}
+.footertengah2-bawah{
+    width: 100%;
+    height: 50%;
+    text-align: center;
+    font-size: 18px;
+}
+.footerkanan{
+    width: 33%;
+    height: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.footerkanan-isi{
+    width: 100%;
+    height: 70%;
+    margin-top: 80px;
+}
+.footertengah2-bawah p:hover{
+    color: black;
+}
+.isi1{
+    width: 100%;
+    height: 15%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+.tengah-tengah2 b{
+    text-shadow: 0 0 30px #FFD700;
+}
+.isi1 a{
+    width: 7%;
+    height: auto;
+    margin-left: 12%;
+}
+isi1 img{
+    width: 100%;
+    height: auto;
+}
+.isi1 a:hover + p{
+    color: black;
+}
+.isi1 p:hover{
+    color: black;
+}
+.isi1 p{
+    font-size: 15px;
+    margin-left: 20px;
+}
+/* END FOOTER SECTION */
