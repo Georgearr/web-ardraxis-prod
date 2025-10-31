@@ -48,23 +48,25 @@ body {
 }
 
 .nav-logo img {
-  width: 60px;
-  height: 60px;
+  width: auto;
+  height: 40px;
   object-fit: cover;
   border-radius: 8px;
 }
 
-.nav-logo  {
+.nav-logo {
   color: #e2e8f0; /* slate-200 */
   font-weight: 700;
   letter-spacing: 0.5px;
 }
-.brand{
+
+.brand {
   font-size: 2rem;
   color: white;
-    font-weight: 700;
+  font-weight: 700;
   letter-spacing: 0.5px;
 }
+
 /* Link */
 .nav-nav {
   display: flex;
@@ -79,56 +81,54 @@ body {
   letter-spacing: 0.3px;
   padding: 8px 10px;
   border-radius: 8px;
-  transition: color 160ms ease, background 160ms ease, transform 120ms ease;
+  /* Transisi diperhalus */
+  transition: 
+    color 0.6s ease-in-out,
+    transform 0.4s ease-in-out,
+    text-shadow 0.8s ease-in-out;
 }
 
+/* Efek hover dengan glow halus */
 .nav-nav a:hover {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
   transform: translateY(-1px);
+  animation: glowFade 0.4s ease-in-out forwards;
+}
+
+/* Efek saat tidak dihover (glow menghilang halus) */
+.nav-nav a:not(:hover) {
+  animation: glowFadeOut 0.4s ease-in-out forwards;
+}
+
+/* Animasi nyala (fade-in) */
+@keyframes glowFade {
+  from {
+    text-shadow: none;
+  }
+  to {
+    text-shadow: 
+      0 0 5px #00ffff,
+      0 0 10px #00ffff,
+      0 0 20px #00ffff,
+      0 0 40px #00ffff;
+  }
+}
+
+/* Animasi mati (fade-out) */
+@keyframes glowFadeOut {
+  from {
+    text-shadow: 
+      0 0 5px #00ffff,
+      0 0 10px #00ffff,
+      0 0 20px #00ffff,
+      0 0 40px #00ffff;
+  }
+  to {
+    text-shadow: none;
+  }
 }
 
 .nav-nav a:active {
   transform: translateY(0);
 }
 
-/* Tombol call-to-action (opsional: untuk TRY D'RAX) */
-.nav-nav a:last-child {
-  color: #0b1220;
-  background: linear-gradient(135deg, #28bba7, #054d52);
-  font-weight: 700;
-}
-
-.nav-nav a:last-child:hover {
-  filter: brightness(1.05);
-  color: #0b1220;
-  background: linear-gradient(135deg, #1be0c9, #108c95);
-}
-
-/* Responsif */
-@media (max-width: 768px) {
-  .nav-nav {
-    gap: 10px;
-  }
-  .nav-nav a {
-    padding: 8px 8px;
-    font-size: 14px;
-  }
-  .nav-logo img {
-    width: 32px;
-    height: 32px;
-  }
-}
-
-/* Stack vertikal di layar sangat kecil */
-@media (max-width: 480px) {
-  .navbar {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-  }
-  .nav-nav {
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-}
