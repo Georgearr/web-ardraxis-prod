@@ -1,0 +1,128 @@
+/* Reset dasar */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #0f172a; /* slate-900 */
+  background: #f8fafc; /* slate-50 */
+}
+
+/* Navbar */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background: rgb(29, 105, 110); /* slate-900, semi-transparent */
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Container */
+.navbar > .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Bila tidak ingin pakai .container, gaya langsung ke .navbar child */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+}
+
+/* Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-logo img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.nav-logo .brand {
+  color: #e2e8f0; /* slate-200 */
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Link */
+.nav-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-nav a {
+  color: #cbd5e1; /* slate-300 */
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition: color 160ms ease, background 160ms ease, transform 120ms ease;
+}
+
+.nav-nav a:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.nav-nav a:active {
+  transform: translateY(0);
+}
+
+/* Tombol call-to-action (opsional: untuk TRY D'RAX) */
+.nav-nav a:last-child {
+  color: #0b1220;
+  background: linear-gradient(135deg, #60a5fa, #22d3ee);
+  font-weight: 700;
+}
+
+.nav-nav a:last-child:hover {
+  filter: brightness(1.05);
+  color: #0b1220;
+  background: linear-gradient(135deg, #7cb5ff, #38e0f3);
+}
+
+/* Responsif */
+@media (max-width: 768px) {
+  .nav-nav {
+    gap: 10px;
+  }
+  .nav-nav a {
+    padding: 8px 8px;
+    font-size: 14px;
+  }
+  .nav-logo img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Stack vertikal di layar sangat kecil */
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .nav-nav {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+}
