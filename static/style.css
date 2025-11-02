@@ -160,6 +160,155 @@ body {
   transform: translateY(0);
 }
 
+/* Hamburger Button */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+  position: relative;
+}
+
+.hamburger span {
+  width: 100%;
+  height: 3px;
+  background-color: white;
+  border-radius: 3px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(10px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* Sidebar Overlay */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -300px;
+  width: 300px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgb(29, 105, 110), rgb(48, 171, 180));
+  z-index: 1000;
+  transition: right 0.3s ease;
+  overflow-y: auto;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar.active {
+  right: 0;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(29, 105, 110, 0.9);
+}
+
+.sidebar-header img {
+  width: auto;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.sidebar-brand {
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 5px #0e3a42, 0 0 1px #0e3a42, 0 0 1.5px #0e3a42,
+    0 0 2px white;
+  flex: 1;
+}
+
+.sidebar-close {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.sidebar-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(90deg);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
+
+.sidebar-nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  padding: 15px 25px;
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-nav a:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-left-color: white;
+  padding-left: 30px;
+  text-shadow: 0 0 5px #96cccd, 0 0 10px #96cccd;
+}
+
+.sidebar-nav a:active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 /* Home Section */
 .home {
   min-height: 100vh;
@@ -346,7 +495,7 @@ body {
 
 /* ABOUT SECTION */
 .bg-wrap {
-  background-color: rgb(95, 165, 159);
+  background: linear-gradient(135deg, #1a5f66 0%, #2d8f9a 50%, #30a8b8 100%);
 }
 
 section.about {
@@ -357,8 +506,53 @@ section.about {
   width: 90%;
   min-height: 100vh;
   align-items: center;
-  background-color: rgb(95, 165, 159);
+  /* Gradient background yang menarik dengan warna cyan/teal yang harmonis */
+  background: linear-gradient(135deg, #1a5f66 0%, #2d8f9a 50%, #30a8b8 100%);
+  position: relative;
+  overflow: hidden;
   /* padding-bottom: 15vh; */
+}
+
+/* Background Pattern Overlay untuk efek depth */
+section.about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(
+      circle at 30% 70%,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 30%,
+      rgba(255, 255, 255, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(29, 105, 110, 0.2) 0%,
+      transparent 60%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle wave pattern overlay */
+section.about::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.05) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 0;
 }
 
 .waves-2 {
@@ -370,6 +564,8 @@ section.about .about-text {
   flex-direction: column;
   justify-content: center;
   width: 70%;
+  position: relative;
+  z-index: 1;
 }
 
 section.about h1 {
@@ -397,7 +593,10 @@ section.about .about-content {
 section.about img {
   width: 400px;
   height: 400px;
-  filter: 0px 0px 3px #fff;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+  position: relative;
+  z-index: 1;
+  animation: float 6s ease-in-out infinite;
 }
 /* END ABOUT SECTION */
 
@@ -514,14 +713,42 @@ section.about img {
 .tengah-tengah2 b {
   text-shadow: 0 0 30px #ffd700;
 }
-.isi1 a {
+.isi1 a{
   width: 7%;
   height: auto;
   margin-left: 12%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-isi1 img {
+.isi1 img{
   width: 100%;
   height: auto;
+}
+/* ========================================
+   UKURAN ICON SOCIAL MEDIA - DESKTOP
+   Ubah font-size di bawah untuk mengubah ukuran icon
+   ======================================== */
+.isi1 i,
+.isi1 .bi {
+  color: white;
+  display: block;
+  font-size: 24px; /* ← UBAH NILAI INI untuk ukuran desktop */
+  line-height: 1;
+  width: 100%;
+  text-align: center;
+}
+.isi1 a i,
+.isi1 a .bi {
+  font-size: 30px; /* ← UBAH NILAI INI untuk ukuran desktop */
+  color: white;
+  line-height: 1;
+  transition: all 0.3s ease;
+}
+.isi1 a:hover i,
+.isi1 a:hover .bi {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 5px rgba(150, 204, 205, 0.8));
 }
 .isi1 a:hover + p {
   color: black;
@@ -534,3 +761,359 @@ isi1 img {
   margin-left: 20px;
 }
 /* END FOOTER SECTION */
+
+/* ========================================
+   RESPONSIVE DESIGN - NAVBAR, ABOUT, FOOTER
+   ======================================== */
+
+/* Tablet (max-width: 992px) */
+@media (max-width: 992px) {
+  /* Navbar Responsive */
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  .brand {
+    font-size: 1.5rem;
+  }
+
+  .nav-logo img {
+    height: 35px;
+  }
+
+  /* Hide nav links, show hamburger */
+  .nav-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* About Section Responsive */
+  section.about {
+    flex-direction: column;
+    margin-left: 0;
+    width: 100%;
+    padding: 60px 20px;
+    gap: 40px;
+  }
+
+  section.about .about-text {
+    width: 100%;
+    text-align: center;
+  }
+
+  section.about h1 {
+    font-size: 3.5rem;
+    letter-spacing: 3px;
+  }
+
+  section.about p {
+    font-size: 20px;
+  }
+
+  section.about img {
+    width: 300px;
+    height: 300px;
+  }
+
+  /* Footer Responsive */
+  .footer {
+    height: auto;
+    min-height: 60vh;
+  }
+
+  .footerbawah {
+    flex-direction: column;
+    height: auto;
+    min-height: 60vh;
+    padding: 40px 20px;
+    gap: 40px;
+  }
+
+  .footerkiri,
+  .footertengah,
+  .footerkanan {
+    width: 100%;
+    height: auto;
+  }
+
+  .footerkiriutama {
+    width: 100%;
+    margin-top: 0;
+  }
+
+  .footertengah2-atas i {
+    font-size: 50px !important;
+  }
+
+  .footerkanan-isi {
+    margin-top: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .isi1 {
+    width: auto;
+    height: auto;
+    margin: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .isi1 a {
+    width: auto;
+    margin-left: 0;
+  }
+
+  /* Ukuran icon untuk Tablet */
+  .isi1 a i,
+  .isi1 a .bi {
+    font-size: 28px; /* ← UBAH NILAI INI untuk ukuran tablet */
+  }
+
+  .isi1 p {
+    margin-left: 0;
+    font-size: 14px;
+  }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+  /* Navbar Responsive */
+  .navbar {
+    padding: 8px 12px;
+  }
+
+  .brand {
+    font-size: 1.3rem;
+    letter-spacing: 0.3px;
+  }
+
+  .nav-logo {
+    gap: 8px;
+  }
+
+  .nav-logo img {
+    height: 30px;
+  }
+
+  /* Ensure nav is hidden and hamburger is shown */
+  .nav-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Sidebar adjustments for mobile */
+  .sidebar {
+    width: 280px;
+  }
+
+  .sidebar-header {
+    padding: 15px;
+  }
+
+  .sidebar-header img {
+    height: 35px;
+  }
+
+  .sidebar-brand {
+    font-size: 1.3rem;
+  }
+
+  .sidebar-nav a {
+    font-size: 1.1rem;
+    padding: 12px 20px;
+  }
+
+  /* About Section Responsive */
+  section.about {
+    padding: 40px 15px;
+    gap: 30px;
+  }
+
+  section.about h1 {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+
+  section.about p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  section.about img {
+    width: 250px;
+    height: 250px;
+  }
+
+  /* Footer Responsive */
+  .footerbawah {
+    padding: 30px 15px;
+    gap: 30px;
+  }
+
+  .footerkiriatas img {
+    height: 80px;
+  }
+
+  .footerkiritengah h1 {
+    font-size: 1.5rem;
+  }
+
+  .footerkiribawah p {
+    font-size: 16px;
+  }
+
+  .footertengah2-atas i {
+    font-size: 40px !important;
+  }
+
+  .footertengah2-bawah p {
+    font-size: 16px;
+  }
+
+  .footerkanan-isi {
+    gap: 15px;
+  }
+
+  .isi1 a img {
+    width: 30px;
+    height: auto;
+  }
+
+  /* Ukuran icon untuk Mobile */
+  .isi1 a i,
+  .isi1 a .bi {
+    font-size: 24px; /* ← UBAH NILAI INI untuk ukuran mobile */
+  }
+
+  .isi1 p {
+    font-size: 12px;
+  }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  /* Navbar Responsive */
+  .brand {
+    font-size: 1.1rem;
+  }
+
+  .nav-logo img {
+    height: 28px;
+  }
+
+  /* Ensure nav is hidden and hamburger is shown */
+  .nav-nav {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+    width: 26px;
+    height: 26px;
+  }
+
+  /* Sidebar adjustments for small mobile */
+  .sidebar {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .sidebar-header {
+    padding: 12px;
+  }
+
+  .sidebar-header img {
+    height: 30px;
+  }
+
+  .sidebar-brand {
+    font-size: 1.1rem;
+  }
+
+  .sidebar-nav a {
+    font-size: 1rem;
+    padding: 12px 18px;
+  }
+
+  /* About Section Responsive */
+  section.about {
+    padding: 30px 10px;
+    gap: 25px;
+  }
+
+  section.about h1 {
+    font-size: 2rem;
+    letter-spacing: 1.5px;
+  }
+
+  section.about p {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  section.about img {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Footer Responsive */
+  .footerbawah {
+    padding: 25px 10px;
+    gap: 25px;
+  }
+
+  .footerkiriatas img {
+    height: 60px;
+  }
+
+  .footerkiritengah h1 {
+    font-size: 1.3rem;
+  }
+
+  .footerkiribawah p {
+    font-size: 14px;
+  }
+
+  .footertengah2-atas i {
+    font-size: 35px !important;
+  }
+
+  .footertengah2-bawah p {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .footerkanan-isi {
+    gap: 12px;
+  }
+
+  .isi1 {
+    gap: 5px;
+  }
+
+  .isi1 a img {
+    width: 25px;
+  }
+
+  /* Ukuran icon untuk Small Mobile */
+  .isi1 a i,
+  .isi1 a .bi {
+    font-size: 20px; /* ← UBAH NILAI INI untuk ukuran small mobile */
+  }
+
+  .isi1 p {
+    font-size: 11px;
+  }
+}
