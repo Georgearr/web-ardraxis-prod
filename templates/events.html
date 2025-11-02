@@ -3,18 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ardraxis | OSIS SMA IGS</title>
+    <title>Events | OSIS SMA IGS</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
     <link
-      href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
-      rel="stylesheet"
+    href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
+    rel="stylesheet"
     /> 
     <link
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+    
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/events.css') }}"
     />
 
     <link
@@ -111,88 +116,22 @@
     </div>
     <!-- End Sidebar Section -->
 
-    <!-- Home Section -->
-    <section class="home" id="h">
-      <div class="home-image">
+    <!-- Events Section -->
+    <section class="events" id="e">
+      <div class="events-image">
         <img
           src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
           alt="ARDRAXIS"
         />
       </div>
-      <div class="home-text">
-        <h1 class="text-shadow hidden">ARDRAXIS</h1>
+      <div class="events-text">
+        <h1 class="text-shadow hidden">No Events Yet...</h1>
         <p class="text-shadow hidden">
-          Kabinet OSIS SMA Ignatius Global School Periode 2025/2026
+          We're cooking up something. We'll be right back!
         </p>
       </div>
     </section>
-    <!-- End Home Section -->
-
-    <!-- About Section -->
-      <section class="about" id="a">
-        <div class="about-text">
-          <h1 class="text-shadow hidden">ARDRAXIS</h1>
-          <p class="text-shadow hidden" style="color: white">
-            Ardraxis merupakan nama kabinet OSIS SMA IGS periode 2025/2026.
-            Ardraxis berarti "semangat dan inti" yang bermakna bahwa OSIS SMA
-            IGS adalah organisasi yang gagah dan tegar dalam menghadapi berbagai
-            macam masalah atau konflik apapun. Dan organisasi yang berani untuk
-            bekerja, berani untuk lelah, dan berani untuk bertanggung jawab.
-          </p>
-        </div>
-        <img
-          src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-          alt="ARDRAXIS"
-        />
-      </section>
-    <!-- End About Section -->
-
-    <!-- Prior Cabinets Section -->
-    <section class="prior-cabinets" id="pc">
-      <h2 class="prior-cabinets-title text-shadow hidden">Our Prior Cabinets</h2>
-      <div class="prior-cabinets-container hidden">
-        
-        <div class="cabinet-card hidden">
-          <div class="cabinet-card-image">
-            <img
-              src="{{ url_for('static', filename='img/Valiance.png') }}"
-              alt="Valiance"
-              class="cabinet-image"
-            />
-          </div>
-          <h3 class="cabinet-card-title">Valiance</h3>
-          <p class="cabinet-card-desc">Kabinet OSIS SMA Ignatius Global School periode 2024/2025</p>
-          <button class="cabinet-card-button">Click Here</button>
-        </div>
-
-        <div class="cabinet-card hidden">
-          <div class="cabinet-card-image">
-            <img
-              src="{{ url_for('static', filename='img/asteration.png') }}"
-              alt="Asteration"
-              class="cabinet-image"
-            />
-          </div>
-          <h3 class="cabinet-card-title">Asteration</h3>
-          <p class="cabinet-card-desc">Kabinet OSIS SMA Ignatius Global School periode 2023/2024</p>
-          <button class="cabinet-card-button">Click Here</button>
-        </div>
-
-        <div class="cabinet-card hidden">
-          <div class="cabinet-card-image">
-            <img
-              src="{{ url_for('static', filename='img/credence.png') }}"
-              alt="Credence"
-              class="cabinet-image"
-            />
-          </div>
-          <h3 class="cabinet-card-title">Credence</h3>
-          <p class="cabinet-card-desc">Kabinet OSIS SMA Ignatius Global School periode 2022/2023</p>
-          <button class="cabinet-card-button">Click Here</button>
-        </div>
-      </div>
-    </section>
-    <!-- End Prior Cabinets Section -->
+    <!-- End Events Section -->
 
     <!-- Footer Section -->
     <footer class="footer reveal-on-scroll">
