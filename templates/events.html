@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block link %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/events.css') }}">
+{% endblock %}
+{% block isi %}
+   <!-- Events Section -->
+    <section class="events" id="e">
+      <div class="events-image">
+        <img
+          src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
+          alt="ARDRAXIS"
+        />
+      </div>
+      <div class="events-text">
+        <h1 class="text-shadow hidden">No Events Yet...</h1>
+        <p class="text-shadow hidden">
+          We're cooking up something. We'll be right back!
+        </p>
+      </div>
+    </section>
+    <!-- End Events Section -->
+
+    <script src="{{ url_for('static', filename='js/events.js') }}"></script>
+{% endblock %}
