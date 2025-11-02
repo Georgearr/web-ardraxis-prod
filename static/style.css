@@ -446,7 +446,7 @@ body {
   }
 
   .home-image img {
-    width: 250px;
+    width: 500px;
   }
 
   .home-text h1 {
@@ -465,7 +465,7 @@ body {
   }
 
   .home-image img {
-    width: 200px;
+    width: 300px;
   }
 
   .home-text h1 {
@@ -494,16 +494,12 @@ body {
 }
 
 /* ABOUT SECTION */
-.bg-wrap {
-  background: linear-gradient(135deg, #1a5f66 0%, #2d8f9a 50%, #30a8b8 100%);
-}
 
 section.about {
   display: flex;
-  margin-left: 5%;
   flex-direction: row;
   justify-content: center;
-  width: 90%;
+  width: 100%;
   min-height: 100vh;
   align-items: center;
   /* Gradient background yang menarik dengan warna cyan/teal yang harmonis */
@@ -512,14 +508,18 @@ section.about {
   overflow: hidden;
   /* padding-bottom: 15vh; */
 }
-
+.about-text{
+  margin-left: 5%;
+}
+.about img{
+  margin-right: 5%;
+}
 /* Background Pattern Overlay untuk efek depth */
 section.about::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: 
-    radial-gradient(
+  background: radial-gradient(
       circle at 30% 70%,
       rgba(255, 255, 255, 0.1) 0%,
       transparent 50%
@@ -546,11 +546,7 @@ section.about::after {
   left: 0;
   right: 0;
   height: 100px;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.05) 0%,
-    transparent 100%
-  );
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.05) 0%, transparent 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -713,7 +709,7 @@ section.about img {
 .tengah-tengah2 b {
   text-shadow: 0 0 30px #ffd700;
 }
-.isi1 a{
+.isi1 a {
   width: 7%;
   height: auto;
   margin-left: 12%;
@@ -721,7 +717,7 @@ section.about img {
   align-items: center;
   justify-content: center;
 }
-.isi1 img{
+.isi1 img {
   width: 100%;
   height: auto;
 }
@@ -802,6 +798,7 @@ section.about img {
   section.about .about-text {
     width: 100%;
     text-align: center;
+    margin: 0;
   }
 
   section.about h1 {
@@ -843,7 +840,9 @@ section.about img {
     width: 100%;
     margin-top: 0;
   }
-
+  .footerkiriatas img {
+    height: 250px;
+  }
   .footertengah2-atas i {
     font-size: 50px !important;
   }
