@@ -1,5 +1,3 @@
-
-
 /* Reset dasar */
 * {
   box-sizing: border-box;
@@ -65,11 +63,45 @@ body {
 
 .brand {
   font-size: 2rem;
-  color: white;
+  color: #d2983f;
   font-weight: 700;
   letter-spacing: 0.5px;
+  text-shadow: 0 0 5px rgb(255, 255, 255), 0 0 1px #ffffff, 0 0 1.5px #ffffff,
+    0 0 2px #ffffff;
+}
+.brand:hover {
+  color: #d2983f;
+  transform: translateY(-1px);
+  animation: glowUp 0.4s ease-in-out forwards;
+  cursor: pointer;
 }
 
+/* Efek saat tidak dihover (glow menghilang halus) */
+.brand:not(:hover) {
+  animation: glowDown 0.4s ease-in-out forwards;
+}
+
+/* Animasi nyala (fade-in) */
+@keyframes glowUp {
+  from {
+    text-shadow: none;
+  }
+  to {
+    text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff,
+      0 0 40px #ffffff;
+  }
+}
+
+/* Animasi mati (fade-out) */
+@keyframes glowDown {
+  from {
+    text-shadow: 0 0 5px #ffffff, 0 0 10px #000000, 0 0 20px #ffffff,
+      0 0 40px #00ffff;
+  }
+  to {
+    text-shadow: none;
+  }
+}
 /* Link */
 .nav-nav {
   display: flex;
@@ -85,9 +117,7 @@ body {
   padding: 8px 10px;
   border-radius: 8px;
   /* Transisi diperhalus */
-  transition: 
-    color 0.6s ease-in-out,
-    transform 0.4s ease-in-out,
+  transition: color 0.6s ease-in-out, transform 0.4s ease-in-out,
     text-shadow 0.8s ease-in-out;
 }
 
@@ -109,10 +139,7 @@ body {
     text-shadow: none;
   }
   to {
-    text-shadow: 
-      0 0 5px #00ffff,
-      0 0 10px #00ffff,
-      0 0 20px #00ffff,
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff,
       0 0 40px #00ffff;
   }
 }
@@ -120,10 +147,7 @@ body {
 /* Animasi mati (fade-out) */
 @keyframes glowFadeOut {
   from {
-    text-shadow: 
-      0 0 5px #00ffff,
-      0 0 10px #00ffff,
-      0 0 20px #00ffff,
+    text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff,
       0 0 40px #00ffff;
   }
   to {
@@ -136,195 +160,190 @@ body {
 }
 
 /* ABOUT SECTION */
-.bg-wrap{
-    width: 100vw;
-    background-color: #000;
-    padding: 5rem 0;
+.bg-wrap {
+  background-color: rgb(95, 165, 159);
 }
 
 section.about {
-    display: flex;
-    margin-left: 5%;
-    flex-direction: row;
-    justify-content: center;
-    width: 90%;
-    align-items: center;
-    background-color: #000;
-    /* padding-bottom: 15vh; */
+  display: flex;
+  margin-left: 5%;
+  flex-direction: row;
+  justify-content: center;
+  width: 90%;
+  height: 93vh;
+  align-items: center;
+  background-color: rgb(95, 165, 159);
+  /* padding-bottom: 15vh; */
 }
 
-.waves-2{
-    background-color: rgb(124, 28, 28)
+.waves-2 {
+  background-color: rgb(124, 28, 28);
 }
 
 section.about .about-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70%;
 }
 
 section.about h1 {
-    letter-spacing: 3px;
-    color: #F3DE74;
-    font-family: 'Anton', sans-serif;
-    font-size: 80px;
-    color: rgb(255, 178, 45);
-    text-shadow:
-      0 0 10px rgb(255, 178, 45),
-      0 0 20px #fbbf24,
-      0 0 40px #fbbf24,
-      0 0 80px #D19C22;
-    font-weight: 900;
-    text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #d2983f;
+  font-family: "Anton", sans-serif;
+  font-size: 80px;
+  text-shadow: 0 0 7px rgb(255, 255, 255), 0 0 11px #ffffff, 0 0 14px #ffffff,
+    0 0 18px #000000;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
-section.about p{
-    font-size: 25px;
+section.about p {
+  font-size: 25px;
 }
 
 section.about .about-content {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 section.about img {
-    width: 35%;
-    height: 35%;
-    filter: 0px 0px 3px #FFF;
+  width: 350px;
+  height: 350px;
+  filter: 0px 0px 3px #fff;
 }
 /* END ABOUT SECTION */
 
 /* FOOTER SECTION */
-.footer{
-    width: 100%;
-    height: 60vh;
-    position: relative; /* Tambahkan untuk z-index */
-    z-index: 1; /* Lapisan 3: Di atas partikel (Perbaikan) */
-    text-shadow: 0 0 20px white;
+.footer {
+  width: 100%;
+  height: 60vh;
+  position: relative; /* Tambahkan untuk z-index */
+  z-index: 1; /* Lapisan 3: Di atas partikel (Perbaikan) */
+  text-shadow: 0 0 20px white;
 }
-.footeratas{
-    width: 100%;
-    height: 25vh;
+.footeratas {
+  width: 100%;
+  height: 25vh;
 }
-.footerbawah{
-    width: 100%;
-    height: 60vh;
-    display: flex;
-    color: white;
-    background: linear-gradient(to bottom, rgb(29, 105, 110), rgb(48, 171, 180));
-    overflow: hidden;
-    position: absolute;
+.footerbawah {
+  width: 100%;
+  height: 60vh;
+  display: flex;
+  color: white;
+  background: linear-gradient(to bottom, rgb(29, 105, 110), rgb(48, 171, 180));
+  overflow: hidden;
+  position: absolute;
 }
-.footerkiri{
-    width: 33%;
-    height: 100%;
-    justify-content: center;
-    display: flex;
-    align-items: center;
+.footerkiri {
+  width: 33%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
-.footerkiriutama{
-    width: 60%;
-    height: 80%;
-    margin-top: 7rem;
+.footerkiriutama {
+  width: 60%;
+  height: 80%;
+  margin-top: 7rem;
 }
-.footerkiriatas{
-    width: 100%;
-    height: 60%;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+.footerkiriatas {
+  width: 100%;
+  height: 60%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
-.footerkiriatas img{
-    width: auto;
-    height: 100%;
+.footerkiriatas img {
+  width: auto;
+  height: 100%;
 }
-.footerkiritengah{
-    width: 100%;
-    height: 17%;
-    text-align: center;
-    align-items: center;
-    font-size: 20px;
+.footerkiritengah {
+  width: 100%;
+  height: 17%;
+  text-align: center;
+  align-items: center;
+  font-size: 20px;
 }
-.footerkiribawah{
-    width: 100%;
-    height: 23%;
-    font-size: 18px;
-    text-align: center;
+.footerkiribawah {
+  width: 100%;
+  height: 23%;
+  font-size: 18px;
+  text-align: center;
 }
-.footertengah{
-    width: 34%;
-    height: 100%;
+.footertengah {
+  width: 34%;
+  height: 100%;
 }
-.footertengah1{
-    width: 100%;
-    height: 50%;
+.footertengah1 {
+  width: 100%;
+  height: 50%;
 }
-.footertengah2{
-    width: 100%;
-    height: 50%;
+.footertengah2 {
+  width: 100%;
+  height: 50%;
 }
-.footertengah2-atas{
-    width: 100%;
-    height: 50%;
-    justify-content: center;
-    align-items: center;
-    display: flex;
+.footertengah2-atas {
+  width: 100%;
+  height: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
-.footertengah2-atas img{
-    width: 15%;
-    height: 70%;
+.footertengah2-atas img {
+  width: 15%;
+  height: 70%;
 }
-.footertengah2-bawah{
-    width: 100%;
-    height: 50%;
-    text-align: center;
-    font-size: 18px;
+.footertengah2-bawah {
+  width: 100%;
+  height: 50%;
+  text-align: center;
+  font-size: 18px;
 }
-.footerkanan{
-    width: 33%;
-    height: 100%;
-    justify-content: center;
-    display: flex;
-    align-items: center;
+.footerkanan {
+  width: 33%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
-.footerkanan-isi{
-    width: 100%;
-    height: 70%;
-    margin-top: 80px;
+.footerkanan-isi {
+  width: 100%;
+  height: 70%;
+  margin-top: 80px;
 }
-.footertengah2-bawah p:hover{
-    color: black;
+.footertengah2-bawah p:hover {
+  color: black;
 }
-.isi1{
-    width: 100%;
-    height: 15%;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
+.isi1 {
+  width: 100%;
+  height: 15%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
 }
-.tengah-tengah2 b{
-    text-shadow: 0 0 30px #FFD700;
+.tengah-tengah2 b {
+  text-shadow: 0 0 30px #ffd700;
 }
-.isi1 a{
-    width: 7%;
-    height: auto;
-    margin-left: 12%;
+.isi1 a {
+  width: 7%;
+  height: auto;
+  margin-left: 12%;
 }
-isi1 img{
-    width: 100%;
-    height: auto;
+isi1 img {
+  width: 100%;
+  height: auto;
 }
-.isi1 a:hover + p{
-    color: black;
+.isi1 a:hover + p {
+  color: black;
 }
-.isi1 p:hover{
-    color: black;
+.isi1 p:hover {
+  color: black;
 }
-.isi1 p{
-    font-size: 15px;
-    margin-left: 20px;
+.isi1 p {
+  font-size: 15px;
+  margin-left: 20px;
 }
 /* END FOOTER SECTION */
