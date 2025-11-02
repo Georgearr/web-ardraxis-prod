@@ -564,6 +564,7 @@ section.about .about-text {
   z-index: 1;
 }
 
+
 section.about h1 {
   font-size: 4.5rem;
   font-weight: 800;
@@ -818,15 +819,15 @@ section.about img {
   /* Footer Responsive */
   .footer {
     height: auto;
-    min-height: 60vh;
+    min-height: auto;
   }
 
   .footerbawah {
     flex-direction: column;
     height: auto;
-    min-height: 60vh;
-    padding: 40px 20px;
-    gap: 40px;
+    min-height: auto;
+    padding: 30px 20px;
+    gap: 30px;
   }
 
   .footerkiri,
@@ -841,7 +842,7 @@ section.about img {
     margin-top: 0;
   }
   .footerkiriatas img {
-    height: 250px;
+    height: 150px;
   }
   .footertengah2-atas i {
     font-size: 50px !important;
@@ -956,9 +957,16 @@ section.about img {
   }
 
   /* Footer Responsive */
+  .footer {
+    height: auto;
+    min-height: auto;
+  }
+
   .footerbawah {
-    padding: 30px 15px;
-    gap: 30px;
+    padding: 25px 15px;
+    gap: 25px;
+    height: auto;
+    min-height: auto;
   }
 
   .footerkiriatas img {
@@ -966,11 +974,11 @@ section.about img {
   }
 
   .footerkiritengah h1 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 
   .footerkiribawah p {
-    font-size: 16px;
+    font-size: 20px;
   }
 
   .footertengah2-atas i {
@@ -978,7 +986,7 @@ section.about img {
   }
 
   .footertengah2-bawah p {
-    font-size: 16px;
+    font-size: 20px;
   }
 
   .footerkanan-isi {
@@ -997,13 +1005,14 @@ section.about img {
   }
 
   .isi1 p {
-    font-size: 12px;
+    font-size: 16px;
   }
 }
 
 /* Small Mobile (max-width: 480px) */
 @media (max-width: 480px) {
   /* Navbar Responsive */
+ 
   .brand {
     font-size: 1.1rem;
   }
@@ -1011,7 +1020,7 @@ section.about img {
   .nav-logo img {
     height: 28px;
   }
-
+  
   /* Ensure nav is hidden and hamburger is shown */
   .nav-nav {
     display: none;
@@ -1068,9 +1077,16 @@ section.about img {
   }
 
   /* Footer Responsive */
+  .footer {
+    height: auto;
+    min-height: auto;
+  }
+
   .footerbawah {
-    padding: 25px 10px;
-    gap: 25px;
+    padding: 20px 10px;
+    gap: 20px;
+    height: auto;
+    min-height: auto;
   }
 
   .footerkiriatas img {
@@ -1078,11 +1094,11 @@ section.about img {
   }
 
   .footerkiritengah h1 {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
   }
 
   .footerkiribawah p {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .footertengah2-atas i {
@@ -1090,7 +1106,7 @@ section.about img {
   }
 
   .footertengah2-bawah p {
-    font-size: 14px;
+    font-size: 18px;
     line-height: 1.4;
   }
 
@@ -1113,6 +1129,6 @@ section.about img {
   }
 
   .isi1 p {
-    font-size: 11px;
+    font-size: 14px;
   }
 }
