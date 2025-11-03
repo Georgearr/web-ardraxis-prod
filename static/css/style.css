@@ -521,7 +521,39 @@ body {
 /* ============================================
    END HOME SECTION - RESPONSIVE DESIGN
    ============================================ */
+/* ============================================
+   EVENTS SECTION
+   ============================================ */
 
+section.events {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+  background: linear-gradient(135deg, #1a5f66 0%, #2d8f9a 50%, #30a8b8 100%);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+div.events-image > img {
+  width: 400px;
+  max-width: 100%;
+  height: 400px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+  animation: float 6s ease-in-out infinite;
+}
+
+div.events-text {
+  color: #ffffff;
+}
+
+/* ============================================
+   END EVENTS SECTION
+   ============================================ */
 /* ============================================
    ABOUT SECTION
    ============================================ */
@@ -997,9 +1029,6 @@ section.about img {
   height: 70%;
   margin-top: 80px;
 }
-.footertengah2-bawah p:hover {
-  color: black;
-}
 .isi1 {
   width: 100%;
   height: 15%;
@@ -1047,12 +1076,6 @@ section.about img {
 .isi1 a:hover .bi {
   transform: scale(1.1);
   filter: drop-shadow(0 0 5px rgba(150, 204, 205, 0.8));
-}
-.isi1 a:hover + p {
-  color: black;
-}
-.isi1 p:hover {
-  color: black;
 }
 .isi1 p {
   font-size: 15px;

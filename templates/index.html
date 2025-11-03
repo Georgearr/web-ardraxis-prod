@@ -11,10 +11,10 @@
     <link
       href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
       rel="stylesheet"
-    /> 
+    />
     <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
     />
 
     <link
@@ -43,7 +43,9 @@
       sidebar.classList.toggle("active");
       overlay.classList.toggle("active");
       hamburger.classList.toggle("active");
-      document.body.style.overflow = sidebar.classList.contains("active") ? "hidden" : "auto";
+      document.body.style.overflow = sidebar.classList.contains("active")
+        ? "hidden"
+        : "auto";
     }
 
     // Close sidebar when clicking on overlay
@@ -60,7 +62,7 @@
     // Close sidebar when clicking on menu links
     document.addEventListener("DOMContentLoaded", () => {
       const menuLinks = document.querySelectorAll(".sidebar-nav a");
-      menuLinks.forEach(link => {
+      menuLinks.forEach((link) => {
         link.addEventListener("click", closeMenu);
       });
     });
@@ -76,10 +78,10 @@
         <span class="brand">ARDRAXIS</span>
       </div>
       <div class="nav-nav">
-        <a href="/">HOME</a>
-        <a href="/events">EVENTS</a>
-        <a href="#a">ABOUT US</a>
-        <a href="#t">TRY D'RAX</a>
+        <a href="#home">HOME</a>
+        <a href="#events">EVENTS</a>
+        <a href="#about">ABOUT US</a>
+        <a href="#try">TRY D'RAX</a>
       </div>
       <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
         <span></span>
@@ -90,7 +92,11 @@
     <!-- End Navbar Section -->
 
     <!-- Sidebar Section -->
-    <div class="sidebar-overlay" id="sidebar-overlay" onclick="closeMenu()"></div>
+    <div
+      class="sidebar-overlay"
+      id="sidebar-overlay"
+      onclick="closeMenu()"
+    ></div>
     <div class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <img
@@ -98,21 +104,25 @@
           alt="ARDRAXIS"
         />
         <span class="sidebar-brand">ARDRAXIS</span>
-        <button class="sidebar-close" onclick="closeMenu()" aria-label="Close menu">
+        <button
+          class="sidebar-close"
+          onclick="closeMenu()"
+          aria-label="Close menu"
+        >
           <i class="bx bx-x"></i>
         </button>
       </div>
       <nav class="sidebar-nav">
-        <a href="#h">HOME</a>
-        <a href="#e">EVENTS</a>
-        <a href="#a">ABOUT US</a>
-        <a href="#t">TRY D'RAX</a>
+        <a href="#home">HOME</a>
+        <a href="#events">EVENTS</a>
+        <a href="#about">ABOUT US</a>
+        <a href="#try">TRY D'RAX</a>
       </nav>
     </div>
     <!-- End Sidebar Section -->
 
     <!-- Home Section -->
-    <section class="home" id="h">
+    <section class="home" id="home">
       <div class="home-image">
         <img
           src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
@@ -127,31 +137,47 @@
       </div>
     </section>
     <!-- End Home Section -->
-
-    <!-- About Section -->
-      <section class="about" id="a">
-        <div class="about-text">
-          <h1 class="text-shadow hidden">ARDRAXIS</h1>
-          <p class="text-shadow hidden" style="color: white">
-            Ardraxis merupakan nama kabinet OSIS SMA IGS periode 2025/2026.
-            Ardraxis berarti "semangat dan inti" yang bermakna bahwa OSIS SMA
-            IGS adalah organisasi yang gagah dan tegar dalam menghadapi berbagai
-            macam masalah atau konflik apapun. Dan organisasi yang berani untuk
-            bekerja, berani untuk lelah, dan berani untuk bertanggung jawab.
-          </p>
-        </div>
+    <!-- Events Section -->
+    <section class="events" id="events">
+      <div class="events-image">
         <img
           src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
           alt="ARDRAXIS"
         />
-      </section>
+      </div>
+      <div class="events-text">
+        <h1 class="text-shadow hidden">No Events Yet...</h1>
+        <p class="text-shadow hidden">
+          We're cooking up something. We'll be right back!
+        </p>
+      </div>
+    </section>
+    <!-- End Events Section -->
+    <!-- About Section -->
+    <section class="about" id="about">
+      <div class="about-text">
+        <h1 class="text-shadow hidden">ARDRAXIS</h1>
+        <p class="text-shadow hidden" style="color: white">
+          Ardraxis merupakan nama kabinet OSIS SMA IGS periode 2025/2026.
+          Ardraxis berarti "semangat dan inti" yang bermakna bahwa OSIS SMA IGS
+          adalah organisasi yang gagah dan tegar dalam menghadapi berbagai macam
+          masalah atau konflik apapun. Dan organisasi yang berani untuk bekerja,
+          berani untuk lelah, dan berani untuk bertanggung jawab.
+        </p>
+      </div>
+      <img
+        src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
+        alt="ARDRAXIS"
+      />
+    </section>
     <!-- End About Section -->
 
     <!-- Prior Cabinets Section -->
     <section class="prior-cabinets" id="pc">
-      <h2 class="prior-cabinets-title text-shadow hidden">Our Prior Cabinets</h2>
+      <h2 class="prior-cabinets-title text-shadow hidden">
+        Our Prior Cabinets
+      </h2>
       <div class="prior-cabinets-container hidden">
-        
         <div class="cabinet-card hidden">
           <div class="cabinet-card-image">
             <img
@@ -161,7 +187,9 @@
             />
           </div>
           <h3 class="cabinet-card-title">Valiance</h3>
-          <p class="cabinet-card-desc">Kabinet OSIS SMA Ignatius Global School periode 2024/2025</p>
+          <p class="cabinet-card-desc">
+            Kabinet OSIS SMA Ignatius Global School periode 2024/2025
+          </p>
           <button class="cabinet-card-button">Click Here</button>
         </div>
 
@@ -174,7 +202,9 @@
             />
           </div>
           <h3 class="cabinet-card-title">Asteration</h3>
-          <p class="cabinet-card-desc">Kabinet OSIS SMA Ignatius Global School periode 2023/2024</p>
+          <p class="cabinet-card-desc">
+            Kabinet OSIS SMA Ignatius Global School periode 2023/2024
+          </p>
           <button class="cabinet-card-button">Click Here</button>
         </div>
 
@@ -187,7 +217,9 @@
             />
           </div>
           <h3 class="cabinet-card-title">Credence</h3>
-          <p class="cabinet-card-desc">Kabinet OSIS SMA Ignatius Global School periode 2022/2023</p>
+          <p class="cabinet-card-desc">
+            Kabinet OSIS SMA Ignatius Global School periode 2022/2023
+          </p>
           <button class="cabinet-card-button">Click Here</button>
         </div>
       </div>
@@ -237,32 +269,38 @@
           <div class="footerkanan-isi">
             <div class="isi1">
               <a href="https://www.instagram.com/osis.smaigs/"
-                ><i class="bi bi-instagram"></i></a>
+                ><i class="bi bi-instagram"></i
+              ></a>
               <p>Instagram</p>
             </div>
             <div class="isi1">
               <a href="https://x.com/osis_smaigs?t=L-SgwLESUY_a6ViBCYIlTw&s=09"
-                ><i class="bi bi-twitter-x"></i></a>
+                ><i class="bi bi-twitter-x"></i
+              ></a>
               <p>Twitter</p>
             </div>
             <div class="isi1">
               <a href="https://www.tiktok.com/@osis.smaigs"
-                ><i class="bi bi-tiktok"></i></a>
+                ><i class="bi bi-tiktok"></i
+              ></a>
               <p>Tiktok</p>
             </div>
             <div class="isi1">
               <a href="https://line.me/R/ti/p/@053dzdrl?from=page"
-                ><i class="bi bi-line"></i></a>
+                ><i class="bi bi-line"></i
+              ></a>
               <p>Line</p>
             </div>
             <div class="isi1">
               <a href="https://www.youtube.com/channel/UCJcG1VCjXHNig5JIDEgYH7w"
-                ><i class="bi bi-youtube"></i></a>
+                ><i class="bi bi-youtube"></i
+              ></a>
               <p>Youtube</p>
             </div>
             <div class="isi1">
               <a href="https://github.com/OSISSMAIGS"
-                ><i class="bi bi-github"></i></a>
+                ><i class="bi bi-github"></i
+              ></a>
               <p>Github</p>
             </div>
           </div>
