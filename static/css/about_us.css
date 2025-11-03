@@ -1,8 +1,8 @@
 /* ============================================
-   EVENTS SECTION
+   ABOUT US SECTION
    ============================================ */
 
-section.events {
+section.about-us {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,19 +15,6 @@ section.events {
   text-align: center;
 }
 
-div.events-image > img {
-  width: 400px;
-  max-width: 100%;
-  height: 400px;
-  object-fit: contain;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
-  animation: float 6s ease-in-out infinite;
-}
-
-div.events-text {
-  color: #ffffff;
-}
-
 /* ============================================
-   END EVENTS SECTION
+   END ABOUT US SECTION
    ============================================ */
