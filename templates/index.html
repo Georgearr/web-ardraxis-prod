@@ -31,7 +31,7 @@
       hiddenElements.forEach((element, index) => {
         setTimeout(() => {
           element.classList.add("fade-in");
-        }, index * 300);
+        }, index * 100);
       });
     });
 
@@ -139,17 +139,42 @@
     <!-- End Home Section -->
     <!-- Events Section -->
     <section class="events" id="events">
-      <div class="events-image">
-        <img
-          src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-          alt="ARDRAXIS"
-        />
-      </div>
-      <div class="events-text">
-        <h1 class="text-shadow hidden">No Events Yet...</h1>
-        <p class="text-shadow hidden">
-          We're cooking up something. We'll be right back!
-        </p>
+      <h2 class="events-title text-shadow hidden">Events</h2>
+      <div class="events-carousel">
+        <button class="carousel-btn prev" aria-label="Previous slide">&#10094;</button>
+        <div class="carousel-viewport">
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <div class="slide-media">
+                <img src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}" alt="Event 1" />
+              </div>
+              <div class="slide-caption">
+                <h3>Meloria</h3>
+                <p>Event Bulan Bahasa 14 November 2025</p>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="slide-media">
+                <img src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}" alt="Event 2" />
+              </div>
+              <div class="slide-caption">
+                <h3>Coming Soon</h3>
+                <p>Coming Soon</p>
+              </div>
+            </div>
+            <div class="carousel-slide">
+              <div class="slide-media">
+                <img src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}" alt="Event 3" />
+              </div>
+              <div class="slide-caption">
+                <h3>Coming Soon</h3>
+                <p>Coming Soon</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="carousel-btn next" aria-label="Next slide">&#10095;</button>
+        <div class="carousel-dots" aria-label="Slide indicators"></div>
       </div>
     </section>
     <!-- End Events Section -->
@@ -308,5 +333,56 @@
       </div>
     </footer>
     <!-- End Footer Section -->
+    <script>
+      // Simple Carousel Logic for Events Section
+      (function() {
+        const eventsSection = document.querySelector('.events');
+        if (!eventsSection) return;
+        const track = eventsSection.querySelector('.carousel-track');
+        const slides = Array.from(eventsSection.querySelectorAll('.carousel-slide'));
+        const prevBtn = eventsSection.querySelector('.carousel-btn.prev');
+        const nextBtn = eventsSection.querySelector('.carousel-btn.next');
+        const dotsContainer = eventsSection.querySelector('.carousel-dots');
+
+        if (!track || slides.length === 0) return;
+
+        let currentIndex = 0;
+
+        // Create dots
+        slides.forEach((_, idx) => {
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot' + (idx === 0 ? ' active' : '');
+          dot.setAttribute('aria-label', `Go to slide ${idx + 1}`);
+          dot.addEventListener('click', () => goToSlide(idx));
+          dotsContainer.appendChild(dot);
+        });
+
+        function update() {
+          const offset = -currentIndex * 100;
+          track.style.transform = `translateX(${offset}%)`;
+          const dots = Array.from(dotsContainer.querySelectorAll('.carousel-dot'));
+          dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+        }
+
+        function goToSlide(index) {
+          currentIndex = (index + slides.length) % slides.length;
+          update();
+        }
+
+        function next() { goToSlide(currentIndex + 1); }
+        function prev() { goToSlide(currentIndex - 1); }
+
+        nextBtn && nextBtn.addEventListener('click', next);
+        prevBtn && prevBtn.addEventListener('click', prev);
+
+        // Auto-play (optional). Pause on hover for accessibility.
+        let autoPlayId = setInterval(next, 5000);
+        eventsSection.addEventListener('mouseenter', () => clearInterval(autoPlayId));
+        eventsSection.addEventListener('mouseleave', () => autoPlayId = setInterval(next, 5000));
+
+        // Initialize
+        update();
+      })();
+    </script>
   </body>
 </html>
