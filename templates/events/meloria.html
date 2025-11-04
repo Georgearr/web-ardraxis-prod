@@ -1,0 +1,52 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Méloria | OSIS SMA IGS
+{% endblock %}
+{% block style_link %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/events/meloria.css') }}">
+{% endblock %}
+
+{% block isi %}
+  <!-- Banner Section -->
+    <section class="banner">
+      <img
+      src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
+      alt="MELORIA"
+      />
+      <div class="banner-gradient"></div>
+    </section>
+  <!-- End Banner Section -->
+
+  <!-- About Section -->
+    <section class="about">
+      <h1>About Meloria</h1>
+      <p>add actual description here</p>
+      <div class="list-panitia">
+        <div class="panitia">
+          <h3>Ketua Panitia</h3>
+          <p>insert here</p>
+        </div>
+        <div class="panitia">
+          <h3>Wakil Ketua Panitia</h3>
+          <p>insert here</p>
+        </div>
+        <div class="panitia">
+          <h3>Wakil Ketua Panitia 2</h3>
+          <p>insert here</p>
+        </div>
+        <div class="panitia">
+          <h3>Ketua Acara</h3>
+          <p>insert here</p>
+        </div>
+      </div>
+    </section>
+  <!-- End About Section -->
+
+  <!-- Activities Section -->
+    <section class="activities">
+      <h1>Activities & Performances</h1>
+      <p>insert buttons here</p>
+    </section>
+  <!-- End Activities Section -->
+{% endblock %}

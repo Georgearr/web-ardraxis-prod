@@ -1,0 +1,94 @@
+/* dev note : change the colors after the banner comes out */
+
+/* ============================================
+   MELORIA - BANNER SECTION
+   ============================================ */
+
+section.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: white;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+section.banner > img {
+  width: 110%;
+}
+
+.banner-gradient {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  bottom: 0;
+  height: 10rem;
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #2d8f9a);
+}
+   
+/* ============================================
+   END MELORIA - BANNER SECTION
+   ============================================ */
+
+/* ============================================
+   MELORIA - ABOUT SECTION
+   ============================================ */
+
+section.about {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 70vh;
+  font-size: 1.25rem;
+  align-items: center;
+  background-color: #2d8f9a;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.list-panitia {
+  width: 80%;
+  display: flex;
+  margin-top: 30px;
+  gap: 100px;
+}
+
+.panitia {
+  width: 30%;
+  font-size: 1.2rem;
+}
+
+/* ============================================
+   END MELORIA - ABOUT SECTION
+   ============================================ */
+
+/* ============================================
+   MELORIA - ACTIVITIES SECTION
+   ============================================ */
+
+section.activities {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 100vh;
+  font-size: 1.25rem;
+  align-items: center;
+  background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* ============================================
+   END MELORIA - ACTIVITIES SECTION
+   ============================================ */

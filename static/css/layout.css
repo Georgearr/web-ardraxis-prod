@@ -1,6 +1,15 @@
 /* ============================================
+   CSS ROOT (continue this later)
+   ============================================ */
+:root {
+  --nav-base: rgb(29, 105, 110);
+  --nav-shade: rgb(48, 171, 180);
+}
+
+/* ============================================
    GLOBAL RESET & BASE STYLES
    ============================================ */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -103,10 +112,6 @@ body {
 }
 
 /* ============================================
-   END KEYFRAMES LIST
-   ============================================*/
-
-/* ============================================
    NAVBAR SECTION
    ============================================ */
 .navbar {
@@ -114,7 +119,7 @@ body {
   top: 0;
   z-index: 50;
   width: 100%;
-  background: rgb(29, 105, 110); /* slate-900, semi-transparent */
+  background: var(--nav-base); /* slate-900, semi-transparent */
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   font-family: sans-serif;
@@ -285,7 +290,7 @@ body {
   right: -300px;
   width: 300px;
   height: 100%;
-  background: linear-gradient(to bottom, rgb(29, 105, 110), rgb(48, 171, 180));
+  background: linear-gradient(to bottom, var(--nav-base), rgb(48, 171, 180));
   z-index: 1000;
   transition: right 0.3s ease;
   overflow-y: auto;
@@ -394,7 +399,7 @@ body {
   height: 60vh;
   display: flex;
   color: white;
-  background: linear-gradient(to bottom, rgb(29, 105, 110), rgb(48, 171, 180));
+  background: linear-gradient(to bottom, var(--nav-base), rgb(48, 171, 180));
   overflow: hidden;
   position: absolute;
 }
