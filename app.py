@@ -3,6 +3,9 @@ app = Flask(__name__)
 
 # Main Pages
 @app.route("/")
+@app.route("/Events")
+def events():
+    return render_template("events.html")
 @app.route("/Home")
 def home():
    return render_template("index.html")
