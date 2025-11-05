@@ -1287,7 +1287,7 @@ section.about img {
    ============================================ */
 
 /* ============================================
-   FOOTER SECTION
+   FOOTER SECTION 
    ============================================ */
 
 .footer {
@@ -1297,7 +1297,7 @@ section.about img {
   overflow: hidden;
 }
 
-/* Grid 3 kolom untuk kartu */
+/* Grid 3 kolom */
 .footer .footerbawah {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1322,8 +1322,7 @@ section.about img {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Buat tinggi kartu seragam */
-  min-height: 240px;
+  min-height: 240px; /* seragam */
 }
 
 /* Dekorasi halus */
@@ -1388,11 +1387,11 @@ section.about img {
   display: grid;
   grid-template-rows: auto auto;
   justify-items: center;
-  align-content: center;   /* vertikal simetris */
+  align-content: center;  /* vertikal simetris */
   text-align: center;
   gap: 10px;
   width: 100%;
-  height: 100%;            /* isi mengisi kartu agar seimbang */
+  height: 100%;           /* isi mengisi kartu */
 }
 
 .footer .footertengah2-atas i {
@@ -1406,7 +1405,7 @@ section.about img {
   margin: 0;
   color: #e8f7f7;
   line-height: 1.6;
-  max-width: 22ch;
+  max-width: 28ch;
 }
 
 /* ========== KARTU KANAN (Sosial) ========== */
@@ -1519,7 +1518,7 @@ section.about img {
   .footer .footertengah2-bawah p { font-size: .88rem; line-height: 1.5; }
 }
 
-/* Aksesibilitas: kurangi motion bila perlu */
+/* Aksesibilitas */
 @media (prefers-reduced-motion: reduce) {
   .footer, .footer * {
     animation: none !important;
