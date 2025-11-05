@@ -67,26 +67,24 @@
       });
     });
 
-
-
     // Durasi total intro (ms), lalu auto-dismiss
-  const INTRO_DURATION = 2600;
+    const INTRO_DURATION = 2600;
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const intro = document.getElementById("intro");
-    const skip  = document.getElementById("intro-skip");
+    document.addEventListener("DOMContentLoaded", () => {
+      const intro = document.getElementById("intro");
+      const skip = document.getElementById("intro-skip");
 
-    // Auto close after duration
-    const timer = setTimeout(() => {
-      intro.classList.add("hide");
-    }, INTRO_DURATION);
+      // Auto close after duration
+      const timer = setTimeout(() => {
+        intro.classList.add("hide");
+      }, INTRO_DURATION);
 
-    // Allow skip
-    skip.addEventListener("click", () => {
-      clearTimeout(timer);
-      intro.classList.add("hide");
+      // Allow skip
+      skip.addEventListener("click", () => {
+        clearTimeout(timer);
+        intro.classList.add("hide");
+      });
     });
-  });
   </script>
   <body>
     <!-- Entrance Start -->
@@ -336,49 +334,50 @@
             <div class="footertengah2-bawah">
               <p>
                 Jl. Mayor Ruslan No. 118, 20 Ilir I, Kec. Ilir Timur I,
-                <br />Palembang
+                Palembang
               </p>
             </div>
           </div>
         </div>
         <div class="footerkanan">
           <div class="footerkanan-isi">
-            <div class="isi1">
-              <a href="https://www.instagram.com/osis.smaigs/"
-                ><i class="bi bi-instagram"></i
-              ></a>
-              <p>Instagram</p>
+            <a href="https://www.instagram.com/osis.smaigs/">
+              <div class="isi1">
+                <i class="bi bi-instagram"></i>
+                <p>Instagram</p>
+              </div>
+            </a>
+            <a href="https://x.com/osis_smaigs?t=L-SgwLESUY_a6ViBCYIlTw&s=09">
+              <div class="isi1">
+                <i class="bi bi-twitter-x"></i>
+                <p>Twitter</p>
+              </div>
+            </a>
+            <a href="https://www.tiktok.com/@osis.smaigs">
+              <div class="isi1">
+                <i class="bi bi-tiktok"></i>
+                <p>Tiktok</p>
+              </div>
+            </a>
             </div>
-            <div class="isi1">
-              <a href="https://x.com/osis_smaigs?t=L-SgwLESUY_a6ViBCYIlTw&s=09"
-                ><i class="bi bi-twitter-x"></i
-              ></a>
-              <p>Twitter</p>
-            </div>
-            <div class="isi1">
-              <a href="https://www.tiktok.com/@osis.smaigs"
-                ><i class="bi bi-tiktok"></i
-              ></a>
-              <p>Tiktok</p>
-            </div>
-            <div class="isi1">
-              <a href="https://line.me/R/ti/p/@053dzdrl?from=page"
-                ><i class="bi bi-line"></i
-              ></a>
-              <p>Line</p>
-            </div>
-            <div class="isi1">
-              <a href="https://www.youtube.com/channel/UCJcG1VCjXHNig5JIDEgYH7w"
-                ><i class="bi bi-youtube"></i
-              ></a>
-              <p>Youtube</p>
-            </div>
-            <div class="isi1">
-              <a href="https://github.com/OSISSMAIGS"
-                ><i class="bi bi-github"></i
-              ></a>
-              <p>Github</p>
-            </div>
+            <a href="https://line.me/R/ti/p/@053dzdrl?from=page">
+              <div class="isi1"></div>
+                <i class="bi bi-line"></i>
+                <p>Line</p>
+              </div>
+            </a>
+            <a href="https://www.youtube.com/channel/UCJcG1VCjXHNig5JIDEgYH7w">
+              <div class="isi1">
+                <i class="bi bi-youtube"></i>
+                <p>Youtube</p>
+              </div>
+            </a>
+            <a href="https://github.com/OSISSMAIGS">
+              <div class="isi1">
+                <i class="bi bi-github"></i>
+                <p>Github</p>
+              </div>
+            </a>
           </div>
         </div>
       </div>
