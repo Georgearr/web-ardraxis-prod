@@ -1154,7 +1154,7 @@ section.about img {
   height: 60vh;
   display: flex;
   color: white;
-  background: linear-gradient(to bottom, rgb(29, 105, 110), rgb(48, 171, 180));
+  background: #397B7B;
   overflow: hidden;
   position: absolute;
 }
