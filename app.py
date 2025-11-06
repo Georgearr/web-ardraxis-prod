@@ -10,5 +10,9 @@ def home():
 def coming_soon():
     return render_template("coming_soon.html")
 
+@app.errorhandler(404)
+def handle_404(error):
+    return render_template("404.html"), 404
+
 if __name__ == "__main__":
     app.run()

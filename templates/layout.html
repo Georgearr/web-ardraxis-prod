@@ -6,6 +6,10 @@
     <title>Ardraxis | OSIS SMA IGS</title>
     <link
       rel="stylesheet"
+      href="{{ url_for('static', filename='css/layout.css') }}"
+    />
+    <link
+      rel="stylesheet"
       href="{{ url_for('static', filename='css/style_homepage.css') }}"
     />
     <link
@@ -22,6 +26,7 @@
       type="image/x-icon"
       href="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
     />
+    {% block extra_css %}{% endblock %}
   </head>
   <script src="{{ url_for('static', filename='js/loading_animation.js') }}"></script>
   <body>
@@ -44,17 +49,17 @@
     <!-- Entrance End -->
     <!-- Navbar Section -->
     <div class="navbar">
-      <div class="nav-logo">
+      <a class="nav-logo" href="{{ url_for('home') }}#home">
         <img
           src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
           alt="ARDRAXIS"
         />
         <span class="brand">ARDRAXIS</span>
-      </div>
+      </a>
       <div class="nav-nav">
-        <a href="#home">HOME</a>
-        <a href="#events">EVENTS</a>
-        <a href="#about">ABOUT US</a>
+        <a href="{{ url_for('home') }}#home">HOME</a>
+        <a href="{{ url_for('home') }}#events">EVENTS</a>
+        <a href="{{ url_for('coming_soon') }}">ABOUT US</a>
         <a href="{{ url_for('coming_soon') }}">TRY D'RAX</a>
       </div>
       <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
@@ -73,10 +78,12 @@
     ></div>
     <div class="sidebar" id="sidebar">
       <div class="sidebar-header">
-        <img
-          src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-          alt="ARDRAXIS"
-        />
+        <a href="{{ url_for('home') }}#home">
+          <img
+            src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
+            alt="ARDRAXIS"
+          />
+        </a>
         <span class="sidebar-brand">ARDRAXIS</span>
         <button
           class="sidebar-close"
@@ -87,10 +94,10 @@
         </button>
       </div>
       <nav class="sidebar-nav">
-        <a href="#home">HOME</a>
-        <a href="#events">EVENTS</a>
-        <a href="#about">ABOUT US</a>
-        <a href="#try">TRY D'RAX</a>
+        <a href="{{ url_for('home') }}#home">HOME</a>
+        <a href="{{ url_for('home') }}#events">EVENTS</a>
+        <a href="{{ url_for('coming_soon') }}">ABOUT US</a>
+        <a href="{{ url_for('coming_soon') }}">TRY D'RAX</a>
       </nav>
     </div>
     <!-- End Sidebar Section -->

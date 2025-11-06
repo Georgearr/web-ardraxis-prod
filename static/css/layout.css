@@ -47,10 +47,12 @@
   }
   
   /* Logo */
-  .nav-logo {
+.nav-logo {
     display: flex;
     align-items: center;
     gap: 12px;
+  text-decoration: none; /* remove underline when used as <a> */
+  color: inherit;
   }
   
   .nav-logo img {
