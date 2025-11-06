@@ -6,7 +6,6 @@
       href="{{ url_for('static', filename='css/style_homepage.css') }}"
     />
 {% endblock %}
-
 {% block isi %}
   <!-- Home Section -->
   <section class="home" id="home">
@@ -106,6 +105,10 @@
     </div>
   </section>
   <!-- End Prior Cabinets Section -->
+  {% block extra_js %}
+  <script src="{{ url_for('static', filename='js/scroll_reveal.js') }}">
+  </script>
+{% endblock %}
 {% endblock %}
 
 
