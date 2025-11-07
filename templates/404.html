@@ -1,0 +1,24 @@
+{% extends 'layout.html' %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/error_404.css') }}"
+/>
+{% endblock %} {% block isi %}
+<section class="fullpage-center">
+  <div class="center-content">
+    <img
+      class="logo"
+      src="{{ url_for('static', filename='img/logo_ardraxis.png') }}"
+      alt="ARDRAXIS"
+    />
+    <h1 class="title">Page Not Found</h1>
+    <p class="subtitle">The page you are looking for doesn’t exist.</p>
+    <a
+      class="back-home"
+      href="{{ url_for('home') }}#home"
+      aria-label="Back to home"
+      >Kembali ke Home</a
+    >
+  </div>
+</section>
+{% endblock %}
