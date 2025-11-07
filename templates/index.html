@@ -1,458 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ardraxis | OSIS SMA IGS</title>
-    <link
+{% extends 'layout.html' %}
+
+{% block extra_css %}
+  <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
+      href="{{ url_for('static', filename='css/style_homepage.css') }}"
     />
-    <link
-      href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-    />
+{% endblock %}
+{% block isi %}
+  <!-- Home Section -->
+  <section class="home" id="home">
+    <div class="home-image">
+      <img class="logo" src="{{ url_for('static', filename='img/logo_ardraxis.png') }}" alt="ARDRAXIS" />
+    </div>
+    <div class="home-text">
+      <h1 class="text-shadow hidden">ARDRAXIS</h1>
+      <p class="text-shadow hidden">Kabinet OSIS SMA Ignatius Global School Periode 2025/2026</p>
+    </div>
+  </section>
+  <!-- End Home Section -->
 
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-    />
-  </head>
-  <script>
-    // Fade in animation saat halaman load
-    document.addEventListener("DOMContentLoaded", () => {
-      const hiddenElements = document.querySelectorAll(".hidden");
+  <!-- Events Section -->
+  <section class="events" id="events">
+    <h2 class="events-title text-shadow hidden">Events</h2>
+    <div class="events-carousel">
+      <button class="carousel-btn prev" aria-label="Previous slide">&#10094;</button>
+      <div class="carousel-viewport">
+        <div class="carousel-track">
+          <div class="carousel-slide">
+            <div class="slide-media">
+              <a href="{{ url_for('coming_soon') }}">
+                <img src="{{ url_for('static', filename='img/logo_ardraxis.png') }}" alt="Event 1" />
+              </a>
+            </div>
+            <div class="slide-caption">
+              <h3>Coming Soon</h3>
+              <p>Coming Soon</p>
+            </div>
+          </div>
+          <div class="carousel-slide">
+            <div class="slide-media">
+              <a href="{{ url_for('coming_soon') }}">
+                <img src="{{ url_for('static', filename='img/logo_ardraxis.png') }}" alt="Event 1" />
+              </a>
+            </div>
+            <div class="slide-caption">
+              <h3>Coming Soon</h3>
+              <p>Coming Soon</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-btn next" aria-label="Next slide">&#10095;</button>
+      <div class="carousel-dots" aria-label="Slide indicators"></div>
+    </div>
+  </section>
+  <!-- End Events Section -->
 
-      hiddenElements.forEach((element, index) => {
-        setTimeout(() => {
-          element.classList.add("fade-in");
-        }, index * 100);
-      });
-    });
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="about-text">
+      <h1 class="text-shadow hidden">ARDRAXIS</h1>
+      <p class="text-shadow hidden" style="color: white">
+        Ardraxis merupakan nama kabinet OSIS SMA IGS periode 2025/2026.
+        Ardraxis berarti "semangat dan inti" yang bermakna bahwa OSIS SMA IGS
+        adalah organisasi yang gagah dan tegar dalam menghadapi berbagai macam
+        masalah atau konflik apapun. Dan organisasi yang berani untuk bekerja,
+        berani untuk lelah, dan berani untuk bertanggung jawab.
+      </p>
+    </div>
+    <img src="{{ url_for('static', filename='img/logo_ardraxis.png') }}" alt="ARDRAXIS" />
+  </section>
+  <!-- End About Section -->
 
-    // Hamburger menu toggle
-    function toggleMenu() {
-      const sidebar = document.getElementById("sidebar");
-      const overlay = document.getElementById("sidebar-overlay");
-      const hamburger = document.querySelector(".hamburger");
-      sidebar.classList.toggle("active");
-      overlay.classList.toggle("active");
-      hamburger.classList.toggle("active");
-      document.body.style.overflow = sidebar.classList.contains("active")
-        ? "hidden"
-        : "auto";
-    }
+  <!-- Prior Cabinets Section -->
+  <section class="prior-cabinets" id="pc">
+    <h2 class="prior-cabinets-title text-shadow hidden">Our Prior Cabinets</h2>
+    <div class="prior-cabinets-container hidden">
+      <div class="cabinet-card hidden">
+        <div class="cabinet-card-image">
+          <img src="{{ url_for('static', filename='img/valiance_logo.png') }}" alt="Valiance" class="cabinet-image" />
+        </div>
+        <h3 class="cabinet-card-title">Valiance</h3>
+        <p class="cabinet-card-desc">Kabinet OSIS SMA Ignatius Global School periode 2024/2025</p>
+        <button class="cabinet-card-button" onclick="window.location.assign('https://valiance.osissmaigs.com')">Click Here</button>
+      </div>
 
-    // Close sidebar when clicking on overlay
-    function closeMenu() {
-      const sidebar = document.getElementById("sidebar");
-      const overlay = document.getElementById("sidebar-overlay");
-      const hamburger = document.querySelector(".hamburger");
-      sidebar.classList.remove("active");
-      overlay.classList.remove("active");
-      hamburger.classList.remove("active");
-      document.body.style.overflow = "auto";
-    }
+      <div class="cabinet-card hidden">
+        <div class="cabinet-card-image">
+          <img src="{{ url_for('static', filename='img/asteration_logo.png') }}" alt="Asteration" class="cabinet-image" />
+        </div>
+        <h3 class="cabinet-card-title">Asteration</h3>
+        <p class="cabinet-card-desc">Kabinet OSIS SMA Ignatius Global School periode 2023/2024</p>
+        <button class="cabinet-card-button" onclick="window.location.assign('https://asteration.osissmaigs.com')">Click Here</button>
+      </div>
 
-    // Close sidebar when clicking on menu links
-    document.addEventListener("DOMContentLoaded", () => {
-      const menuLinks = document.querySelectorAll(".sidebar-nav a");
-      menuLinks.forEach((link) => {
-        link.addEventListener("click", closeMenu);
-      });
-    });
-
-    // Durasi total intro (ms), lalu auto-dismiss
-    const INTRO_DURATION = 2600;
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const intro = document.getElementById("intro");
-      const skip = document.getElementById("intro-skip");
-
-      // Auto close after duration
-      const timer = setTimeout(() => {
-        intro.classList.add("hide");
-      }, INTRO_DURATION);
-
-      // Allow skip
-      skip.addEventListener("click", () => {
-        clearTimeout(timer);
-        intro.classList.add("hide");
-      });
-    });
+      <div class="cabinet-card hidden">
+        <div class="cabinet-card-image">
+          <img src="{{ url_for('static', filename='img/credence_logo.png') }}" alt="Credence" class="cabinet-image" />
+        </div>
+        <h3 class="cabinet-card-title">Credence</h3>
+        <p class="cabinet-card-desc">Kabinet OSIS SMA Ignatius Global School periode 2022/2023</p>
+        <button class="cabinet-card-button" onclick="window.location.assign('https://osissmaigs.com/coming_soon')">Click Here</button>
+      </div>
+    </div>
+  </section>
+  <!-- End Prior Cabinets Section -->
+  {% block extra_js %}
+  <script src="{{ url_for('static', filename='js/scroll_reveal.js') }}">
   </script>
-  <body>
-    <!-- Entrance Start -->
-    <div id="intro" class="intro">
-      <div class="intro-bg"></div>
-      <div class="intro-inner">
-        <img
-          class="intro-dragon"
-          src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-          alt="ARDRAXIS"
-        />
-        <h1 class="intro-title">ARDRAXIS</h1>
-        <p class="intro-slogan">Born To Lead, Bound To Rise</p>
-      </div>
-      <button id="intro-skip" class="intro-skip" aria-label="Skip intro">
-        Skip
-      </button>
-    </div>
-    <!-- Entrance End -->
-    <!-- Navbar Section -->
-    <div class="navbar">
-      <div class="nav-logo">
-        <img
-          src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-          alt="ARDRAXIS"
-        />
-        <span class="brand">ARDRAXIS</span>
-      </div>
-      <div class="nav-nav">
-        <a href="#home">HOME</a>
-        <a href="#events">EVENTS</a>
-        <a href="#about">ABOUT US</a>
-        <a href="#try">TRY D'RAX</a>
-      </div>
-      <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-    <!-- End Navbar Section -->
-
-    <!-- Sidebar Section -->
-    <div
-      class="sidebar-overlay"
-      id="sidebar-overlay"
-      onclick="closeMenu()"
-    ></div>
-    <div class="sidebar" id="sidebar">
-      <div class="sidebar-header">
-        <img
-          src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-          alt="ARDRAXIS"
-        />
-        <span class="sidebar-brand">ARDRAXIS</span>
-        <button
-          class="sidebar-close"
-          onclick="closeMenu()"
-          aria-label="Close menu"
-        >
-          <i class="bx bx-x"></i>
-        </button>
-      </div>
-      <nav class="sidebar-nav">
-        <a href="#home">HOME</a>
-        <a href="#events">EVENTS</a>
-        <a href="#about">ABOUT US</a>
-        <a href="#try">TRY D'RAX</a>
-      </nav>
-    </div>
-    <!-- End Sidebar Section -->
-
-    <!-- Home Section -->
-    <section class="home" id="home">
-      <div class="home-image">
-        <img
-          src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-          alt="ARDRAXIS"
-        />
-      </div>
-      <div class="home-text">
-        <h1 class="text-shadow hidden">ARDRAXIS</h1>
-        <p class="text-shadow hidden">
-          Kabinet OSIS SMA Ignatius Global School Periode 2025/2026
-        </p>
-      </div>
-    </section>
-    <!-- End Home Section -->
-    <!-- Events Section -->
-    <section class="events" id="events">
-      <h2 class="events-title text-shadow hidden">Events</h2>
-      <div class="events-carousel">
-        <button class="carousel-btn prev" aria-label="Previous slide">
-          &#10094;
-        </button>
-        <div class="carousel-viewport">
-          <div class="carousel-track">
-            <div class="carousel-slide">
-              <div class="slide-media">
-                <img
-                  src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-                  alt="Event 1"
-                />
-              </div>
-              <div class="slide-caption">
-                <h3>Meloria</h3>
-                <p>Event Bulan Bahasa 14 November 2025</p>
-              </div>
-            </div>
-            <div class="carousel-slide">
-              <div class="slide-media">
-                <img
-                  src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-                  alt="Event 2"
-                />
-              </div>
-              <div class="slide-caption">
-                <h3>Coming Soon</h3>
-                <p>Coming Soon</p>
-              </div>
-            </div>
-            <div class="carousel-slide">
-              <div class="slide-media">
-                <img
-                  src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-                  alt="Event 3"
-                />
-              </div>
-              <div class="slide-caption">
-                <h3>Coming Soon</h3>
-                <p>Coming Soon</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <button class="carousel-btn next" aria-label="Next slide">
-          &#10095;
-        </button>
-        <div class="carousel-dots" aria-label="Slide indicators"></div>
-      </div>
-    </section>
-    <!-- End Events Section -->
-    <!-- About Section -->
-    <section class="about" id="about">
-      <div class="about-text">
-        <h1 class="text-shadow hidden">ARDRAXIS</h1>
-        <p class="text-shadow hidden" style="color: white">
-          Ardraxis merupakan nama kabinet OSIS SMA IGS periode 2025/2026.
-          Ardraxis berarti "semangat dan inti" yang bermakna bahwa OSIS SMA IGS
-          adalah organisasi yang gagah dan tegar dalam menghadapi berbagai macam
-          masalah atau konflik apapun. Dan organisasi yang berani untuk bekerja,
-          berani untuk lelah, dan berani untuk bertanggung jawab.
-        </p>
-      </div>
-      <img
-        src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-        alt="ARDRAXIS"
-      />
-    </section>
-    <!-- End About Section -->
-
-    <!-- Prior Cabinets Section -->
-    <section class="prior-cabinets" id="pc">
-      <h2 class="prior-cabinets-title text-shadow hidden">
-        Our Prior Cabinets
-      </h2>
-      <div class="prior-cabinets-container hidden">
-        <div class="cabinet-card hidden">
-          <div class="cabinet-card-image">
-            <img
-              src="{{ url_for('static', filename='img/Valiance.png') }}"
-              alt="Valiance"
-              class="cabinet-image"
-            />
-          </div>
-          <h3 class="cabinet-card-title">Valiance</h3>
-          <p class="cabinet-card-desc">
-            Kabinet OSIS SMA Ignatius Global School periode 2024/2025
-          </p>
-          <button class="cabinet-card-button">Click Here</button>
-        </div>
-
-        <div class="cabinet-card hidden">
-          <div class="cabinet-card-image">
-            <img
-              src="{{ url_for('static', filename='img/asteration.png') }}"
-              alt="Asteration"
-              class="cabinet-image"
-            />
-          </div>
-          <h3 class="cabinet-card-title">Asteration</h3>
-          <p class="cabinet-card-desc">
-            Kabinet OSIS SMA Ignatius Global School periode 2023/2024
-          </p>
-          <button class="cabinet-card-button">Click Here</button>
-        </div>
-
-        <div class="cabinet-card hidden">
-          <div class="cabinet-card-image">
-            <img
-              src="{{ url_for('static', filename='img/credence.png') }}"
-              alt="Credence"
-              class="cabinet-image"
-            />
-          </div>
-          <h3 class="cabinet-card-title">Credence</h3>
-          <p class="cabinet-card-desc">
-            Kabinet OSIS SMA Ignatius Global School periode 2022/2023
-          </p>
-          <button class="cabinet-card-button">Click Here</button>
-        </div>
-      </div>
-    </section>
-    <!-- End Prior Cabinets Section -->
-
-    <!-- Footer Section -->
-    <footer class="footer reveal-on-scroll">
-      <div class="footerbawah">
-        <div class="footerkiri">
-          <div class="footerkiriutama">
-            <div class="footerkiriatas">
-              <img
-                src="{{ url_for('static', filename='img/LOGO ARDRAXIS.png') }}"
-                alt="ARDRAXIS"
-              />
-            </div>
-            <div class="footerkiritengah">
-              <h1>Ardraxis</h1>
-            </div>
-            <div class="footerkiribawah">
-              <p>
-                Kabinet OSIS SMA Ignatius Global <br />
-                School periode 2025/2026
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="footertengah">
-          <div class="footertengah1"></div>
-          <div class="footertengah2">
-            <div class="footertengah2-atas">
-              <i
-                class="bxr bx-location"
-                style="color: white; font-size: 70px"
-              ></i>
-            </div>
-            <div class="footertengah2-bawah">
-              <p>
-                Jl. Mayor Ruslan No. 118, 20 Ilir I, Kec. Ilir Timur I, Palembang
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="footerkanan">
-          <div class="footerkanan-isi">
-
-            <a href="https://www.instagram.com/osis.smaigs/">
-              <div class="isi1">
-                <i class="bi bi-instagram"></i>
-                <p>Instagram</p>
-              </div>
-            </a>
-
-            <a href="https://x.com/osis_smaigs?t=L-SgwLESUY_a6ViBCYIlTw&s=09">
-              <div class="isi1">
-                <i class="bi bi-twitter-x"></i>
-                <p>Twitter</p>
-              </div>
-            </a>
-
-            <a href="https://www.tiktok.com/@osis.smaigs">
-              <div class="isi1">
-                <i class="bi bi-tiktok"></i>
-                <p>Tiktok</p>
-              </div>
-            </a>
-
-            <a href="https://line.me/R/ti/p/@053dzdrl?from=page">
-              <div class="isi1">
-                <i class="bi bi-line"></i>
-                <p>Line</p>
-              </div>
-            </a>
-
-            <a href="https://www.youtube.com/channel/UCJcG1VCjXHNig5JIDEgYH7w">
-              <div class="isi1">
-                <i class="bi bi-youtube"></i>
-                <p>Youtube</p>
-              </div>
-            </a>
-
-            <a href="https://github.com/OSISSMAIGS">
-              <div class="isi1">
-                <i class="bi bi-github"></i>
-                <p>Github</p>
-              </div>
-            </a>
-            
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- End Footer Section -->
-    <script>
-      // Simple Carousel Logic for Events Section
-      (function () {
-        const eventsSection = document.querySelector(".events");
-        if (!eventsSection) return;
-        const track = eventsSection.querySelector(".carousel-track");
-        const slides = Array.from(
-          eventsSection.querySelectorAll(".carousel-slide")
-        );
-        const prevBtn = eventsSection.querySelector(".carousel-btn.prev");
-        const nextBtn = eventsSection.querySelector(".carousel-btn.next");
-        const dotsContainer = eventsSection.querySelector(".carousel-dots");
-
-        if (!track || slides.length === 0) return;
-
-        let currentIndex = 0;
-
-        // Create dots
-        slides.forEach((_, idx) => {
-          const dot = document.createElement("button");
-          dot.className = "carousel-dot" + (idx === 0 ? " active" : "");
-          dot.setAttribute("aria-label", `Go to slide ${idx + 1}`);
-          dot.addEventListener("click", () => goToSlide(idx));
-          dotsContainer.appendChild(dot);
-        });
-
-        function update() {
-          const offset = -currentIndex * 100;
-          track.style.transform = `translateX(${offset}%)`;
-          const dots = Array.from(
-            dotsContainer.querySelectorAll(".carousel-dot")
-          );
-          dots.forEach((d, i) =>
-            d.classList.toggle("active", i === currentIndex)
-          );
-        }
-
-        function goToSlide(index) {
-          currentIndex = (index + slides.length) % slides.length;
-          update();
-        }
-
-        function next() {
-          goToSlide(currentIndex + 1);
-        }
-        function prev() {
-          goToSlide(currentIndex - 1);
-        }
-
-        nextBtn && nextBtn.addEventListener("click", next);
-        prevBtn && prevBtn.addEventListener("click", prev);
-
-        // Auto-play (optional). Pause on hover for accessibility.
-        let autoPlayId = setInterval(next, 5000);
-        eventsSection.addEventListener("mouseenter", () =>
-          clearInterval(autoPlayId)
-        );
-        eventsSection.addEventListener(
-          "mouseleave",
-          () => (autoPlayId = setInterval(next, 5000))
-        );
-
-        // Initialize
-        update();
-      })();
-    </script>
-  </body>
-</html>
+{% endblock %}
+{% endblock %}
