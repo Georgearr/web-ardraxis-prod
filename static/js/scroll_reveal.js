@@ -1,6 +1,6 @@
 (function () {
       const ease = 'cubic-bezier(0.2, 0.65, 0.3, 1)';
-      const baseDurationMs = 1000; // faster animation
+      const baseDurationMs = 1000; // entrance animation duration
       const baseDistancePx = 60;  // noticeable movement
       const staggerMs = 70;       // slight stagger
 
@@ -38,6 +38,13 @@
         if (unhide && el.classList) el.classList.remove('hidden');
         el.style.opacity = '1';
         el.style.transform = 'translateX(0) translateY(0)';
+        // After entrance finishes, hand control back to CSS (hover transitions)
+        setTimeout(() => {
+          el.style.removeProperty('transform');
+          el.style.removeProperty('transition');
+          el.style.removeProperty('will-change');
+          el.style.removeProperty('opacity');
+        }, baseDurationMs + 50);
       };
 
       const io = new IntersectionObserver((entries) => {
