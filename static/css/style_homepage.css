@@ -747,6 +747,7 @@ section.events::after {
 .slide-caption h3 {
   font-size: 1.8rem;
   margin-bottom: 8px;
+  color: white;
 }
 
 .slide-caption p {

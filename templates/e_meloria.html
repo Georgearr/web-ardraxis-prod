@@ -1,0 +1,205 @@
+{% extends 'layout.html' %}
+
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/e_meloria.css') }}"
+/>
+{% endblock %}
+
+{% block isi %}
+<section class="meloria-registration">
+  <div class="meloria-header">
+    <h1 class="meloria-title">MELORIA 2025</h1>
+    <p class="meloria-subtitle">Registration</p>
+    <p class="meloria-description">Pilih lomba yang ingin Anda ikuti</p>
+  </div>
+
+  <!-- LOMBA SECTION -->
+  <div class="category-section">
+    <div class="category-header">
+      <h2 class="category-title">🏆 Lomba Kompetisi</h2>
+      <p class="category-description">Kompetisi resmi dengan hadiah menarik</p>
+    </div>
+    
+    <div class="posters-grid">
+      {% set lomba = [
+        {'file': 'Lomba Bahasa Mandarin.jpg', 'name': 'Lomba Bahasa Mandarin', 'route': 'coming_soon'},
+        {'file': 'Lomba bahasa prancis.png', 'name': 'Lomba Bahasa Prancis', 'route': 'coming_soon'},
+        {'file': 'Lomba Lampu Hijau Lampu Merah Bahasa Korea.jpg', 'name': 'Lomba Lampu Hijau Lampu Merah Bahasa Korea', 'route': 'coming_soon'},
+        {'file': 'lomba Spelling Bee GERMAN.jpg', 'name': 'Lomba Spelling Bee German', 'route': 'coming_soon'},
+        {'file': 'Lomba Cerdas Cermat.png', 'name': 'Lomba Cerdas Cermat', 'route': 'coming_soon'},
+        {'file': 'Lomba Cerdas Cermat Bahasa Arab.png', 'name': 'Lomba Cerdas Cermat Bahasa Arab', 'route': 'coming_soon'},
+        {'file': 'Lomba Cerdas Cermat Bahasa Jepang.jpg', 'name': 'Lomba Cerdas Cermat Bahasa Jepang', 'route': 'coming_soon'},
+        {'file': 'lomba debat indo.jpeg', 'name': 'Lomba Debat Bahasa Indonesia', 'route': 'coming_soon'},
+        {'file': 'Lomba English Debate.png', 'name': 'Lomba English Debate', 'route': 'coming_soon'},
+        {'file': 'Lomba Web Cloning.png', 'name': 'Lomba Web Cloning', 'route': 'coming_soon'},
+        {'file': 'LOMBA COSPLAY.jpg', 'name': 'Lomba Cosplay', 'route': 'coming_soon'},
+        {'file': 'Lomba IGS Got Talent.jpg', 'name': 'Lomba IGS Got Talent', 'route': 'coming_soon'},
+        {'file': 'Lomba Desain Infografis.jpg', 'name': 'Lomba Desain Infografis', 'route': 'coming_soon'},
+        {'file': 'Lomba menghias totebag.png', 'name': 'Lomba Menghias Totebag', 'route': 'coming_soon'},
+        {'file': 'Lomba Membaca Puisi.png', 'name': 'Lomba Membaca Puisi', 'route': 'coming_soon'},
+      ] %}
+      
+      {% for poster in lomba %}
+      <div class="poster-card">
+        <a href="{{ url_for(poster.route) }}" class="poster-link">
+          <div class="poster-image-wrapper">
+            <img 
+              src="{{ url_for('static', filename='img/meloria/' + poster.file) }}" 
+              alt="{{ poster.name }}"
+              class="poster-image"
+              loading="lazy"
+            />
+            <div class="poster-overlay">
+              <div class="poster-info">
+                <h3 class="poster-name">{{ poster.name }}</h3>
+                <span class="poster-click">Klik untuk Daftar →</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- MINIGAMES SECTION -->
+  <div class="category-section">
+    <div class="category-header">
+      <h2 class="category-title">🎮 Minigames</h2>
+      <p class="category-description">Permainan seru untuk semua peserta</p>
+    </div>
+    
+    <div class="posters-grid">
+      {% set minigames = [
+        {'file': 'Minigames - Boardgames.png', 'name': 'Minigames - Boardgames', 'route': 'coming_soon'},
+        {'file': 'Minigames - Mystery Color.jpg', 'name': 'Minigames - Mystery Color', 'route': 'coming_soon'},
+        {'file': 'Minigames - Norebang.jpg', 'name': 'Minigames - Norebang', 'route': 'coming_soon'},
+        {'file': 'Minigames - word chain.jpg', 'name': 'Minigames - Word Chain', 'route': 'coming_soon'}
+      ] %}
+      
+      {% for poster in minigames %}
+      <div class="poster-card">
+        <a href="{{ url_for(poster.route) }}" class="poster-link">
+          <div class="poster-image-wrapper">
+            <img 
+              src="{{ url_for('static', filename='img/meloria/' + poster.file) }}" 
+              alt="{{ poster.name }}"
+              class="poster-image"
+              loading="lazy"
+            />
+            <div class="poster-overlay">
+              <div class="poster-info">
+                <h3 class="poster-name">{{ poster.name }}</h3>
+                <span class="poster-click">Klik untuk Daftar →</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- WORKSHOP SECTION -->
+  <div class="category-section">
+    <div class="category-header">
+      <h2 class="category-title">🎨 Workshop</h2>
+      <p class="category-description">Belajar hal baru bersama para ahli</p>
+    </div>
+    
+    <div class="posters-grid">
+      {% set workshop = [
+        {'file': 'Workshop DaurUlang.jpg', 'name': 'Workshop Daur Ulang', 'route': 'coming_soon'}
+      ] %}
+      
+      {% for poster in workshop %}
+      <div class="poster-card">
+        <a href="{{ url_for(poster.route) }}" class="poster-link">
+          <div class="poster-image-wrapper">
+            <img 
+              src="{{ url_for('static', filename='img/meloria/' + poster.file) }}" 
+              alt="{{ poster.name }}"
+              class="poster-image"
+              loading="lazy"
+            />
+            <div class="poster-overlay">
+              <div class="poster-info">
+                <h3 class="poster-name">{{ poster.name }}</h3>
+                <span class="poster-click">Klik untuk Daftar →</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="meloria-footer">
+    <a href="{{ url_for('home') }}#events" class="back-to-events">
+      ← Kembali ke Events
+    </a>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  // Scroll reveal animation for poster cards in Meloria page
+  (function() {
+    const ease = 'cubic-bezier(0.2, 0.65, 0.3, 1)';
+    const baseDurationMs = 600;
+    const baseDistancePx = 50;
+    const staggerMs = 60;
+
+    const primePoster = (el, delay) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(' + baseDistancePx + 'px)';
+      el.style.transition = `transform ${baseDurationMs}ms ${ease}, opacity ${baseDurationMs}ms ${ease}`;
+      el.style.willChange = 'transform, opacity';
+      el.__posterDelay = delay;
+    };
+
+    const showPoster = (el) => {
+      const delay = el.__posterDelay || 0;
+      setTimeout(() => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+        
+        setTimeout(() => {
+          el.style.removeProperty('opacity');
+          el.style.removeProperty('transition');
+          el.style.removeProperty('will-change');
+          el.style.transform = '';
+        }, baseDurationMs + 50);
+      }, delay);
+    };
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        if (el.__posterRevealed) return;
+        el.__posterRevealed = true;
+        showPoster(el);
+        io.unobserve(el);
+      });
+    }, { 
+      threshold: 0.1, 
+      rootMargin: '0px 0px -5% 0px' 
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.meloria-registration .poster-card');
+      cards.forEach((card, index) => {
+        if (card.__posterPrimed) return;
+        card.__posterPrimed = true;
+        primePoster(card, index * staggerMs);
+        io.observe(card);
+      });
+    });
+  })();
+</script>
+{% endblock %}

@@ -22,7 +22,7 @@
       type="image/x-icon"
       href="{{ url_for('static', filename='img/logo_ardraxis.png') }}"
     />
-    {% block extra_css %}{% endblock %} {% block extra_js %}{% endblock %}
+    {% block extra_css %}{% endblock %}
   </head>
   <script src="{{ url_for('static', filename='js/loading_animation.js') }}"></script>
   <body>
@@ -188,5 +188,6 @@
     </footer>
     <!-- End Footer Section -->
     <script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
+    {% block extra_js %}{% endblock %}
   </body>
 </html>
