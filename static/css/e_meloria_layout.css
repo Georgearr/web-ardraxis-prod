@@ -62,6 +62,8 @@
 }
 .registeration-card-poster > img {
   width: 600px;
+  max-width: 100%;
+  height: auto;
   border-radius: 30px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
@@ -107,3 +109,51 @@
 /* ============================================
    END MELORIA REGISTRATION SUB-PAGE
    ============================================ */
+
+@media (max-width: 1200px) {
+  .registeration-main-card {
+    width: 95%;
+    padding: 24px;
+    gap: 24px;
+  }
+  .registeration-title { font-size: 2.25rem; }
+  .registeration-card-poster > img { width: 520px; }
+}
+
+@media (max-width: 992px) {
+  .registeration-main-card {
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    gap: 20px;
+  }
+  .registeration-card-poster { order: -1; }
+  .registeration-card-poster > img {
+    width: 100%;
+    max-width: 520px;
+  }
+  .register { padding: 24px; }
+}
+
+@media (max-width: 768px) {
+  .registeration {
+    padding: 30px 12px;
+  }
+  .registeration-title {
+    font-size: 1.8rem;
+  }
+  .registeration-card-poster { margin-bottom: 20px; }
+  .registeration-card-poster > img { max-width: 420px; width: 90%; }
+  .registeration-main-card { border-radius: 20px; }
+  .register { padding: 20px; }
+}
+
+@media (max-width: 480px) {
+  .registeration-main-card { padding: 16px; gap: 16px; }
+  .registeration-card-poster > img { max-width: 320px; width: 100%; }
+  .registeration-title { font-size: 1.5rem; }
+  .register > input { font-size: 1rem; }
+  .register-submit, .back-meloria { padding: 8px 12px; font-size: 0.95rem; }
+  .registeration-card-left { width: 100%; }
+}
