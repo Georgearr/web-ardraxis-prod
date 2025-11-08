@@ -1,0 +1,21 @@
+{% extends 'meloria/meloria_layout.html' %}
+
+{% block title_lomba %}Boardgames{% endblock %}
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/meloria/Minigames - Boardgames.png') }}" 
+        alt="Boardgames"
+        class="registeration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block form %}
+    <!-- Temporary form, continue later -->
+    <h2>participant</h2>
+    <input type="text">
+    <h2>participant</h2>
+    <input type="text">
+    <h2>participant</h2>
+    <input type="text">
+{% endblock %}

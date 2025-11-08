@@ -1,0 +1,21 @@
+{% extends 'meloria/meloria_layout.html' %}
+
+{% block title_lomba %}Lomba Cosplay{% endblock %}
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/meloria/LOMBA COSPLAY.jpg') }}" 
+        alt="Lomba Cosplay"
+        class="registeration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block form %}
+    <!-- Temporary form, continue later -->
+    <h2>participant</h2>
+    <input type="text">
+    <h2>participant</h2>
+    <input type="text">
+    <h2>participant</h2>
+    <input type="text">
+{% endblock %}

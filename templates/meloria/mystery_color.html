@@ -1,0 +1,21 @@
+{% extends 'meloria/meloria_layout.html' %}
+
+{% block title_lomba %}Mystery Color{% endblock %}
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/meloria/Minigames - Mystery Color.jpg') }}" 
+        alt="Mystery Color"
+        class="registeration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block form %}
+    <!-- Temporary form, continue later -->
+    <h2>participant</h2>
+    <input type="text">
+    <h2>participant</h2>
+    <input type="text">
+    <h2>participant</h2>
+    <input type="text">
+{% endblock %}

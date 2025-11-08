@@ -13,8 +13,7 @@
         { selector: '.about img', origin: 'right' },
         { selector: '.prior-cabinets-title', origin: 'bottom', unhide: true },
         { selector: '.prior-cabinets-container', origin: 'bottom' },
-        { selector: '.cabinet-card', origin: 'bottom' },
-        { selector: '.footer', origin: 'bottom' }
+        { selector: '.cabinet-card', origin: 'bottom' }
       ];
 
       const computeTransform = (origin, distance, rotateY) => {

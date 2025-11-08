@@ -1,0 +1,21 @@
+{% extends 'meloria/meloria_layout.html' %}
+
+{% block title_lomba %}Workshop Daur Ulang{% endblock %}
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/meloria/Workshop DaurUlang.jpg') }}" 
+        alt="Workshop Daur Ulang"
+        class="registeration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block form %}
+    <!-- Temporary form, continue later -->
+    <h2>participant</h2>
+    <input type="text">
+    <h2>participant</h2>
+    <input type="text">
+    <h2>participant</h2>
+    <input type="text">
+{% endblock %}

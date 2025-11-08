@@ -1,0 +1,109 @@
+/* ============================================
+   MELORIA REGISTRATION SUB-PAGE
+   ============================================ */
+
+.back-meloria {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 10px 16px;
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(2px);
+  transition: transform .15s ease, background .15s ease;
+  cursor: pointer;
+}
+.back-meloria:hover { transform: translateY(-1px); background: rgba(255,255,255,0.22); }
+
+.registeration {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    #11998e 0%,
+    #83c5bf 25%,
+    #0f766e 50%,
+    #06b6d4 75%,
+    #10b981 100%
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+.registeration-main-card {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  width: 90%;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+.registeration-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  letter-spacing: 1px;
+}
+.registeration-card-left {
+  width: 100%;
+}
+.registeration-card-poster > img {
+  width: 600px;
+  border-radius: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.register {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 30px;
+  margin-top: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 30px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+.register > h2 {
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+.register > input {
+  font-size: 1.25rem;
+  padding: 5px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: none;
+}
+.register-submit {
+  display: inline-block;
+  padding: 10px 16px;
+  color: #ffffff;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  background: rgba(255,255,255,0.01);
+  backdrop-filter: blur(2px);
+  transition: transform .15s ease, background .15s ease;
+  cursor: pointer;
+}
+.register-submit:hover { transform: translateY(-1px); background: rgba(255,255,255,0.2); }
+
+/* ============================================
+   END MELORIA REGISTRATION SUB-PAGE
+   ============================================ */
