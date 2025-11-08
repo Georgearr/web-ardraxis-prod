@@ -103,7 +103,9 @@ def mystery_color():
 def workshop_daur_ulang():
     return render_template("meloria/workshop_daur_ulang.html")
 
-# Workshop Calligraphy not added yet due to poster issues
+@app.route("/meloria/workshop_calligraphy")
+def workshop_calligraphy():
+    return render_template("meloria/workshop_calligraphy.html")
 
 if __name__ == "__main__":
     app.run()
