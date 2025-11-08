@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block extra_css %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/e_meloria_layout.css') }}"
+    />
+{% endblock %}
+{% block title %}Registration{% endblock %}
+{% block isi %}
+    <!-- Registeration Section -->
+    <section class="registeration">
+        <div class="registeration-main-card">
+            <div class="registeration-card-left">
+                <h1 class="registeration-title">{% block title_lomba %}{% endblock %}</h1>
+                <a
+                    class="back-meloria"
+                    href="{{ url_for('meloria') }}"
+                    aria-label="Back to Meloria"
+                    >Kembali ke Meloria</a
+                >
+
+                <form class="register">
+                    {% block form %}{% endblock %}
+                    <button class="register-submit">Daftar</button> <!-- No submitted page yet -->
+                </form>
+            </div>
+            <div class="registeration-card-poster">
+                {% block poster_image %}{% endblock %}
+            </div>
+        </div>
+    </section>
+    <!-- End Registeration Section -->
+{% endblock %}
