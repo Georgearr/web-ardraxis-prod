@@ -2,24 +2,31 @@
 
 {% block title %}Meloria{% endblock %}
 {% block extra_css %}
+<style>
+  .navbar{
+    background-color: #BE3C35;
+  }
+  .footer{
+    background: #596428;
+  }
+</style>
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/e_meloria.css') }}"
 />
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 {% endblock %}
 
 {% block isi %}
-<section class="meloria-registration">
-  <div class="meloria-header">
-    <h1 class="meloria-title">MELORIA 2025</h1>
-    <p class="meloria-subtitle">Registration</p>
-    <p class="meloria-description">Pilih lomba yang ingin Anda ikuti</p>
+<section class="meloria-registration" data-aos="fade-up">
+  <div class="meloria-header" data-aos="fade-up">
+    <img src="{{ url_for('static', filename='img/banner/meloria_banner.jpeg') }}" alt="">
   </div>
 
   <!-- LOMBA SECTION -->
-  <div class="category-section">
-    <div class="category-header">
-      <h2 class="category-title">🏆 Lomba</h2>
+  <div class="category-section" data-aos="fade-up">
+    <div class="category-header" data-aos="fade-up">
+      <h2 class="category-title"> Registration</h2>
       <p class="category-description"></p>
     </div>
     
@@ -43,7 +50,7 @@
       ] %}
       
       {% for poster in lomba %}
-      <div class="poster-card">
+      <div class="poster-card" data-aos="fade-up">
         <a href="{{ url_for(poster.route) }}" class="poster-link">
           <div class="poster-image-wrapper">
             <img 
@@ -66,8 +73,8 @@
   </div>
 
   <!-- MINIGAMES SECTION -->
-  <div class="category-section">
-    <div class="category-header">
+  <div class="category-section" data-aos="fade-up">
+    <div class="category-header" data-aos="fade-up">
       <h2 class="category-title">🎮 Minigames</h2>
       <p class="category-description"></p>
     </div>
@@ -81,7 +88,7 @@
       ] %}
       
       {% for poster in minigames %}
-      <div class="poster-card">
+      <div class="poster-card" data-aos="fade-up">
         <a href="{{ url_for(poster.route) }}" class="poster-link">
           <div class="poster-image-wrapper">
             <img 
@@ -104,8 +111,8 @@
   </div>
 
   <!-- WORKSHOP SECTION -->
-  <div class="category-section">
-    <div class="category-header">
+  <div class="category-section" data-aos="fade-up">
+    <div class="category-header" data-aos="fade-up">
       <h2 class="category-title">🎨 Workshop</h2>
       <p class="category-description"></p>
     </div>
@@ -117,7 +124,7 @@
       ] %}
       
       {% for poster in workshop %}
-      <div class="poster-card">
+      <div class="poster-card" data-aos="fade-up">
         <a href="{{ url_for(poster.route) }}" class="poster-link">
           <div class="poster-image-wrapper">
             <img 
@@ -139,7 +146,7 @@
     </div>
   </div>
 
-  <div class="meloria-footer">
+  <div class="meloria-footer" data-aos="fade-up">
     <a href="{{ url_for('home') }}#events" class="back-to-events">
       ← Kembali ke Events
     </a>
@@ -148,60 +155,8 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
-  // Scroll reveal animation for poster cards in Meloria page
-  (function() {
-    const ease = 'cubic-bezier(0.2, 0.65, 0.3, 1)';
-    const baseDurationMs = 600;
-    const baseDistancePx = 50;
-    const staggerMs = 60;
-
-    const primePoster = (el, delay) => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(' + baseDistancePx + 'px)';
-      el.style.transition = `transform ${baseDurationMs}ms ${ease}, opacity ${baseDurationMs}ms ${ease}`;
-      el.style.willChange = 'transform, opacity';
-      el.__posterDelay = delay;
-    };
-
-    const showPoster = (el) => {
-      const delay = el.__posterDelay || 0;
-      setTimeout(() => {
-        el.style.opacity = '1';
-        el.style.transform = 'translateY(0)';
-        
-        setTimeout(() => {
-          el.style.removeProperty('opacity');
-          el.style.removeProperty('transition');
-          el.style.removeProperty('will-change');
-          el.style.transform = '';
-        }, baseDurationMs + 50);
-      }, delay);
-    };
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        if (el.__posterRevealed) return;
-        el.__posterRevealed = true;
-        showPoster(el);
-        io.unobserve(el);
-      });
-    }, { 
-      threshold: 0.1, 
-      rootMargin: '0px 0px -5% 0px' 
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-      const cards = document.querySelectorAll('.meloria-registration .poster-card');
-      cards.forEach((card, index) => {
-        if (card.__posterPrimed) return;
-        card.__posterPrimed = true;
-        primePoster(card, index * staggerMs);
-        io.observe(card);
-      });
-    });
-  })();
+  AOS.init();
 </script>
 {% endblock %}
