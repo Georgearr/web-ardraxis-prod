@@ -27,13 +27,24 @@ def get_google_sheets_client():
         'https://www.googleapis.com/auth/drive'
     ]
     
-    # Try to load from credentials.json file
+    # Try to load credentials from environment variable first
+    credentials_json = os.getenv('GOOGLE_SHEETS_CREDENTIALS')
+    if credentials_json:
+        try:
+            creds_dict = json.loads(credentials_json)
+            creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+            client = gspread.authorize(creds)
+            return client
+        except json.JSONDecodeError:
+            raise Exception("GOOGLE_SHEETS_CREDENTIALS is not valid JSON")
+    
+    # Fallback to credentials.json file
     try:
         creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
         client = gspread.authorize(creds)
         return client
     except FileNotFoundError:
-        raise Exception("credentials.json file not found. Please add your Google Service Account credentials file.")
+        raise Exception("Credentials not found. Please set GOOGLE_SHEETS_CREDENTIALS environment variable or add credentials.json file.")
 
 def simpan_ke_google_sheets(sheet_name, data):
     try:
@@ -41,18 +52,25 @@ def simpan_ke_google_sheets(sheet_name, data):
         spreadsheet_url = os.getenv('GOOGLE_SPREADSHEET_URL', '')
         
         if not spreadsheet_url:
-            raise Exception("GOOGLE_SPREADSHEET_URL environment variable is not set")
+            raise Exception("GOOGLE_SPREADSHEET_URL tidak diset. Silakan tambahkan URL Google Spreadsheet di Secrets.")
         
         # Extract spreadsheet ID from URL
         spreadsheet_id = extract_spreadsheet_id(spreadsheet_url)
         spreadsheet = client.open_by_key(spreadsheet_id)
         
+        # Cek apakah sheet sudah ada
         try:
             worksheet = spreadsheet.worksheet(sheet_name)
+            # Sheet sudah ada, cek apakah ada header
+            if worksheet.row_count == 0 or not worksheet.row_values(1):
+                # Sheet kosong, tambahkan header
+                worksheet.append_row(list(data.keys()))
         except gspread.exceptions.WorksheetNotFound:
+            # Sheet belum ada, buat baru dengan header
             worksheet = spreadsheet.add_worksheet(title=sheet_name, rows=1000, cols=20)
             worksheet.append_row(list(data.keys()))
         
+        # Tambahkan data
         worksheet.append_row(list(data.values()))
         return True
     except Exception as e:
