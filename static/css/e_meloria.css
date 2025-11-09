@@ -5,6 +5,8 @@
 .meloria-registration {
   min-height: 100vh;
   background-color: #F8E08A;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Background Pattern Overlay */
@@ -166,6 +168,8 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .poster-card {

@@ -1,28 +1,50 @@
-from flask import Flask, render_template, request, redirect
-import openpyxl
+from flask import Flask, render_template, request, redirect, jsonify
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+import json
 import os
 
 app = Flask(__name__)
 
-# Pastikan folder data ada
-if not os.path.exists("data"):
-    os.makedirs("data")
+def load_line_groups():
+    with open('line_groups.json', 'r') as f:
+        return json.load(f)
 
-def simpan_ke_excel(nama_file, data):
-    path = f"data/{nama_file}.xlsx"
+def get_google_sheets_client():
+    scope = [
+        'https://spreadsheets.google.com/feeds',
+        'https://www.googleapis.com/auth/spreadsheets',
+        'https://www.googleapis.com/auth/drive.file',
+        'https://www.googleapis.com/auth/drive'
+    ]
+    
+    google_creds = os.getenv('GOOGLE_SHEETS_CREDENTIALS')
+    if google_creds:
+        creds_dict = json.loads(google_creds)
+        creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+    else:
+        creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+    
+    client = gspread.authorize(creds)
+    return client
 
-    # Jika file belum ada, buat header
-    if not os.path.exists(path):
-        wb = openpyxl.Workbook()
-        ws = wb.active
-        ws.append(list(data.keys()))  # header column
-        wb.save(path)
-
-    # Tambahkan baris data baru
-    wb = openpyxl.load_workbook(path)
-    ws = wb.active
-    ws.append(list(data.values()))
-    wb.save(path)
+def simpan_ke_google_sheets(sheet_name, data):
+    try:
+        client = get_google_sheets_client()
+        spreadsheet_name = os.getenv('GOOGLE_SPREADSHEET_NAME', 'Meloria Event Registration')
+        spreadsheet = client.open(spreadsheet_name)
+        
+        try:
+            worksheet = spreadsheet.worksheet(sheet_name)
+        except gspread.exceptions.WorksheetNotFound:
+            worksheet = spreadsheet.add_worksheet(title=sheet_name, rows=1000, cols=20)
+            worksheet.append_row(list(data.keys()))
+        
+        worksheet.append_row(list(data.values()))
+        return True
+    except Exception as e:
+        print(f"Error saving to Google Sheets: {e}")
+        return False
 
 @app.route("/")
 @app.route("/home")
@@ -37,7 +59,6 @@ def coming_soon():
 def handle_404(error):
     return render_template("404.html"), 404
 
-# Meloria Event Pages
 @app.route("/meloria")
 def meloria():
     return render_template("e_meloria.html")
@@ -50,7 +71,13 @@ def bahasa_mandarin():
             "Kelas": request.form["kelas"],
             "ID Line": request.form["idline"]
         }
-        simpan_ke_excel("bahasa_mandarin", data)
+        if simpan_ke_google_sheets("bahasa_mandarin", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("bahasa_mandarin", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/bahasa_mandarin.html")
 
@@ -63,7 +90,13 @@ def bahasa_prancis():
             "Kelas": request.form["kelas"],
             "ID Line": request.form["idline"]
         }
-        simpan_ke_excel("bahasa_prancis", data)
+        if simpan_ke_google_sheets("bahasa_prancis", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("bahasa_prancis", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/bahasa_prancis.html")
 
@@ -75,7 +108,13 @@ def bahasa_jerman():
             "Kelas": request.form["kelas"],
             "ID Line": request.form["idline"]
         }
-        simpan_ke_excel("bahasa_jerman", data)
+        if simpan_ke_google_sheets("bahasa_jerman", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("bahasa_jerman", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/bahasa_jerman.html")
 
@@ -88,7 +127,13 @@ def bahasa_jepang():
             "Kelas": request.form["kelas"],
             "ID Line": request.form["idline"]
         }
-        simpan_ke_excel("bahasa_jepang", data)
+        if simpan_ke_google_sheets("bahasa_jepang", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("bahasa_jepang", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/bahasa_jepang.html")
 
@@ -102,7 +147,13 @@ def bahasa_korea():
             "Kelas": request.form["kelas"],
             "ID Line": request.form["idline"]
         }
-        simpan_ke_excel("bahasa_korea", data)
+        if simpan_ke_google_sheets("bahasa_korea", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("bahasa_korea", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/bahasa_korea.html")
 
@@ -115,7 +166,13 @@ def bahasa_arab():
             "Kelas": request.form["kelas"],
             "ID Line": request.form["idline"]
         }
-        simpan_ke_excel("bahasa_arab", data)
+        if simpan_ke_google_sheets("bahasa_arab", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("bahasa_arab", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/bahasa_arab.html")
 
@@ -128,7 +185,13 @@ def web_cloning():
             "Kelas": request.form["kelas"],
             "ID Line": request.form["idline"]
         }
-        simpan_ke_excel("web_cloning", data)
+        if simpan_ke_google_sheets("web_cloning", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("web_cloning", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/web_cloning.html")
 
@@ -140,7 +203,13 @@ def membaca_puisi():
             "Kelas": request.form["kelas"],
             "ID Line": request.form["idline"]
         }
-        simpan_ke_excel("membaca_puisi", data)
+        if simpan_ke_google_sheets("membaca_puisi", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("membaca_puisi", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/membaca_puisi.html")
 
@@ -157,7 +226,13 @@ def menghias_totebag():
             "Kelas2": request.form["kelas2"],
             "ID Line2": request.form["idline2"]
         }
-        simpan_ke_excel("menghias_totebag", data)
+        if simpan_ke_google_sheets("menghias_totebag", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("menghias_totebag", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/menghias_totebag.html")
 
@@ -176,7 +251,13 @@ def debat_bahasa_indonesia():
             "Kelas3": request.form["kelas3"],
             "ID Line3": request.form["idline3"]
         }
-        simpan_ke_excel("debat_bahasa_indonesia", data)
+        if simpan_ke_google_sheets("debat_bahasa_indonesia", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("debat_bahasa_indonesia", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/debat_bahasa_indonesia.html")
 
@@ -195,7 +276,13 @@ def debat_bahasa_inggris():
             "Kelas3": request.form["kelas3"],
             "ID Line3": request.form["idline3"]
         }
-        simpan_ke_excel("debat_bahasa_inggris", data)
+        if simpan_ke_google_sheets("debat_bahasa_inggris", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("debat_bahasa_inggris", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/debat_bahasa_inggris.html")
 
@@ -208,7 +295,13 @@ def competitive_programming():
             "Kelas": request.form["kelas"],
             "ID Line": request.form["idline"]
         }
-        simpan_ke_excel("competitive_programming", data)
+        if simpan_ke_google_sheets("competitive_programming", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("competitive_programming", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/competitive_programming.html")
 
@@ -221,7 +314,13 @@ def desain_infografis():
             "Kelas": request.form["kelas"],
             "ID Line": request.form["idline"]
         }
-        simpan_ke_excel("desain_infografis", data)
+        if simpan_ke_google_sheets("desain_infografis", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("desain_infografis", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/desain_infografis.html")
 
@@ -247,7 +346,13 @@ def cosplay():
             "Karakter4": request.form["karakter4"],
             "ID Line4": request.form["idline4"]
         }
-        simpan_ke_excel("cosplay", data)
+        if simpan_ke_google_sheets("cosplay", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("cosplay", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/cosplay.html")
 
@@ -263,7 +368,13 @@ def cerdas_cermat():
             "ID Line 2": request.form["idline3"],
             "Kelas": request.form["kelas"]
         }
-        simpan_ke_excel("cerdas_cermat", data)
+        if simpan_ke_google_sheets("cerdas_cermat", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("cerdas_cermat", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/cerdas_cermat.html")
 
@@ -277,7 +388,13 @@ def igs_got_talent():
             "Jenis Talent": request.form["jenis_talent"],
             "Nama Anggota": request.form["nama_anggota"]
         }
-        simpan_ke_excel("igs_got_talent", data)
+        if simpan_ke_google_sheets("igs_got_talent", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("igs_got_talent", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/igs_got_talent.html")
 
@@ -289,7 +406,13 @@ def workshop_daur_ulang():
             "Kelas": request.form["kelas"],
             "ID Line": request.form["idline"]
         }
-        simpan_ke_excel("workshop_daur_ulang", data)
+        if simpan_ke_google_sheets("workshop_daur_ulang", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("workshop_daur_ulang", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/workshop_daur_ulang.html")
 
@@ -302,7 +425,13 @@ def workshop_calligraphy():
             "ID Line": request.form["idline"],
             "Sesi": request.form["sesi"]
         }
-        simpan_ke_excel("workshop_calligraphy", data)
+        if simpan_ke_google_sheets("workshop_calligraphy", data):
+            line_groups = load_line_groups()
+            return jsonify({
+                "success": True,
+                "line_link": line_groups.get("workshop_calligraphy", "")
+            })
+        return jsonify({"success": False}), 500
 
     return render_template("meloria/workshop_calligraphy.html")
 

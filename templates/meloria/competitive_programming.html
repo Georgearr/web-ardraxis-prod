@@ -1,0 +1,17 @@
+{% extends 'meloria/meloria_layout.html' %}
+
+{% block title_lomba %}Lomba Competitive Programming{% endblock %}
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/meloria/lomba_programming.jpg') }}" 
+        alt="Lomba Competitive Programming"
+        class="registeration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block form %}
+    <!-- Nama Lengkap --> <input type="text" name="nama" placeholder="Nama Lengkap" required>
+    <!-- Kelas --> <input type="text" name="kelas" placeholder="Kelas" required>
+    <!-- ID Line --> <input type="text" name="idline" placeholder="ID Line" required>
+{% endblock %}
