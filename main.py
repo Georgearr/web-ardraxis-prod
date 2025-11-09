@@ -1,14 +1,23 @@
+
 from flask import Flask, render_template, request, redirect, jsonify
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import json
 import os
+import re
 
 app = Flask(__name__)
 
 def load_line_groups():
     with open('line_groups.json', 'r') as f:
         return json.load(f)
+
+def extract_spreadsheet_id(url):
+    """Extract spreadsheet ID from Google Sheets URL"""
+    match = re.search(r'/d/([a-zA-Z0-9-_]+)', url)
+    if match:
+        return match.group(1)
+    return url  # If already an ID, return as is
 
 def get_google_sheets_client():
     scope = [
@@ -18,31 +27,25 @@ def get_google_sheets_client():
         'https://www.googleapis.com/auth/drive'
     ]
     
-    google_creds = os.getenv('GOOGLE_SHEETS_CREDENTIALS')
-    if google_creds:
-        creds_dict = json.loads(google_creds)
-        creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
-    else:
+    # Try to load from credentials.json file
+    try:
         creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
-    
-    client = gspread.authorize(creds)
-    return client
+        client = gspread.authorize(creds)
+        return client
+    except FileNotFoundError:
+        raise Exception("credentials.json file not found. Please add your Google Service Account credentials file.")
 
 def simpan_ke_google_sheets(sheet_name, data):
     try:
         client = get_google_sheets_client()
         spreadsheet_url = os.getenv('GOOGLE_SPREADSHEET_URL', '')
         
-        if spreadsheet_url:
-            # Extract spreadsheet ID from URL
-            if '/d/' in spreadsheet_url:
-                spreadsheet_id = spreadsheet_url.split('/d/')[1].split('/')[0]
-            else:
-                spreadsheet_id = spreadsheet_url
-            spreadsheet = client.open_by_key(spreadsheet_id)
-        else:
-            spreadsheet_name = os.getenv('GOOGLE_SPREADSHEET_NAME', 'Meloria Event Registration')
-            spreadsheet = client.open(spreadsheet_name)
+        if not spreadsheet_url:
+            raise Exception("GOOGLE_SPREADSHEET_URL environment variable is not set")
+        
+        # Extract spreadsheet ID from URL
+        spreadsheet_id = extract_spreadsheet_id(spreadsheet_url)
+        spreadsheet = client.open_by_key(spreadsheet_id)
         
         try:
             worksheet = spreadsheet.worksheet(sheet_name)
