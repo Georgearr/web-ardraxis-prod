@@ -71,12 +71,14 @@
 {% endblock %}
 {% block title %}Registeration{% endblock %}
 {% block isi %}
-    <!-- Popup Success -->
-    <div class="popup-overlay" id="successPopup">
-        <div class="popup-content">
-            <h2>✨ Pendaftaran Berhasil!</h2>
-            <p>Link Grup Lomba:</p>
-            <a href="#" id="lineGroupLink" class="popup-line-link" target="_blank">Klik di sini untuk join grup LINE</a>
+    <!-- Modal Success -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">✓</div>
+            <h2>Pendaftaran Berhasil!</h2>
+            <p>Terima kasih telah mendaftar. Silakan join grup LINE lomba:</p>
+            <a href="#" id="lineGroupLink" class="modal-line-link" target="_blank">Join Grup LINE</a>
+            <button class="modal-close" onclick="closeModal()">Tutup</button>
         </div>
     </div>
 
@@ -104,6 +106,11 @@
     </section>
 
     <script>
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            modal.classList.remove('active');
+        }
+
         document.getElementById('registrationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -121,14 +128,14 @@
                     const lineLink = document.getElementById('lineGroupLink');
                     lineLink.href = 'https://' + data.line_link;
                     
-                    const popup = document.getElementById('successPopup');
-                    popup.classList.add('active');
+                    const modal = document.getElementById('successModal');
+                    modal.classList.add('active');
                     
                     this.reset();
                     
-                    popup.addEventListener('click', function(e) {
-                        if (e.target === popup) {
-                            popup.classList.remove('active');
+                    modal.addEventListener('click', function(e) {
+                        if (e.target === modal) {
+                            closeModal();
                         }
                     });
                 } else {
