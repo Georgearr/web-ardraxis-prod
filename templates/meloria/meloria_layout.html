@@ -69,7 +69,7 @@
         }
     </style>
 {% endblock %}
-{% block title %}Registeration{% endblock %}
+{% block title %}Registration{% endblock %}
 {% block isi %}
     <!-- Modal Success -->
     <div class="modal-overlay" id="successModal">
@@ -82,11 +82,11 @@
         </div>
     </div>
 
-    <!-- Registeration Section -->
-    <section class="registeration">
-        <div class="registeration-main-card">
-            <div class="registeration-card-left">
-                <h1 class="registeration-title">{% block title_lomba %}{% endblock %}</h1>
+    <!-- Registration Section -->
+    <section class="registration">
+        <div class="registration-main-card">
+            <div class="registration-card-left">
+                <h1 class="registration-title">{% block title_lomba %}{% endblock %}</h1>
                 <a
                     class="back-meloria"
                     href="{{ url_for('meloria') }}"
@@ -99,7 +99,7 @@
                     <button type="submit" class="submit-btn">Daftar</button>
                 </form>
             </div>
-            <div class="registeration-card-poster">
+            <div class="registration-card-poster">
                 {% block poster_image %}{% endblock %}
             </div>
         </div>
@@ -147,5 +147,5 @@
             }
         });
     </script>
-    <!-- End Registeration Section -->
+    <!-- End Registration Section -->
 {% endblock %}
