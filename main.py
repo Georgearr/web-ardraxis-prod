@@ -6,19 +6,33 @@ import json
 import os
 import re
 
-# --- Google Sheets Setup ---
-with open("credentials.json") as f:
+# Path ke file credentials JSON
+CREDENTIALS_FILE = "credentials.json"
+
+if not os.path.exists(CREDENTIALS_FILE):
+    raise Exception(f"❌ File {CREDENTIALS_FILE} tidak ditemukan")
+
+# Load service account JSON dari file
+with open(CREDENTIALS_FILE, "r") as f:
     SERVICE_ACCOUNT_INFO = json.load(f)
 
-# Ruang lingkup izin untuk Sheets API
-SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 
-# Buat credentials dan client
+# Scope modern untuk Sheets & Drive
+SCOPES = [
+    "https://www.googleapis.com/auth/spreadsheets",
+    "https://www.googleapis.com/auth/drive"
+]
+
+# Buat credentials & client gspread
 creds = Credentials.from_service_account_info(SERVICE_ACCOUNT_INFO, scopes=SCOPES)
 client = gspread.authorize(creds)
 
-# ID spreadsheet utama (pastikan diisi benar)
+# Spreadsheet ID utama
 SPREADSHEET_ID = "1FZEjJ8x5QDow7VtK1zHmy6kziHpshq_Es22Nvtcy2tM"
+
+# Tes buka spreadsheet
+spreadsheet = client.open_by_key(SPREADSHEET_ID)
+print("✅ Google Sheets client berhasil dibuat!")
 
 
 SHEET_URLS = {
@@ -637,29 +651,24 @@ def extract_spreadsheet_id(url):
 
 
 def get_google_sheets_client():
-    """Return authorized gspread client"""
-    try:
-        # Ambil credential dari .env
-        credentials_json = os.getenv("GOOGLE_SHEETS_CREDENTIALS")
-        if not credentials_json:
-            raise Exception("❌ GOOGLE_SHEETS_CREDENTIALS belum diset di .env")
+    CREDENTIALS_FILE = "credentials.json"
+    if not os.path.exists(CREDENTIALS_FILE):
+        raise Exception(f"❌ File {CREDENTIALS_FILE} tidak ditemukan")
+    
+    # Load service account info
+    with open(CREDENTIALS_FILE, "r") as f:
+        service_account_info = json.load(f)
+    
+    # Scope modern
+    SCOPES = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
 
-        creds_dict = json.loads(credentials_json)
-
-        # Scope modern (disarankan)
-        scopes = [
-            "https://www.googleapis.com/auth/spreadsheets",
-            "https://www.googleapis.com/auth/drive"
-        ]
-
-        creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
-        client = gspread.authorize(creds)
-        return client
-    except json.JSONDecodeError:
-        raise Exception("❌ GOOGLE_SHEETS_CREDENTIALS bukan JSON yang valid")
-    except Exception as e:
-        raise Exception(f"❌ Error in get_google_sheets_client(): {e}")
-
+    # Buat credentials & client gspread
+    creds = Credentials.from_service_account_info(service_account_info, scopes=SCOPES)
+    client = gspread.authorize(creds)
+    return client
 
 def simpan_ke_google_sheets(sheet_name, data):
     """Save registration data to a specific sheet in the spreadsheet"""

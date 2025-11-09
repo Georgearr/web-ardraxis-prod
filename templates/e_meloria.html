@@ -60,7 +60,7 @@
         {'file': 'lomba_cosplay.jpg', 'name': 'Lomba Cosplay', 'route': 'cosplay'},
         {'file': 'lomba_igs_got_talent.jpg', 'name': 'Lomba IGS Got Talent', 'route': 'igs_got_talent'},
         {'file': 'lomba_desain_infografis.jpg', 'name': 'Lomba Desain Infografis', 'route': 'desain_infografis'},
-        {'file': 'lomba_menghias_totebag.png', 'name': 'Lomba Menghias Totebag', 'route': 'totebag'},
+        {'file': 'lomba_menghias_totebag.png', 'name': 'Lomba Menghias Totebag', 'route': 'lomba_totebag'},
         {'file': 'lomba_membaca_puisi.png', 'name': 'Lomba Membaca Puisi', 'route': 'membaca_puisi'},
         {'file': 'lomba_programming.jpg', 'name': 'Lomba Competitive Programming', 'route': 'competitive_programming'},
       ] %}
@@ -105,7 +105,7 @@
       
       {% for poster in minigames %}
       <div class="poster-card" data-aos="fade-up">
-        <a href="{{ url_for(poster.route) }}" class="poster-link">
+        <!-- <a href="{{ url_for(poster.route) }}" class="poster-link"> -->
           <div class="poster-image-wrapper">
             <img 
               src="{{ url_for('static', filename='img/meloria/' + poster.file) }}" 
@@ -116,11 +116,11 @@
             <div class="poster-overlay">
               <div class="poster-info">
                 <h3 class="poster-name">{{ poster.name }}</h3>
-                <span class="poster-click">Klik untuk Daftar →</span>
+                <!-- <span class="poster-click">Klik untuk Daftar →</span> -->
               </div>
             </div>
           </div>
-        </a>
+        <!-- </a> -->
       </div>
       {% endfor %}
     </div>
