@@ -1,22 +1,20 @@
 {% extends 'meloria/meloria_layout.html' %}
 
 {% block title_lomba %}Lomba Cerdas Cermat Bahasa Jepang{% endblock %}
+
 {% block poster_image %}
-    <img 
-        src="{{ url_for('static', filename='img/meloria/Lomba Cerdas Cermat Bahasa Jepang.jpg') }}" 
-        alt="Lomba Cerdas Cermat Bahasa Jepang"
-        class="registeration-poster-image"
-        loading="lazy"
-    />
+<img src="{{ url_for('static', filename='img/meloria/Lomba Cerdas Cermat Bahasa Jepang.jpg') }}"
+     alt="Lomba Cerdas Cermat Bahasa Jepang"
+     class="poster-image">
 {% endblock %}
 
 {% block form %}
-    <!-- Temporary form, continue later -->
-    <h2>Nama Lengkap</h2>
-    <input type="text">
-    <h2>Kelas</h2>
-    <input type="text">
-    <h2>ID Line</h2>
-    <input type="text">
-    <button class="grup"><a href="">Grup</a></button>
+    <label>Nama Lengkap</label>
+    <input type="text" name="nama" required>
+
+    <label>Kelas</label>
+    <input type="text" name="kelas" required>
+
+    <label>ID Line</label>
+    <input type="text" name="idline" required>
 {% endblock %}

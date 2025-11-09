@@ -11,12 +11,15 @@
 {% endblock %}
 
 {% block form %}
-    <!-- Temporary form, continue later -->
-    <h2>Nama Lengkap</h2>
-    <input type="text">
-    <h2>Kelas</h2>
-    <input type="text">
-    <h2>ID Line</h2>
-    <input type="text">
-    <button class="grup"><a href="">Grup</a></button>
+    <label>Nama Lengkap</label>
+    <input type="text" name="nama" required>
+
+    <label>Kelas</label>
+    <input type="text" name="kelas" required>
+
+    <label>ID Line</label>
+    <input type="text" name="idline" required>
+
+    <label>Sesi 1 = 08:00 s/d 09:30  Dan Sesi 2 = 10:15 s/d 11:45 </label>
+    <input type="text" name="sesi" required>
 {% endblock %}

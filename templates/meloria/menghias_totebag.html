@@ -11,12 +11,24 @@
 {% endblock %}
 
 {% block form %}
-    <!-- Temporary form, continue later -->
-    <h2>Nama Lengkap</h2>
-    <input type="text">
-    <h2>Kelas</h2>
-    <input type="text">
-    <h2>ID Line</h2>
-    <input type="text">
-    <button class="grup"><a href="">Grup</a></button>
+    <label>Nama Tim</label>
+    <input type="text" name="nama_tim" required>
+
+    <label>Nama Peserta 1</label>
+    <input type="text" name="nama1" required>
+
+    <label>Kelas</label>
+    <input type="text" name="kelas1" required>
+
+    <label>ID Line</label>
+    <input type="text" name="idline1" required>
+
+    <label>Nama Peserta 2</label>
+    <input type="text" name="nama2" required>
+
+    <label>Kelas</label>
+    <input type="text" name="kelas2" required>
+
+    <label>ID Line</label>
+    <input type="text" name="idline2" required>
 {% endblock %}

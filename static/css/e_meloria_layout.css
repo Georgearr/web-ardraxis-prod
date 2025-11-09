@@ -92,7 +92,7 @@
   border-radius: 10px;
   border: none;
 }
-.register-submit {
+.submit-btn, .register-submit {
   display: inline-block;
   padding: 10px 16px;
   color: #ffffff;
