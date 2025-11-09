@@ -78,7 +78,7 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 30px;
+  border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 .register > h2 {
@@ -86,10 +86,16 @@
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 .register > input {
-  font-size: 1.25rem;
+  font-size: 1.10rem;
   padding: 5px;
   margin-bottom: 20px;
   border-radius: 10px;
+  border-radius: 8px;
+  outline: none;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 8px;
+  padding-right: 8px;
   border: none;
 }
 .submit-btn, .register-submit {
@@ -99,12 +105,13 @@
   text-decoration: none;
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 10px;
-  background: rgba(255,255,255,0.01);
+  background: #3C6868;
   backdrop-filter: blur(2px);
   transition: transform .15s ease, background .15s ease;
   cursor: pointer;
+  font-size: 20px;
 }
-.register-submit:hover { transform: translateY(-1px); background: rgba(255,255,255,0.2); }
+.submit-btn:hover, .register-submit:hover { transform: translateY(-1px); background: #3c686894; }
 
 .grup{
   width: 100px;
