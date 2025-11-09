@@ -26,6 +26,7 @@
     backdrop-filter: blur(8px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     font-family: sans-serif;
+    box-shadow: 0 3px 25px rgba(0, 0, 0, 0.8);
   }
   
   /* Container */
@@ -367,18 +368,6 @@
     min-height: 240px; /* seragam */
   }
   
-  /* Dekorasi halus */
-  .footer::after {
-    content: "";
-    position: absolute;
-    inset: -20%;
-    background:
-      radial-gradient(circle at 18% 82%, rgba(255,255,255,.08) 0 26%, transparent 48%),
-      radial-gradient(circle at 84% 22%, rgba(255,255,255,.06) 0 22%, transparent 46%);
-    filter: blur(10px);
-    pointer-events: none;
-    z-index: 0;
-  }
   
   /* ========== KARTU KIRI (Brand) ========== */
   .footer .footerkiriutama {
