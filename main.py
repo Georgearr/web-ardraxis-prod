@@ -31,8 +31,18 @@ def get_google_sheets_client():
 def simpan_ke_google_sheets(sheet_name, data):
     try:
         client = get_google_sheets_client()
-        spreadsheet_name = os.getenv('GOOGLE_SPREADSHEET_NAME', 'Meloria Event Registration')
-        spreadsheet = client.open(spreadsheet_name)
+        spreadsheet_url = os.getenv('GOOGLE_SPREADSHEET_URL', '')
+        
+        if spreadsheet_url:
+            # Extract spreadsheet ID from URL
+            if '/d/' in spreadsheet_url:
+                spreadsheet_id = spreadsheet_url.split('/d/')[1].split('/')[0]
+            else:
+                spreadsheet_id = spreadsheet_url
+            spreadsheet = client.open_by_key(spreadsheet_id)
+        else:
+            spreadsheet_name = os.getenv('GOOGLE_SPREADSHEET_NAME', 'Meloria Event Registration')
+            spreadsheet = client.open(spreadsheet_name)
         
         try:
             worksheet = spreadsheet.worksheet(sheet_name)
