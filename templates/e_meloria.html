@@ -15,8 +15,10 @@
   .footer .footerbawah{
     background: linear-gradient(to bottom, #CA5342, #8B2E23);
   }
-  .footer::after {
-    background: linear-gradient(to bottom, #CA5342, #8B2E23);
+   @media (max-width: 768px) {
+    .meloria-footer path {
+      display: none;
+    }
   }
 </style>
 <link
