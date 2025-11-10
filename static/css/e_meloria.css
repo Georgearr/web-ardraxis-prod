@@ -2,6 +2,77 @@
    MELORIA REGISTRATION PAGE
    ============================================ */
 
+/* Slightly change navbar */
+.brand {
+  text-shadow: 0 0 5px #F8E08A, 0 0 2px white;
+}
+
+/* Animasi nyala (fade-in) */
+@keyframes glowUp {
+  from {
+    text-shadow: none;
+  }
+  to {
+    text-shadow: 0 0 5px #F8E08A, 0 0 2px white;
+  }
+}
+
+/* Animasi mati (fade-out) */
+@keyframes glowDown {
+  from {
+    text-shadow: 0 0 5px #F8E08A, 0 0 2px white;
+  }
+  to {
+    text-shadow: none;
+  }
+}
+
+.nav-nav a {
+    color: white; /* slate-300 */
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    /* Transisi diperhalus */
+    transition: color 0.6s ease-in-out, transform 0.4s ease-in-out,
+      text-shadow 0.8s ease-in-out;
+  }
+  
+  /* Efek hover dengan glow halus */
+  .nav-nav a:hover {
+    color: #ffffff;
+    transform: translateY(-1px);
+    animation: glowFade 0.4s ease-in-out forwards;
+  }
+  
+  /* Efek saat tidak dihover (glow menghilang halus) */
+  .nav-nav a:not(:hover) {
+    animation: glowFadeOut 0.4s ease-in-out forwards;
+  }
+  
+  /* Animasi nyala (fade-in) */
+  @keyframes glowFade {
+    from {
+      text-shadow: none;
+    }
+    to {
+      text-shadow: 0 0 5px #F8E08A, 0 0 2px white;
+    }
+  }
+  
+  /* Animasi mati (fade-out) */
+  @keyframes glowFadeOut {
+    from {
+      text-shadow: 0 0 5px #F8E08A, 0 0 2px white;
+    }
+    to {
+      text-shadow: none;
+    }
+  }
+/* Navbar change end */
+
 .meloria-registration {
   min-height: 100vh;
   background-color: #F8E08A;
@@ -131,7 +202,7 @@
   text-align: center;
   margin-bottom: 40px;
   padding: 25px 20px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -149,7 +220,7 @@
   color: #ffffff;
   margin-bottom: 10px;
   text-shadow:
-    0 0 5px #fff;
+    0 0 5px #e8e8e8;
   letter-spacing: 1px;
 }
 
@@ -256,7 +327,7 @@
 
 .poster-click {
   font-size: 0.9rem;
-  color: #b2dfdb;
+  color: #e1dec2;
   font-weight: 500;
   display: inline-block;
   transition: transform 0.2s ease;
@@ -277,7 +348,7 @@
 .back-to-events {
   display: inline-block;
   padding: 12px 30px;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.3);
@@ -291,7 +362,7 @@
 }
 
 .back-to-events:hover {
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
