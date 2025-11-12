@@ -1,7 +1,9 @@
 /* ============================================
    MELORIA REGISTRATION PAGE
    ============================================ */
-
+html, body {
+  overflow-x: hidden;
+}
 .meloria-registration {
   min-height: 100vh;
   background-color: #F8E08A;
