@@ -5,13 +5,13 @@
     <img 
         src="{{ url_for('static', filename='img/meloria/lomba_cerdas_cermat_bahasa_arab.png') }}" 
         alt="Lomba Cerdas Cermat Bahasa Arab"
-        class="registeration-poster-image"
+        class="registration-poster-image"
         loading="lazy"
     />
 {% endblock %}
 
 {% block form %}
-    <!-- Nama Lengkap --> <input type="text" name="nama" placeholder="Nama Lengkap" required>
-    <!-- Kelas --> <input type="text" name="kelas" placeholder="Kelas" required>
-    <!-- ID Line --> <input type="text" name="idline" placeholder="ID Line" required>
+    <input type="text" name="nama" placeholder="Nama Lengkap" required>
+    <input type="text" name="kelas" placeholder="Kelas" required>
+    <input type="text" name="idline" placeholder="ID Line" required>
 {% endblock %}

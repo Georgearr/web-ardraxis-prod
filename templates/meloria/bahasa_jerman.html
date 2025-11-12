@@ -3,20 +3,15 @@
 {% block title_lomba %}Lomba Spelling Bee German{% endblock %}
 {% block poster_image %}
     <img 
-        src="{{ url_for('static', filename='img/meloria/Lomba Spelling Bee GERMAN.jpg') }}" 
+        src="{{ url_for('static', filename='img/meloria/lomba_spelling_bee_german.jpg') }}" 
         alt="Lomba Spelling Bee German"
-        class="registeration-poster-image"
+        class="registration-poster-image"
         loading="lazy"
     />
 {% endblock %}
 
 {% block form %}
-    <label>Nama Lengkap</label>
-    <input type="text" name="nama" required>
-
-    <label>Kelas</label>
-    <input type="text" name="kelas" required>
-
-    <label>ID Line</label>
-    <input type="text" name="idline" required>
+    <input type="text" name="nama" placeholder="Nama Lengkap" required>
+    <input type="text" name="kelas" placeholder="Kelas" required>
+    <input type="text" name="idline" placeholder="ID Line" required>
 {% endblock %}

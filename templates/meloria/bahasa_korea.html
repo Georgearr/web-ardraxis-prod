@@ -3,20 +3,15 @@
 {% block title_lomba %}Lomba Lampu Hijau Lampu Merah Bahasa Korea{% endblock %}
 {% block poster_image %}
     <img 
-        src="{{ url_for('static', filename='img/meloria/Lomba Lampu Hijau Lampu Merah Bahasa Korea.jpg') }}" 
+        src="{{ url_for('static', filename='img/meloria/lomba_lampu_hijau_lampu_merah_bahasa_korea.jpg') }}" 
         alt="Lomba Lampu Hijau Lampu Merah Bahasa Korea"
-        class="registeration-poster-image"
+        class="registration-poster-image"
         loading="lazy"
     />
 {% endblock %}
 
 {% block form %}
-    <label>Nama Lengkap</label>
-    <input type="text" name="nama" required>
-
-    <label>Kelas</label>
-    <input type="text" name="kelas" required>
-
-    <label>ID Line</label>
-    <input type="text" name="idline" required>
+    <input type="text" name="nama" placeholder="Nama Lengkap" required>
+    <input type="text" name="kelas" placeholder="Kelas" required>
+    <input type="text" name="idline" placeholder="ID Line" required>
 {% endblock %}

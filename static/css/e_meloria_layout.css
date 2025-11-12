@@ -17,7 +17,7 @@
 }
 .back-meloria:hover { transform: translateY(-1px); background: rgba(255,255,255,0.22); }
 
-.registeration {
+.registration {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
-.registeration-main-card {
+.registration-main-card {
   display: flex;
   justify-content: space-between;
   gap: 30px;
@@ -50,17 +50,17 @@
   width: 90%;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
-.registeration-title {
+.registration-title {
   font-size: 2.5rem;
   font-weight: 900;
   color: #ffffff;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   letter-spacing: 1px;
 }
-.registeration-card-left {
+.registration-card-left {
   width: 100%;
 }
-.registeration-card-poster > img {
+.registration-card-poster > img {
   width: 600px;
   max-width: 100%;
   height: auto;
@@ -85,7 +85,8 @@
   color: #ffffff;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
-.register > input {
+.register > input,
+.register > select {
   font-size: 1.10rem;
   padding: 5px;
   margin-bottom: 20px;
@@ -97,6 +98,16 @@
   padding-left: 8px;
   padding-right: 8px;
   border: none;
+}
+
+.register > select {
+  cursor: pointer;
+  background-color: white;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
 }
 .submit-btn, .register-submit {
   display: inline-block;
@@ -128,32 +139,153 @@
 .grup a{
   text-decoration: none;
   color: #ffffff;
-} 
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  transform: scale(0.7);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.modal-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  color: white;
+  font-size: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  animation: scaleIn 0.5s ease 0.2s both;
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.modal-content h2 {
+  color: #2d3748;
+  font-size: 28px;
+  margin-bottom: 15px;
+  animation: fadeInUp 0.5s ease 0.3s both;
+}
+
+.modal-content p {
+  color: #4a5568;
+  font-size: 16px;
+  margin-bottom: 25px;
+  animation: fadeInUp 0.5s ease 0.4s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-line-link {
+  display: inline-block;
+  background: linear-gradient(135deg, #11998e, #38ef7d);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeInUp 0.5s ease 0.5s both;
+}
+
+.modal-line-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(17, 153, 142, 0.4);
+}
+
+.modal-close {
+  background: #e2e8f0;
+  color: #4a5568;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+  animation: fadeInUp 0.5s ease 0.6s both;
+}
+
+.modal-close:hover {
+  background: #cbd5e0;
+}
 
 /* ============================================
    END MELORIA REGISTRATION SUB-PAGE
    ============================================ */
 
 @media (max-width: 1200px) {
-  .registeration-main-card {
+  .registration-main-card {
     width: 95%;
     padding: 24px;
     gap: 24px;
   }
-  .registeration-title { font-size: 2.25rem; }
-  .registeration-card-poster > img { width: 520px; }
+  .registration-title { font-size: 2.25rem; }
+  .registration-card-poster > img { width: 520px; }
 }
 
 @media (max-width: 992px) {
-  .registeration-main-card {
+  .registration-main-card {
     text-align: center;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     gap: 20px;
   }
-  .registeration-card-poster { order: -1; }
-  .registeration-card-poster > img {
+  .registration-card-poster { order: -1; }
+  .registration-card-poster > img {
     width: 100%;
     max-width: 520px;
   }
@@ -161,23 +293,54 @@
 }
 
 @media (max-width: 768px) {
-  .registeration {
+  .registration {
     padding: 30px 12px;
   }
-  .registeration-title {
+  .registration-title {
     font-size: 1.8rem;
   }
-  .registeration-card-poster { margin-bottom: 20px; }
-  .registeration-card-poster > img { max-width: 420px; width: 90%; }
-  .registeration-main-card { border-radius: 20px; }
+  .registration-card-poster { margin-bottom: 20px; }
+  .registration-card-poster > img { max-width: 420px; width: 90%; }
+  .registration-main-card { border-radius: 20px; }
   .register { padding: 20px; }
 }
 
 @media (max-width: 480px) {
-  .registeration-main-card { padding: 16px; gap: 16px; }
-  .registeration-card-poster > img { max-width: 320px; width: 100%; }
-  .registeration-title { font-size: 1.5rem; }
+  .registration-main-card { padding: 16px; gap: 16px; }
+  .registration-card-poster > img { max-width: 320px; width: 100%; }
+  .registration-title { font-size: 1.5rem; }
   .register > input { font-size: 1rem; }
   .register-submit, .back-meloria { padding: 8px 12px; font-size: 0.95rem; }
-  .registeration-card-left { width: 100%; }
+  .registration-card-left { width: 100%; }
+}
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  left: 0; top: 0;
+  width: 100%; height: 100%; 
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background: white;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 12px;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+button#closeModal {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+button#closeModal:hover {
+  background: #0056b3;
 }

@@ -1,25 +1,24 @@
+
 {% extends 'meloria/meloria_layout.html' %}
 
-{% block title_lomba %}Workshop Daur Ulang{% endblock %}
+{% block title_lomba %}Workshop Chinese Calligraphy{% endblock %}
 {% block poster_image %}
     <img 
-        src="{{ url_for('static', filename='img/meloria/Workshop Calligraphy.png') }}" 
-        alt="Workshop Calligraphy"
-        class="registeration-poster-image"
+        src="{{ url_for('static', filename='img/meloria/workshop_calligraphy.png') }}" 
+        alt="Workshop Chinese Calligraphy"
+        class="registration-poster-image"
         loading="lazy"
     />
 {% endblock %}
 
 {% block form %}
-    <label>Nama Lengkap</label>
-    <input type="text" name="nama" required>
-
-    <label>Kelas</label>
-    <input type="text" name="kelas" required>
-
-    <label>ID Line</label>
-    <input type="text" name="idline" required>
-
-    <label>Sesi 1 = 08:00 s/d 09:30  Dan Sesi 2 = 10:15 s/d 11:45 </label>
-    <input type="text" name="sesi" required>
+    <input type="text" name="nama" placeholder="Nama Lengkap" required>
+    <input type="text" name="kelas" placeholder="Kelas" required>
+    <input type="text" name="idline" placeholder="ID Line" required>
+    
+    <select name="sesi" required>
+        <option value="" disabled selected>Pilih Sesi Workshop</option>
+        <option value="Sesi 1 (08:00 - 09:30)">Sesi 1 (08:00 - 09:30)</option>
+        <option value="Sesi 2 (10:15 - 11:45)">Sesi 2 (10:15 - 11:45)</option>
+    </select>
 {% endblock %}

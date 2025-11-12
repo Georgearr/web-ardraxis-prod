@@ -3,20 +3,15 @@
 {% block title_lomba %}Boardgames{% endblock %}
 {% block poster_image %}
     <img 
-        src="{{ url_for('static', filename='img/meloria/Minigames - Boardgames.png') }}" 
+        src="{{ url_for('static', filename='img/meloria/minigames_boardgames.png') }}" 
         alt="Boardgames"
-        class="registeration-poster-image"
+        class="registration-poster-image"
         loading="lazy"
     />
 {% endblock %}
 
 {% block form %}
-    <!-- Temporary form, continue later -->
-    <h2>Nama Lengkap</h2>
-    <input type="text">
-    <h2>Kelas</h2>
-    <input type="text">
-    <h2>ID Line</h2>
-    <input type="text">
-    <button class="grup"><a href="">Grup</a></button>
+    <input type="text" name="nama" placeholder="Nama Lengkap" required>
+    <input type="text" name="kelas" placeholder="Kelas" required>
+    <input type="text" name="idline" placeholder="ID Line" required>
 {% endblock %}

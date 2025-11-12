@@ -1,28 +1,23 @@
-{% extends 'layout.html' %}
-
-{% block title %}Meloria{% endblock %}
-
-{% block extra_css %}
+{% extends 'layout.html' %} {% block title %}Meloria{% endblock %} {% block
+extra_css %}
 <style>
-  .navbar{
-    background-color: #CA5342;
+  .navbar {
+    background-color: #ca5342;
   }
-  .footer{
-    background: linear-gradient(to bottom, #CA5342, #8B2E23);   
+  .footer {
+    background: linear-gradient(to bottom, #ca5342, #8b2e23);
   }
-  .wave-container{
-    background-color: #F8E08A;
+  .wave-container {
+    background-color: #f8e08a;
   }
-  .footer .footerbawah{
-    background: linear-gradient(to bottom, #CA5342, #8B2E23);
+  .footer .footerbawah {
+    background: linear-gradient(to bottom, #ca5342, #8b2e23);
   }
   @media (max-width: 768px) {
     .meloria-footer path {
       display: none;
     }
-  }
-
-  /* Modal: pendaftaran ditutup */
+  } /* Modal: pendaftaran ditutup */
   .poster-modal {
     display: none;
     position: fixed; /* tetap mengacu ke viewport */
@@ -41,23 +36,22 @@
   .poster-modal__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,.55);
+    background: rgba(0, 0, 0, 0.55);
   }
   .poster-modal__content {
     position: relative;
     background: #fff;
     padding: 2.25rem 2.75rem;
     border-radius: 16px;
-    box-shadow: 0 20px 45px rgba(0,0,0,.25);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
     max-width: 420px;
     width: 100%;
     text-align: center;
     transform: translateY(12px);
     opacity: 0;
-    transition: transform .25s ease, opacity .25s ease;
+    transition: transform 0.25s ease, opacity 0.25s ease;
     z-index: 2;
   }
-
   .poster-modal.is-visible .poster-modal__content {
     transform: translateY(0);
     opacity: 1;
@@ -70,45 +64,41 @@
     background: transparent;
     font-size: 1.75rem;
     cursor: pointer;
-    color: #CA5342;
+    color: #ca5342;
     line-height: 1;
   }
   .poster-modal__title {
-    margin-bottom: .75rem;
+    margin-bottom: 0.75rem;
     font-size: 1.35rem;
   }
   .poster-modal__desc {
     margin: 0;
     font-size: 1rem;
     line-height: 1.5;
-  }
-
-  /* (sisa CSS kamu: header, poster grid, responsive etc.) */
-  /* ... copy seluruh CSS yang kamu pakai sebelumnya di sini ... */
-
-  /* Untuk singkatnya saya asumsikan sisa CSS sama seperti file asli */
+  } /* (sisa CSS kamu: header, poster grid, responsive etc.) */ /* ... copy seluruh CSS yang kamu pakai sebelumnya di sini ... */ /* Untuk singkatnya saya asumsikan sisa CSS sama seperti file asli */
 </style>
-
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/e_meloria.css') }}"
 />
-<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-{% endblock %}
-
-{% block isi %}
+<link
+  href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+  rel="stylesheet"
+/>
+{% endblock %} {% block isi %}
 <section class="meloria-registration" data-aos="fade-up">
   <div class="meloria-header" data-aos="fade-up">
-    <img src="{{ url_for('static', filename='img/banner/meloria_banner.jpeg') }}" alt="">
+    <img
+      src="{{ url_for('static', filename='img/banner/meloria_banner.jpeg') }}"
+      alt=""
+    />
   </div>
-
   <!-- LOMBA SECTION -->
   <div class="category-section" data-aos="fade-up">
     <div class="category-header" data-aos="fade-up">
-      <h2 class="category-title"> Registration</h2>
+      <h2 class="category-title">Registration</h2>
       <p class="category-description"></p>
     </div>
-
     <div class="posters-grid">
       {% set lomba = [
         {'file': 'lomba_bahasa_mandarin.jpg', 'name': 'Lomba Bahasa Mandarin'},
@@ -133,8 +123,8 @@
       <div class="poster-card" data-aos="fade-up">
         <a href="#" class="poster-link">
           <div class="poster-image-wrapper">
-            <img 
-              src="{{ url_for('static', filename='img/meloria/' + poster.file) }}" 
+            <img
+              src="{{ url_for('static', filename='img/meloria/' + poster.file) }}"
               alt="{{ poster.name }}"
               class="poster-image"
               loading="lazy"
@@ -151,10 +141,8 @@
       {% endfor %}
     </div>
   </div>
-
   <!-- MINIGAMES & WORKSHOP SECTIONS (tetap di dalam section jika perlu) -->
   <!-- ... (seluruh konten lainnya yang ingin tetap di dalam section) ... -->
-
   <div class="meloria-footer">
     <a href="{{ url_for('home') }}#events" class="back-to-events">
       ← Kembali ke Events
@@ -162,54 +150,54 @@
     <!-- svg waves dst -->
   </div>
 </section>
-
 <!-- IMPORTANT: Modal DIPINDAHKAN KE SINI (di luar section) supaya fixed mengacu ke viewport -->
 <div id="posterModal" class="poster-modal" aria-hidden="true">
   <div class="poster-modal__backdrop" role="presentation"></div>
-  <div class="poster-modal__content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <button class="poster-modal__close" type="button" aria-label="Tutup pop-up">×</button>
-    <h3 id="modalTitle" class="poster-modal__title">Pendaftaran telah ditutup</h3>
+  <div
+    class="poster-modal__content"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalTitle"
+  >
+    <button class="poster-modal__close" type="button" aria-label="Tutup pop-up">
+      ×
+    </button>
+    <h3 id="modalTitle" class="poster-modal__title">
+      Pendaftaran telah ditutup
+    </h3>
     <p class="poster-modal__desc">
-      Maaf, pendaftaran untuk kegiatan ini tidak tersedia lagi.
+      Maaf, pendaftaran untuk kegiatan ini sudah tidak tersedia.
     </p>
   </div>
 </div>
-
-{% endblock %}
-
-{% block extra_js %}
+{% endblock %} {% block extra_js %}
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 <script>
   AOS.init();
-
-  document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('posterModal');
-    const closeBtn = modal.querySelector('.poster-modal__close');
-    const backdrop = modal.querySelector('.poster-modal__backdrop');
-
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("posterModal");
+    const closeBtn = modal.querySelector(".poster-modal__close");
+    const backdrop = modal.querySelector(".poster-modal__backdrop");
     const openModal = () => {
-      modal.classList.add('is-visible');
-      document.body.style.overflow = 'hidden';
-      modal.setAttribute('aria-hidden', 'false');
+      modal.classList.add("is-visible");
+      document.body.style.overflow = "hidden";
+      modal.setAttribute("aria-hidden", "false");
     };
-
     const closeModal = () => {
-      modal.classList.remove('is-visible');
-      document.body.style.overflow = '';
-      modal.setAttribute('aria-hidden', 'true');
+      modal.classList.remove("is-visible");
+      document.body.style.overflow = "";
+      modal.setAttribute("aria-hidden", "true");
     };
-
-    document.querySelectorAll('.poster-link').forEach(link => {
-      link.addEventListener('click', event => {
+    document.querySelectorAll(".poster-link").forEach((link) => {
+      link.addEventListener("click", (event) => {
         event.preventDefault();
         openModal();
       });
     });
-
-    closeBtn.addEventListener('click', closeModal);
-    backdrop.addEventListener('click', closeModal);
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && modal.classList.contains('is-visible')) {
+    closeBtn.addEventListener("click", closeModal);
+    backdrop.addEventListener("click", closeModal);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("is-visible")) {
         closeModal();
       }
     });

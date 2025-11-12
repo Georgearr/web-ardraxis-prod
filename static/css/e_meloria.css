@@ -7,6 +7,7 @@ html, body {
 .meloria-registration {
   min-height: 100vh;
   background-color: #F8E08A;
+  width: 100%;
 }
 
 /* Background Pattern Overlay */
@@ -125,6 +126,7 @@ html, body {
   position: relative;
   z-index: 1;
   margin-bottom: 80px;
+  max-width: 100%;
 }
 
 .category-header {

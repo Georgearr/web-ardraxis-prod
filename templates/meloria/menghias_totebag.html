@@ -3,32 +3,21 @@
 {% block title_lomba %}Lomba Menghias Totebag{% endblock %}
 {% block poster_image %}
     <img 
-        src="{{ url_for('static', filename='img/meloria/LOMBA MENGHIAS TOTEEBAG.png') }}" 
+        src="{{ url_for('static', filename='img/meloria/lomba_menghias_totebag.png') }}" 
         alt="Lomba Menghias Totebag"
-        class="registeration-poster-image"
+        class="registration-poster-image"
         loading="lazy"
     />
 {% endblock %}
 
 {% block form %}
-    <label>Nama Tim</label>
-    <input type="text" name="nama_tim" required>
-
-    <label>Nama Peserta 1</label>
-    <input type="text" name="nama1" required>
-
-    <label>Kelas</label>
-    <input type="text" name="kelas1" required>
-
-    <label>ID Line</label>
-    <input type="text" name="idline1" required>
-
-    <label>Nama Peserta 2</label>
-    <input type="text" name="nama2" required>
-
-    <label>Kelas</label>
-    <input type="text" name="kelas2" required>
-
-    <label>ID Line</label>
-    <input type="text" name="idline2" required>
+    <input type="text" name="nama_tim" placeholder="Nama Tim" required>
+    
+    <input type="text" name="nama1" placeholder="Nama Peserta 1" required>
+    <input type="text" name="kelas1" placeholder="Kelas Peserta 1" required>
+    <input type="text" name="idline1" placeholder="ID Line Peserta 1" required>
+    
+    <input type="text" name="nama2" placeholder="Nama Peserta 2" required>
+    <input type="text" name="kelas2" placeholder="Kelas Peserta 2" required>
+    <input type="text" name="idline2" placeholder="ID Line Peserta 2" required>
 {% endblock %}
