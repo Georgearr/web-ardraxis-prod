@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Festiora{% endblock %}</title>
+
+    <!-- CSS UTAMA FESTIORA -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/e_festiora_layout.css') }}"
+    />
+
+    {% block extra_css %}{% endblock %}
+  </head>
+  <body>
+
+    {% block content %}
+      <h1>{% block form_title %}{% endblock %}</h1>
+
+      <div class="form-wrapper">
+        {% block form_content %}{% endblock %}
+      </div>
+    {% endblock %}
+
+    <!-- JS SUBMIT FESTIORA -->
+    <script src="{{ url_for('static', filename='js/festiora_submit.js') }}"></script>
+
+    {% block extra_js %}{% endblock %}
+  </body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'Festiora/e_festiora_layout.html' %}
+{% block title %}Basket{% endblock %}
+{% block form_title %}Basket Registration{% endblock %}
+{% block form_content %}
+<form id="festioraForm" data-lomba="basket">
+    <label>Nama Ketua</label><input type="text" name="ketua" required>
+    <label>ID Line Ketua</label><input type="text" name="idline_ketua" required>
+    <label>Nama Anggota 1</label><input type="text" name="anggota1" required>
+    <label>ID Line Anggota 1</label><input type="text" name="idline_anggota1" required>
+    <label>Nama Anggota 2</label><input type="text" name="anggota2" required>
+    <label>ID Line Anggota 2</label><input type="text" name="idline_anggota2" required>
+    <label>Nama Cadangan (opsional)</label><input type="text" name="cadangan">
+    <label>ID Line Cadangan (opsional)</label><input type="text" name="idline_cadangan">
+    <label>Kelas</label><input type="text" name="kelas" required>
+    <button type="submit">Kirim</button>
+</form>
+{% endblock %}
+

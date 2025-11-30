@@ -75,6 +75,7 @@ extra_css %}
     margin: 0;
     font-size: 1rem;
     line-height: 1.5;
+
   } /* (sisa CSS kamu: header, poster grid, responsive etc.) */ /* ... copy seluruh CSS yang kamu pakai sebelumnya di sini ... */ /* Untuk singkatnya saya asumsikan sisa CSS sama seperti file asli */
   .about-questival {
     background: #F7E396;
@@ -193,19 +194,16 @@ extra_css %}
     </div>
     <div class="posters-grid">
       {% set lomba = [
-        {'file': 'Family_100.png', 'name': 'Family 100', 'link': '/family100.html'},
-        {'file': 'Follo_The_Harmony_20251129_060556_0000.png', 'name': 'Follow The Harmony', 'link': '/followtheharmony.html'},
-        {'file': 'Fun_Activities_-_Find_The_Imposter!.png', 'name': 'Find The Imposter!', 'link': '/findtheimposter.html'},
-        {'file': 'Fun_Activity_Flip_a_Prize.png', 'name': 'Flip a Prize', 'link': '/flipaprize.html'},
-        {'file': 'Live_Emoji.jpg', 'name': 'Live Emoji', 'link': '/liveemoji.html'},
-        {'file': 'LOMBA_BASKET_.png', 'name': 'Lomba Basket', 'link': '/lombabasket.html'},
-        {'file': 'Poster_Case_Crackers.jpg', 'name': 'Case Crackers', 'link': '/casecrackers.html'},
-        {'file': 'Poster_Lomba_E-Sport_MLBB.jpg', 'name': 'Lomba E-Sport MLBB', 'link': '/esportmlbb.html'},
-        {'file': 'Poster_Trivia_Showdown.JPG', 'name': 'Trivia Showdown', 'link': '/triviashowdown.html'},
-        {'file': 'Real_life_boardgame.jpg', 'name': 'Real Life Boardgame', 'link': '/reallifeboardgame.html'},
-        {'file': 'TIME_CAPSULE_POSTER.jpg', 'name': 'Time Capsule', 'link': '/timecapsule.html'},
-        {'file': 'TriQuest.jpg', 'name': 'TriQuest', 'link': '/triquest.html'},
-        {'file': 'Workshop_Robotic.png', 'name': 'Workshop Robotic', 'link': '/workshoprobotic.html'}
+        {'file': 'Family_100.png', 'name': 'Family 100', 'link': '/festiora/family_100'},
+        {'file': 'Live_Emoji.jpg', 'name': 'Speed Drawing', 'link': '/festiora/speed_drawing'},
+        {'file': 'Follo_The_Harmony_20251129_060556_0000.png', 'name': 'Follow The Harmony', 'link': '/festiora/follow_the_harmony'},
+        {'file': 'LOMBA_BASKET_.png', 'name': 'Lomba Basket', 'link': '/festiora/basket'},
+        {'file': 'Poster_Case_Crackers.jpg', 'name': 'Case Crackers', 'link': '/festiora/case_crackers'},
+        {'file': 'Poster_Lomba_E-Sport_MLBB.jpg', 'name': 'Lomba E-Sport MLBB', 'link': '/festiora/mlbb'},
+        {'file': 'Poster_Trivia_Showdown.JPG', 'name': 'Trivia Showdown', 'link': '/festiora/trivia_showdown'},
+        {'file': 'Real_life_boardgame.jpg', 'name': 'Real Life Boardgame', 'link': '/festiora/real_life_boardgame'},
+        {'file': 'TriQuest.jpg', 'name': 'TriQuest', 'link': '/festiora/triquest'},
+        {'file': 'Workshop_Robotic.png', 'name': 'Workshop Robotic', 'link': '/festiora/workshop_robotic'}
       ] %}
 
       {% for poster in lomba %}
