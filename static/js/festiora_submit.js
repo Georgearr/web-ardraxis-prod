@@ -2,12 +2,64 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("festioraForm");
     if (!form) return;
 
+    // Fungsi untuk menampilkan modal dengan animasi
+    function showSuccessModal(lineLink = "#") {
+        const modal = document.getElementById("successModal");
+        const lineGroupLink = document.getElementById("lineGroupLink");
+        
+        if (lineGroupLink && lineLink !== "#") {
+            lineGroupLink.href = lineLink;
+        }
+        
+        if (modal) {
+            modal.classList.add("active");
+            document.body.style.overflow = "hidden";
+        }
+    }
+
+    // Fungsi untuk menutup modal
+    function closeModal() {
+        const modal = document.getElementById("successModal");
+        if (modal) {
+            modal.classList.remove("active");
+            document.body.style.overflow = "";
+        }
+    }
+
+    // Event listener untuk tombol tutup modal
+    const closeBtn = document.querySelector(".modal-close");
+    if (closeBtn) {
+        closeBtn.addEventListener("click", closeModal);
+    }
+
+    // Event listener untuk backdrop modal
+    const modalOverlay = document.getElementById("successModal");
+    if (modalOverlay) {
+        modalOverlay.addEventListener("click", (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+    }
+
+    // Event listener untuk ESC key
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            closeModal();
+        }
+    });
+
+    // Expose closeModal ke global scope untuk onclick di HTML
+    window.closeModal = closeModal;
+
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
         const submitButton = form.querySelector("button[type='submit']");
-        submitButton.disabled = true; // disable button saat submit
+        const originalText = submitButton.textContent;
+        submitButton.disabled = true;
         submitButton.textContent = "Mengirim...";
+        submitButton.style.opacity = "0.7";
 
         try {
             // Ambil nama lomba dari data-lomba
@@ -23,8 +75,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const result = await response.json();
 
             if (result.status === "ok") {
-                alert("Pendaftaran berhasil!");
+                // Ambil link LINE dari response atau dari data attribute form
+                const lineLink = result.line_link || form.dataset.lineLink || "#";
+                
+                // Reset form
                 form.reset();
+                
+                // Tampilkan modal dengan animasi
+                showSuccessModal(lineLink);
             } else {
                 alert("Terjadi kesalahan. Coba lagi.");
             }
@@ -34,7 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
         } finally {
             // Re-enable button
             submitButton.disabled = false;
-            submitButton.textContent = "Kirim";
+            submitButton.textContent = originalText;
+            submitButton.style.opacity = "1";
         }
     });
 });

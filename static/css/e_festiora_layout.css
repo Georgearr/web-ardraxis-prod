@@ -27,14 +27,8 @@
   padding: 40px 16px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    135deg,
-    #11998e 0%,
-    #83c5bf 25%,
-    #0f766e 50%,
-    #06b6d4 75%,
-    #10b981 100%
-  );
+  background-color: #FEBDAC;
+  
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
@@ -133,13 +127,13 @@
   text-decoration: none;
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 10px;
-  background: #3C6868;
+  background: #FEBDAC;
   backdrop-filter: blur(2px);
   transition: transform .15s ease, background .15s ease;
   cursor: pointer;
   font-size: 20px;
 }
-#festioraForm > button:hover { transform: translateY(-1px); background: #3c686894; }
+#festioraForm > button:hover { transform: translateY(-1px); background: #febdac94; }
 
 .grup{
   width: 100px;
@@ -189,20 +183,35 @@
   max-width: 500px;
   width: 90%;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  transform: scale(0.7);
+  transform: scale(0.7) translateY(-50px);
   opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
 }
 
 .modal-overlay.active .modal-content {
-  transform: scale(1);
+  transform: scale(1) translateY(0);
   opacity: 1;
+  animation: modalBounce 0.6s ease-out;
+}
+
+@keyframes modalBounce {
+  0% {
+    transform: scale(0.7) translateY(-50px);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05) translateY(0);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
 }
 
 .modal-icon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #11998e, #38ef7d);
+  background: linear-gradient(135deg, #FEBDAC, #ff9d8a);
   color: white;
   font-size: 48px;
   border-radius: 50%;
@@ -210,7 +219,19 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto 20px;
-  animation: scaleIn 0.5s ease 0.2s both;
+  animation: scaleIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both, iconPulse 2s ease-in-out 1s infinite;
+  box-shadow: 0 8px 20px rgba(254, 189, 172, 0.4);
+}
+
+@keyframes iconPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 20px rgba(254, 189, 172, 0.4);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 12px 30px rgba(254, 189, 172, 0.6);
+  }
 }
 
 @keyframes scaleIn {
@@ -246,7 +267,7 @@
 
 .modal-line-link {
   display: inline-block;
-  background: linear-gradient(135deg, #11998e, #38ef7d);
+  background: linear-gradient(135deg, #FEBDAC, #ff9d8a);
   color: white;
   padding: 12px 30px;
   border-radius: 25px;
@@ -255,11 +276,13 @@
   margin-bottom: 15px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   animation: fadeInUp 0.5s ease 0.5s both;
+  box-shadow: 0 4px 15px rgba(254, 189, 172, 0.3);
 }
 
 .modal-line-link:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(17, 153, 142, 0.4);
+  box-shadow: 0 5px 20px rgba(254, 189, 172, 0.5);
+  background: linear-gradient(135deg, #ff9d8a, #FEBDAC);
 }
 
 .modal-close {
