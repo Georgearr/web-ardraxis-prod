@@ -1,6 +1,19 @@
 {% extends 'Festiora/e_festiora_layout.html' %}
-{% block title %}Case Crackers{% endblock %}
-{% block form_title %}Case Crackers Registration{% endblock %}
+{% block form_title %}Case Crackers{% endblock %}
+
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/festiora/Poster_Case_Crackers.jpg') }}" 
+        alt="Case Crackers"
+        class="registration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block description %}
+    Masing-masing kelas harus mengirimkan satu tim yang berisi 3 orang peserta. Setiap tim akan diberikan sebuah map yang berisi kasus-kasus yang harus mereka selidiki dan pecahkan, dengan menggunakan nalar dan juga logika. Pemenang akan ditentukan dengan waktu penyelesaian kasus dan benar atau tidaknya jawaban yang didapat.
+{% endblock %}
+
 {% block form_content %}
 <form id="festioraForm" data-lomba="case_crackers">
     <label>Nama Kelompok</label><input type="text" name="kelompok" required>

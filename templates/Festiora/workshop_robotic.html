@@ -1,6 +1,15 @@
 {% extends 'Festiora/e_festiora_layout.html' %}
-{% block title %}Workshop Robotic{% endblock %}
-{% block form_title %}Workshop Robotic Registration{% endblock %}
+{% block form_title %}Workshop Robotic{% endblock %}
+
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/festiora/Workshop_Robotic.png') }}" 
+        alt="Workshop Robotic"
+        class="registration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
 {% block form_content %}
 <form id="festioraForm" data-lomba="workshop_robotic">
     <label>Nama Peserta</label><input type="text" name="peserta" required>

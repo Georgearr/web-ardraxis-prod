@@ -1,6 +1,19 @@
 {% extends 'Festiora/e_festiora_layout.html' %}
-{% block title %}Trivia Showdown{% endblock %}
-{% block form_title %}Trivia Showdown Registration{% endblock %}
+{% block form_title %}Trivia Showdown{% endblock %}
+
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/festiora/Poster_Trivia_Showdown.JPG') }}" 
+        alt="Trivia Showdown"
+        class="registration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block description %}
+    Masing-masing kelas akan mengirimkan satu tim yang berisi 3 orang peserta. Panitia akan memberikan pertanyaan-pertanyaan mengenai pengetahuan umum dan pembelajaran, yang harus dijawab oleh peserta. Setiap tim harus berebut untuk menjawab pertanyaan, dengan menekan tombol yang sudah disiapkan oleh panitia.
+{% endblock %}
+
 {% block form_content %}
 <form id="festioraForm" data-lomba="trivia_showdown">
     <label>Nama Peserta 1</label><input type="text" name="peserta1" required>

@@ -1,6 +1,19 @@
 {% extends 'Festiora/e_festiora_layout.html' %}
-{% block title %}TriQuest{% endblock %}
-{% block form_title %}TriQuest Registration{% endblock %}
+{% block form_title %}TriQuest{% endblock %}
+
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/festiora/TriQuest.jpg') }}" 
+        alt="TriQuest"
+        class="registration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block description %}
+    Setiap kelas mengirimkan 1 tim yang berisi 5 orang peserta. Perlombaan ini terdapat 3 babak. Babak pertama yaitu, 3 orang peserta harus masuk dan memakai satu buah sarung yang kemudian mereka semua harus berjalan dengan kompak ke garis finish (<a href="https://vt.tiktok.com/ZSfPCTKwo/">https://vt.tiktok.com/ZSfPCTKwo/</a>). Lalu dilanjutkan dengan babak kedua yaitu, ke-5 orang peserta ini harus estafet gelas plastik dengan meniup balon dari mulut mereka masing-masing (<a href="https://vt.tiktok.com/ZSf5KamYy/">https://vt.tiktok.com/ZSf5KamYy/</a>). Dan yang terakhir adalah babak ketiga yaitu, ke-5 peserta harus saling mengaitkan tangan mereka masing-masing dan membuat lingkaran yang wajah mereka menghadap ke depan semua, lalu mereka harus berjalan dengan kompak sampai ke garis finish untuk memenangkan lomba (<a href="https://vt.tiktok.com/ZSf5K9VxX/">https://vt.tiktok.com/ZSf5K9VxX/</a>).
+{% endblock %}
+
 {% block form_content %}
 <form id="festioraForm" data-lomba="triquest">
     <label>Nama Kapten</label><input type="text" name="kapten" required>

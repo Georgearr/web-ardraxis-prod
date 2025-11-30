@@ -1,6 +1,19 @@
 {% extends 'Festiora/e_festiora_layout.html' %}
-{% block title %}Family 100{% endblock %}
-{% block form_title %}Family 100 Registration{% endblock %}
+{% block form_title %}Family 100{% endblock %}
+
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/festiora/Family_100.png') }}" 
+        alt="Family 100"
+        class="registration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block description %}
+    Perlombaan ini akan dimainkan oleh masing-masing kelas mengirim satu tim yang berisi 5 orang pemain. Setelah permainan dimulai, panitia akan memberi pertanyaan-pertanyaan random yang di mana setiap tim akan saling menebak jawaban paling populer dari survei yang telah dilakukan sebelumnya. Tim yang ingin menjawab harus menekan tombol ataupun bel yang tersedia. Setiap tim harus berusaha mendapatkan poin terbanyak untuk mendapatkan hadiah dan menjadi pemenangnya.
+{% endblock %}
+
 {% block form_content %}
 <form id="festioraForm" data-lomba="family_100">
     <label>Kelas</label><input type="text" name="kelas" required>

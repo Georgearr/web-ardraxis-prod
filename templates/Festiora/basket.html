@@ -1,6 +1,19 @@
 {% extends 'Festiora/e_festiora_layout.html' %}
-{% block title %}Basket{% endblock %}
-{% block form_title %}Basket Registration{% endblock %}
+{% block form_title %}Basket{% endblock %}
+
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/festiora/LOMBA_BASKET_.png') }}" 
+        alt="Basket"
+        class="registration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block description %}
+    Permainan ini akan dimainkan oleh dua tim yang berasal dari dua kelas yang berbeda, permainan ini akan berlangsung dengan saling berusaha memasukkan bola ke ring lawan dengan cara menggiring, mengoper, dan menembak bola, sambil tetap mematuhi aturan yang ada, yang pada akhirnya nantinya tim yang memiliki poin terbanyak di akhir waktu adalah pemenangnya.
+{% endblock %}
+
 {% block form_content %}
 <form id="festioraForm" data-lomba="basket">
     <label>Nama Ketua</label><input type="text" name="ketua" required>
@@ -15,4 +28,3 @@
     <button type="submit">Kirim</button>
 </form>
 {% endblock %}
-

@@ -1,6 +1,19 @@
 {% extends 'Festiora/e_festiora_layout.html' %}
-{% block title %}Speed Drawing{% endblock %}
-{% block form_title %}Speed Drawing Registration{% endblock %}
+{% block form_title %}Speed Drawing{% endblock %}
+
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/festiora/Poster_speed_drawing_.png') }}" 
+        alt="Speed Drawing"
+        class="registration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block description %}
+    Setiap kelas dapat mengirimkan satu orang peserta yang sudah membawa alat gambarnya masing-masing. Perlombaan dimulai dengan panitia akan menentukan sebuah tema yang harus digambar oleh peserta selama 10 menit, saat waktu habis panitia akan menarik semua lembar kertas gambar yang akan diberi poin 1-5. Perlombaan terus berulang seperti itu sampai pada akhirnya pemenang akan ditentukan dari banyaknya poin yang didapat.
+{% endblock %}
+
 {% block form_content %}
 <form id="festioraForm" data-lomba="speed_drawing">
     <label>Nama Peserta 1</label><input type="text" name="peserta1" required>

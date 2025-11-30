@@ -1,6 +1,19 @@
 {% extends 'Festiora/e_festiora_layout.html' %}
-{% block title %}MLBB{% endblock %}
-{% block form_title %}MLBB Registration{% endblock %}
+{% block form_title %}E-Sport MLBB{% endblock %}
+
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/festiora/Poster_Lomba_E-Sport_MLBB.jpg') }}" 
+        alt="E-Sport MLBB"
+        class="registration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block description %}
+    Permainan ini akan dimainkan oleh masing-masing kelas akan terdapat satu tim yang berisi lima orang pemain, peserta akan memilih hero melalui fase draft pick yang mencakup ban dan pick bergantian, lalu bertanding di dalam game untuk menghancurkan base lawan dengan menguasai lane, pemenang ditentukan dari tim yang lebih dulu mencapai jumlah kemenangan yang ditetapkan.
+{% endblock %}
+
 {% block form_content %}
 <form id="festioraForm" data-lomba="mlbb">
     <label>Nama Kapten</label><input type="text" name="kapten" required>

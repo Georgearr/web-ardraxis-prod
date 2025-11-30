@@ -1,6 +1,19 @@
 {% extends 'Festiora/e_festiora_layout.html' %}
-{% block title %}Follow The Harmony{% endblock %}
-{% block form_title %}Follow The Harmony Registration{% endblock %}
+{% block form_title %}Follow the Harmony{% endblock %}
+
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/festiora/Follo_The_Harmony_20251129_060556_0000.png') }}" 
+        alt="Follow the Harmony"
+        class="registration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block description %}
+    Permainan ini adalah kompetisi menebak judul lagu dari instrumen tanpa lirik, dimainkan dalam tiga babak: penyisihan, semifinal, dan final. Setiap kelompok berisi tiga orang yang duduk berdekatan dan harus menekan bel sebelum menjawab. Dalam setiap babak yang berdurasi maksimal delapan menit (10 lagu), kelompok berlomba menebak secepat dan seakurat mungkin. Jika sebuah kelompok tidak menjawab dalam 10 detik, pertanyaan akan dioper ke dua tim lain; jika tiga tim berturut-turut tidak dapat menjawab, lagu diganti. Dari penyisihan dipilih lima kelompok terbaik ke semifinal, lalu tiga terbaik ke final, dan pemenang ditentukan dari akumulasi poin tertinggi. Jika terjadi skor imbang di tiga besar, akan ada babak deathmatch dengan satu pertanyaan tambahan.
+{% endblock %}
+
 {% block form_content %}
 <form id="festioraForm" data-lomba="follow_the_harmony">
     <label>Nama Peserta 1</label><input type="text" name="peserta1" required>

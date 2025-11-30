@@ -1,6 +1,19 @@
 {% extends 'Festiora/e_festiora_layout.html' %}
-{% block title %}Real Life Boardgame{% endblock %}
-{% block form_title %}Real Life Boardgame Registration{% endblock %}
+{% block form_title %}Real Life Boardgame{% endblock %}
+
+{% block poster_image %}
+    <img 
+        src="{{ url_for('static', filename='img/festiora/Real_life_boardgame.jpg') }}" 
+        alt="Real Life Boardgame"
+        class="registration-poster-image"
+        loading="lazy"
+    />
+{% endblock %}
+
+{% block description %}
+    Setiap kelas akan mengirimkan masing-masing perwakilan kelasnya, 1 orang saja. Ketika permainan dimulai, peserta dengan bergantian akan memutar dadu yang sudah disiapkan oleh panitia, ketika dadu menunjukkan sebuah angka, peserta dapat melangkah ke dalam matras puzzle lantai sebanyak jumlah angka yang mereka dapat. Setiap matras puzzle lantai akan memiliki petunjuk masing-masing, di antaranya adalah tidak mendapat apa-apa (aman), mendapat hukuman, ataupun mendapat keberuntungan berupa spin wheel untuk mendapatkan sebuah hadiah. (Contohnya: dapat melangkah 2 kali lagi). Pemenang akan ditentukan dari peserta yang pertama kali mencapai titik finish boardgame tersebut.
+{% endblock %}
+
 {% block form_content %}
 <form id="festioraForm" data-lomba="real_life_boardgame">
     <label>Nama Peserta</label><input type="text" name="peserta" required>
