@@ -1,0 +1,11 @@
+{% extends 'Festiora/e_festiora_layout.html' %}
+{% block title %}Real Life Boardgame{% endblock %}
+{% block form_title %}Real Life Boardgame Registration{% endblock %}
+{% block form_content %}
+<form id="festioraForm" data-lomba="real_life_boardgame">
+    <label>Nama Peserta</label><input type="text" name="peserta" required>
+    <label>Kelas</label><input type="text" name="kelas" required>
+    <label>ID Line</label><input type="text" name="idline" required>
+    <button type="submit">Kirim</button>
+</form>
+{% endblock %}

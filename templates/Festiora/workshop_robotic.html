@@ -1,0 +1,11 @@
+{% extends 'Festiora/e_festiora_layout.html' %}
+{% block title %}Workshop Robotic{% endblock %}
+{% block form_title %}Workshop Robotic Registration{% endblock %}
+{% block form_content %}
+<form id="festioraForm" data-lomba="workshop_robotic">
+    <label>Nama Peserta</label><input type="text" name="peserta" required>
+    <label>Kelas</label><input type="text" name="kelas" required>
+    <label>ID Line</label><input type="text" name="idline" required>
+    <button type="submit">Kirim</button>
+</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'Festiora/e_festiora_layout.html' %}
+{% block title %}Follow The Harmony{% endblock %}
+{% block form_title %}Follow The Harmony Registration{% endblock %}
+{% block form_content %}
+<form id="festioraForm" data-lomba="follow_the_harmony">
+    <label>Nama Peserta 1</label><input type="text" name="peserta1" required>
+    <label>Nama Peserta 2</label><input type="text" name="peserta2" required>
+    <label>Nama Peserta 3</label><input type="text" name="peserta3" required>
+    <label>Kelas</label><input type="text" name="kelas" required>
+    <label>ID Line</label><input type="text" name="idline" required>
+    <button type="submit">Kirim</button>
+</form>
+{% endblock %}

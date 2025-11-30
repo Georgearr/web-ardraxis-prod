@@ -1,0 +1,19 @@
+{% extends 'Festiora/e_festiora_layout.html' %}
+{% block title %}Family 100{% endblock %}
+{% block form_title %}Family 100 Registration{% endblock %}
+{% block form_content %}
+<form id="festioraForm" data-lomba="family_100">
+    <label>Kelas</label><input type="text" name="kelas" required>
+    <label>Nama Ketua</label><input type="text" name="ketua" required>
+    <label>ID Line Ketua</label><input type="text" name="idline_ketua" required>
+    <label>Nama Anggota 1</label><input type="text" name="anggota1" required>
+    <label>ID Line Anggota 1</label><input type="text" name="idline_anggota1" required>
+    <label>Nama Anggota 2</label><input type="text" name="anggota2" required>
+    <label>ID Line Anggota 2</label><input type="text" name="idline_anggota2" required>
+    <label>Nama Anggota 3</label><input type="text" name="anggota3" required>
+    <label>ID Line Anggota 3</label><input type="text" name="idline_anggota3" required>
+    <label>Nama Anggota 4</label><input type="text" name="anggota4" required>
+    <label>ID Line Anggota 4</label><input type="text" name="idline_anggota4" required>
+    <button type="submit">Kirim</button>
+</form>
+{% endblock %}
