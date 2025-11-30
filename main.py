@@ -199,6 +199,42 @@ def festiora_submit(lomba):
         ]
     elif lomba == "basket":
         ws = sh.worksheet("Basket")
+        
+        # ===============================
+        # Cek jumlah tim yang sudah mendaftar (maksimal 16 tim)
+        # ===============================
+        try:
+            # Hitung jumlah baris data (exclude header jika ada)
+            all_values = ws.get_all_values()
+            # Jika ada header, kurangi 1, jika tidak ada header, gunakan semua baris
+            # Asumsikan baris pertama adalah header jika tidak kosong
+            if all_values and len(all_values) > 0:
+                # Cek apakah baris pertama adalah header (biasanya berisi nama kolom)
+                first_row = all_values[0]
+                # Jika baris pertama berisi teks seperti "Nama", "Kelas", dll, itu header
+                is_header = any(keyword in str(first_row[0]).lower() for keyword in ['nama', 'ketua', 'kelas', 'id line'])
+                
+                if is_header:
+                    # Ada header, hitung baris data saja (exclude header)
+                    registered_count = len(all_values) - 1
+                else:
+                    # Tidak ada header, hitung semua baris
+                    registered_count = len(all_values)
+            else:
+                registered_count = 0
+            
+            # Jika sudah 16 tim, tolak pendaftaran
+            if registered_count >= 16:
+                return jsonify({
+                    "status": "closed",
+                    "message": "Pendaftaran ditutup. Kuota 16 tim sudah terpenuhi."
+                }), 403
+            
+        except Exception as e:
+            print("Error checking registration count:", e)
+            # Jika error saat cek, tetap lanjutkan (jangan block pendaftaran)
+            pass
+        
         row = [
             data.get("ketua",""),
             data.get("idline_ketua",""),
