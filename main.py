@@ -12,7 +12,12 @@ SCOPES = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-creds = Credentials.from_service_account_file("e-festiora-sheets-3bfd5f4f75a2.json", scopes=SCOPES)
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CREDENTIAL_PATH = os.path.join(BASE_DIR, "e-festiora-sheets-3bfd5f4f75a2.json")
+creds = Credentials.from_service_account_file(CREDENTIAL_PATH, scopes=SCOPES)
+
+
 gc = gspread.authorize(creds)
 
 SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1eOUPWVbY3X8uCHIOdTFnTBhUSXJaCcbRlh8yuo3F2vw/edit"
