@@ -18,5 +18,10 @@ def handle_404(error):
 def meloria():
     return render_template("e_meloria.html")
 
+@app.route("/festoria")
+def festoria():
+    return render_template("e_festiora.html")
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)
