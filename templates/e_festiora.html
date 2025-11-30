@@ -141,6 +141,12 @@ extra_css %}
   @media (max-width: 900px) {
     .about-panitia-grid { grid-template-columns: 1fr 1fr; gap: 36px 12px; }
     .about-title { font-size: 2.1rem; }
+    /* Perkecil nama panitia */
+    .about-role { font-size: 1.1rem; }
+    .about-name { font-size: 1rem; }
+    /* Perpendek jarak about ke banner */
+    .about-questival { padding-top: 10px; margin-top: -20px; }
+    .meloria-header { margin-bottom: 20px; }
   }
   @media (max-width: 600px) {
     .about-panitia-grid {
@@ -149,6 +155,30 @@ extra_css %}
     }
     .about-title { font-size: 1.4rem; }
     .about-desc { font-size: 1rem; }
+    /* Perkecil nama panitia lebih lanjut */
+    .about-role { font-size: 0.95rem; }
+    .about-name { font-size: 0.85rem; }
+    /* Perpendek jarak about ke banner lebih lanjut */
+    .about-questival { padding-top: 8px; margin-top: -30px; padding-bottom: 30px; }
+    .meloria-header { margin-bottom: 10px; }
+    /* Perbesar ukuran poster */
+    .posters-grid {
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)) !important;
+      gap: 20px;
+    }
+  }
+  @media (max-width: 768px) {
+    /* Perbesar ukuran poster di tablet */
+    .posters-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+      gap: 24px;
+    }
+    /* Perpendek jarak about ke banner */
+    .about-questival { padding-top: 12px; margin-top: -25px; }
+    .meloria-header { margin-bottom: 15px; }
+    /* Perkecil nama panitia */
+    .about-role { font-size: 1.15rem; }
+    .about-name { font-size: 1.05rem; }
   }
 </style>
 <link

@@ -251,11 +251,11 @@ html, body {
 }
 
 @media (max-width: 768px) {
-  .posters-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+  .posters-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
 }
 
 @media (max-width: 480px) {
-  .posters-grid { grid-template-columns: repeat(2, 1fr); }
+  .posters-grid { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
   .poster-name { font-size: .9rem; }
 }
 
