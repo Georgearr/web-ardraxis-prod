@@ -27,8 +27,8 @@
   padding: 40px 16px;
   position: relative;
   overflow: hidden;
-  background-color: #FEBDAC;
-  
+  background-color: #f0a694;
+  margin-top: 50px;
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
 }
@@ -102,13 +102,13 @@
 #festioraForm > input,
 #festioraForm > select {
   font-size: 1rem;
-  padding: 5px;
+  padding: 12px 10px;
   margin-bottom: 20px;
-  border-radius: 10px;
   border-radius: 8px;
   outline: none;
-  padding: 4px;
   border: none;
+  min-height: 44px;
+  box-sizing: border-box;
 }
 
 #festioraForm > select {
@@ -127,7 +127,7 @@
   text-decoration: none;
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 10px;
-  background: #FEBDAC;
+  background: #F0AC9C;
   backdrop-filter: blur(2px);
   transition: transform .15s ease, background .15s ease;
   cursor: pointer;
