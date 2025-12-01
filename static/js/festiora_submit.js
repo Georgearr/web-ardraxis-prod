@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 alert("Terjadi kesalahan. Coba lagi.");
             }
+            
         } catch (err) {
             console.error("Error:", err);
             alert("Gagal mengirim data. Cek koneksi atau server.");

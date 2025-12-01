@@ -98,7 +98,7 @@ def festiora_submit(lomba):
     # ===============================
     # Langsung tutup pendaftaran untuk lomba tertentu
     # ===============================
-    if lomba in ["family_100", "case_crackers", "follow_the_harmony"]:
+    if lomba in ["family_100", "case_crackers", "follow_the_harmony", "mlbb", "real_life_boardgame", "speed_drawing", "workshop_robotic", "triquest"]:
         return jsonify({
             "status": "closed",
             "message": "Pendaftaran ditutup"
