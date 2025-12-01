@@ -96,6 +96,15 @@ def festiora_submit(lomba):
     data = request.form.to_dict()
 
     # ===============================
+    # Langsung tutup pendaftaran untuk lomba tertentu
+    # ===============================
+    if lomba in ["family_100", "case_crackers"]:
+        return jsonify({
+            "status": "closed",
+            "message": "Pendaftaran ditutup"
+        }), 403
+
+    # ===============================
     # Tentukan sheet dan row per lomba
     # ===============================
     if lomba == "follow_the_harmony":
@@ -118,6 +127,35 @@ def festiora_submit(lomba):
         ]
     elif lomba == "trivia_showdown":
         ws = sh.worksheet("Trivia Showdown")
+
+        # ===============================
+        # Batasi maksimal 10 tim untuk Trivia Showdown
+        # ===============================
+        try:
+            all_values = ws.get_all_values()
+            if all_values and len(all_values) > 0:
+                first_row = all_values[0]
+                is_header = any(
+                    keyword in str(first_row[0]).lower()
+                    for keyword in ['nama', 'kelas', 'id line']
+                )
+                if is_header:
+                    registered_count = len(all_values) - 1
+                else:
+                    registered_count = len(all_values)
+            else:
+                registered_count = 0
+
+            if registered_count >= 10:
+                return jsonify({
+                    "status": "closed",
+                    "message": "Pendaftaran ditutup"
+                }), 403
+        except Exception as e:
+            print("Error checking trivia_showdown count:", e)
+            # Jika gagal cek, jangan blokir pendaftaran
+            pass
+
         row = [
             data.get("peserta1",""),
             data.get("peserta2",""),
@@ -182,21 +220,6 @@ def festiora_submit(lomba):
             data.get("anggota3",""),
             data.get("idline_anggota3","")
         ]
-    elif lomba == "family_100":
-        ws = sh.worksheet("Family 100")
-        row = [
-            data.get("kelas",""),
-            data.get("ketua",""),
-            data.get("idline_ketua",""),
-            data.get("anggota1",""),
-            data.get("idline_anggota1",""),
-            data.get("anggota2",""),
-            data.get("idline_anggota2",""),
-            data.get("anggota3",""),
-            data.get("idline_anggota3",""),
-            data.get("anggota4",""),
-            data.get("idline_anggota4","")
-        ]
     elif lomba == "basket":
         ws = sh.worksheet("Basket")
         
@@ -227,7 +250,7 @@ def festiora_submit(lomba):
             if registered_count >= 16:
                 return jsonify({
                     "status": "closed",
-                    "message": "Pendaftaran ditutup. Kuota 16 tim sudah terpenuhi."
+                    "message": "Pendaftaran ditutup"
                 }), 403
             
         except Exception as e:
