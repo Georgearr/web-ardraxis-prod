@@ -10,6 +10,10 @@ app = Flask(__name__)
 def home():
     return render_template("index.html")
 
+@app.route("/about_us")
+def about_us():
+    return render_template("about_us.html")
+
 @app.route("/coming_soon")
 def coming_soon():
     return render_template("coming_soon.html")

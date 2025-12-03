@@ -1,0 +1,117 @@
+{% extends "layout.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/about.css') }}"
+/>
+{% endblock %}
+
+{% block isi %}
+<main class="about-page">
+  <section class="top3-section reveal-on-scroll">
+
+    <!-- Cloud elements (9 awan: kiri, tengah, kanan; atas & bawah) -->
+    <!-- Kiri: atas, tengah, bawah -->
+    <div class="top3-cloud top3-cloud-left-top"></div>
+    <div class="top3-cloud top3-cloud-left-mid"></div>
+    <div class="top3-cloud top3-cloud-left-bottom"></div>
+
+    <!-- Tengah: atas, tengah, bawah -->
+    <div class="top3-cloud top3-cloud-center-top"></div>
+    <div class="top3-cloud top3-cloud-center-mid"></div>
+    <div class="top3-cloud top3-cloud-center-bottom"></div>
+
+    <!-- Kanan: atas, tengah, bawah -->
+    <div class="top3-cloud top3-cloud-right-top"></div>
+    <div class="top3-cloud top3-cloud-right-mid"></div>
+    <div class="top3-cloud top3-cloud-right-bottom"></div>
+
+    <h1 class="top3-title">TOP 3</h1>
+
+    <div class="top3-card-wrapper">
+      <!-- Card 1 -->
+      <article class="top3-card top3-card-1">
+        <div class="top3-card-inner">
+          <header class="top3-card-header">
+            <span class="top3-card-experience">2 YEARS OF EXPERIENCE</span>
+            <span class="top3-card-rank">1</span>
+          </header>
+
+          <div class="top3-card-body">
+            <div class="top3-card-photo-wrapper">
+              <img
+                src="{{ url_for('static', filename='img/fotokabinet/inti/Jesmun.png') }}"
+                alt="Jessica Duangmun"
+                class="top3-card-photo"
+              />
+            </div>
+            <p class="top3-card-name">Jessica Duangmun</p>
+            <p class="top3-card-nickname">(yunwei)</p>
+          </div>
+
+          <footer class="top3-card-footer">
+            <p class="top3-card-role-main">KETUA OSIS I</p>
+          </footer>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="top3-card top3-card-2">
+        <div class="top3-card-inner">
+          <header class="top3-card-header">
+            <span class="top3-card-experience">2 YEARS OF EXPERIENCE</span>
+            <span class="top3-card-rank">2</span>
+          </header>
+
+          <div class="top3-card-body">
+            <div class="top3-card-photo-wrapper">
+              <img
+                src="{{ url_for('static', filename='img/fotokabinet/inti/Rakha.png') }}"
+                alt="Rakha Aqila Astro"
+                class="top3-card-photo"
+              />
+            </div>
+            <p class="top3-card-name">Rakha Aqila Astro</p>
+            <p class="top3-card-nickname">(yume)</p>
+          </div>
+
+          <footer class="top3-card-footer">
+            <p class="top3-card-role-sub">WAKIL KETUA OSIS I</p>
+          </footer>
+        </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="top3-card top3-card-3">
+        <div class="top3-card-inner">
+          <header class="top3-card-header">
+            <span class="top3-card-experience">2 YEARS OF EXPERIENCE</span>
+            <span class="top3-card-rank">3</span>
+          </header>
+
+          <div class="top3-card-body">
+            <div class="top3-card-photo-wrapper">
+              <img
+                src="{{ url_for('static', filename='img/fotokabinet/inti/Sydney.png') }}"
+                alt="Sydney Venecia"
+                class="top3-card-photo"
+              />
+            </div>
+            <p class="top3-card-name">Sydney Venecia</p>
+            <p class="top3-card-nickname">(yukii)</p>
+          </div>
+
+          <footer class="top3-card-footer">
+            <p class="top3-card-role-sub">WAKIL KETUA OSIS II</p>
+          </footer>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+{% endblock %}
+
+
