@@ -1,4 +1,4 @@
- .about-page {
+.about-page {
   min-height: 100vh;
   padding: 120px 24px 80px;
   background: radial-gradient(circle at top, #0e7b84 0, #044b51 45%, #022a2e 100%);
@@ -7,6 +7,7 @@
   justify-content: center;
   color: #f8fafc;
   box-sizing: border-box;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .top3-section {
@@ -22,17 +23,142 @@
 
 .top3-title {
   text-align: center;
-  letter-spacing: 0.18em;
-  font-size: 28px;
+  letter-spacing: 0.1em;
+  font-size: 68px;
   font-weight: 700;
   margin: 0 0 28px;
   color: #fdfdfd;
   text-transform: uppercase;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.top3-placeholder-card {
+  width: 100%;
+  min-height: 500px;
+  border-radius: 18px;
+  margin-bottom: 32px;
+  border: 2px solid rgba(240, 249, 255, 0.9);
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  background: radial-gradient(
+      circle at top,
+      rgba(255, 255, 255, 0.09),
+      transparent 55%
+    ),
+    rgba(3, 77, 83, 0.9);
+}
+
+.top3-placeholder-card::before,
+.top3-placeholder-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+      circle at 20% 20%,
+      rgba(255, 255, 255, 0.16),
+      transparent 50%
+    ),
+    radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.14), transparent 52%);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.top3-placeholder-card::after {
+  background-image: radial-gradient(
+      circle at 25% 30%,
+      rgba(255, 255, 255, 0.06),
+      transparent 55%
+    ),
+    radial-gradient(circle at 70% 55%, rgba(255, 255, 255, 0.06), transparent 55%);
+  mix-blend-mode: screen;
+}
+
+.placeholder-carousel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+
+.placeholder-carousel-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transform: translateX(100%);
+  opacity: 0;
+  animation: placeholder-carousel-slide 15s infinite;
+  will-change: transform, opacity;
+  z-index: 1;
+}
+
+.placeholder-carousel-image:nth-child(1) {
+  animation-delay: 0s;
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.placeholder-carousel-image:nth-child(2) {
+  animation-delay: 5s;
+}
+
+.placeholder-carousel-image:nth-child(3) {
+  animation-delay: 10s;
+}
+
+@keyframes placeholder-carousel-slide {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  3% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  30% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  33.33% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Awan di antara gambar dan card */
+.top3-cloud-between-left {
+  left: -4%;
+  top: auto;
+  bottom: -8%;
+  animation: top3-cloud-move-left 7s ease-in-out infinite alternate;
+}
+
+.top3-cloud-between-center {
+  left: 50%;
+  transform: translateX(-50%);
+  top: auto;
+  bottom: -10%;
+  animation: top3-cloud-move-center 6s ease-in-out infinite alternate;
+}
+
+.top3-cloud-between-right {
+  right: -4%;
+  top: auto;
+  bottom: -8%;
+  animation: top3-cloud-move-right 7s ease-in-out infinite alternate;
 }
 
 .top3-card-wrapper {
   display: flex;
-  gap: 24px;
+  gap: 35px;
   justify-content: center;
   align-items: stretch;
   position: relative;
@@ -109,6 +235,7 @@
   text-transform: uppercase;
   color: #e0f2fe;
   opacity: 0.85;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .top3-card-rank {
@@ -130,6 +257,13 @@
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
 }
 
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .top3-card-photo {
   width: 100%;
   height: 100%;
@@ -138,11 +272,70 @@
   display: block;
 }
 
+.carousel-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateX(100%) scale(1.2);
+  opacity: 0;
+  animation: carousel-slide 15s infinite;
+  will-change: transform, opacity;
+}
+
+.carousel-image:nth-child(1) {
+  animation-delay: 0s;
+  transform: translateX(0) scale(1.1);
+  opacity: 1;
+}
+
+.carousel-image:nth-child(2) {
+  animation-delay: 5s;
+}
+
+.carousel-image:nth-child(3) {
+  animation-delay: 10s;
+}
+
+@keyframes carousel-slide {
+  0% {
+    transform: translateX(100%) scale(1.2);
+    opacity: 0;
+  }
+  3% {
+    transform: translateX(0) scale(1.2);
+    opacity: 1;
+  }
+  10% {
+    transform: translateX(0) scale(1.15);
+  }
+  20% {
+    transform: translateX(0) scale(1.1);
+  }
+  30% {
+    transform: translateX(0) scale(1.05);
+    opacity: 1;
+  }
+  31% {
+    transform: translateX(0) scale(1);
+  }
+  33.33% {
+    transform: translateX(-100%) scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(-100%) scale(0.9);
+    opacity: 0;
+  }
+}
+
 .top3-card-name {
   margin: 0 0 4px;
   font-size: 18px;
   font-weight: 600;
   color: #ffffff;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .top3-card-nickname {
@@ -150,12 +343,16 @@
   font-size: 13px;
   font-style: italic;
   color: #e5e7eb;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .top3-card-footer {
   margin-top: 32px;
   border-top: 1px solid rgba(226, 232, 240, 0.55);
   padding-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .top3-card-role-main,
@@ -166,10 +363,26 @@
   text-transform: uppercase;
   color: #fef9c3;
   text-align: left;
+  font-family: 'Bebas Neue', sans-serif;
 }
 
 .top3-card-role-sub {
   color: #e0f2fe;
+}
+
+.top3-card-instagram {
+  color: #e0f2fe;
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top3-card-instagram:hover {
+  color: #fef9c3;
+  transform: scale(1.2);
 }
 
 /* Big "TOP 3" text behind the cards */

@@ -3,6 +3,9 @@
 {% block title %}About Us{% endblock %}
 
 {% block extra_css %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/about.css') }}"
@@ -31,6 +34,31 @@
 
     <h1 class="top3-title">TOP 3</h1>
 
+    <div class="top3-placeholder-card">
+      <div class="placeholder-carousel-container">
+        <img
+          src="{{ url_for('static', filename='img/fotokabinet/inti1.png') }}"
+          alt="Inti 1"
+          class="placeholder-carousel-image"
+        />
+        <img
+          src="{{ url_for('static', filename='img/fotokabinet/inti2.png') }}"
+          alt="Inti 2"
+          class="placeholder-carousel-image"
+        />
+        <img
+          src="{{ url_for('static', filename='img/fotokabinet/inti3.png') }}"
+          alt="Inti 3"
+          class="placeholder-carousel-image"
+        />
+      </div>
+    </div>
+
+    <!-- Awan di antara gambar dan card -->
+    <div class="top3-cloud top3-cloud-between-left"></div>
+    <div class="top3-cloud top3-cloud-between-center"></div>
+    <div class="top3-cloud top3-cloud-between-right"></div>
+
     <div class="top3-card-wrapper">
       <!-- Card 1 -->
       <article class="top3-card top3-card-1">
@@ -42,11 +70,23 @@
 
           <div class="top3-card-body">
             <div class="top3-card-photo-wrapper">
-              <img
-                src="{{ url_for('static', filename='img/fotokabinet/inti/Jesmun.png') }}"
-                alt="Jessica Duangmun"
-                class="top3-card-photo"
-              />
+              <div class="carousel-container">
+                <img
+                  src="{{ url_for('static', filename='img/fotokabinet/Inti/jesmun1.png') }}"
+                  alt="Jessica Duangmun"
+                  class="top3-card-photo carousel-image"
+                />
+                <img
+                  src="{{ url_for('static', filename='img/fotokabinet/Inti/jesmun2.png') }}"
+                  alt="Jessica Duangmun"
+                  class="top3-card-photo carousel-image"
+                />
+                <img
+                  src="{{ url_for('static', filename='img/fotokabinet/Inti/jesmun3.png') }}"
+                  alt="Jessica Duangmun"
+                  class="top3-card-photo carousel-image"
+                />
+              </div>
             </div>
             <p class="top3-card-name">Jessica Duangmun</p>
             <p class="top3-card-nickname">(yunwei)</p>
@@ -54,6 +94,9 @@
 
           <footer class="top3-card-footer">
             <p class="top3-card-role-main">KETUA OSIS I</p>
+            <a href="https://www.instagram.com/osis.smaigs/" target="_blank" class="top3-card-instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
           </footer>
         </div>
       </article>
@@ -68,11 +111,23 @@
 
           <div class="top3-card-body">
             <div class="top3-card-photo-wrapper">
-              <img
-                src="{{ url_for('static', filename='img/fotokabinet/inti/Rakha.png') }}"
-                alt="Rakha Aqila Astro"
-                class="top3-card-photo"
-              />
+              <div class="carousel-container">
+                <img
+                  src="{{ url_for('static', filename='img/fotokabinet/Inti/rakha1.png') }}"
+                  alt="Rakha Aqila Astro"
+                  class="top3-card-photo carousel-image"
+                />
+                <img
+                  src="{{ url_for('static', filename='img/fotokabinet/Inti/rakha2.png') }}"
+                  alt="Rakha Aqila Astro"
+                  class="top3-card-photo carousel-image"
+                />
+                <img
+                  src="{{ url_for('static', filename='img/fotokabinet/Inti/rakha3.png') }}"
+                  alt="Rakha Aqila Astro"
+                  class="top3-card-photo carousel-image"
+                />
+              </div>
             </div>
             <p class="top3-card-name">Rakha Aqila Astro</p>
             <p class="top3-card-nickname">(yume)</p>
@@ -80,6 +135,9 @@
 
           <footer class="top3-card-footer">
             <p class="top3-card-role-sub">WAKIL KETUA OSIS I</p>
+            <a href="https://www.instagram.com/osis.smaigs/" target="_blank" class="top3-card-instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
           </footer>
         </div>
       </article>
@@ -94,11 +152,23 @@
 
           <div class="top3-card-body">
             <div class="top3-card-photo-wrapper">
-              <img
-                src="{{ url_for('static', filename='img/fotokabinet/inti/Sydney.png') }}"
-                alt="Sydney Venecia"
-                class="top3-card-photo"
-              />
+              <div class="carousel-container">
+                <img
+                  src="{{ url_for('static', filename='img/fotokabinet/Inti/sydney1.png') }}"
+                  alt="Sydney Venecia"
+                  class="top3-card-photo carousel-image"
+                />
+                <img
+                  src="{{ url_for('static', filename='img/fotokabinet/Inti/sydney2.png') }}"
+                  alt="Sydney Venecia"
+                  class="top3-card-photo carousel-image"
+                />
+                <img
+                  src="{{ url_for('static', filename='img/fotokabinet/Inti/sydney3.png') }}"
+                  alt="Sydney Venecia"
+                  class="top3-card-photo carousel-image"
+                />
+              </div>
             </div>
             <p class="top3-card-name">Sydney Venecia</p>
             <p class="top3-card-nickname">(yukii)</p>
@@ -106,6 +176,9 @@
 
           <footer class="top3-card-footer">
             <p class="top3-card-role-sub">WAKIL KETUA OSIS II</p>
+            <a href="https://www.instagram.com/osis.smaigs/" target="_blank" class="top3-card-instagram">
+              <i class="bi bi-instagram"></i>
+            </a>
           </footer>
         </div>
       </article>
