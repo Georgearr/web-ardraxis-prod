@@ -3,6 +3,8 @@
   padding: 120px 24px 80px;
   background: radial-gradient(circle at top, #0e7b84 0, #044b51 45%, #022a2e 100%);
   display: flex;
+  flex-direction: column;
+  gap: 80px;
   align-items: center;
   justify-content: center;
   color: #f8fafc;
@@ -10,7 +12,7 @@
   font-family: 'Bebas Neue', sans-serif;
 }
 
-.top3-section {
+.sekbid-section {
   position: relative;
   width: 100%;
   max-width: 1100px;
@@ -21,7 +23,7 @@
   overflow: hidden;
 }
 
-.top3-title {
+.sekbid-title {
   text-align: center;
   letter-spacing: 0.1em;
   font-size: 68px;
@@ -32,7 +34,7 @@
   font-family: 'Bebas Neue', sans-serif;
 }
 
-.top3-placeholder-card {
+.sekbid-placeholder-card {
   width: 100%;
   min-height: 500px;
   border-radius: 18px;
@@ -49,8 +51,8 @@
     rgba(3, 77, 83, 0.9);
 }
 
-.top3-placeholder-card::before,
-.top3-placeholder-card::after {
+.sekbid-placeholder-card::before,
+.sekbid-placeholder-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -64,7 +66,7 @@
   pointer-events: none;
 }
 
-.top3-placeholder-card::after {
+.sekbid-placeholder-card::after {
   background-image: radial-gradient(
       circle at 25% 30%,
       rgba(255, 255, 255, 0.06),
@@ -133,30 +135,7 @@
   }
 }
 
-/* Awan di antara gambar dan card */
-.top3-cloud-between-left {
-  left: -4%;
-  top: auto;
-  bottom: -8%;
-  animation: top3-cloud-move-left 7s ease-in-out infinite alternate;
-}
-
-.top3-cloud-between-center {
-  left: 50%;
-  transform: translateX(-50%);
-  top: auto;
-  bottom: -10%;
-  animation: top3-cloud-move-center 6s ease-in-out infinite alternate;
-}
-
-.top3-cloud-between-right {
-  right: -4%;
-  top: auto;
-  bottom: -8%;
-  animation: top3-cloud-move-right 7s ease-in-out infinite alternate;
-}
-
-.top3-card-wrapper {
+.sekbid-card-wrapper {
   display: flex;
   gap: 35px;
   justify-content: center;
@@ -166,12 +145,12 @@
   flex-wrap: wrap;
 }
 
-.top3-card {
+.sekbid-card {
   flex: 1 1 260px;
   max-width: 320px;
 }
 
-.top3-card-inner {
+.sekbid-card-inner {
   position: relative;
   height: 100%;
   border-radius: 18px;
@@ -190,8 +169,8 @@
   overflow: hidden;
 }
 
-.top3-card-inner::before,
-.top3-card-inner::after {
+.sekbid-card-inner::before,
+.sekbid-card-inner::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -205,7 +184,7 @@
   pointer-events: none;
 }
 
-.top3-card-inner::after {
+.sekbid-card-inner::after {
   background-image: radial-gradient(
       circle at 25% 30%,
       rgba(255, 255, 255, 0.06),
@@ -215,21 +194,21 @@
   mix-blend-mode: screen;
 }
 
-.top3-card-header,
-.top3-card-body,
-.top3-card-footer {
+.sekbid-card-header,
+.sekbid-card-body,
+.sekbid-card-footer {
   position: relative;
   z-index: 1;
 }
 
-.top3-card-header {
+.sekbid-card-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   margin-bottom: 40px;
 }
 
-.top3-card-experience {
+.sekbid-card-experience {
   font-size: 10px;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -238,17 +217,17 @@
   font-family: 'Bebas Neue', sans-serif;
 }
 
-.top3-card-rank {
+.sekbid-card-rank {
   font-size: 40px;
   font-weight: 700;
   color: #fefce8;
 }
 
-.top3-card-body {
+.sekbid-card-body {
   text-align: center;
 }
 
-.top3-card-photo-wrapper {
+.sekbid-card-photo-wrapper {
   width: 100%;
   height: 190px;
   border-radius: 16px;
@@ -264,7 +243,7 @@
   overflow: hidden;
 }
 
-.top3-card-photo {
+.sekbid-card-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -330,7 +309,7 @@
   }
 }
 
-.top3-card-name {
+.sekbid-card-name {
   margin: 0 0 4px;
   font-size: 18px;
   font-weight: 600;
@@ -338,7 +317,7 @@
   font-family: 'Bebas Neue', sans-serif;
 }
 
-.top3-card-nickname {
+.sekbid-card-nickname {
   margin: 0;
   font-size: 13px;
   font-style: italic;
@@ -346,7 +325,7 @@
   font-family: 'Bebas Neue', sans-serif;
 }
 
-.top3-card-footer {
+.sekbid-card-footer {
   margin-top: 32px;
   border-top: 1px solid rgba(226, 232, 240, 0.55);
   padding-top: 14px;
@@ -355,8 +334,7 @@
   justify-content: space-between;
 }
 
-.top3-card-role-main,
-.top3-card-role-sub {
+.sekbid-card-role {
   margin: 0;
   font-size: 12px;
   letter-spacing: 0.18em;
@@ -366,11 +344,11 @@
   font-family: 'Bebas Neue', sans-serif;
 }
 
-.top3-card-role-sub {
+.sekbid-card-role {
   color: #e0f2fe;
 }
 
-.top3-card-instagram {
+.sekbid-card-instagram {
   color: #e0f2fe;
   font-size: 18px;
   text-decoration: none;
@@ -380,13 +358,12 @@
   justify-content: center;
 }
 
-.top3-card-instagram:hover {
+.sekbid-card-instagram:hover {
   color: #fef9c3;
   transform: scale(1.2);
 }
 
-/* Big "TOP 3" text behind the cards */
-.top3-bg-word {
+.sekbid-bg-word {
   position: absolute;
   inset: 50% 0 auto 0;
   transform: translateY(-50%);
@@ -403,7 +380,7 @@
 }
 
 /* Cloud decorative element – semua awan ukuran sama, posisi beda (kiri/ tengah / kanan, atas & bawah) */
-.top3-cloud {
+.sekbid-cloud {
   position: absolute;
   width: 26%;
   height: 110px;
@@ -416,63 +393,86 @@
 }
 
 /* KIRI */
-.top3-cloud-left-top {
+.sekbid-cloud-left-top {
   left: -4%;
   top: 8%;
-  animation: top3-cloud-move-left 7s ease-in-out infinite alternate;
+  animation: sekbid-cloud-move-left 7s ease-in-out infinite alternate;
 }
 
-.top3-cloud-left-mid {
+.sekbid-cloud-left-mid {
   left: 4%;
   top: 45%;
-  animation: top3-cloud-move-left 6s ease-in-out infinite alternate;
+  animation: sekbid-cloud-move-left 6s ease-in-out infinite alternate;
 }
 
-.top3-cloud-left-bottom {
+.sekbid-cloud-left-bottom {
   left: 0;
   bottom: -2%;
-  animation: top3-cloud-move-left 7.5s ease-in-out infinite alternate;
+  animation: sekbid-cloud-move-left 7.5s ease-in-out infinite alternate;
 }
 
 /* TENGAH */
-.top3-cloud-center-top {
+.sekbid-cloud-center-top {
   left: 32%;
   top: 6%;
-  animation: top3-cloud-move-center 7s ease-in-out infinite alternate;
+  animation: sekbid-cloud-move-center 7s ease-in-out infinite alternate;
 }
 
-.top3-cloud-center-mid {
+.sekbid-cloud-center-mid {
   left: 30%;
   top: 48%;
-  animation: top3-cloud-move-center 6s ease-in-out infinite alternate;
+  animation: sekbid-cloud-move-center 6s ease-in-out infinite alternate;
 }
 
-.top3-cloud-center-bottom {
+.sekbid-cloud-center-bottom {
   left: 34%;
   bottom: -4%;
-  animation: top3-cloud-move-center 7.5s ease-in-out infinite alternate;
+  animation: sekbid-cloud-move-center 7.5s ease-in-out infinite alternate;
 }
 
 /* KANAN */
-.top3-cloud-right-top {
+.sekbid-cloud-right-top {
   right: -4%;
   top: 8%;
-  animation: top3-cloud-move-right 7s ease-in-out infinite alternate;
+  animation: sekbid-cloud-move-right 7s ease-in-out infinite alternate;
 }
 
-.top3-cloud-right-mid {
+.sekbid-cloud-right-mid {
   right: 4%;
   top: 45%;
-  animation: top3-cloud-move-right 6s ease-in-out infinite alternate;
+  animation: sekbid-cloud-move-right 6s ease-in-out infinite alternate;
 }
 
-.top3-cloud-right-bottom {
+.sekbid-cloud-right-bottom {
   right: 0;
   bottom: -2%;
-  animation: top3-cloud-move-right 7.5s ease-in-out infinite alternate;
+  animation: sekbid-cloud-move-right 7.5s ease-in-out infinite alternate;
 }
 
-@keyframes top3-cloud-move-left {
+/* DIANTARA GAMBAR DAN CARD */
+.sekbid-cloud-between-left {
+  left: -4%;
+  top: auto;
+  bottom: -8%;
+  animation: sekbid-cloud-move-left 7s ease-in-out infinite alternate;
+}
+
+.sekbid-cloud-between-center {
+  left: 50%;
+  transform: translateX(-50%);
+  top: auto;
+  bottom: -10%;
+  animation: sekbid-cloud-move-center 6s ease-in-out infinite alternate;
+}
+
+.sekbid-cloud-between-right {
+  right: -4%;
+  top: auto;
+  bottom: -8%;
+  animation: sekbid-cloud-move-right 7s ease-in-out infinite alternate;
+}
+
+@keyframes sekbid-cloud-move-left {
   0% {
     transform: translateX(-24px);
   }
@@ -484,7 +484,7 @@
   }
 }
 
-@keyframes top3-cloud-move-center {
+@keyframes sekbid-cloud-move-center {
   0% {
     transform: translateX(20px);
   }
@@ -496,7 +496,7 @@
   }
 }
 
-@keyframes top3-cloud-move-right {
+@keyframes sekbid-cloud-move-right {
   0% {
     transform: translateX(28px);
   }
@@ -513,17 +513,17 @@
     padding-top: 110px;
   }
 
-  .top3-section {
+  .sekbid-section {
     padding: 32px 20px 36px;
   }
 
-  .top3-bg-number {
+  .sekbid-bg-number {
     font-size: 150px;
     top: 28%;
     opacity: 0.22;
   }
 
-  .top3-bg-word {
+  .sekbid-bg-word {
     font-size: 64px;
     letter-spacing: 0.18em;
   }
@@ -534,28 +534,28 @@
     padding: 100px 16px 56px;
   }
 
-  .top3-section {
+  .sekbid-section {
     padding: 28px 18px 32px;
   }
 
-  .top3-title {
+  .sekbid-title {
     font-size: 22px;
     margin-bottom: 22px;
   }
 
-  .top3-card-wrapper {
+  .sekbid-card-wrapper {
     gap: 18px;
   }
 
-  .top3-card-inner {
+  .sekbid-card-inner {
     padding: 20px 18px 22px;
   }
 
-  .top3-card-header {
+  .sekbid-card-header {
     margin-bottom: 32px;
   }
 
-  .top3-card-photo-wrapper {
+  .sekbid-card-photo-wrapper {
     height: 150px;
   }
 }
