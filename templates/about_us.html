@@ -20,6 +20,14 @@
 
 {% block extra_js %}
     <script>
+        /*
+        Dev Note : Members that haven't sent their data :
+        1. Richiro Huang
+        2. Mackenzoe Nathan Huang (website)
+        3. Andrew Nickson
+        4. Muhammad Chava Putra Anugrah
+        5. Muhammad Sony Yulianto
+        */
         const ardraxisCabinet = [
             {
                 sekbid: "Top 3",
@@ -28,28 +36,33 @@
                 members: [
                     {
                         name: "Jessica Duangmun",
-                        rank: 1,
+                        jersey: 1,
                         exp: 2,
                         nicknames: "jesmun/jezzd",
                         jabatan: "Ketua OSIS",
                         instagram: "jesmoonn",
-                        images: ["Top3/jesmun_f.png", "Top3/jesmun_nf1.png", "Top3/jesmun_nf2.png"]
-                    }, {
+                        images: ["Top3/jesmun_f.png", "Top3/jesmun_nf1.png", "Top3/jesmun_nf2.png"],
+                        style: "main"
+                    },
+                    {
                         name: "Rakha Aqila Astro",
-                        rank: 2,
+                        jersey: 2,
                         exp: 2,
                         nicknames: "astro/karak/rakhaa",
                         jabatan: "Wakil Ketua OSIS I",
                         instagram: "rakhaaqilaastroo",
-                        images: ["Top3/rakha_f.png", "Top3/rakha_nf1.png", "Top3/rakha_nf2.png"]
-                    }, {
+                        images: ["Top3/rakha_f.png", "Top3/rakha_nf1.png", "Top3/rakha_nf2.png"],
+                        style: "main"
+                    },
+                    {
                         name: "Sydney Venecia",
-                        rank: 3,
+                        jersey: 3,
                         exp: 2,
                         nicknames: "sydney/ney",
                         jabatan: "Wakil Ketua OSIS II",
                         instagram: "sydney.venecia",
-                        images: ["Top3/sydney_f.png", "Top3/sydney_nf1.png", "Top3/sydney_nf2.png"]
+                        images: ["Top3/sydney_f.png", "Top3/sydney_nf1.png", "Top3/sydney_nf2.png"],
+                        style: "main"
                     }
                 ]
             },
@@ -60,21 +73,23 @@
                 members: [
                     {
                         name: "Licia Emiliandra",
-                        rank: 90,
-                        exp: 2,
+                        jersey: 90,
+                        exp: 1,
                         nicknames: "Lici/cia/Cece sekree",
                         jabatan: "Sekretaris",
                         instagram: "licia_zhu09",
-                        images: ["Sekretaris/LiciaEmiliandra_f.png", "Sekretaris/LiciaEmiliandra_nf1.png", "Sekretaris/LiciaEmiliandra_nf2.png"]
+                        images: ["Sekretaris/LiciaEmiliandra_f.png", "Sekretaris/LiciaEmiliandra_nf1.png", "Sekretaris/LiciaEmiliandra_nf2.png"],
+                        style: "main"
                     },
                     {
                         name: "Zahra Fadhilah Adz Zikra",
-                        rank: 51,
-                        exp: 2,
+                        jersey: 51,
+                        exp: 1,
                         nicknames: "zahra/adillah/ara",
                         jabatan: "Wakil Sekretaris",
                         instagram: "zfadzzikra",
-                        images: ["Sekretaris/Zahra_Fadhilah_f.png", "Sekretaris/Zahra_Fadhilah_nf1.png", "Sekretaris/Zahra_Fadhilah_nf2.png"]
+                        images: ["Sekretaris/Zahra_Fadhilah_f.png", "Sekretaris/Zahra_Fadhilah_nf1.png", "Sekretaris/Zahra_Fadhilah_nf2.png"],
+                        style: "main"
                     }
                 ]
             },
@@ -85,21 +100,23 @@
                 members: [
                     {
                         name: "Kayla Visha Arganata",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
+                        jersey: 4,
+                        exp: 2,
+                        nicknames: "kela/ayak/kayie",
                         jabatan: "Bendahara",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        instagram: "kaylaavsh",
+                        images: ["", "", ""],
+                        style: "main"
                     },
                     {
                         name: "Felicia Theng",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
+                        jersey: 84,
+                        exp: 1,
+                        nicknames: "Feli/Wakil Bendahara",
                         jabatan: "Wakil Bendahara",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        instagram: "felistillrunning",
+                        images: ["", "", ""],
+                        style: "main"
                     }
                 ]
             },
@@ -109,29 +126,131 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        name: "Laxmi Dewa Putu Ardana",
+                        jersey: 23,
+                        exp: 2,
+                        nicknames: "laxmi/putu/mimi",
+                        jabatan: "Koordinator",
+                        instagram: "laxmi.ardana",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Fadli Said Ramadhan",
+                        jersey: 27,
+                        exp: 1,
+                        nicknames: "fadli/padil/dil",
+                        jabatan: "Anggota",
+                        instagram: "fdli_srn",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Salwa Putri Athirah",
+                        jersey: 28,
+                        exp: 1,
+                        nicknames: "Salwow Hacker Belanda",
+                        jabatan: "Anggota",
+                        instagram: "slwaaptr21",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Luh Made Jasmine Ayyashi",
+                        jersey: 36,
+                        exp: 1,
+                        nicknames: "jasmine ayyashi/jasmin aladdin/min",
+                        jabatan: "Anggota",
+                        instagram: "aysiizxcv_",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Khairunnisa Lubna",
+                        jersey: 21,
+                        exp: 1,
+                        nicknames: "lulubnana",
+                        jabatan: "Anggota",
+                        instagram: "khairnnslbn",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Benedicta Andinica Keiko",
+                        jersey: 37,
+                        exp: 1,
+                        nicknames: "keiko/es kiko/kekok tokek",
+                        jabatan: "Anggota",
+                        instagram: "keiko.benedicta",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Velyn Calista Syakirah",
+                        jersey: 77,
+                        exp: 1,
+                        nicknames: "lyn/velyn",
+                        jabatan: "Anggota",
+                        instagram: "velyn.cs",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Naura Syifa Mazzayah",
+                        jersey: 42,
+                        exp: 1,
+                        nicknames: "Naura/naura yang “itu”/naura yang mana?",
+                        jabatan: "Anggota",
+                        instagram: "naurasyifam",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
             {
-                sekbid: "Multimedia Onfield",
+                sekbid: "Multimedia On-field",
                 sekbid_id: "mm_onfield",
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
+                        name: "Richiro Huang",
+                        jersey: 96,
+                        exp: 2,
                         nicknames: "nickname",
-                        jabatan: "jabatan",
+                        jabatan: "Koordinator",
                         instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Kevin Hendrawan",
+                        jersey: 17,
+                        exp: 1,
+                        nicknames: "Kepin/sultan palembang/pirang",
+                        jabatan: "Anggota",
+                        instagram: "kvn_hndrwnn",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Rachel Callista Zerlind",
+                        jersey: 86,
+                        exp: 1,
+                        nicknames: "recel/acel",
+                        jabatan: "Anggota",
+                        instagram: "_raechelcz",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Ethen Licius",
+                        jersey: 53,
+                        exp: 1,
+                        nicknames: "ethen",
+                        jabatan: "Anggota",
+                        instagram: "ethenlicius",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -141,45 +260,44 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
+                        name: "George Arrev Turnip",
+                        jersey: 69,
+                        exp: 1,
+                        nicknames: "jorji/jorj/lighting",
+                        jabatan: "Koordinator",
+                        instagram: "george_arrev_turnip",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Mackenzoe Nathan Huang",
+                        jersey: 46,
+                        exp: 1,
                         nicknames: "nickname",
-                        jabatan: "jabatan",
+                        jabatan: "Anggota",
                         instagram: "osis.smaigs",
-                        images: ["", "", ""]
-                    }, {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
-                    }, {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
-                    }, {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
-                    }, {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Handoyo",
+                        jersey: 56,
+                        exp: 1,
+                        nicknames: "handoyo",
+                        jabatan: "Anggota",
+                        instagram: "fakecomew",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Filbert Willy",
+                        jersey: 94,
+                        exp: 1,
+                        nicknames: "ibet/codeforcer",
+                        jabatan: "Anggota",
+                        instagram: "filbertwilly",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -189,13 +307,74 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        name: "Ahmatania Daneendra Shasikirana",
+                        jersey: 11,
+                        exp: 2,
+                        nicknames: "kirana",
+                        jabatan: "Koordinator",
+                        instagram: "taniadndra",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Nathasya Averill Chandra",
+                        jersey: 78,
+                        exp: 1,
+                        nicknames: "Nathasya/Nat",
+                        jabatan: "Anggota",
+                        instagram: "nathvrll",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Khaeirin Alya Al Gaffar",
+                        jersey: 15,
+                        exp: 1,
+                        nicknames: "keyyy",
+                        jabatan: "Anggota",
+                        instagram: "khrin.aag",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Graciella Naomi Lee",
+                        jersey: 87,
+                        exp: 1,
+                        nicknames: "Nomii/Nanaoo",
+                        jabatan: "Anggota",
+                        instagram: "nao_milee",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Neyra Azalia Titian",
+                        jersey: 35,
+                        exp: 1,
+                        nicknames: "ney/iney/neyen",
+                        jabatan: "Anggota",
+                        instagram: "neyraazalia_",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Klarensa Sastra Gennar",
+                        jersey: 34,
+                        exp: 1,
+                        nicknames: "klarens/klapibara",
+                        jabatan: "Anggota",
+                        instagram: "klareansa",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Jevonne Aireen Jaufarry",
+                        jersey: 81,
+                        exp: 1,
+                        nicknames: "Aireen/Aiwin/Yiyin",
+                        jabatan: "Anggota",
+                        instagram: "aireenzz_kkk",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -205,13 +384,54 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        name: "Siti Naila Zhafirah",
+                        jersey: 7,
+                        exp: 2,
+                        nicknames: "Nailaa/Anai/jgnpanggil siti pls",
+                        jabatan: "Koordinator",
+                        instagram: "aannaaii_",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Rainazia Mikaila Dopong",
+                        jersey: 13,
+                        exp: 1,
+                        nicknames: "Zia",
+                        jabatan: "Anggota",
+                        instagram: "m.kaell4_",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Celeste Wisman",
+                        jersey: 18,
+                        exp: 1,
+                        nicknames: "tomat",
+                        jabatan: "Anggota",
+                        instagram: "lecii.cel",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Jocelyn Kalisa Theng",
+                        jersey: 39,
+                        exp: 1,
+                        nicknames: "Jocelyn/Kalisa/Jojo Theng",
+                        jabatan: "Anggota",
+                        instagram: "kalisa_jt",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Fathi Dhiya Zhafar",
+                        jersey: 98,
+                        exp: 1,
+                        nicknames: "pati pemalaz",
+                        jabatan: "Anggota",
+                        instagram: "fathi.dzr",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -221,13 +441,54 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        name: "Kayyisah Putri Khairani",
+                        jersey: 60,
+                        exp: 1,
+                        nicknames: "Kayy/Kayyisah",
+                        jabatan: "Koordinator",
+                        instagram: "ky.khair",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Mika Renatta Indrawan",
+                        jersey: 54,
+                        exp: 1,
+                        nicknames: "mik/don buri/mika pencinta kodok",
+                        jabatan: "Anggota",
+                        instagram: "mikarntta",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Evelly Lynn Hyori Kho",
+                        jersey: 6,
+                        exp: 1,
+                        nicknames: "eve/ipi",
+                        jabatan: "Anggota",
+                        instagram: "evehyori_",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Nazzahra Lidwina Naira Sutari",
+                        jersey: 63,
+                        exp: 1,
+                        nicknames: "princess rb/el dudu",
+                        jabatan: "Anggota",
+                        instagram: "njy.neii",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Philomena Glovia Cheryl Purba",
+                        jersey: 62,
+                        exp: 1,
+                        nicknames: "chiril",
+                        jabatan: "Anggota",
+                        instagram: "philomn.cheryl",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -237,13 +498,74 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        name: "Oriana Toha",
+                        jersey: 19,
+                        exp: 1,
+                        nicknames: "Ruru",
+                        jabatan: "Koordinator",
+                        instagram: "orianaa.th",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Aurelia Yusafira Muslim",
+                        jersey: 79,
+                        exp: 1,
+                        nicknames: "Auau/Orel/Aurel Yusa",
+                        jabatan: "Anggota",
+                        instagram: "arl.ysm",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Almira Simiya Nadhifa Ridho",
+                        jersey: 74,
+                        exp: 1,
+                        nicknames: "mia/meye",
+                        jabatan: "Anggota",
+                        instagram: "simiya_nadhifa",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Keneisha Jocelyn Herrin",
+                        jersey: 52,
+                        exp: 1,
+                        nicknames: "keilyn/kenei",
+                        jabatan: "Anggota",
+                        instagram: "keiii.jlyn",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Kharyn Vanesta Husnafsky",
+                        jersey: 25,
+                        exp: 1,
+                        nicknames: "arin/ryn",
+                        jabatan: "Anggota",
+                        instagram: "kharyn_vanesta",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Hassel Audric",
+                        jersey: 48,
+                        exp: 1,
+                        nicknames: "hansol/hassel/audric",
+                        jabatan: "Anggota",
+                        instagram: "thy_oiis.10",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Filbert Kenjiro",
+                        jersey: 26,
+                        exp: 1,
+                        nicknames: "beber/bear/bret",
+                        jabatan: "Anggota",
+                        instagram: "flbrtt_",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -253,13 +575,44 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        name: "Ruth Abigail Levana",
+                        jersey: 100,
+                        exp: 2,
+                        nicknames: "Iyut imut",
+                        jabatan: "Koordinator",
+                        instagram: "ruthabigals",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Revaline Tan Aurellia",
+                        jersey: 29,
+                        exp: 1,
+                        nicknames: "repak/epa/repa",
+                        jabatan: "Anggota",
+                        instagram: "revvllyn",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Marcello Deven Husada",
+                        jersey: 40,
+                        exp: 1,
+                        nicknames: "martellok",
+                        jabatan: "Anggota",
+                        instagram: "marc.deven",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Luthfiyah Khairunnisa",
+                        jersey: 55,
+                        exp: 1,
+                        nicknames: "piyayoy",
+                        jabatan: "Anggota",
+                        instagram: "thfiannisa",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -269,13 +622,74 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        name: "Nabila Putri Awaliyah",
+                        jersey: 10,
+                        exp: 2,
+                        nicknames: "abil/nabil/nabila",
+                        jabatan: "Koordinator",
+                        instagram: "a._.bill",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Warren Tio",
+                        jersey: 80,
+                        exp: 1,
+                        nicknames: "War/Wer/NERO",
+                        jabatan: "Anggota",
+                        instagram: "wrrento",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Mahasin Qutbi",
+                        jersey: 43,
+                        exp: 1,
+                        nicknames: "Qutbi/Idoel/Ubik",
+                        jabatan: "Anggota",
+                        instagram: "mi.mayy_",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Michaela Nathania",
+                        jersey: 93,
+                        exp: 1,
+                        nicknames: "misyela/niyot",
+                        jabatan: "Anggota",
+                        instagram: "mchaela.nath",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Marcelo William L. Tobing",
+                        jersey: 47,
+                        exp: 1,
+                        nicknames: "Celo/Selo",
+                        jabatan: "Anggota",
+                        instagram: "william.tbg",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Treesha",
+                        jersey: 88,
+                        exp: 1,
+                        nicknames: "Trezz/hyper aktip/Triver",
+                        jabatan: "Anggota",
+                        instagram: "treesha_1228",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Nanda Syahnila Mufidah",
+                        jersey: 75,
+                        exp: 1,
+                        nicknames: "Nanda",
+                        jabatan: "Anggota",
+                        instagram: "nandsnl",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -285,13 +699,54 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        name: "Catherine Novia Hartanto",
+                        jersey: 14,
+                        exp: 2,
+                        nicknames: "cath/ceen",
+                        jabatan: "Koordinator",
+                        instagram: "nviaa_cath",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Jacqueline",
+                        jersey: 22,
+                        exp: 1,
+                        nicknames: "jacq",
+                        jabatan: "Anggota",
+                        instagram: "jxc.qln",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Jesicaren Natali Siregar",
+                        jersey: 16,
+                        exp: 1,
+                        nicknames: "jessie/caren/jess",
+                        jabatan: "Anggota",
+                        instagram: "jescrentli",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Joice Theresia Simanjuntak",
+                        jersey: 73,
+                        exp: 1,
+                        nicknames: "joi",
+                        jabatan: "Anggota",
+                        instagram: "jjoice__",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Jessica Aulia Putri",
+                        jersey: 32,
+                        exp: 1,
+                        nicknames: "Chika/Jejes",
+                        jabatan: "Anggota",
+                        instagram: "jejessicaa_aulia",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -301,13 +756,54 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
+                        name: "Andrew Nickson",
+                        jersey: 8,
+                        exp: 2,
                         nicknames: "nickname",
-                        jabatan: "jabatan",
+                        jabatan: "Koordinator",
                         instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Priscilla Meisandri Lim",
+                        jersey: 76,
+                        exp: 1,
+                        nicknames: "sisil",
+                        jabatan: "Anggota",
+                        instagram: "prscllaml",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Alexandro Risamanto",
+                        jersey: 41,
+                        exp: 1,
+                        nicknames: "lex/jimbok/alex berisik",
+                        jabatan: "Anggota",
+                        instagram: "alexxrisam",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Syafiqah Amirah Luthfiyah",
+                        jersey: 71,
+                        exp: 1,
+                        nicknames: "pika/fiq/syafiqah",
+                        jabatan: "Anggota",
+                        instagram: "syfqahamiraa",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Sydney Gracelyn Wang",
+                        jersey: 83,
+                        exp: 1,
+                        nicknames: "sidni",
+                        jabatan: "Anggota",
+                        instagram: "grracelynnwang",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -317,13 +813,64 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        name: "Muhammad Daffa Aqeela Shidqi",
+                        jersey: 9,
+                        exp: 2,
+                        nicknames: "Dapa/daqee/emsih",
+                        jabatan: "Koordinator",
+                        instagram: "dffshdqi",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Quinsha Hidayatun Nazilla",
+                        jersey: 59,
+                        exp: 1,
+                        nicknames: "paulus/quin puisi",
+                        jabatan: "Anggota",
+                        instagram: "quinshapaulus",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Alifia Mazaya Syauqina",
+                        jersey: 89,
+                        exp: 1,
+                        nicknames: "Fia",
+                        jabatan: "Anggota",
+                        instagram: "fia.mzy",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Lukluk Neci Salsabila",
+                        jersey: 92,
+                        exp: 1,
+                        nicknames: "Chalca",
+                        jabatan: "Anggota",
+                        instagram: "luklukncsa",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Rishanda Auliya Putri",
+                        jersey: 49,
+                        exp: 1,
+                        nicknames: "Ris/Risha/Rishanda",
+                        jabatan: "Anggota",
+                        instagram: "rishanda_auliya_putri_",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Nadine Cheryl",
+                        jersey: 99,
+                        exp: 1,
+                        nicknames: "Nadine/Cheryl/Nanad",
+                        jabatan: "Anggota",
+                        instagram: "nadine.and.you",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -333,13 +880,44 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
+                        name: "Livia Atriana Taufiek",
+                        jersey: 5,
+                        exp: 2,
+                        nicknames: "lip/livi",
+                        jabatan: "Koordinator",
+                        instagram: "lvxy.liv",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Muhammad Chava Putra Anugrah",
+                        jersey: 97,
+                        exp: 2,
                         nicknames: "nickname",
-                        jabatan: "jabatan",
+                        jabatan: "Anggota",
                         instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Viena Yang",
+                        jersey: 64,
+                        exp: 1,
+                        nicknames: "yena/pien/pen",
+                        jabatan: "Anggota",
+                        instagram: "vienayg",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Amirah Mirza Hanania",
+                        jersey: 85,
+                        exp: 1,
+                        nicknames: "Amy/Umy/Mirah Mirja",
+                        jabatan: "Anggota",
+                        instagram: "swastramirah",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -349,13 +927,74 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        name: "Krisensia Early Renata",
+                        jersey: 20,
+                        exp: 2,
+                        nicknames: "Irli/kris/tata",
+                        jabatan: "Koordinator",
+                        instagram: "earlysadat",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Devina Aurelia Theng Situmorang",
+                        jersey: 91,
+                        exp: 1,
+                        nicknames: "Devina/Depinaak~",
+                        jabatan: "Anggota",
+                        instagram: "devina.aureliaa",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Putri Syifa Azzahra",
+                        jersey: 95,
+                        exp: 1,
+                        nicknames: "Umik/Brozu/Ipoet",
+                        jabatan: "Anggota",
+                        instagram: "raassyia",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Quaneisha Aqeela Hasan",
+                        jersey: 45,
+                        exp: 1,
+                        nicknames: "queen",
+                        jabatan: "Anggota",
+                        instagram: "quaneishaaqeela_",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Celine Livina Rusli",
+                        jersey: 82,
+                        exp: 1,
+                        nicknames: "lin/sisi",
+                        jabatan: "Sub-Koordinator Club Penalaran",
+                        instagram: "celinelivina",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Nyimas Faiza Athaya",
+                        jersey: 31,
+                        exp: 2,
+                        nicknames: "fai",
+                        jabatan: "Sub-Koordinator Club Seni",
+                        instagram: "nyfza_",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Aurel Bonnita Gultom",
+                        jersey: 24,
+                        exp: 2,
+                        nicknames: "abonnita",
+                        jabatan: "Sub-Koordinator Club Olahraga",
+                        instagram: "aurel.bonnita",
+                        images: ["", "", ""],
+                        style: "main"
                     }
                 ]
             },
@@ -365,13 +1004,54 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        name: "Rihanna Maheswari Sastradiredja",
+                        jersey: 12,
+                        exp: 1,
+                        nicknames: "Rihanna/canva editor/nana si gembrot",
+                        jabatan: "Koordinator",
+                        instagram: "rihanmahes",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Jessica Diantha Putri",
+                        jersey: 30,
+                        exp: 1,
+                        nicknames: "Jess",
+                        jabatan: "Anggota",
+                        instagram: "jdiantha",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Tifanie Elvaretta",
+                        jersey: 33,
+                        exp: 1,
+                        nicknames: "Tifanie/Tifunny",
+                        jabatan: "Anggota",
+                        instagram: "tifanie_elvaretta",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Ramadhani Alaya Rasyid",
+                        jersey: 72,
+                        exp: 1,
+                        nicknames: "alay/laya",
+                        jabatan: "Anggota",
+                        instagram: "alaya.zip",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Zavira Zavieri Farizah",
+                        jersey: 65,
+                        exp: 1,
+                        nicknames: "piree",
+                        jabatan: "Anggota",
+                        instagram: "_zvirvier",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -381,13 +1061,54 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
+                        name: "Abdul Atha Mori",
+                        jersey: 38,
+                        exp: 2,
+                        nicknames: "Atha/thaa/Kang edit",
+                        jabatan: "Koordinator",
+                        instagram: "thawrld__",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Deanisha Pramudita Ayu Gumilang",
+                        jersey: 67,
+                        exp: 1,
+                        nicknames: "dita/dea",
+                        jabatan: "Anggota",
+                        instagram: "prmuditagumilang",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Muhammad Sony Yulianto",
+                        jersey: 70,
+                        exp: 1,
                         nicknames: "nickname",
-                        jabatan: "jabatan",
+                        jabatan: "Anggota",
                         instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Rahmad Ardhani Arba'a",
+                        jersey: 68,
+                        exp: 1,
+                        nicknames: "enik",
+                        jabatan: "Anggota",
+                        instagram: "rahmad_arbaa",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Syarafana Aziza",
+                        jersey: 58,
+                        exp: 1,
+                        nicknames: "zizot/sarapanasigoreng/goldfish",
+                        jabatan: "Anggota",
+                        instagram: "syrfnnaa_",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             },
@@ -397,13 +1118,54 @@
                 sekbid_image: ["", "", ""],
                 members: [
                     {
-                        name: "name",
-                        rank: 0,
-                        exp: 0,
-                        nicknames: "nickname",
-                        jabatan: "jabatan",
-                        instagram: "osis.smaigs",
-                        images: ["", "", ""]
+                        name: "Aveline Calista Zora Adriansyah",
+                        jersey: 50,
+                        exp: 2,
+                        nicknames: "apel/peline",
+                        jabatan: "Koordinator",
+                        instagram: "velllineeee1",
+                        images: ["", "", ""],
+                        style: "main"
+                    },
+                    {
+                        name: "Cherine Chiandiary",
+                        jersey: 57,
+                        exp: 1,
+                        nicknames: "Chee/Ceyin",
+                        jabatan: "Anggota",
+                        instagram: "cherine_chian",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Jaqueen Sheeva Millefiori",
+                        jersey: 66,
+                        exp: 1,
+                        nicknames: "Jaqueen King As/Yori/FioriOri",
+                        jabatan: "Anggota",
+                        instagram: "millefiori_710",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Rezky Zahran",
+                        jersey: 61,
+                        exp: 1,
+                        nicknames: "rezky/tabib istana/ray orang timur",
+                        jabatan: "Anggota",
+                        instagram: "rezky_vro",
+                        images: ["", "", ""],
+                        style: "sub"
+                    },
+                    {
+                        name: "Felisa Zhafirah",
+                        jersey: 44,
+                        exp: 1,
+                        nicknames: "Peli/Kain Pel/Feli",
+                        jabatan: "Anggota",
+                        instagram: "felisazhafirahh",
+                        images: ["", "", ""],
+                        style: "sub"
                     }
                 ]
             }
@@ -431,22 +1193,22 @@
 
                 <h1 class="sekbid-title">${ardraxisCabinet[sekbid].sekbid}</h1>
 
-                <div class="sekbid-placeholder-card">
-                    <div class="placeholder-carousel-container">
+                <div class="sekbid-image-card">
+                    <div class="image-carousel-container">
                         <img
                             src="${staticBase}img/fotokabinet/${ardraxisCabinet[sekbid].sekbid_image[0]}"
                             alt="${ardraxisCabinet[sekbid].sekbid} 1"
-                            class="placeholder-carousel-image"
+                            class="image-carousel-image"
                         />
                         <img
                             src="${staticBase}img/fotokabinet/${ardraxisCabinet[sekbid].sekbid_image[1]}"
                             alt="${ardraxisCabinet[sekbid].sekbid} 2"
-                            class="placeholder-carousel-image"
+                            class="image-carousel-image"
                         />
                         <img
                             src="${staticBase}img/fotokabinet/${ardraxisCabinet[sekbid].sekbid_image[2]}"
                             alt="${ardraxisCabinet[sekbid].sekbid} 3"
-                            class="placeholder-carousel-image"
+                            class="image-carousel-image"
                         />
                     </div>
                 </div>
@@ -466,12 +1228,19 @@
                 cardWrapper.append(memberCard);
 
                 const member = ardraxisCabinet[sekbid].members[memberData];
+                let experience = member.exp;
+                if (experience == 1) {
+                    experience += " YEAR";
+                } else {
+                    experience += " YEARS";
+                }
+
                 memberCard.innerHTML += `
                     <article class="sekbid-card">
                         <div class="sekbid-card-inner">
                             <header class="sekbid-card-header">
-                                <span class="sekbid-card-experience">${member.exp} YEARS OF EXPERIENCE</span>
-                                <span class="sekbid-card-rank">${member.rank}</span>
+                                <span class="sekbid-card-experience">${experience} OF EXPERIENCE</span>
+                                <span class="sekbid-card-jersey">${member.jersey}</span>
                             </header>
 
                             <div class="sekbid-card-body">
@@ -499,7 +1268,7 @@
                             </div>
 
                             <footer class="sekbid-card-footer">
-                                <p class="sekbid-card-role-sub">${member.jabatan}</p>
+                                <p class="sekbid-card-role-${member.style}">${member.jabatan}</p>
                                 <a href="https://www.instagram.com/${member.instagram}/" target="Blank" class="sekbid-card-instagram">
                                     <i class="bi bi-instagram"></i>
                                 </a>
