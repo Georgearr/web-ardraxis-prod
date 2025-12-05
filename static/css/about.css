@@ -350,7 +350,7 @@
 
 .sekbid-card-instagram {
   color: #e0f2fe;
-  font-size: 18px;
+  font-size: 26px; /* perbesar ikon instagram */
   text-decoration: none;
   transition: all 0.3s ease;
   display: flex;
@@ -360,7 +360,7 @@
 
 .sekbid-card-instagram:hover {
   color: #fef9c3;
-  transform: scale(1.2);
+  transform: scale(1.25);
 }
 
 .sekbid-bg-word {
@@ -536,6 +536,23 @@
 
   .sekbid-section {
     padding: 28px 18px 32px;
+  }
+
+  /* Jadikan sekbid_image responsif 16:9 di mobile */
+  .sekbid-placeholder-card {
+    min-height: auto;
+  }
+
+  .placeholder-carousel-container {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+  }
+
+  .placeholder-carousel-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
   }
 
   .sekbid-title {
