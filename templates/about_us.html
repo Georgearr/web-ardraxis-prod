@@ -299,7 +299,7 @@ extra_css %}
           exp: 2,
                         nicknames: "-",
           jabatan: "Koordinator",
-                        instagram: "osis.smaigs",
+                        instagram: "richiro_huang",
           images: [
             "Multimedia-Onfield/richiro_f.png",
             "Multimedia-Onfield/richiro_nf1.png",
@@ -1066,7 +1066,7 @@ extra_css %}
           exp: 2,
           nicknames: "-",
           jabatan: "Koordinator",
-          instagram: "osis.smaigs",
+          instagram: "andrwnic",
           images: [
             "Governance/andrew_f.png", 
             "Governance/andrew_nf1.png", 
@@ -1256,7 +1256,7 @@ extra_css %}
           exp: 2,
                         nicknames: "-",
           jabatan: "Anggota",
-                        instagram: "osis.smaigs",
+                        instagram: "chava.anugra",
           images: [
             "Bahasa/chava_f.png",
             "Bahasa/chava_nf1.png",
@@ -1523,7 +1523,7 @@ extra_css %}
           exp: 1,
                         nicknames: "-",
           jabatan: "Anggota",
-                        instagram: "osis.smaigs",
+                        instagram: "sonyulian_",
           images: [
             "Video-Editor/sony_f.png", 
             "Video-Editor/sony_nf1.png", 
@@ -1829,16 +1829,19 @@ extra_css %}
                                             src="${staticBase}img/fotokabinet/${member.images[0]}"
                                             alt="${member.name} 1"
                                             class="sekbid-card-photo carousel-image"
+                                            loading="eager"
                                         />
                                         <img
                                             src="${staticBase}img/fotokabinet/${member.images[1]}"
                                             alt="${member.name} 2"
                                             class="sekbid-card-photo carousel-image"
+                                            loading="lazy"
                                         />
                                         <img
                                             src="${staticBase}img/fotokabinet/${member.images[2]}"
                                             alt="${member.name} 3"
                                             class="sekbid-card-photo carousel-image"
+                                            loading="lazy"
                                         />
                                     </div>
                                 </div>
@@ -1856,6 +1859,35 @@ extra_css %}
                     </article>
                 `;
             }
+        }
+
+        // Optimasi performa: Preload gambar carousel secara bertahap
+        function optimizeCarouselImages() {
+            const carouselContainers = document.querySelectorAll('.carousel-container');
+            
+            carouselContainers.forEach((container) => {
+                const images = container.querySelectorAll('.carousel-image');
+                
+                // Prioritaskan gambar pertama
+                if (images[0]) {
+                    images[0].loading = 'eager';
+                }
+                
+                // Lazy load gambar kedua dan ketiga
+                if (images[1]) {
+                    images[1].loading = 'lazy';
+                }
+                if (images[2]) {
+                    images[2].loading = 'lazy';
+                }
+            });
+        }
+
+        // Jalankan optimasi setelah DOM selesai dimuat
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', optimizeCarouselImages);
+        } else {
+            optimizeCarouselImages();
         }
     </script>
 {% endblock %}
