@@ -617,6 +617,93 @@ section.events {
   overflow: hidden;
 }
 
+.events-now-badge {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.events-now-banner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 980px;
+  margin-bottom: 32px;
+  padding: 28px 26px;
+  min-height: 400px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 18px;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.events-now-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+}
+
+.events-now-content {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  justify-content: center;
+}
+
+.events-now-title {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 800;
+  color: #e0f2fe;
+}
+
+.events-now-date {
+  margin: 4px 0 4px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+}
+
+.events-now-info {
+  text-align: center;
+  margin-top: 6px;
+}
+
+.events-now-image-wrapper {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.events-now-image {
+  width: 90%;
+  max-width: 900px;
+  height: auto;
+  max-height: 450px;
+  object-fit: contain;
+  object-position: center;
+  margin: 0 auto;
+  display: block;
+  border-radius: 12px;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: float 6s ease-in-out infinite;
+}
+
+.events-now-image:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+}
+
 .events-title {
   font-size: 3rem;
   font-weight: 900;
@@ -694,6 +781,26 @@ section.events::after {
 .events-carousel {
   position: relative;
   z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .events-now-content {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .events-now-banner {
+    padding: 12px 14px;
+  }
+
+  .events-now-title {
+    font-size: 1.2rem;
+  }
+
+  .events-now-date {
+    font-size: 0.85rem;
+  }
 }
 
 .carousel-viewport {

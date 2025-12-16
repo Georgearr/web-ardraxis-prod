@@ -7,6 +7,7 @@
       const setups = [
         { selector: '.home-image', origin: 'left' },
         { selector: '.home-text .hidden', origin: 'right', unhide: true },
+        { selector: '.events-now-banner', origin: 'bottom', unhide: true },
         { selector: '.events-title', origin: 'bottom', unhide: true },
         { selector: '.carousel-slide', origin: 'bottom', rotateY: 6 },
         { selector: '.about .hidden', origin: 'bottom', unhide: true },
