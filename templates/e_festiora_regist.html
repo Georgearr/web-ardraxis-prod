@@ -1,0 +1,362 @@
+{% extends 'layout.html' %} {% block title %}Festiora{% endblock %} {% block
+extra_css %}
+<style>
+  /* ============================
+  WARNA UTAMA ============================ */ :root {
+    --primary: #66bef9;
+    --primary-dark: #5094ee;
+    --text-white: #ffffff;
+  }
+
+  /* ============================
+      NAVBAR & LAYOUT FIX
+============================ */
+  .navbar {
+    background-color: var(--primary);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 5000;
+  }
+  .footer {
+    background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+  }
+  .sidebar-header {
+    background-color: #66BEF9;
+    position: fixed;
+    z-index: 9999;
+  }
+
+  .meloria-registration {
+    padding-top: 0 !important;
+  }
+  .meloria-header {
+    margin-top: 0;
+    padding-top: 0;
+  }
+  .sidebar {
+    background: linear-gradient(to bottom, #66BEF9, #5094ee);
+    position: fixed;
+    z-index: 9999;
+  }
+  /* ============================
+      SECTION ABOUT
+============================ */
+  .about-questival {
+    color: var(--text-white);
+    text-align: center;
+    margin: 40px auto;
+    max-width: 1500px;
+    padding: 20px 10px 60px;
+  }
+
+  .about-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  .about-desc {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    font-size: 1.15rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    padding: 20px;
+    border-radius: 18px;
+    backdrop-filter: blur(6px);
+  }
+
+  /* GRID PANITIA */
+  .about-panitia-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    max-width: 900px;
+    margin: 40px auto 0;
+  }
+
+  .about-panitia-item {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    padding: 20px;
+    border-radius: 18px;
+    backdrop-filter: blur(6px);
+  }
+
+  .about-role {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .about-name {
+    margin-top: 8px;
+    font-size: 1.1rem;
+  }
+
+  /* ============================
+      POSTER GRID
+============================ */
+  .posters-grid {
+    display: grid;
+    gap: 25px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    margin-top: 30px;
+  }
+
+  .poster-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .poster-image-wrapper img {
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .poster-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    transition: 0.25s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .poster-card:hover .poster-overlay {
+    opacity: 1;
+  }
+
+  .poster-name {
+    color: #fff;
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+
+  .poster-click {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.95rem;
+    color: #fff;
+  }
+
+  /* ============================
+      MODAL
+============================ */
+  .poster-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    padding: 1.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .poster-modal.is-visible {
+    display: flex;
+  }
+
+  .poster-modal__content {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+  }
+
+  .poster-modal__close {
+    background: transparent;
+    color: red;
+    border: none;
+    font-size: 2rem;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+  }
+
+  .poster-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  /* ============================
+  BACK BUTTON
+============================ */
+  .back-button {
+    display: inline-block;
+    margin: 20px 0 10px 10px;
+    padding: 10px 18px;
+    background: var(--primary-dark);
+    color: white;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.25s ease;
+  }
+
+  .back-button:hover {
+    background: #3f7cd6;
+  }
+
+  /* ============================
+      RESPONSIVE
+============================ */
+  @media (max-width: 900px) {
+    .about-title {
+      font-size: 2.4rem;
+    }
+    .about-desc {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .about-title {
+      font-size: 1.8rem;
+    }
+    .about-name {
+      font-size: 0.95rem;
+    }
+  }
+</style>
+
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/e_festiora.css') }}"
+/>
+<link
+  href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+  rel="stylesheet"
+/>
+{% endblock %} {% block isi %}
+<section class="meloria-registration" data-aos="fade-up">
+  <div class="meloria-header" data-aos="fade-up">
+    <img
+      src="{{ url_for('static', filename='img/banner/festiora_banner.png') }}"
+      alt=""
+    />
+  </div>
+
+  <!-- ABOUT -->
+  <div class="about-questival" data-aos="fade-up">
+    <h2 class="about-title">Festiora</h2>
+    <p class="about-desc">
+      Festiora merupakan nama yang berasal dari Bahasa Latin "Festum" yang
+      berarti perayaan. Event Festiora tersendiri membawakan nuansa yang penuh
+      suka cinta dengan menyatukan semangat dan kebersamaan dalam suasana penuh
+      kehangatan. Dalam event Festiora para siswa dapat mengikuti berbagai jenis
+      lomba dan juga fun activities yang dapat mempererat solidaritas dan
+      pertemanan.
+    </p>
+
+    <div class="about-panitia-grid">
+      <div class="about-panitia-item">
+        <div class="about-role">Ketua Panitia</div>
+        <div class="about-name">Siti Naila Zhafirah</div>
+      </div>
+
+      <div class="about-panitia-item">
+        <div class="about-role">Wakil Ketua Panitia</div>
+        <div class="about-name">Rihanna Maheswari Sastradiredja</div>
+      </div>
+
+      <div class="about-panitia-item">
+        <div class="about-role">Ketua Acara</div>
+        <div class="about-name">Amirah Mirza Hanania</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- POSTERS REGISTRATION -->
+  <div class="category-section" data-aos="fade-up">
+    <div class="category-header">
+      <h2 class="category-title">Festiora</h2>
+    </div>
+
+    <div class="posters-grid">
+      {% set lomba = [ {'file': 'Family_100.png', 'name': 'Family 100'},
+      {'file': 'Poster_speed_drawing_.png', 'name': 'Speed Drawing'}, {'file':
+      'Follo_The_Harmony_20251129_060556_0000.png', 'name': 'Follow The
+      Harmony'}, {'file': 'LOMBA_BASKET_.png', 'name': 'Lomba Basket'}, {'file':
+      'Poster_Case_Crackers.jpg', 'name': 'Case Crackers'}, {'file':
+      'Poster_Lomba_E-Sport_MLBB.jpg', 'name': 'Lomba E-Sport MLBB'}, {'file':
+      'Poster_Trivia_Showdown.JPG', 'name': 'Trivia Showdown'}, {'file':
+      'Real_life_boardgame.jpg', 'name': 'Real Life Boardgame'}, {'file':
+      'TriQuest.jpg', 'name': 'TriQuest'}, {'file': 'Workshop_Robotic.png',
+      'name': 'Workshop Robotic'} ] %} {% for poster in lomba %}
+      <div class="poster-card" data-aos="fade-up">
+        <a href="#" class="poster-link" data-closed="true">
+          <div class="poster-image-wrapper">
+            <img
+              src="{{ url_for('static', filename='img/festiora/' + poster.file) }}"
+              class="poster-image"
+            />
+            <div class="poster-overlay">
+              <div class="poster-info">
+                <h3 class="poster-name">{{ poster.name }}</h3>
+                <span class="poster-click">Klik untuk Daftar →</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="meloria-footer">
+    <a href="{{ url_for('home') }}#events" class="back-to-events">
+      ← Kembali ke Events
+    </a>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="posterModal" class="poster-modal" aria-hidden="true">
+  <div class="poster-modal__backdrop"></div>
+  <div class="poster-modal__content">
+    <button class="poster-modal__close">×</button>
+    <h3 class="poster-modal__title">Pendaftaran telah ditutup</h3>
+    <p class="poster-modal__desc">
+      Maaf, pendaftaran untuk kegiatan ini sudah tidak tersedia.
+    </p>
+  </div>
+</div>
+
+{% endblock %} {% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+<script>
+  AOS.init();
+
+  const modal = document.getElementById("posterModal");
+  const backdrop = modal.querySelector(".poster-modal__backdrop");
+  const closeBtn = modal.querySelector(".poster-modal__close");
+
+  document
+    .querySelectorAll(".poster-link[data-closed='true']")
+    .forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.preventDefault();
+        modal.classList.add("is-visible");
+      });
+    });
+
+  closeBtn.addEventListener("click", () =>
+    modal.classList.remove("is-visible")
+  );
+  backdrop.addEventListener("click", () =>
+    modal.classList.remove("is-visible")
+  );
+</script>
+{% endblock %}
