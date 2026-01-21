@@ -1,3 +1,5 @@
+
+
 /* ============================================
    GLOBAL RESET & BASE STYLES
    ============================================ */
@@ -17,6 +19,7 @@ body {
 /* ============================================
    NAVBAR SECTION
    ============================================ */
+   
 .navbar {
   position: sticky;
   top: 0;
@@ -539,6 +542,7 @@ body {
   .home-text p {
     font-size: 0.9rem;
   }
+
 }
 
 /* ≤ 480px */
@@ -801,6 +805,10 @@ section.events::after {
   .events-now-date {
     font-size: 0.85rem;
   }
+  .events-now-badge {
+  font-size: 2rem;
+
+}
 }
 
 .carousel-viewport {
