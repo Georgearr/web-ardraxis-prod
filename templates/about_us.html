@@ -107,11 +107,11 @@ extra_css %}
           style: "main",
                     },
                     {
-          name: "Zahra Fadhilah Adz Zikra",
+                        name: "Zahra Fadhilah Adz Zikra",
           jersey: 51,
           exp: 1,
           nicknames: "zahra/adillah/ara",
-          jabatan: "Wakil Sekretaris",
+                        jabatan: "Wakil Sekretaris",
           instagram: "zfadzzikra",
           images: [
             "Sekretaris/Zahra_Fadhilah_f.png",
@@ -126,9 +126,9 @@ extra_css %}
                 sekbid: "Bendahara",
                 sekbid_id: "bendahara",
       sekbid_image: [
-        "Bendahara/bendahara_f.png",
-        "Bendahara/bendahara_nf1.png",
-        "Bendahara/bendahara_nf2.png",
+        "bendahara/bendahara_f.png",
+        "bendahara/bendahara_nf1.png",
+        "bendahara/bendahara_nf2.png",
       ],
                 members: [
                     {
@@ -139,9 +139,9 @@ extra_css %}
                         jabatan: "Bendahara",
           instagram: "kaylaavsh",
           images: [
-            "Bendahara/kayla_f.png",
-            "Bendahara/kayla_nf1.png",
-            "Bendahara/kayla_nf2.png",
+            "bendahara/kayla_f.png",
+            "bendahara/kayla_nf1.png",
+            "bendahara/kayla_nf2.png",
           ],
           style: "main",
                     },
@@ -149,13 +149,13 @@ extra_css %}
                         name: "Felicia Theng",
           jersey: 84,
           exp: 1,
-          nicknames: "Feli :P / 唐玉眉 / 펠리",
+          nicknames: "Feli/Wakil Bendahara",
                         jabatan: "Wakil Bendahara",
           instagram: "felistillrunning",
           images: [
-            "Bendahara/felicia_f.png",
-            "Bendahara/felicia_nf1.png",
-            "Bendahara/felicia_nf2.png",
+            "bendahara/felicia_f.png",
+            "bendahara/felicia_nf1.png",
+            "bendahara/felicia_nf2.png",
           ],
           style: "main",
         },
@@ -299,7 +299,7 @@ extra_css %}
           exp: 2,
                         nicknames: "-",
           jabatan: "Koordinator",
-                        instagram: "richiro_huang",
+                        instagram: "osis.smaigs",
           images: [
             "Multimedia-Onfield/richiro_f.png",
             "Multimedia-Onfield/richiro_nf1.png",
@@ -411,7 +411,7 @@ extra_css %}
           instagram: "filbertwilly",
           images: [
             "Multimedia-Website/filbert_f.png",
-            "Multimedia-Website/filbert_nf1.png",
+            "Multimedia-Website/filbert_nf2.png",
             "Multimedia-Website/filbert_nf2.png",
           ],
           style: "sub",
@@ -1066,7 +1066,7 @@ extra_css %}
           exp: 2,
           nicknames: "-",
           jabatan: "Koordinator",
-          instagram: "andrwnic",
+          instagram: "osis.smaigs",
           images: [
             "Governance/andrew_f.png", 
             "Governance/andrew_nf1.png", 
@@ -1256,7 +1256,7 @@ extra_css %}
           exp: 2,
                         nicknames: "-",
           jabatan: "Anggota",
-                        instagram: "chava.anugra",
+                        instagram: "osis.smaigs",
           images: [
             "Bahasa/chava_f.png",
             "Bahasa/chava_nf1.png",
@@ -1523,7 +1523,7 @@ extra_css %}
           exp: 1,
                         nicknames: "-",
           jabatan: "Anggota",
-                        instagram: "sonyulian_",
+                        instagram: "osis.smaigs",
           images: [
             "Video-Editor/sony_f.png", 
             "Video-Editor/sony_nf1.png", 
@@ -1565,9 +1565,9 @@ extra_css %}
                 sekbid: "Producer",
                 sekbid_id: "producer",
       sekbid_image: [
-        "Producer/producer_f.png",
-        "Producer/producer_nf1.png",
-        "Producer/producer_nf2.png",
+        "Producer/Producer_f.png",
+        "Producer/Producer_nf1.png",
+        "Producer/Producer_nf2.png",
       ],
                 members: [
                     {
@@ -1829,19 +1829,16 @@ extra_css %}
                                             src="${staticBase}img/fotokabinet/${member.images[0]}"
                                             alt="${member.name} 1"
                                             class="sekbid-card-photo carousel-image"
-                                            loading="eager"
                                         />
                                         <img
                                             src="${staticBase}img/fotokabinet/${member.images[1]}"
                                             alt="${member.name} 2"
                                             class="sekbid-card-photo carousel-image"
-                                            loading="lazy"
                                         />
                                         <img
                                             src="${staticBase}img/fotokabinet/${member.images[2]}"
                                             alt="${member.name} 3"
                                             class="sekbid-card-photo carousel-image"
-                                            loading="lazy"
                                         />
                                     </div>
                                 </div>
@@ -1859,35 +1856,6 @@ extra_css %}
                     </article>
                 `;
             }
-        }
-
-        // Optimasi performa: Preload gambar carousel secara bertahap
-        function optimizeCarouselImages() {
-            const carouselContainers = document.querySelectorAll('.carousel-container');
-            
-            carouselContainers.forEach((container) => {
-                const images = container.querySelectorAll('.carousel-image');
-                
-                // Prioritaskan gambar pertama
-                if (images[0]) {
-                    images[0].loading = 'eager';
-                }
-                
-                // Lazy load gambar kedua dan ketiga
-                if (images[1]) {
-                    images[1].loading = 'lazy';
-                }
-                if (images[2]) {
-                    images[2].loading = 'lazy';
-                }
-            });
-        }
-
-        // Jalankan optimasi setelah DOM selesai dimuat
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', optimizeCarouselImages);
-        } else {
-            optimizeCarouselImages();
         }
     </script>
 {% endblock %}
