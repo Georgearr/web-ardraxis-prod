@@ -1,9 +1,6 @@
 // Modules
 import { useEffect, useState } from "react";
 
-// Assets
-import logo from "../assets/logo_ardraxis.png";
-
 // Components
 import styles from "./css/Layout.module.css";
 
@@ -29,7 +26,7 @@ const Entrance = () => {
       <div className={styles["intro-bg"]}></div>
 
       <div className={styles["intro-inner"]}>
-        <img className={styles["intro-dragon"]} src={logo} alt="ARDRAXIS" />
+        <img className={styles["intro-dragon"]} src="/images/logo_ardraxis.png" alt="ARDRAXIS" />
         <h1 className={styles["intro-title"]}>ARDRAXIS</h1>
         <p className={styles["intro-slogan"]}>Born To Lead, Bound To Rise</p>
       </div>

@@ -1,6 +1,3 @@
-// Assets
-import logo from "../assets/logo_ardraxis.png";
-
 // Components
 import styles from "./css/Layout.module.css";
 
@@ -12,7 +9,7 @@ const Footer = () => {
           <div className={styles["footerkiriutama"]}>
             <div className={styles["footerkiriatas"]}>
               <img
-                src={logo}
+                src="/images/logo_ardraxis.png"
                 alt="ARDRAXIS"
               />
             </div>
