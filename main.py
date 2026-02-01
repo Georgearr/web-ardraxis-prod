@@ -1,6 +1,14 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
+from werkzeug.utils import secure_filename
+import os
+from datetime import datetime
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB max file size
+app.config['UPLOAD_FOLDER'] = 'static/uploads/valentine'
+
+# Create upload directory if it doesn't exist
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 # ===============================
 # ROUTES HTML
@@ -29,6 +37,10 @@ def meloria():
 @app.route("/festiora")
 def festiora():
     return render_template("e_festiora.html")
+
+@app.route("/valentine_order")
+def valentine_order():
+    return render_template("valentine_order.html")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5001, debug=True)
