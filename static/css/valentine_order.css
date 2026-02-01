@@ -472,6 +472,50 @@
   }
 
   /* ============================
+  TOTAL PRICE
+  ============================ */
+  .total-price-container {
+    background: rgba(255,107,157,0.1);
+    border: 2px solid var(--valentine-pink);
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 20px;
+  }
+
+  .total-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+  }
+
+  .total-price-row:last-child {
+    margin-bottom: 0;
+  }
+
+  .total-price-label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .total-price-value {
+    font-weight: 700;
+    color: var(--valentine-red);
+    font-size: 1.2rem;
+  }
+
+  .total-price-final .total-price-label {
+    font-size: 1.3rem;
+    font-weight: 700;
+  }
+
+  .total-price-final .total-price-value {
+    font-size: 1.5rem;
+    color: var(--valentine-red);
+  }
+
+  /* ============================
   SUBMIT BUTTON
   ============================ */
   .submit-button {
@@ -650,5 +694,9 @@
     .addon-label {
     font-size: 0.7rem;
     font-weight: 600;
+  }
+  .total-price-value {
+    font-weight: 700;
+    font-size: 1rem;
   }
   }

@@ -11,6 +11,42 @@ document.addEventListener("DOMContentLoaded", () => {
     const chocobloomCheckbox = document.getElementById("chocobloomCheckbox");
     const colorSelection = document.getElementById("colorSelection");
     const colorRadios = document.querySelectorAll('input[name="forever_flowers_color"]');
+    const subtotalPrice = document.getElementById("subtotalPrice");
+    const totalPrice = document.getElementById("totalPrice");
+
+    // ================= PRICE CALCULATION =================
+    const prices = {
+        "Flowers": 15000,
+        "Bundle": 20000,
+        "Chocobloom": 18000
+    };
+    const thoughtCardPrice = 2000;
+
+    function formatPrice(price) {
+        return `Rp ${price.toLocaleString("id-ID")}`;
+    }
+
+    function calculateTotal() {
+        const selectedProduct = document.querySelector('input[name="product"]:checked');
+        let subtotal = 0;
+
+        if (selectedProduct && prices[selectedProduct.value]) {
+            subtotal = prices[selectedProduct.value];
+        }
+
+        const addonPrice = chocobloomCheckbox && chocobloomCheckbox.checked ? thoughtCardPrice : 0;
+        const total = subtotal + addonPrice;
+
+        if (subtotalPrice) {
+            subtotalPrice.textContent = formatPrice(subtotal);
+        }
+        if (totalPrice) {
+            totalPrice.textContent = formatPrice(total);
+        }
+    }
+
+    // Initial calculation
+    calculateTotal();
 
     // ================= WORD COUNT =================
     function countWords(text) {
@@ -36,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 notesTextarea.value = "";
                 updateWordCount();
             }
+            calculateTotal();
         });
     }
 
@@ -66,6 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 colorSelection.style.display = "none";
                 colorRadios.forEach(r => r.checked = false);
             }
+            
+            calculateTotal();
         });
     });
 
