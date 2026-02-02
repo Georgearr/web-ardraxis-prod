@@ -52,8 +52,8 @@ def meloria():
 def festiora():
     return render_template("e_festiora.html")
 
-@app.route("/valentine_order", methods=["GET", "POST"])
-def valentine_order():
+@app.route("/cupids-corner", methods=["GET", "POST"])
+def cupids_corner():
     if request.method == "POST":
         data = request.get_json()
 
