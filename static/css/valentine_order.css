@@ -547,7 +547,22 @@
     cursor: not-allowed;
     transform: none;
   }
-
+  .account-number {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  .metode-bayar {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .qris-image {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+  }
   /* ============================
   MODAL
   ============================ */
