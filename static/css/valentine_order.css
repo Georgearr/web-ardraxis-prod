@@ -1,717 +1,412 @@
-  /* ============================
-  VALENTINE THEME COLORS
-  ============================ */
-  :root {
-    --valentine-pink: #ff6b9d;
-    --valentine-red: #e63946;
-    --valentine-light: #fff0f5;
-    --valentine-dark: #c1121f;
-    --text-white: #ffffff;
-  }
-
-  /* ============================
-  NAVBAR & LAYOUT FIX
-  ============================ */
-  .navbar {
-    background-color: var(--valentine-red);
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 5000;
-  }
-  .footer {
-    background: linear-gradient(to bottom, var(--valentine-red), var(--valentine-dark));
-  }
-  .sidebar-header {
-    background-color: var(--valentine-red);
-    position: fixed;
-    z-index: 9999;
-  }
-  .sidebar {
-    background: linear-gradient(to bottom, var(--valentine-red), var(--valentine-dark));
-    position: fixed;
-    z-index: 9999;
-  }
-
-  /* ============================
-  PAGE CONTAINER
-  ============================ */
-  .valentine-order-page {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #ff6b9d 0%, #e63946 50%, #c1121f 100%);
-    padding: 120px 20px 60px;
-    position: relative;
-    overflow-x: hidden;
-  }
-
-  .valentine-order-page::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: 
-      radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 40%),
-      radial-gradient(circle at 80% 70%, rgba(255,255,255,0.08) 0%, transparent 40%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .valentine-order-page::after {
-    content: "💕";
-    position: absolute;
-    font-size: 2rem;
-    opacity: 0.1;
-    animation: float 6s ease-in-out infinite;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-20px) rotate(10deg); }
-  }
-
-  /* ============================
-  HEADER SECTION
-  ============================ */
-  .valentine-header {
-    text-align: center;
-    margin-bottom: 50px;
-    position: relative;
-    z-index: 1;
-  }
-
-  .valentine-title {
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: var(--text-white);
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
-  }
-
-  .valentine-subtitle {
-    font-size: 1.3rem;
-    color: var(--valentine-light);
-    margin-bottom: 20px;
-  }
-
-  .deadline-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.2);
-    backdrop-filter: blur(10px);
-    padding: 12px 24px;
-    border-radius: 25px;
-    border: 2px solid rgba(255,255,255,0.3);
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--text-white);
-    margin-top: 15px;
-  }
-
-  /* ============================
-  FORM CONTAINER
-  ============================ */
-  .form-container {
-    max-width: 800px;
-    margin: 0 auto;
-    background: rgba(255,255,255,0.95);
-    border-radius: 25px;
-    padding: 40px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    position: relative;
-    z-index: 1;
-  }
-
-  .form-section {
-    margin-bottom: 35px;
-  }
-
-  .form-section-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--valentine-red);
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 3px solid var(--valentine-pink);
-  }
-
-  .form-group {
-    margin-bottom: 25px;
-  }
-
-  .form-label {
-    display: block;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 8px;
-  }
-
-  .form-label .required {
-    color: var(--valentine-red);
-    margin-left: 3px;
-  }
-
-  .form-input,
-  .form-select,
-  .form-textarea {
-    width: 100%;
-    padding: 12px 16px;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    font-family: inherit;
-  }
-
-  .form-input:focus,
-  .form-select:focus,
-  .form-textarea:focus {
-    outline: none;
-    border-color: var(--valentine-pink);
-    box-shadow: 0 0 0 3px rgba(255,107,157,0.1);
-  }
-
-  .form-textarea {
-    resize: vertical;
-    min-height: 100px;
-  }
-
-  .word-count {
-    font-size: 0.85rem;
-    color: #666;
-    margin-top: 5px;
-    text-align: right;
-  }
-
-  .word-count.warning {
-    color: #ff6b00;
-  }
-
-  .word-count.error {
-    color: var(--valentine-red);
-    font-weight: 600;
-  }
-
-  /* ============================
-  PRODUCT SELECTION
-  ============================ */
-  .product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 15px;
-  }
-
-  .product-card {
-    border: 3px solid #e0e0e0;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: white;
-  }
-
-  .product-card:hover {
-    border-color: var(--valentine-pink);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(255,107,157,0.2);
-  }
-
-  .product-card.selected {
-    border-color: var(--valentine-red);
-    background: var(--valentine-light);
-  }
-
-  .product-card input[type="radio"] {
-    display: none;
-  }
-
-  .product-image {
-    width: 100%;
-    height: 180px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    background: #f5f5f5;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #999;
-    font-size: 0.9rem;
-    border: 2px dashed #ddd;
-    overflow: hidden;
-  }
-
-  .product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 12px;
-    display: block;
-  }
-
-  .product-image:has(img[style*="display: none"]) {
-    border: 2px dashed #ddd;
-  }
-
-  .product-name {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--valentine-red);
-    margin-bottom: 10px;
-  }
-
-  .product-info {
-    font-size: 0.9rem;
-    color: #666;
-    margin-top: 8px;
-  }
-
-  .product-price {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #333;
-    margin-top: 10px;
-  }
-
-  /* Color Selection for Forever Flowers */
-  .color-selection {
-    margin-top: 20px;
-    padding: 20px;
-    background: rgba(255,107,157,0.05);
-    border: 2px solid var(--valentine-pink);
-    border-radius: 12px;
-  }
-
-  .color-selection-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--valentine-red);
-    margin-bottom: 15px;
-    text-align: center;
-  }
-
-  .color-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    margin-top: 15px;
-  }
-
-  .color-option {
-    position: relative;
-    border: 3px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 15px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: white;
-  }
-
-  .color-option:hover {
-    border-color: var(--valentine-pink);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(255,107,157,0.2);
-  }
-
-  .color-option.selected {
-    border-color: var(--valentine-red);
-    background: var(--valentine-light);
-    box-shadow: 0 5px 15px rgba(230,57,70,0.2);
-  }
-
-  .color-option input[type="radio"] {
-    display: none;
-  }
-
-  .color-image {
-    width: 100%;
-    height: 120px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    background: #f5f5f5;
-    overflow: hidden;
-    border: 2px solid #e0e0e0;
-  }
-
-  .color-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .color-name {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: #333;
-  }
-
-  /* Optional Add-on */
-  .addon-option {
-    margin-top: 20px;
-    padding: 20px;
-    background: rgba(255,107,157,0.05);
-    border: 2px solid var(--valentine-pink);
-    border-radius: 12px;
-  }
-
-  .addon-checkbox-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-  }
-
-  .addon-checkbox-wrapper input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    accent-color: var(--valentine-red);
-  }
-
-  .addon-label {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #333;
-    cursor: pointer;
-    flex: 1;
-  }
-
-  .addon-price {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--valentine-red);
-  }
-
-  /* ============================
-  FILE UPLOAD
-  ============================ */
-  .file-upload-wrapper {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-  }
-
-  .file-upload-input {
-    position: absolute;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-
-  .file-upload-label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    border: 3px dashed #ccc;
-    border-radius: 12px;
-    background: #f9f9f9;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-  }
-
-  .file-upload-label:hover {
-    border-color: var(--valentine-pink);
-    background: var(--valentine-light);
-  }
-
-  .file-upload-label.has-file {
-    border-color: var(--valentine-red);
-    background: rgba(255,107,157,0.1);
-  }
-
-  .file-upload-icon {
-    font-size: 2rem;
-    margin-right: 10px;
-  }
-
-  .file-name {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #666;
-    font-weight: 500;
-  }
-
-  /* ============================
-  CONTACT INFO
-  ============================ */
-  .contact-info {
-    background: rgba(255,107,157,0.1);
-    border: 2px solid var(--valentine-pink);
-    border-radius: 15px;
-    padding: 20px;
-    margin-top: 20px;
-    text-align: center;
-  }
-
-  .contact-info-title {
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--valentine-red);
-    margin-bottom: 10px;
-  }
-
-  .contact-info-text {
-    font-size: 1rem;
-    color: #333;
-  }
-
-  .contact-info-link {
-    color: var(--valentine-red);
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  .contact-info-link:hover {
-    text-decoration: underline;
-  }
-
-  /* ============================
-  TOTAL PRICE
-  ============================ */
-  .total-price-container {
-    background: rgba(255,107,157,0.1);
-    border: 2px solid var(--valentine-pink);
-    border-radius: 15px;
-    padding: 25px;
-    margin-top: 20px;
-  }
-
-  .total-price-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
-  }
-
-  .total-price-row:last-child {
-    margin-bottom: 0;
-  }
-
-  .total-price-label {
-    font-weight: 600;
-    color: #333;
-  }
-
-  .total-price-value {
-    font-weight: 700;
-    color: var(--valentine-red);
-    font-size: 1.2rem;
-  }
-
-  .total-price-final .total-price-label {
-    font-size: 1.3rem;
-    font-weight: 700;
-  }
-
-  .total-price-final .total-price-value {
-    font-size: 1.5rem;
-    color: var(--valentine-red);
-  }
-
-  /* ============================
-  SUBMIT BUTTON
-  ============================ */
-  .submit-button {
-    width: 100%;
-    padding: 18px;
-    background: linear-gradient(135deg, var(--valentine-pink), var(--valentine-red));
-    color: var(--text-white);
-    border: none;
-    border-radius: 12px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(230,57,70,0.3);
-    margin-top: 30px;
-  }
-
-  .submit-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(230,57,70,0.4);
-  }
-
-  .submit-button:active {
-    transform: translateY(0);
-  }
-
-  .submit-button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    transform: none;
-  }
-  .account-number {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 15px;
-  }
-  .metode-bayar {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  .qris-image {
-    width: 150px;
-    height: auto;
-    border-radius: 8px;
-    border: 2px solid #e0e0e0;
-  }
-  /* ============================
-  MODAL
-  ============================ */
-  .modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    z-index: 10000;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(5px);
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-
-  .modal.active {
-    display: flex;
-  }
-
+:root {
+  --val-pink: #fb7185;
+  --val-red: #be123c;
+  --val-soft: #fff1f2;
+  --val-bg: #fff5f7;
+  --val-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+body {
+  background: var(--val-bg);
+}
+
+/* Page & Header */
+.valentine-order-page {
+  padding: 40px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+.valentine-header {
+  text-align: center;
+  margin-bottom: 35px;
+  padding: 25px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+}
+.valentine-title {
+  font-size: 2.6rem;
+  color: var(--val-red);
+  letter-spacing: 1px;
+}
+.valentine-subtitle {
+  color: #666;
+}
+.deadline-badge {
+  display: inline-block;
+  background: #fee2e2;
+  color: var(--val-red);
+  padding: 6px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  margin-top: 12px;
+  box-shadow: 0 4px 12px rgba(190, 18, 60, 0.25);
+}
+
+/* Form */
+.form-container {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: var(--val-shadow);
+}
+.form-section {
+  margin-bottom: 30px;
+}
+.form-section-title {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+.form-label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  display: block;
+}
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: var(--val-pink);
+  box-shadow: 0 0 0 3px rgba(251, 113, 133, 0.25);
+}
+.form-textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+/* Product */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.product-card {
+  background: white;
+  border-radius: 18px;
+  padding: 15px;
+  border: 2px solid #eee;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.25s ease;
+  box-shadow: var(--val-shadow);
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--val-pink);
+  box-shadow: 0 18px 40px rgba(190, 18, 60, 0.25);
+}
+.product-card input[type="radio"] {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  accent-color: var(--val-pink);
+}
+.product-image img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+.product-name {
+  font-weight: 700;
+  margin-top: 12px;
+}
+.product-info {
+  font-size: 0.9rem;
+  color: #666;
+}
+.product-price {
+  font-weight: 800;
+  margin-top: 6px;
+  color: var(--val-red);
+}
+.qty-input {
+  text-align: center;
+  font-weight: 700;
+  border: 2px solid var(--val-pink);
+  border-radius: 12px;
+  background: #fff;
+}
+
+/* Colors */
+.color-options {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.color-option {
+  border: 2px solid #eee;
+  border-radius: 14px;
+  padding: 10px;
+  width: 140px;
+  cursor: pointer;
+  background: white;
+  transition: all 0.25s ease;
+}
+.color-option:hover {
+  transform: scale(1.05);
+  border-color: var(--val-pink);
+}
+.color-option input {
+  display: none;
+}
+.color-option input:checked + .color-image {
+  box-shadow: 0 0 0 3px var(--val-pink);
+  border-radius: 12px;
+}
+.color-image img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.color-name {
+  text-align: center;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+/* Addon */
+.addon-checkbox-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--val-soft);
+  padding: 14px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  border: 2px dashed var(--val-pink);
+}
+.addon-price {
+  font-weight: 800;
+  color: var(--val-red);
+}
+
+/* Payment */
+.metode-bayar {
+  background: var(--val-soft);
+  padding: 20px;
+  border-radius: 18px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+.account-number {
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--val-red);
+}
+.qris-image {
+  width: 150px;
+  margin: 15px auto 0;
+  display: block;
+  transition: transform 0.25s ease;
+}
+.qris-image:hover {
+  transform: scale(1.08);
+}
+
+/* File upload */
+.file-upload-wrapper {
+  border: 2px dashed #ddd;
+  padding: 20px;
+  border-radius: 14px;
+  text-align: center;
+}
+.file-upload-input {
+  display: none;
+}
+.file-name {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+/* Total price */
+.total-price-container {
+  background: var(--val-soft);
+  padding: 20px;
+  border-radius: 18px;
+}
+.total-price-final {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--val-red);
+}
+
+/* Button */
+.submit-button {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.1rem;
+  border-radius: 16px;
+  border: none;
+  background: var(--val-red);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(190, 18, 60, 0.35);
+  transition: all 0.25s ease;
+}
+.submit-button:hover {
+  transform: translateY(-2px);
+  background: #9f1239;
+}
+.submit-button:disabled {
+  background: #fda4af;
+  cursor: not-allowed;
+}
+
+/* ===================== MODAL ===================== */
+.modal {
+  display: none; /* default hidden */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5); /* semi-transparent background */
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  animation: modalFadeIn 0.3s ease;
+}
+
+/* Close button top-right */
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s;
+}
+.modal-close:hover {
+  color: #ff4c4c;
+}
+
+/* Icon */
+.modal-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+}
+
+/* Titles */
+.modal-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Message */
+.modal-message {
+  font-size: 16px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+/* Button */
+.modal-button {
+  background-color: #ff4c4c;
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.modal-button:hover {
+  background-color: #e04343;
+}
+
+/* Animasi modal */
+@keyframes modalFadeIn {
+  0% {opacity: 0; transform: translateY(-20px);}
+  100% {opacity: 1; transform: translateY(0);}
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 480px) {
   .modal-content {
-    background: white;
-    border-radius: 20px;
-    padding: 40px;
-    max-width: 500px;
-    width: 100%;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    padding: 20px 15px;
   }
-
-  .modal-close {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: transparent;
-    border: none;
-    font-size: 2rem;
-    color: #999;
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-  }
-
-  .modal-close:hover {
-    background: #f0f0f0;
-    color: var(--valentine-red);
-  }
-
   .modal-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
+    font-size: 40px;
   }
-
   .modal-title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--valentine-red);
-    margin-bottom: 15px;
+    font-size: 20px;
   }
-
   .modal-message {
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 25px;
-    line-height: 1.6;
+    font-size: 14px;
   }
-
   .modal-button {
-    padding: 12px 30px;
-    background: var(--valentine-red);
-    color: white;
-    border: none;
-    border-radius: 25px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    width: 100%;
+    padding: 10px;
   }
+}
 
-  .modal-button:hover {
-    background: var(--valentine-dark);
-    transform: translateY(-2px);
-  }
-
-  /* ============================
-  RESPONSIVE
-  ============================ */
-  @media (max-width: 768px) {
-    .valentine-title {
-      font-size: 2.5rem;
-    }
-
-    .valentine-subtitle {
-      font-size: 1.1rem;
-    }
-
-    .form-container {
-      padding: 25px;
-    }
-
-    .product-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .color-options {
-      grid-template-columns: 1fr;
-    }
-
-    .form-section-title {
-      font-size: 1.3rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .valentine-order-page {
-      padding: 100px 15px 40px;
-    }
-
-    .valentine-title {
-      font-size: 1.5rem;
-    }
-
-    .form-container {
-      padding: 20px;
-    }
-    .valentine-subtitle {
-      font-size: 0.8rem;
-    }
-
-    .deadline-badge {
-    padding: 8px 20px;
-    border-radius: 25px;
-    border: 2px solid rgba(255,255,255,0.3);
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: var(--text-white);
-    margin-top: 15px;
-  }
-    .addon-label {
-    font-size: 0.7rem;
-    font-weight: 600;
-  }
-  .total-price-value {
-    font-weight: 700;
-    font-size: 1rem;
-  }
-  }
+/* Contact */
+.contact-info {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #fff1f2, #ffe4e6);
+  text-align: center;
+  box-shadow: var(--val-shadow);
+}
+.contact-info-title {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: var(--val-red);
+  margin-bottom: 10px;
+}
+.contact-info-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+}
+.contact-info-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #06c755;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.25s ease;
+  box-shadow: 0 6px 18px rgba(6, 199, 85, 0.35);
+}
+.contact-info-link:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(6, 199, 85, 0.45);
+}

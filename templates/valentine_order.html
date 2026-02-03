@@ -3,8 +3,7 @@
 {% block title %}Cupid's Corners{% endblock %}
 
 {% block extra_css %}
-
- <link rel="stylesheet" href="{{ url_for('static', filename='css/valentine_order.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/valentine_order.css') }}">
 {% endblock %}
 
 {% block isi %}
@@ -12,70 +11,88 @@
   <div class="valentine-header">
     <h1 class="valentine-title">💕 Cupid's Corner 💕</h1>
     <p class="valentine-subtitle">Actual product may vary slightly from the catalog photos</p>
-    <div class="deadline-badge">
-      Close: 7 Februari 2026, 23:59 WIB
-    </div>
+    <div class="deadline-badge">Close: 7 Februari 2026, 23:59 WIB</div>
   </div>
 
   <div class="form-container">
     <form id="valentineOrderForm" method="POST" enctype="multipart/form-data">
+      
       <!-- Product Selection -->
       <div class="form-section">
         <h2 class="form-section-title">Pilih Produk</h2>
         <div class="product-grid">
+
+          <!-- Flowers -->
           <label class="product-card">
             <input type="radio" name="product" value="Flowers" required>
             <div class="product-image">
-              <img src="{{ url_for('static', filename='img/valentine/Rose.jpeg') }}" alt="Forever Flowers" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>Gambar Forever Flowers</span>';">
+              <img src="{{ url_for('static', filename='img/valentine/Rose.jpeg') }}" alt="Forever Flowers">
             </div>
             <div class="product-name">Forever Flowers</div>
             <div class="product-info">Handcrafted flowers designed to look sweet forever</div>
             <div class="product-price">Rp 15.000</div>
+            <div class="form-group" style="margin-top:10px;">
+              <label class="form-label">Jumlah</label>
+              <input type="number" name="qty_flowers" class="form-input qty-input" data-product="Flowers" min="1" value="1">
+            </div>
           </label>
+
+          <!-- Bundle -->
           <label class="product-card">
             <input type="radio" name="product" value="Bundle" required>
             <div class="product-image">
-              <img src="{{ url_for('static', filename='img/valentine/Bundle.jpeg') }}" alt="Cupids Heartfelt Bundle" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>Gambar Cupids Heartfelt Bundle</span>';">
+              <img src="{{ url_for('static', filename='img/valentine/Bundle.jpeg') }}" alt="Cupids Heartfelt Bundle">
             </div>
             <div class="product-name">Cupids Heartfelt Bundle</div>
             <div class="product-info">A specially curated bundle full of small things that mean a lot</div>
             <div class="product-price">Rp 20.000</div>
+            <div class="form-group" style="margin-top:10px;">
+              <label class="form-label">Jumlah</label>
+              <input type="number" name="qty_bundle" class="form-input qty-input" data-product="Bundle" min="1" value="1">
+            </div>
           </label>
+
+          <!-- Chocobloom -->
           <label class="product-card">
             <input type="radio" name="product" value="Chocobloom" required>
             <div class="product-image">
-              <img src="{{ url_for('static', filename='img/valentine/Chocobloom.jpeg') }}" alt="Chocobloom" onerror="this.style.display='none'; this.parentElement.innerHTML='<span>Gambar Chocobloom</span>';">
+              <img src="{{ url_for('static', filename='img/valentine/Chocobloom.jpeg') }}" alt="Chocobloom">
             </div>
             <div class="product-name">Chocobloom</div>
-            <div class="product-info">A rose packaged along with a little sweet treat to brighten up your special someones day</div>
+            <div class="product-info">A rose packaged along with a little sweet treat</div>
             <div class="product-price">Rp 18.000</div>
+            <div class="form-group" style="margin-top:10px;">
+              <label class="form-label">Jumlah</label>
+              <input type="number" name="qty_chocobloom" class="form-input qty-input" data-product="Chocobloom" min="1" value="1">
+            </div>
           </label>
+
         </div>
       </div>
 
-      <!-- Color Selection for Forever Flowers -->
+      <!-- Color Selection for Flowers -->
       <div class="form-section" id="colorSelection" style="display: none;">
         <div class="color-selection">
           <div class="color-selection-title">Forever Flowers</div>
           <div class="color-options">
             <label class="color-option">
-              <input type="radio" name="forever_flowers_color" value="Peony" id="colorRed">
+              <input type="radio" name="forever_flowers_color" value="Peony">
               <div class="color-image">
-                <img src="{{ url_for('static', filename='img/valentine/Peony.jpeg') }}" alt="Forever Flowers Red" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#999;\'>Red</span>';">
+                <img src="{{ url_for('static', filename='img/valentine/Peony.jpeg') }}" alt="Peony">
               </div>
               <div class="color-name">Peony</div>
             </label>
             <label class="color-option">
-              <input type="radio" name="forever_flowers_color" value="Rose" id="colorPink">
+              <input type="radio" name="forever_flowers_color" value="Rose">
               <div class="color-image">
-                <img src="{{ url_for('static', filename='img/valentine/Rose.jpeg') }}" alt="Forever Flowers Pink" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#999;\'>Pink</span>';">
+                <img src="{{ url_for('static', filename='img/valentine/Rose.jpeg') }}" alt="Rose">
               </div>
               <div class="color-name">Rose</div>
             </label>
             <label class="color-option">
-              <input type="radio" name="forever_flowers_color" value="Tiger-lily" id="colorWhite">
+              <input type="radio" name="forever_flowers_color" value="Tiger-lily">
               <div class="color-image">
-                <img src="{{ url_for('static', filename='img/valentine/Tiger_lily.jpeg') }}" alt="Forever Flowers White" onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'display:flex;align-items:center;justify-content:center;height:100%;color:#999;\'>White</span>';">
+                <img src="{{ url_for('static', filename='img/valentine/Tiger_lily.jpeg') }}" alt="Tiger Lily">
               </div>
               <div class="color-name">Tiger Lily</div>
             </label>
@@ -83,107 +100,65 @@
         </div>
       </div>
 
-      <!-- Optional Add-on: Chocobloom -->
+      <!-- Thought Card Addon -->
       <div class="form-section">
         <div class="addon-option">
           <label class="addon-checkbox-wrapper">
-            <input type="checkbox" name="add_chocobloom" value="yes" id="chocobloomCheckbox">
-            <span class="addon-label">Thought Card (Write a heartfelt message to your special someone)</span>
+            <input type="checkbox" name="add_thought_card" value="yes" id="thoughtCardCheckbox">
+            <span class="addon-label">Thought Card (Tuliskan pesan untuk orang spesial)</span>
             <span class="addon-price">+Rp 2.000</span>
           </label>
         </div>
       </div>
 
-      <!-- Notes Section (only for Chocobloom add-on) -->
+      <!-- Notes Section -->
       <div class="form-section" id="notesSection" style="display: none;">
-        <h2 class="form-section-title">Thought Card Message</h2>
+        <h2 class="form-section-title">Pesan Thought Card</h2>
         <div class="form-group">
-          <label class="form-label">
-            Isi Pesan <span class="required">*</span>
-            <span style="font-size: 0.9rem; font-weight: normal; color: #666;">(Maksimal 40 kata)</span>
-          </label>
-          <textarea 
-            name="notes" 
-            class="form-textarea" 
-            placeholder="Tuliskan pesan Anda di sini..."
-            maxlength="500"
-            id="notesTextarea"
-          ></textarea>
+          <label class="form-label">Isi Pesan <span class="required">*</span> (Maks 40 kata)</label>
+          <textarea name="notes" class="form-textarea" id="notesTextarea" maxlength="500" placeholder="Tuliskan pesan Anda di sini..."></textarea>
           <div class="word-count" id="wordCount">0 / 40 kata</div>
         </div>
       </div>
 
-
-      <!-- Recipient Information -->
+      <!-- Recipient Info -->
       <div class="form-section">
         <h2 class="form-section-title">Penerima Hadiah</h2>
         <div class="form-group">
-          <label class="form-label">
-            Nama Penerima <span class="required">*</span>
-          </label>
-          <input 
-            type="text" 
-            name="recipient_name" 
-            class="form-input" 
-            placeholder="Masukkan nama penerima"
-            required
-          >
+          <label class="form-label">Nama Penerima <span class="required">*</span></label>
+          <input type="text" name="recipient_name" class="form-input" placeholder="Masukkan nama penerima" required>
         </div>
         <div class="form-group">
-          <label class="form-label">
-            Kelas Penerima <span class="required">*</span>
-          </label>
-          <input 
-            type="text" 
-            name="recipient_class" 
-            class="form-input" 
-            placeholder="Contoh: X IPA 1, XI IPS 2, XII IPA 3"
-            required
-          >
+          <label class="form-label">Kelas Penerima <span class="required">*</span></label>
+          <input type="text" name="recipient_class" class="form-input" placeholder="Contoh: X IPA 1" required>
         </div>
       </div>
 
-
-
-      <!-- Payment Proof Upload -->
+      <!-- Payment -->
       <div class="form-section">
         <h2 class="form-section-title">Bukti Transfer Pembayaran</h2>
-        <div class="form-group">
-           <div class="metode-bayar">
-            <h3>Metode Pembayaran</h3>
-            <p class="account-number">8533070521 BCA</p>
-            <p>QRIS</p>
-            <img src="{{ url_for('static', filename='img/valentine/Qris.jpeg') }}" alt="" class="qris-image">
-          </div>
-          <label class="form-label">
-            Upload Bukti Transfer <span class="required">*</span>
+        <div class="metode-bayar">
+          <h3>Metode Pembayaran</h3>
+          <p class="account-number">8533070521 BCA</p>
+          <p>QRIS</p>
+          <img src="{{ url_for('static', filename='img/valentine/Qris.jpeg') }}" alt="" class="qris-image">
+        </div>
+        <label class="form-label">Upload Bukti Transfer <span class="required">*</span></label>
+        <div class="file-upload-wrapper">
+          <input type="file" name="payment_proof" id="paymentProof" class="file-upload-input" accept="image/*,.pdf" required>
+          <label for="paymentProof" class="file-upload-label" id="fileUploadLabel">
+            <div>
+              <div style="font-weight: 600;">Klik untuk Upload</div>
+              <div style="font-size: 0.9rem; color: #666;">Format: JPG, PNG, PDF (Maks 5MB)</div>
+            </div>
           </label>
-          <div class="file-upload-wrapper">
-            <input 
-              type="file" 
-              name="payment_proof" 
-              class="file-upload-input" 
-              id="paymentProof"
-              accept="image/*,.pdf"
-              required
-            >
-            <label for="paymentProof" class="file-upload-label" id="fileUploadLabel">
-              <div>
-                <div style="font-weight: 600; color: #333;">Klik untuk Upload</div>
-                <div style="font-size: 0.9rem; color: #666; margin-top: 5px;">
-                  Format: JPG, PNG, atau PDF (Maks. 5MB)
-                </div>
-              </div>
-            </label>
-            <div class="file-name" id="fileName"></div>
-          </div>
+          <div class="file-name" id="fileName"></div>
         </div>
       </div>
 
       <!-- Total Price -->
       <div class="form-section">
         <div class="total-price-container">
-          
           <div class="total-price-row total-price-final">
             <span class="total-price-label">Total Harga:</span>
             <span class="total-price-value" id="totalPrice">Rp 0</span>
@@ -191,21 +166,16 @@
         </div>
       </div>
 
-      <!-- Contact Information -->
+      <!-- Contact -->
       <div class="contact-info">
         <div class="contact-info-title">Contact</div>
-        <div class="contact-info-text">
-          LINE: 
-          <a href="https://line.me/R/ti/p/kinoash1?from=page" class="contact-info-link">
-            @kinoash1
-          </a>
+        <div class="contact-info-text">LINE: 
+          <a href="https://line.me/R/ti/p/kinoash1?from=page" class="contact-info-link">@kinoash1</a>
         </div>
       </div>
 
-      <!-- Submit Button -->
-      <button type="submit" class="submit-button" id="submitButton">
-        Kirim Pesanan
-      </button>
+      <!-- Submit -->
+      <button type="submit" class="submit-button">Kirim Pesanan</button>
     </form>
   </div>
 </section>
@@ -213,26 +183,22 @@
 <!-- Success Modal -->
 <div class="modal" id="successModal">
   <div class="modal-content">
-    <button class="modal-close" onclick="closeModal()">×</button>
+    <button class="modal-close" onclick="closeModal('success')">×</button>
     <div class="modal-icon">✅</div>
     <h2 class="modal-title">Pesanan Berhasil!</h2>
-    <p class="modal-message">
-      Terima kasih! Pesanan Anda telah berhasil dikirim. 
-    </p>
-    <button class="modal-button" onclick="closeModal()">Tutup</button>
+    <p class="modal-message">Terima kasih! Pesanan Anda telah berhasil dikirim.</p>
+    <button class="modal-button" onclick="closeModal('success')">Tutup</button>
   </div>
 </div>
 
 <!-- Error Modal -->
 <div class="modal" id="errorModal">
   <div class="modal-content">
-    <button class="modal-close" onclick="closeErrorModal()">×</button>
+    <button class="modal-close" onclick="closeModal('error')">×</button>
     <div class="modal-icon">❌</div>
     <h2 class="modal-title">Terjadi Kesalahan</h2>
-    <p class="modal-message" id="errorMessage">
-      Maaf, terjadi kesalahan saat mengirim pesanan. Silakan coba lagi.
-    </p>
-    <button class="modal-button" onclick="closeErrorModal()">Tutup</button>
+    <p class="modal-message" id="errorMessage">Maaf, terjadi kesalahan.</p>
+    <button class="modal-button" onclick="closeModal('error')">Tutup</button>
   </div>
 </div>
 {% endblock %}
@@ -240,4 +206,3 @@
 {% block extra_js %}
 <script src="{{ url_for('static', filename='js/valentine_order.js') }}"></script>
 {% endblock %}
-
