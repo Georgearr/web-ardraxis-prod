@@ -112,6 +112,10 @@ def cupids_corner():
             file.save(filepath)
 
             # ===== SIMPAN KE SHEETS =====
+            base_url = "https://osissmaigs.com"
+            file_url = f"{base_url}/static/uploads/valentine/{safe_filename}"
+            link_bukti = f'=HYPERLINK("{file_url}", "Lihat Bukti")'
+
             sheet.append_row([
                 waktu,
                 product,
@@ -121,9 +125,10 @@ def cupids_corner():
                 name,
                 kelas,
                 notes,
-                safe_filename,
+                link_bukti,
                 total_price
-            ])
+                ])
+
 
             # ===== RESPONSE SUCCESS =====# RESPONSE SUCCESS
             return jsonify({"status": "success", "total_price": total_price}), 200
