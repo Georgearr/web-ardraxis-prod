@@ -106,8 +106,11 @@ def cupids_corner():
 
             # ===== SIMPAN FILE =====
             waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             ext = os.path.splitext(file.filename)[1]
-            safe_filename = f"{waktu}_{random.randint(100,999)}{ext}"
+            safe_filename = f"{timestamp}_{random.randint(100,999)}{ext}"
+
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], safe_filename)
             file.save(filepath)
 
@@ -117,20 +120,20 @@ def cupids_corner():
             link_bukti = f'=HYPERLINK("{file_url}"; "Lihat Bukti")'
 
             sheet.append_row(
-            [
-                waktu,
-                product,
-                quantity,
-                color,
-                "Yes" if addon == "yes" else "No",
-                name,
-                kelas,
-                notes,
-                link_bukti,
-                total_price
-            ],
-            value_input_option="USER_ENTERED"
-            )
+                [
+                    waktu,
+                    product,
+                    quantity,
+                    color,
+                    "Yes" if addon == "yes" else "No",
+                    name,
+                    kelas,
+                    notes,
+                    link_bukti,
+                    total_price
+                ],
+                value_input_option="USER_ENTERED"
+)
 
 
 
