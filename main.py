@@ -107,16 +107,17 @@ def cupids_corner():
             # ===== SIMPAN FILE =====
             waktu = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             ext = os.path.splitext(file.filename)[1]
-            safe_filename = f"{waktu.replace(':','').replace(' ','_')}_{random.randint(100,999)}{ext}"
+            safe_filename = f"{waktu}_{random.randint(100,999)}{ext}"
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], safe_filename)
             file.save(filepath)
 
             # ===== SIMPAN KE SHEETS =====
             base_url = "https://osissmaigs.com"
             file_url = f"{base_url}/static/uploads/valentine/{safe_filename}"
-            link_bukti = f'=HYPERLINK("{file_url}", "Lihat Bukti")'
+            link_bukti = f'=HYPERLINK("{file_url}"; "Lihat Bukti")'
 
-            sheet.append_row([
+            sheet.append_row(
+            [
                 waktu,
                 product,
                 quantity,
@@ -127,7 +128,10 @@ def cupids_corner():
                 notes,
                 link_bukti,
                 total_price
-                ])
+            ],
+            value_input_option="USER_ENTERED"
+            )
+
 
 
             # ===== RESPONSE SUCCESS =====# RESPONSE SUCCESS
