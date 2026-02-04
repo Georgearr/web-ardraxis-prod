@@ -79,9 +79,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Limit words in notes
   notesTextarea.addEventListener("input", () => {
-    let words = notesTextarea.value.trim().split(/\s+/).filter(Boolean);
-    if (words.length > 40) words = words.slice(0,40);
-    notesTextarea.value = words.join(" ");
+    const text = notesTextarea.value;
+    const words = text.split(/\s+/).filter(Boolean);
+
+    if (words.length > 40) {
+      notesTextarea.value = words.slice(0, 40).join(" ");
+    }
+
     wordCount.textContent = `${words.length} / 40 kata`;
   });
 
