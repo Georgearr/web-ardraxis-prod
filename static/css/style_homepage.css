@@ -681,32 +681,97 @@ section.events {
   margin-top: 6px;
 }
 
+/* ======================================
+   EVENTS IMAGE – FLOATING RESPONSIVE
+   ====================================== */
+
 .events-now-image-wrapper {
   width: 100%;
-  max-width: 100%;
   display: flex;
   justify-content: center;
 }
 
+/* Gambar utama */
 .events-now-image {
   width: 90%;
   max-width: 900px;
-  height: auto;
   max-height: 450px;
+  height: auto;
+
+  display: block;
+  margin: 0 auto;
+
   object-fit: contain;
   object-position: center;
-  margin: 0 auto;
-  display: block;
-  border-radius: 12px;
-  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
+
+  border-radius: 14px;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.45));
+
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  animation: float 6s ease-in-out infinite;
+
+  /* FLOAT DEFAULT (DESKTOP) */
+  animation: eventsFloat 6s ease-in-out infinite;
 }
 
+/* Hover desktop */
 .events-now-image:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.9);
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.9);
 }
+
+/* ======================================
+   MOBILE & TABLET
+   ====================================== */
+@media (max-width: 768px) {
+  .events-now-image {
+    width: 100%;
+    max-width: 100%;
+    max-height: 280px;
+
+    object-fit: cover;
+
+    /* FLOAT MOBILE (LEBIH HALUS) */
+    animation: eventsFloatMobile 5s ease-in-out infinite;
+  }
+}
+
+/* ======================================
+   FLOAT ANIMATIONS
+   ====================================== */
+@keyframes eventsFloat {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes eventsFloatMobile {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* ======================================
+   ACCESSIBILITY
+   ====================================== */
+@media (prefers-reduced-motion: reduce) {
+  .events-now-image {
+    animation: none !important;
+  }
+}
+
+
 
 .events-title {
   font-size: 3rem;
