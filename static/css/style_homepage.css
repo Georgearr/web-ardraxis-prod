@@ -1010,8 +1010,14 @@ section.events::after {
     height: 40px;
   }
   .events-now-banner{
+    height: 350px;
+  }
+  .events-now-image-wrapper img{
     height: 250px;
   }
+  .events-now-badge {
+  font-size: 1.3rem;
+}
 }
 
 /* ============================================

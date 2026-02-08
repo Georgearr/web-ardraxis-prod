@@ -137,12 +137,7 @@
       <!-- Payment -->
       <div class="form-section">
         <h2 class="form-section-title">Bukti Transfer Pembayaran</h2>
-        <div class="metode-bayar">
-          <h3>Metode Pembayaran</h3>
-          <p class="account-number">8533070521 BCA</p>
-          <p>QRIS</p>
-          <img src="{{ url_for('static', filename='img/valentine/Qris.jpeg') }}" alt="" class="qris-image">
-        </div>
+       
         <label class="form-label">Upload Bukti Transfer <span class="required">*</span></label>
         <div class="file-upload-wrapper">
           <input type="file" name="payment_proof" id="paymentProof" class="file-upload-input" accept="image/*,.pdf" required>
@@ -180,6 +175,17 @@
   </div>
 </section>
 
+<!-- Closed Modal -->
+<div class="modal" id="closedModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('closed')">×</button>
+    <div class="modal-icon">🚫</div>
+    <h2 class="modal-title">Pemesanan Sudah Ditutup</h2>
+    <p class="modal-message">Maaf, periode pemesanan Cupid's Corner sudah ditutup. Terima kasih atas minat Anda!</p>
+    <button class="modal-button" onclick="closeModal('closed')">Tutup</button>
+  </div>
+</div>
+
 <!-- Success Modal -->
 <div class="modal" id="successModal">
   <div class="modal-content">
@@ -205,4 +211,45 @@
 
 {% block extra_js %}
 <script src="{{ url_for('static', filename='js/valentine_order.js') }}"></script>
+<script>
+  // Prevent form submission and show closed modal
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('valentineOrderForm');
+    
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        showModal('closed');
+      });
+    }
+  });
+  
+  // Function to show modal
+  function showModal(type) {
+    const modal = document.getElementById(type + 'Modal');
+    if (modal) {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+  }
+  
+  // Function to close modal (if not already defined in valentine_order.js)
+  if (typeof closeModal === 'undefined') {
+    function closeModal(type) {
+      const modal = document.getElementById(type + 'Modal');
+      if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    }
+  }
+  
+  // Close modal when clicking outside
+  window.addEventListener('click', function(e) {
+    if (e.target.classList.contains('modal')) {
+      e.target.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  });
+</script>
 {% endblock %}

@@ -94,33 +94,15 @@ document.addEventListener("DOMContentLoaded", () => {
     fileName.textContent = paymentInput.files.length ? paymentInput.files[0].name : "";
   });
 
-  // Form submit
-  form.addEventListener("submit", async (e) => {
+  // Form submit - Pemesanan sudah ditutup
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
-    const formData = new FormData(form);
-
-    try {
-      const res = await fetch(form.action || window.location.href, {
-        method: "POST",
-        body: formData
-      });
-
-      const data = await res.json();
-      if (data.status === "success") {
-        document.getElementById("successModal").style.display = "flex";
-        form.reset();
-        totalPriceEl.textContent = "Rp 0";
-        disableAllQty();
-        colorSection.style.display = "none";
-        notesSection.style.display = "none";
-        wordCount.textContent = "0 / 40 kata";
-        fileName.textContent = "";
-      } else {
-        throw new Error(data.message || "Terjadi kesalahan");
-      }
-    } catch (err) {
-      document.getElementById("errorMessage").textContent = err.message;
-      document.getElementById("errorModal").style.display = "flex";
+    e.stopPropagation();
+    // Tampilkan modal pemesanan ditutup
+    const closedModal = document.getElementById("closedModal");
+    if (closedModal) {
+      closedModal.style.display = "flex";
+      document.body.style.overflow = "hidden";
     }
   });
 
@@ -129,6 +111,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Modals
 function closeModal(type) {
-  if (type === "success") document.getElementById("successModal").style.display = "none";
-  else if (type === "error") document.getElementById("errorModal").style.display = "none";
+  const modalId = type + "Modal";
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = "none";
+    document.body.style.overflow = "";
+  }
 }
