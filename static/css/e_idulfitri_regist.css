@@ -1,0 +1,184 @@
+/* ===============================
+   ROOT & RESET
+================================ */
+:root {
+  --navbar-height: 80px; /* aman untuk fixed / sticky navbar */
+  --yellow-light: #fffde5;
+  --yellow-base: #ffed91;
+  --yellow-dark: #949166;
+  --bg-main: #0e634e;
+  --text-dark: #ffffff;
+  --text-muted: #dcfce7;
+  --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background: var(--bg-main);
+  color: var(--text-dark);
+}
+
+/* ===============================
+   PAGE LAYOUT (ANTI NEMPEL NAVBAR)
+================================ */
+.idul-fitri-page {
+  min-height: 100vh;
+  padding: calc(var(--navbar-height) + 40px) 16px 80px;
+}
+
+/* ===============================
+   HEADER
+================================ */
+.idul-fitri-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.idul-fitri-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--yellow-base);
+  margin-bottom: 12px;
+}
+
+.deadline-badge {
+  display: inline-block;
+  background: var(--yellow-dark);
+  color: var(--yellow-light);
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* ===============================
+   FORM CONTAINER
+================================ */
+.form-container {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #488273;
+  border: 5px solid var(--yellow-light);
+  border-radius: 18px;
+  padding: 32px;
+  box-shadow: var(--shadow-soft);
+}
+
+/* ===============================
+   FORM INPUTS
+================================ */
+.form-container input[type="text"] {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border: 3px solid var(--yellow-light);
+  border-radius: 16px;
+  font-size: 1rem;
+}
+
+.form-container select {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border: 3px solid var(--yellow-light);
+  border-radius: 16px;
+  font-size: 1rem;
+  background-color: #fffde5;
+  cursor: pointer;
+}
+
+.form-container select:hover {
+  background-color: #e6e3c1;
+}
+
+.form-container select:focus {
+  background-color: #fffde5;
+}
+
+.form-container .confirmation {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.2rem;
+}
+
+.form-container .confirmation input[type="checkbox"] {
+  width: 50px;
+  height: 50px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+/* ===============================
+   BUTTON
+================================ */
+.submit-button {
+  width: 100%;
+  margin-top: 32px;
+  padding: 14px;
+  border: none;
+  border-radius: 16px;
+  font-size: 1rem;
+  font-weight: 700;
+  border: 3px solid var(--yellow-light);
+  background: #559080;
+  color: var(--yellow-light);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submit-button:hover {
+  background-color: #3e7264;
+  transform: scale(1.02, 1.02);
+}
+
+/* ===============================
+   ANIMATION
+================================ */
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===============================
+   RESPONSIVE
+================================ */
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 70px;
+  }
+
+  .form-container {
+    padding: 24px;
+  }
+
+  .product-grid {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --navbar-height: 64px;
+  }
+
+  .valentine-order-page {
+    padding-bottom: 60px;
+  }
+
+  .form-container {
+    padding: 20px;
+  }
+}

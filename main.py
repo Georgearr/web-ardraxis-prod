@@ -61,6 +61,10 @@ def festiora():
 def handle_404(error):
     return render_template("404.html"), 404
 
+@app.route("/idul-fitri")
+def idul_fitri():
+    return render_template("e_idulfitri_regist.html")
+
 # ===============================
 # CUPID'S CORNER
 # ===============================

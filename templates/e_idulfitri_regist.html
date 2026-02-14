@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block title %}Idul Fitri{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/e_idulfitri_regist.css') }}">
+{% endblock %}
+
+{% block isi %}
+<section class="idul-fitri-page">
+  <div class="idul-fitri-header">
+    <h1 class="idul-fitri-title">Idul Fitri Registration</h1>
+    <div class="deadline-badge">Closes • deadline here</div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-container">
+    <form id="idulFitriForm">
+      <input type="text" name="nama-lengkap" id="namaLengkap" placeholder="Nama Lengkap" required>
+      <select name="angkatan" id="angkatan" required>
+        <option value="sd">SD</option>
+        <option value="smp">SMP</option>
+        <option value="sma">SMA</option>
+      </select>
+      <input type="text" name="kelas" id="kelas" placeholder="Kelas" required>
+      <div class="confirmation">
+        <input type="checkbox" name="konfirmasi" id="konfirmasi" required>
+        <label for="konfirmasi">Dengan mengisi formulir ini, saya bersedia untuk mengikuti rangkaian acara Idul Fitri yang akan dilaksanakan pada tanggal ...</label>
+      </div>
+
+      <!-- Button -->
+      <button type="button" class="submit-button">
+        Submit
+      </button>
+    </form>
+  </div>
+</section>
+{% endblock %}
