@@ -35,4 +35,44 @@
     </form>
   </div>
 </section>
+
+<script>
+document.querySelector(".submit-button").addEventListener("click", function() {
+
+  const nama = document.getElementById("namaLengkap").value;
+  const angkatan = document.getElementById("angkatan").value;
+  const kelas = document.getElementById("kelas").value;
+
+  if (!nama || !angkatan || !kelas) {
+    alert("Lengkapi semua data dulu!");
+    return;
+  }
+
+  const data = {
+    nama: nama,
+    angkatan: angkatan,
+    kelas: kelas
+  };
+
+  fetch("https://script.google.com/macros/s/AKfycbzlEkphDSq_qpVVOmpG5U9dAO7ueoYSnQ9AUXe5zZHljqnJiFjJ_ti5qkqlDYpouQvzgA/exec", {
+    method: "POST",
+    mode: "no-cors", // 🔥 penting
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  })
+  .then(() => {
+    alert("Berhasil daftar!");
+    document.getElementById("idulFitriForm").reset();
+  })
+  .catch(error => {
+    console.error("Error:", error);
+    alert("Gagal kirim!");
+  });
+
+});
+</script>
+
+
 {% endblock %}
