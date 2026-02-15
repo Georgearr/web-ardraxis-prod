@@ -1,179 +1,249 @@
-{% extends 'layout.html' %}
-
-{% block title %}Ardraxis{% endblock %}
-{% block extra_css %}
-  <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style_homepage.css') }}"
+{% extends 'layout.html' %} {% block title %}Ardraxis{% endblock %} {% block
+extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/style_homepage.css') }}"
+/>
+{% endblock %} {% block isi %}
+<!-- Home Section -->
+<section class="home" id="home">
+  <div class="home-image">
+    <img
+      class="logo"
+      src="{{ url_for('static', filename='img/logo_ardraxis.png') }}"
+      alt="ARDRAXIS"
     />
-{% endblock %}
-{% block isi %}
-  <!-- Home Section -->
-  <section class="home" id="home">
-    <div class="home-image">
-      <img class="logo" src="{{ url_for('static', filename='img/logo_ardraxis.png') }}" alt="ARDRAXIS" />
-    </div>
-    <div class="home-text">
-      <h1 class="text-shadow hidden">ARDRAXIS</h1>
-      <p class="text-shadow hidden">Kabinet OSIS SMA Ignatius Global School Periode 2025/2026</p>
-    </div>
-  </section>
-  <!-- End Home Section -->
+  </div>
+  <div class="home-text">
+    <h1 class="text-shadow hidden">ARDRAXIS</h1>
+    <p class="text-shadow hidden">
+      Kabinet OSIS SMA Ignatius Global School Periode 2025/2026
+    </p>
+  </div>
+</section>
+<!-- End Home Section -->
 
-  <!-- Events Section -->
-  <section class="events" id="events">
-    <!-- Event Happening Now Title -->
-    <div class="events-now-badge text-shadow hidden">Happening Now</div>
+<!-- Events Section -->
+<section class="events" id="events">
+  <!-- Happening Now -->
+  <div class="events-now-badge text-shadow hidden">Happening Now</div>
 
-    <!-- Event Happening Now Banner -->
-    <div class="events-now-banner text-shadow hidden">
-      <div class="events-now-content">
-        <div class="events-now-image-wrapper">
-          <a href="{{ url_for('cupids_corner') }}" class="events-now-link">
-            <img
-              src="{{ url_for('static', filename='img/logo_ardraxis.png') }}"
-              alt="Festiora - Happening Now"
-              class="events-now-image"
-            />
-          </a>
+  <div class="events-now-banner text-shadow hidden">
+    <div class="events-now-content">
+      <div class="events-now-image-wrapper">
+        <a href="{{ url_for('idul_fitri') }}" class="events-now-link">
+          <img
+            src="{{ url_for('static', filename='img/logo_ardraxis.png') }}"
+            alt="Idul Fitri"
+            class="events-now-image"
+          />
+        </a>
+      </div>
+      <div class="events-now-info">
+        <h3 class="events-now-title">Idul Fitri Celebration</h3>
+        <p class="events-now-date">Coming Soon</p>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="events-title text-shadow hidden">Events</h2>
+
+  <div class="events-carousel">
+    <button class="carousel-btn prev" aria-label="Previous slide">
+      &#10094;
+    </button>
+
+    <div class="carousel-viewport">
+      <div class="carousel-track">
+        <!-- Cupid's Corner (Moved Here) -->
+        <div class="carousel-slide">
+          <div class="slide-media">
+            <a href="{{ url_for('cupids_corner') }}">
+              <img
+                src="{{ url_for('static', filename='img/logo_ardraxis.png') }}"
+                alt="Cupid’s Corner"
+              />
+            </a>
+          </div>
+          <div class="slide-caption">
+            <h3>Cupid’s Corner</h3>
+            <p>7 February 2026</p>
+          </div>
         </div>
-        <div class="events-now-info">
-          <h3 class="events-now-title">Cupid’s Corner</h3>
-          <p class="events-now-date">Close: 7 February</p>
+
+        <!-- Meloria -->
+        <div class="carousel-slide">
+          <div class="slide-media">
+            <a href="{{ url_for('meloria') }}">
+              <img
+                src="{{ url_for('static', filename='img/banner/meloria_banner.jpeg') }}"
+                alt="Meloria"
+              />
+            </a>
+          </div>
+          <div class="slide-caption">
+            <h3>Meloria</h3>
+            <p>14 November 2025</p>
+          </div>
+        </div>
+
+        <!-- Ajakrasa -->
+        <div class="carousel-slide">
+          <div class="slide-media">
+            <a href="{{ url_for('coming_soon') }}">
+              <img
+                src="{{ url_for('static', filename='img/banner/ajakrasa_banner.png') }}"
+                alt="Ajakrasa"
+              />
+            </a>
+          </div>
+          <div class="slide-caption">
+            <h3>Ajakrasa</h3>
+            <p>25 November 2025</p>
+          </div>
+        </div>
+
+        <!-- Festiora -->
+        <div class="carousel-slide">
+          <div class="slide-media">
+            <a href="{{ url_for('festiora') }}">
+              <img
+                src="{{ url_for('static', filename='img/banner/festiora_banner.png') }}"
+                alt="Festiora"
+              />
+            </a>
+          </div>
+          <div class="slide-caption">
+            <h3>Festiora</h3>
+            <p>2 December 2025</p>
+          </div>
+        </div>
+
+        <!-- Concendant -->
+        <div class="carousel-slide">
+          <div class="slide-media">
+            <a href="{{ url_for('coming_soon') }}">
+              <img
+                src="{{ url_for('static', filename='img/banner/concendant_banner.png') }}"
+                alt="Concendant"
+              />
+            </a>
+          </div>
+          <div class="slide-caption">
+            <h3>Concendant</h3>
+            <p>9 December 2025</p>
+          </div>
+        </div>
+
+        <!-- Sacrelume -->
+        <div class="carousel-slide">
+          <div class="slide-media">
+            <a href="{{ url_for('coming_soon') }}">
+              <img
+                src="{{ url_for('static', filename='img/banner/sacrelume_banner.png') }}"
+                alt="Sacrelume"
+              />
+            </a>
+          </div>
+          <div class="slide-caption">
+            <h3>Sacrelume</h3>
+            <p>12 December 2025</p>
+          </div>
         </div>
       </div>
     </div>
 
-    <h2 class="events-title text-shadow hidden">Events</h2>
-    <div class="events-carousel">
-      <button class="carousel-btn prev" aria-label="Previous slide">&#10094;</button>
-      <div class="carousel-viewport">
-        <div class="carousel-track">
-          <div class="carousel-slide">
-            <div class="slide-media">
-              <a href="{{ url_for('meloria') }}">
-                <img src="{{ url_for('static', filename='img/banner/meloria_banner.jpeg') }}" alt="Meloria" />
-              </a>
-            </div>
-            <div class="slide-caption">
-              <h3>Meloria</h3>
-              <p>14 November 2025</p>
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-media">
-              <a href="{{ url_for('coming_soon') }}">
-                <img src="{{ url_for('static', filename='img/banner/ajakrasa_banner.png') }}" alt="Ajakrasa" />
-              </a>
-            </div>
-            <div class="slide-caption">
-              <h3>Ajakrasa</h3>
-              <p>25 November 2025</p>
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-media">
-              <a href="{{ url_for('festiora') }}">
-                <img src="{{ url_for('static', filename='img/banner/festiora_banner.png') }}" alt="Festiora" />
-              </a>
-            </div>
-            <div class="slide-caption">
-              <h3>Festiora</h3>
-              <p>2 December 2025</p>
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-media">
-              <a href="{{ url_for('coming_soon') }}">
-                <img src="{{ url_for('static', filename='img/banner/concendant_banner.png') }}" alt="Concendant" />
-              </a>
-            </div>
-            <div class="slide-caption">
-              <h3>Concendant</h3>
-              <p>9 December 2025</p>
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-media">
-              <a href="{{ url_for('coming_soon') }}">
-                <img src="{{ url_for('static', filename='img/banner/sacrelume_banner.png') }}" alt="Sacrelume" />
-              </a>
-            </div>
-            <div class="slide-caption">
-              <h3>Sacrelume</h3>
-              <p>12 December 2025</p>
-            </div>
-          </div>
-          <div class="carousel-slide">
-            <div class="slide-media">
-              <a href="{{ url_for('coming_soon') }}">
-                <img src="{{ url_for('static', filename='img/logo_ardraxis.png') }}" alt="Coming Soon" />
-              </a>
-            </div>
-            <div class="slide-caption">
-              <h3>Coming Soon</h3>
-              <p>Coming Soon</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-btn next" aria-label="Next slide">&#10095;</button>
-      <div class="carousel-dots" aria-label="Slide indicators"></div>
-    </div>
-  </section>
-  <!-- End Events Section -->
+    <button class="carousel-btn next" aria-label="Next slide">&#10095;</button>
+    <div class="carousel-dots" aria-label="Slide indicators"></div>
+  </div>
+</section>
+<!-- End Events Section -->
 
-  <!-- About Section -->
-  <section class="about" id="about">
-    <div class="about-text">
-      <h1 class="text-shadow hidden">ARDRAXIS</h1>
-      <p class="text-shadow hidden" style="color: white">
-        Ardraxis merupakan nama kabinet OSIS SMA IGS periode 2025/2026.
-        Ardraxis berarti "semangat dan inti" yang bermakna bahwa OSIS SMA IGS
-        adalah organisasi yang gagah dan tegar dalam menghadapi berbagai macam
-        masalah atau konflik apapun. Dan organisasi yang berani untuk bekerja,
-        berani untuk lelah, dan berani untuk bertanggung jawab.
+<!-- About Section -->
+<section class="about" id="about">
+  <div class="about-text">
+    <h1 class="text-shadow hidden">ARDRAXIS</h1>
+    <p class="text-shadow hidden" style="color: white">
+      Ardraxis merupakan nama kabinet OSIS SMA IGS periode 2025/2026. Ardraxis
+      berarti "semangat dan inti" yang bermakna bahwa OSIS SMA IGS adalah
+      organisasi yang gagah dan tegar dalam menghadapi berbagai macam masalah
+      atau konflik apapun. Dan organisasi yang berani untuk bekerja, berani
+      untuk lelah, dan berani untuk bertanggung jawab.
+    </p>
+  </div>
+  <img
+    src="{{ url_for('static', filename='img/logo_ardraxis.png') }}"
+    alt="ARDRAXIS"
+  />
+</section>
+<!-- End About Section -->
+
+<!-- Prior Cabinets Section -->
+<section class="prior-cabinets" id="pc">
+  <h2 class="prior-cabinets-title text-shadow hidden">Our Prior Cabinets</h2>
+  <div class="prior-cabinets-container hidden">
+    <div class="cabinet-card hidden">
+      <div class="cabinet-card-image">
+        <img
+          src="{{ url_for('static', filename='img/valiance_logo.png') }}"
+          alt="Valiance"
+          class="cabinet-image"
+        />
+      </div>
+      <h3 class="cabinet-card-title">Valiance</h3>
+      <p class="cabinet-card-desc">
+        Kabinet OSIS SMA Ignatius Global School periode 2024/2025
       </p>
+      <button
+        class="cabinet-card-button"
+        onclick="window.location.assign('https://valiance.osissmaigs.com')"
+      >
+        Click Here
+      </button>
     </div>
-    <img src="{{ url_for('static', filename='img/logo_ardraxis.png') }}" alt="ARDRAXIS" />
-  </section>
-  <!-- End About Section -->
 
-  <!-- Prior Cabinets Section -->
-  <section class="prior-cabinets" id="pc">
-    <h2 class="prior-cabinets-title text-shadow hidden">Our Prior Cabinets</h2>
-    <div class="prior-cabinets-container hidden">
-      <div class="cabinet-card hidden">
-        <div class="cabinet-card-image">
-          <img src="{{ url_for('static', filename='img/valiance_logo.png') }}" alt="Valiance" class="cabinet-image" />
-        </div>
-        <h3 class="cabinet-card-title">Valiance</h3>
-        <p class="cabinet-card-desc">Kabinet OSIS SMA Ignatius Global School periode 2024/2025</p>
-        <button class="cabinet-card-button" onclick="window.location.assign('https://valiance.osissmaigs.com')">Click Here</button>
+    <div class="cabinet-card hidden">
+      <div class="cabinet-card-image">
+        <img
+          src="{{ url_for('static', filename='img/asteration_logo.png') }}"
+          alt="Asteration"
+          class="cabinet-image"
+        />
       </div>
-
-      <div class="cabinet-card hidden">
-        <div class="cabinet-card-image">
-          <img src="{{ url_for('static', filename='img/asteration_logo.png') }}" alt="Asteration" class="cabinet-image" />
-        </div>
-        <h3 class="cabinet-card-title">Asteration</h3>
-        <p class="cabinet-card-desc">Kabinet OSIS SMA Ignatius Global School periode 2023/2024</p>
-        <button class="cabinet-card-button" onclick="window.location.assign('https://asteration.osissmaigs.com')">Click Here</button>
-      </div>
-
-      <div class="cabinet-card hidden">
-        <div class="cabinet-card-image">
-          <img src="{{ url_for('static', filename='img/credence_logo.png') }}" alt="Credence" class="cabinet-image" />
-        </div>
-        <h3 class="cabinet-card-title">Credence</h3>
-        <p class="cabinet-card-desc">Kabinet OSIS SMA Ignatius Global School periode 2022/2023</p>
-        <button class="cabinet-card-button" onclick="window.location.assign('https://osissmaigs.com/coming_soon')">Click Here</button>
-      </div>
+      <h3 class="cabinet-card-title">Asteration</h3>
+      <p class="cabinet-card-desc">
+        Kabinet OSIS SMA Ignatius Global School periode 2023/2024
+      </p>
+      <button
+        class="cabinet-card-button"
+        onclick="window.location.assign('https://asteration.osissmaigs.com')"
+      >
+        Click Here
+      </button>
     </div>
-  </section>
-  <!-- End Prior Cabinets Section -->
-  {% block extra_js %}
-  <script src="{{ url_for('static', filename='js/scroll_reveal.js') }}">
-  </script>
-{% endblock %}
-{% endblock %}
+
+    <div class="cabinet-card hidden">
+      <div class="cabinet-card-image">
+        <img
+          src="{{ url_for('static', filename='img/credence_logo.png') }}"
+          alt="Credence"
+          class="cabinet-image"
+        />
+      </div>
+      <h3 class="cabinet-card-title">Credence</h3>
+      <p class="cabinet-card-desc">
+        Kabinet OSIS SMA Ignatius Global School periode 2022/2023
+      </p>
+      <button
+        class="cabinet-card-button"
+        onclick="window.location.assign('https://osissmaigs.com/coming_soon')"
+      >
+        Click Here
+      </button>
+    </div>
+  </div>
+</section>
+<!-- End Prior Cabinets Section -->
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/scroll_reveal.js') }}"></script>
+{% endblock %} {% endblock %}

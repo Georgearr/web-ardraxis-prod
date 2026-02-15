@@ -1,78 +1,147 @@
-{% extends 'layout.html' %}
-
-{% block title %}Idul Fitri{% endblock %}
-
-{% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/e_idulfitri_regist.css') }}">
-{% endblock %}
-
-{% block isi %}
+{% extends 'layout.html' %} {% block title %}Idul Fitri{% endblock %} {% block
+extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/e_idulfitri_regist.css') }}"
+/>
+{% endblock %} {% block isi %}
 <section class="idul-fitri-page">
   <div class="idul-fitri-header">
     <h1 class="idul-fitri-title">Idul Fitri Registration</h1>
     <div class="deadline-badge">Closes • deadline here</div>
   </div>
 
-  <!-- FORM -->
   <div class="form-container">
     <form id="idulFitriForm">
-      <input type="text" name="nama-lengkap" id="namaLengkap" placeholder="Nama Lengkap" required>
-      <select name="angkatan" id="angkatan" required>
+      <input type="text" id="namaLengkap" placeholder="Nama Lengkap" required />
+
+      <select id="angkatan" required>
+        <option value="">Pilih Angkatan</option>
         <option value="sd">SD</option>
         <option value="smp">SMP</option>
         <option value="sma">SMA</option>
       </select>
-      <input type="text" name="kelas" id="kelas" placeholder="Kelas" required>
+
+      <input type="text" id="kelas" placeholder="Kelas" required />
+
       <div class="confirmation">
-        <input type="checkbox" name="konfirmasi" id="konfirmasi" required>
-        <label for="konfirmasi">Dengan mengisi formulir ini, saya bersedia untuk mengikuti rangkaian acara Idul Fitri yang akan dilaksanakan pada tanggal ...</label>
+        <input type="checkbox" id="konfirmasi" />
+        <label for="konfirmasi">
+          Dengan mengisi formulir ini, saya bersedia mengikuti rangkaian acara
+          Idul Fitri.
+        </label>
       </div>
 
-      <!-- Button -->
-      <button type="button" class="submit-button">
-        Submit
-      </button>
+      <button type="button" class="submit-button">Submit</button>
     </form>
   </div>
 </section>
 
+<!-- SUCCESS MODAL -->
+<div class="modal" id="successModal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal('successModal')"
+      >&times;</span
+    >
+    <div class="modal-icon success">✓</div>
+    <h2>Pendaftaran Berhasil!</h2>
+    <p>Terima kasih telah mendaftar Idul Fitri 🎉</p>
+  </div>
+</div>
+
+<!-- ERROR MODAL -->
+<div class="modal" id="errorModal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal('errorModal')">&times;</span>
+    <div class="modal-icon error">✕</div>
+    <h2>Perhatian</h2>
+    <p id="errorMessage">Terjadi kesalahan.</p>
+  </div>
+</div>
+
+<!-- LOADING MODAL -->
+<div class="modal" id="loadingModal">
+  <div class="modal-content loading-content">
+    <div class="loader"></div>
+    <h2>Memproses...</h2>
+    <p>Mohon tunggu sebentar</p>
+  </div>
+</div>
+
+
 <script>
-document.querySelector(".submit-button").addEventListener("click", function() {
+  const form = document.getElementById("idulFitriForm");
+  const button = document.querySelector(".submit-button");
 
-  const nama = document.getElementById("namaLengkap").value;
-  const angkatan = document.getElementById("angkatan").value;
-  const kelas = document.getElementById("kelas").value;
+  button.addEventListener("click", function () {
+    const nama = document.getElementById("namaLengkap").value.trim();
+    const angkatan = document.getElementById("angkatan").value;
+    const kelas = document.getElementById("kelas").value.trim();
+    const konfirmasi = document.getElementById("konfirmasi").checked;
 
-  if (!nama || !angkatan || !kelas) {
-    alert("Lengkapi semua data dulu!");
-    return;
-  }
+    // VALIDASI FIELD KOSONG
+    if (!nama || !angkatan || !kelas) {
+      showError("Tolong isi form ini terlebih dahulu.");
+      return;
+    }
 
-  const data = {
-    nama: nama,
-    angkatan: angkatan,
-    kelas: kelas
-  };
+    // VALIDASI CHECKBOX
+    if (!konfirmasi) {
+      showError("Silakan centang bagian konfirmasi terlebih dahulu.");
+      return;
+    }
 
-  fetch("https://script.google.com/macros/s/AKfycbzlEkphDSq_qpVVOmpG5U9dAO7ueoYSnQ9AUXe5zZHljqnJiFjJ_ti5qkqlDYpouQvzgA/exec", {
-    method: "POST",
-    mode: "no-cors", // 🔥 penting
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-  .then(() => {
-    alert("Berhasil daftar!");
-    document.getElementById("idulFitriForm").reset();
-  })
-  .catch(error => {
-    console.error("Error:", error);
-    alert("Gagal kirim!");
+    const data = { nama, angkatan, kelas };
+
+    // Disable tombol (anti spam)
+    button.disabled = true;
+    button.innerText = "Processing...";
+
+    // Tampilkan loading
+    openModal("loadingModal");
+
+    fetch(
+      "https://script.google.com/macros/s/AKfycbzlEkphDSq_qpVVOmpG5U9dAO7ueoYSnQ9AUXe5zZHljqnJiFjJ_ti5qkqlDYpouQvzgA/exec",
+      {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    )
+      .then(() => {
+        closeModal("loadingModal");
+        openModal("successModal");
+        form.reset();
+      })
+      .catch(() => {
+        closeModal("loadingModal");
+        showError("Terjadi kesalahan. Silakan coba lagi.");
+      })
+      .finally(() => {
+        button.disabled = false;
+        button.innerText = "Submit";
+      });
   });
 
-});
-</script>
+  function showError(message) {
+    document.getElementById("errorMessage").innerText = message;
+    openModal("errorModal");
+  }
 
+  function openModal(id) {
+    document.getElementById(id).style.display = "flex";
+  }
+
+  function closeModal(id) {
+    document.getElementById(id).style.display = "none";
+  }
+
+  window.onclick = function (event) {
+    if (event.target.classList.contains("modal")) {
+      event.target.style.display = "none";
+    }
+  };
+</script>
 
 {% endblock %}
