@@ -31,17 +31,17 @@ extra_css %}
   <div class="events-now-banner text-shadow hidden">
     <div class="events-now-content">
       <div class="events-now-image-wrapper">
-        <a href="{{ url_for('idul_fitri') }}" class="events-now-link">
+        <a href="{{ url_for('athaira') }}" class="events-now-link">
           <img
             src="{{ url_for('static', filename='img/logo_ardraxis.png') }}"
-            alt="Idul Fitri"
+            alt="Athaira"
             class="events-now-image"
           />
         </a>
       </div>
       <div class="events-now-info">
-        <h3 class="events-now-title">Idul Fitri Celebration</h3>
-        <p class="events-now-date">Coming Soon</p>
+        <h3 class="events-now-title">Athaira</h3>
+        <p class="events-now-date">6 March 2026</p>
       </div>
     </div>
   </div>
@@ -55,22 +55,6 @@ extra_css %}
 
     <div class="carousel-viewport">
       <div class="carousel-track">
-        <!-- Cupid's Corner (Moved Here) -->
-        <div class="carousel-slide">
-          <div class="slide-media">
-            <a href="{{ url_for('cupids_corner') }}">
-              <img
-                src="{{ url_for('static', filename='img/logo_ardraxis.png') }}"
-                alt="Cupid’s Corner"
-              />
-            </a>
-          </div>
-          <div class="slide-caption">
-            <h3>Cupid’s Corner</h3>
-            <p>7 February 2026</p>
-          </div>
-        </div>
-
         <!-- Meloria -->
         <div class="carousel-slide">
           <div class="slide-media">
@@ -92,13 +76,13 @@ extra_css %}
           <div class="slide-media">
             <a href="{{ url_for('coming_soon') }}">
               <img
-                src="{{ url_for('static', filename='img/banner/ajakrasa_banner.png') }}"
-                alt="Ajakrasa"
+                src="{{ url_for('static', filename='img/banner/ajakarsa_banner.png') }}"
+                alt="Ajakarsa"
               />
             </a>
           </div>
           <div class="slide-caption">
-            <h3>Ajakrasa</h3>
+            <h3>Ajakarsa</h3>
             <p>25 November 2025</p>
           </div>
         </div>
@@ -148,6 +132,22 @@ extra_css %}
           <div class="slide-caption">
             <h3>Sacrelume</h3>
             <p>12 December 2025</p>
+          </div>
+        </div>
+
+        <!-- Cupid's Corner -->
+        <div class="carousel-slide">
+          <div class="slide-media">
+            <a href="{{ url_for('cupids_corner') }}">
+              <img
+                src="{{ url_for('static', filename='img/logo_ardraxis.png') }}"
+                alt="Cupid’s Corner"
+              />
+            </a>
+          </div>
+          <div class="slide-caption">
+            <h3>Cupid’s Corner</h3>
+            <p>7 February 2026</p>
           </div>
         </div>
       </div>
