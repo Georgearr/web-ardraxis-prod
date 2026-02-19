@@ -65,6 +65,10 @@ def handle_404(error):
 def athaira():
     return render_template("e_athaira_regist.html")
 
+@app.route("/atthaira")
+def atthaira():
+    return render_template("e_athaira_regist.html")
+
 # ===============================
 # CUPID'S CORNER
 # ===============================
