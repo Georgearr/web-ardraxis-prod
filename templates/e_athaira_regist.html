@@ -42,9 +42,9 @@ extra_css %}
     <span class="modal-close" onclick="closeModal('successModal')"
       >&times;</span
     >
-    <div class="modal-icon success">✓</div>
-    <h2>Pendaftaran Berhasil!</h2>
-    <p>Terima kasih telah mendaftar Atthaira 🎉</p>
+    <div class="modal-icon error">✓</div>
+    <h2>Pendaftaran Gagal</h2>
+    <p>Pendaftaran Atthaira telah ditutup</p>
   </div>
 </div>
 
@@ -100,7 +100,7 @@ extra_css %}
     openModal("loadingModal");
 
     fetch(
-      "https://script.google.com/macros/s/AKfycbzlEkphDSq_qpVVOmpG5U9dAO7ueoYSnQ9AUXe5zZHljqnJiFjJ_ti5qkqlDYpouQvzgA/exec",
+      "",
       {
         method: "POST",
         mode: "no-cors",
@@ -141,6 +141,7 @@ extra_css %}
       event.target.style.display = "none";
     }
   };
+
 </script>
 
 {% endblock %}
