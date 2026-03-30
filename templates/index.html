@@ -5,7 +5,6 @@ extra_css %}
   href="{{ url_for('static', filename='css/style_homepage.css') }}"
 />
 {% endblock %} {% block isi %}
-<!-- Home Section -->
 <section class="home" id="home">
   <div class="home-image">
     <img
@@ -21,11 +20,7 @@ extra_css %}
     </p>
   </div>
 </section>
-<!-- End Home Section -->
-
-<!-- Events Section -->
 <section class="events" id="events">
-  <!-- Happening Now -->
   <div class="events-now-badge text-shadow hidden">Happening Now</div>
 
   <div class="events-now-banner text-shadow hidden">
@@ -40,8 +35,8 @@ extra_css %}
         </a>
       </div>
       <div class="events-now-info">
-        <h3 class="events-now-title">Athaira</h3>
-        <p class="events-now-date">6 March 2026</p>
+        <h3 class="events-now-title">Coming Soon</h3>
+        <p class="events-now-date">Coming Soon</p>
       </div>
     </div>
   </div>
@@ -55,7 +50,6 @@ extra_css %}
 
     <div class="carousel-viewport">
       <div class="carousel-track">
-        <!-- Meloria -->
         <div class="carousel-slide">
           <div class="slide-media">
             <a href="{{ url_for('meloria') }}">
@@ -71,7 +65,6 @@ extra_css %}
           </div>
         </div>
 
-        <!-- Ajakrasa -->
         <div class="carousel-slide">
           <div class="slide-media">
             <a href="{{ url_for('coming_soon') }}">
@@ -87,7 +80,6 @@ extra_css %}
           </div>
         </div>
 
-        <!-- Festiora -->
         <div class="carousel-slide">
           <div class="slide-media">
             <a href="{{ url_for('festiora') }}">
@@ -103,7 +95,6 @@ extra_css %}
           </div>
         </div>
 
-        <!-- Concendant -->
         <div class="carousel-slide">
           <div class="slide-media">
             <a href="{{ url_for('coming_soon') }}">
@@ -119,7 +110,6 @@ extra_css %}
           </div>
         </div>
 
-        <!-- Sacrelume -->
         <div class="carousel-slide">
           <div class="slide-media">
             <a href="{{ url_for('coming_soon') }}">
@@ -135,7 +125,6 @@ extra_css %}
           </div>
         </div>
 
-        <!-- Cupid's Corner -->
         <div class="carousel-slide">
           <div class="slide-media">
             <a href="{{ url_for('cupids_corner') }}">
@@ -150,6 +139,21 @@ extra_css %}
             <p>7 February 2026</p>
           </div>
         </div>
+
+        <div class="carousel-slide">
+          <div class="slide-media">
+            <a href="{{ url_for('cupids_corner') }}">
+              <img
+                src="{{ url_for('static', filename='img/logo_ardraxis.png') }}"
+                alt="Cupid’s Corner"
+              />
+            </a>
+          </div>
+          <div class="slide-caption">
+            <h3>Athaira</h3>
+            <p>6 March 2026</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -157,9 +161,6 @@ extra_css %}
     <div class="carousel-dots" aria-label="Slide indicators"></div>
   </div>
 </section>
-<!-- End Events Section -->
-
-<!-- About Section -->
 <section class="about" id="about">
   <div class="about-text">
     <h1 class="text-shadow hidden">ARDRAXIS</h1>
@@ -176,11 +177,9 @@ extra_css %}
     alt="ARDRAXIS"
   />
 </section>
-<!-- End About Section -->
-
-<!-- Prior Cabinets Section -->
 <section class="prior-cabinets" id="pc">
   <h2 class="prior-cabinets-title text-shadow hidden">Our Prior Cabinets</h2>
+
   <div class="prior-cabinets-container hidden">
     <div class="cabinet-card hidden">
       <div class="cabinet-card-image">
@@ -243,7 +242,6 @@ extra_css %}
     </div>
   </div>
 </section>
-<!-- End Prior Cabinets Section -->
-{% block extra_js %}
+{% endblock %} {% block extra_js %}
 <script src="{{ url_for('static', filename='js/scroll_reveal.js') }}"></script>
-{% endblock %} {% endblock %}
+{% endblock %}

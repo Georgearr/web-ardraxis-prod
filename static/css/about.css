@@ -152,6 +152,9 @@
   }
 }
 
+/* =========================================================
+   ABOUT PAGE & SEKBID STRUCTURE
+   ========================================================= */
 .about-page {
   min-height: 100vh;
   padding: 40px 24px 80px;
@@ -188,6 +191,9 @@
   font-family: 'Bebas Neue', sans-serif;
 }
 
+/* =========================================================
+   IMAGE CAROUSEL (KABINET)
+   ========================================================= */
 .sekbid-image-card {
   width: 100%;
   min-height: 500px;
@@ -197,12 +203,7 @@
   position: relative;
   z-index: 1;
   overflow: hidden;
-  background: radial-gradient(
-      circle at top,
-      rgba(255, 255, 255, 0.09),
-      transparent 55%
-    ),
-    rgba(3, 77, 83, 0.9);
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.09), transparent 55%), rgba(3, 77, 83, 0.9);
 }
 
 .sekbid-image-card::before,
@@ -210,23 +211,13 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(
-      circle at 20% 20%,
-      rgba(255, 255, 255, 0.16),
-      transparent 50%
-    ),
-    radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.14), transparent 52%);
+  background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.16), transparent 50%), radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.14), transparent 52%);
   opacity: 0.4;
   pointer-events: none;
 }
 
 .sekbid-image-card::after {
-  background-image: radial-gradient(
-      circle at 25% 30%,
-      rgba(255, 255, 255, 0.06),
-      transparent 55%
-    ),
-    radial-gradient(circle at 70% 55%, rgba(255, 255, 255, 0.06), transparent 55%);
+  background-image: radial-gradient(circle at 25% 30%, rgba(255, 255, 255, 0.06), transparent 55%), radial-gradient(circle at 70% 55%, rgba(255, 255, 255, 0.06), transparent 55%);
   mix-blend-mode: screen;
 }
 
@@ -289,6 +280,9 @@
   }
 }
 
+/* =========================================================
+   MEMBER CARDS
+   ========================================================= */
 .sekbid-card-wrapper {
   display: flex;
   gap: 35px;
@@ -310,12 +304,7 @@
   border-radius: 18px;
   border: 2px solid rgba(240, 249, 255, 0.9);
   padding: 24px 20px 26px;
-  background: radial-gradient(
-      circle at top,
-      rgba(255, 255, 255, 0.09),
-      transparent 55%
-    ),
-    rgba(3, 77, 83, 0.9);
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.09), transparent 55%), rgba(3, 77, 83, 0.9);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
@@ -328,23 +317,13 @@
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(
-      circle at 20% 20%,
-      rgba(255, 255, 255, 0.16),
-      transparent 50%
-    ),
-    radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.14), transparent 52%);
+  background-image: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.16), transparent 50%), radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.14), transparent 52%);
   opacity: 0.4;
   pointer-events: none;
 }
 
 .sekbid-card-inner::after {
-  background-image: radial-gradient(
-      circle at 25% 30%,
-      rgba(255, 255, 255, 0.06),
-      transparent 55%
-    ),
-    radial-gradient(circle at 70% 55%, rgba(255, 255, 255, 0.06), transparent 55%);
+  background-image: radial-gradient(circle at 25% 30%, rgba(255, 255, 255, 0.06), transparent 55%), radial-gradient(circle at 70% 55%, rgba(255, 255, 255, 0.06), transparent 55%);
   mix-blend-mode: screen;
 }
 
@@ -508,7 +487,7 @@
 
 .sekbid-card-instagram {
   color: #e0f2fe;
-  font-size: 26px; /* perbesar ikon instagram */
+  font-size: 26px;
   text-decoration: none;
   transition: all 0.3s ease;
   display: flex;
@@ -521,6 +500,9 @@
   transform: scale(1.25);
 }
 
+/* =========================================================
+   DECORATIVE ELEMENTS & ANIMATIONS (CLOUDS)
+   ========================================================= */
 .sekbid-bg-word {
   position: absolute;
   inset: 50% 0 auto 0;
@@ -537,7 +519,6 @@
   white-space: nowrap;
 }
 
-/* Cloud decorative element – semua awan ukuran sama, posisi beda (kiri/ tengah / kanan, atas & bawah) */
 .sekbid-cloud {
   position: absolute;
   width: 26%;
@@ -666,6 +647,9 @@
   }
 }
 
+/* =========================================================
+   GLOBAL MEDIA QUERIES (RESPONSIVE)
+   ========================================================= */
 @media (max-width: 900px) {
   .about-page {
     padding-top: 110px;
@@ -696,7 +680,6 @@
     padding: 28px 18px 32px;
   }
 
-  /* Jadikan sekbid_image responsif 16:9 di mobile */
   .sekbid-image-card {
     min-height: auto;
   }
@@ -734,5 +717,3 @@
     height: 150px;
   }
 }
-
-
