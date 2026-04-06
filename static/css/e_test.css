@@ -1,0 +1,11 @@
+:root {
+  /* Primary colors */
+  --primary: #66bef9;
+  --primary-dark: #3ea4e8;
+  --text-color-glow: #fef2f2;
+  /* UI colors */
+  --nav-headings: white;
+  --overlay-bg: rgba(220, 38, 38, 0.8);
+  /* Navbar footer */
+  --navbar-hover: #aedfff;
+}

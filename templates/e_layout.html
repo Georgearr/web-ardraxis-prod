@@ -1,0 +1,104 @@
+{% extends "layout.html" %}
+
+<!--
+  e_layout blocks list :
+    event_css
+    banner_img
+    title
+    desc
+    ketua_panitia
+    wakil_ketua_panitia
+    ketua_acara
+-->
+
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='css/e_layout.css') }}"
+/>
+{% block event_css %} {% endblock %}
+
+{% endblock %}
+
+{% block isi %}
+<!-- Banner Section -->
+<section class="banner">
+  {% block banner_img %} {% endblock %}
+  <section class="gradient-banner"></section>
+</section>
+
+<!-- About Section -->
+<section class="about">
+  <h1 class="about-title hidden">About {% block title %} {% endblock %}</h1>
+  <div class="about-desc hidden">{% block desc %} {% endblock %}</div>
+  <div class="about-panitia-row">
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Ketua Panitia</span></div>
+      <div class="about-panitia-name">{% block ketua_panitia %} {% endblock %}</div>
+    </div>
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Wakil Ketua Panitia</span></div>
+      <div class="about-panitia-name">{% block wakil_ketua_panitia %} {% endblock %}</div>
+    </div>
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Ketua Acara</span></div>
+      <div class="about-panitia-name">{% block ketua_acara %} {% endblock %}</div>
+    </div>
+  </div>
+</section>
+
+<!-- Content Section -->
+<section class="content">
+  <!-- Performance Section -->
+  <div class="performance">
+    <h1 class="hidden">Activities & Performances</h1>
+    <div class="lists"></div>
+  </div>
+</section>
+
+<!-- Modal Detail: kiri deskripsi, kanan logo/icon -->
+<div class="detail" id="detail">
+  <div class="detail-container">
+    <div class="content">
+      <div onclick="closeDetail()" class="close">
+        <i class="bi bi-x-circle"></i>
+      </div>
+      <div class="content-desc">
+        <h2 id="detail-heading">Judul</h2>
+        <img id="detail-banner" class="detail-banner" alt="" style="display: none;">
+        <p id="detail-desc" class="detail-desc-text">Deskripsi aktivitas.</p>
+      </div>
+      <div class="content-logo">
+        <i id="detail-logo" class="bx"></i>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock isi %}
+
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='js/detail.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/shown_up.js') }}"></script>
+  {% block event_dict %} {% endblock %}
+  
+  <script>
+    const container = document.querySelector(".lists");
+
+    for (activityIndex in activities) {
+      const activity = activities[activityIndex];
+      const activityContent = document.createElement("div");
+      container.append(activityContent);
+
+      activityContent.innerHTML += `
+      <div class="list hidden" data-event-name="${activity["aName"]}" data-class-event="${activity["aClass"]}" data-desc-event="${activity["aDesc"]}" data-image="{{ url_for('static', filename='img/festiora/test.jpg') }}">
+        <i class="${activity["aClass"]}"></i>
+        <p>${activity["aName"]}</p>
+        <div class="list-actions" onclick="event.stopPropagation()">
+          <button type="button" class="list-btn" onclick="showDetailFromList(this.closest('.list'), false)">Info</button>
+        </div>
+      </div>
+      `;
+    }
+  </script>
+{% endblock %}

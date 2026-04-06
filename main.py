@@ -61,13 +61,9 @@ def festiora():
 def handle_404(error):
     return render_template("404.html"), 404
 
-@app.route("/athaira")
-def athaira():
-    return render_template("e_athaira_regist.html")
-
 @app.route("/atthaira")
 def atthaira():
-    return render_template("e_athaira_regist.html")
+    return render_template("e_atthaira_regist.html")
 
 # ===============================
 # CUPID'S CORNER
