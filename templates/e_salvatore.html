@@ -1,0 +1,155 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='css/e_salvatore.css') }}"
+/>
+{% endblock %}
+
+{% block isi %}
+<!-- Banner Section -->
+<section class="banner">
+  <img
+    src="{{ url_for('static', filename='img/banner/festiora_banner.png') }}"
+    alt="Salvatoré Banner"
+  />
+  <section class="gradient-banner"></section>
+</section>
+
+<!-- About Section -->
+<section class="about">
+  <h1 class="about-title hidden">About {% block title %} Salvatoré {% endblock %}</h1>
+  <div class="about-desc hidden">"Salvatorè" terinspirasi dari kata savior (Juru Selamat) dengan sentuhan modern. Nama ini mencerminkan bahwa sang penyelamat yaitu Yesus telah memberikan nyawa nya untuk seluruh umat manusia dengan wafat di kayu salib.</div> <!-- add more description -->
+  <div class="about-panitia-row">
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Ketua Panitia</span></div>
+      <div class="about-panitia-name">Michaela Nathania</div>
+    </div>
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Wakil Ketua Panitia</span></div>
+      <div class="about-panitia-name">Benedicta Andinica Keiko</div>
+    </div>
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Ketua Acara</span></div>
+      <div class="about-panitia-name">Marcello Deven Husada</div>
+    </div>
+  </div>
+</section>
+
+<!-- Content Section -->
+<section class="content">
+  <!-- Performance Section -->
+  <div class="performance">
+    <h1 class="hidden">Competitions</h1>
+    <p class="hidden">Click on a competition to register</p>
+    <div class="lists">
+      <a href="{{ url_for('home' ) }}">
+        <div class="list hidden" data-event-name="Egg Shell Mosaic Sprint" data-desc-event="Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri." data-image="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
+          <!-- change temporary image when posters are done and delete width + height styles -->
+          <img
+            src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
+            alt="Egg Shell Mosaic Sprint"
+            width="240px"
+            height="320px"
+          >
+          <div class="activity-desc">
+            <div class="activity-text">
+              <h1>Egg Shell Mosaic Sprint</h1>
+              <p>Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri.</p>
+            </div>
+          </div>
+        </div>
+      </a>
+      
+      <a href="{{ url_for('home' ) }}">
+        <div class="list hidden" data-event-name="Story Telling Rohani" data-desc-event="Peserta secara individu menyampaikan sebuah cerita yang berkaitan dengan makna Paskah, seperti kisah kebangkitan Yesus, pengorbanan Yesus, atau nilai kasih, pengampunan, dan harapan dalam kehidupan Kristiani. Setiap peserta diberi waktu sekitar 3-5 menit untuk menyampaikan cerita secara lisan tanpa membaca teks secara penuh. Peserta diperbolehkan menggunakan ekspresi wajah, gerakan tubuh, dan properti sederhana untuk mendukung penyampaian cerita agar lebih menarik. Penilaian dilakukan oleh juri berdasarkan kesesuaian cerita dengan tema Paskah, penghayatan dan ekspresi saat bercerita, kejelasan alur cerita serta pesan rohani yang disampaikan, kreativitas dalam penyampaian, dan kemampuan peserta dalam menguasai panggung." data-image="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
+          <!-- change temporary image when posters are done and delete width + height styles -->
+          <img
+            src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
+            alt="Story Telling Rohani"
+            width="240px"
+            height="320px"
+          >
+          <div class="activity-desc">
+            <div class="activity-text">
+              <h1>Story Telling Rohani</h1>
+              <p>Peserta secara individu menyampaikan sebuah cerita yang berkaitan dengan makna Paskah, seperti kisah kebangkitan Yesus, pengorbanan Yesus, atau nilai kasih, pengampunan, dan harapan dalam kehidupan Kristiani. Setiap peserta diberi waktu sekitar 3-5 menit untuk menyampaikan cerita secara lisan tanpa membaca teks secara penuh. Peserta diperbolehkan menggunakan ekspresi wajah, gerakan tubuh, dan properti sederhana untuk mendukung penyampaian cerita agar lebih menarik. Penilaian dilakukan oleh juri berdasarkan kesesuaian cerita dengan tema Paskah, penghayatan dan ekspresi saat bercerita, kejelasan alur cerita serta pesan rohani yang disampaikan, kreativitas dalam penyampaian, dan kemampuan peserta dalam menguasai panggung.</p>
+            </div>
+          </div>
+        </div>
+      </a>
+      
+      <a href="{{ url_for('home' ) }}">
+        <div class="list hidden" data-event-name="Menyanyi Lagu Rohani" data-desc-event="Setiap peserta tampil secara individu dan menyanyikan satu lagu rohani yang telah dipilih sebelumnya. Waktu penampilan biasanya sekitar 3-5 menit sesuai dengan durasi lagu. Peserta diperbolehkan menggunakan instrumental ataupun dalam bentuk karaoke. Selama penampilan, peserta harus menyanyikan lagu dengan penghayatan, ekspresi, serta kejelasan vokal agar pesan rohani dari lagu dapat tersampaikan dengan baik kepada pendengar. Penilaian dilakukan oleh juri berdasarkan kualitas vokal, ketepatan nada dan tempo, penghayatan lagu, serta penampilan atau kepercayaan diri di atas panggung." data-image="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
+          <!-- change temporary image when posters are done and delete width + height styles -->
+          <img
+            src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
+            alt="Menyanyi Lagu Rohani"
+            width="240px"
+            height="320px"
+          >
+          <div class="activity-desc">
+            <div class="activity-text">
+              <h1>Menyanyi Lagu Rohani</h1>
+              <p>Setiap peserta tampil secara individu dan menyanyikan satu lagu rohani yang telah dipilih sebelumnya. Waktu penampilan biasanya sekitar 3-5 menit sesuai dengan durasi lagu. Peserta diperbolehkan menggunakan instrumental ataupun dalam bentuk karaoke. Selama penampilan, peserta harus menyanyikan lagu dengan penghayatan, ekspresi, serta kejelasan vokal agar pesan rohani dari lagu dapat tersampaikan dengan baik kepada pendengar. Penilaian dilakukan oleh juri berdasarkan kualitas vokal, ketepatan nada dan tempo, penghayatan lagu, serta penampilan atau kepercayaan diri di atas panggung.</p>
+            </div>
+          </div>
+        </div>
+      </a>
+      
+      <a href="{{ url_for('home' ) }}">
+        <div class="list hidden" data-event-name="Quiz Alkitab & Pengetahuan Umum Agama" data-desc-event="Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri." data-image="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
+          <!-- change temporary image when posters are done and delete width + height styles -->
+          <img
+            src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
+            alt="Quiz Alkitab & Pengetahuan Umum Agama"
+            width="240px"
+            height="320px"
+          >
+          <div class="activity-desc">
+            <div class="activity-text">
+              <h1>Quiz Alkitab & Pengetahuan Umum Agama</h1>
+              <p>Peserta PER KELAS akan menyediakan 2 orang (bisa Katolik & Katolik, bisa Kristen & Kristen, bisa Katolik & Kristen) untuk mengikuti lomba Quiz ini. Pada babak awal, peserta menjawab soal pilihan ganda atau isian singkat seputar isi Alkitab, tokoh-tokoh, peristiwa penting, serta pengetahuan umum agama untuk menyaring peserta terbaik. Babak selanjutnya menggunakan sistem cepat tepat, di mana peserta yang lebih dulu menekan bel berhak menjawab pertanyaan, dan jika jawabannya salah, kesempatan diberikan kepada peserta lain. Tingkat kesulitan soal akan meningkat pada setiap babak, mulai dari pengetahuan dasar hingga pemahaman yang lebih mendalam. Penilaian didasarkan pada ketepatan dan kecepatan menjawab, dengan pengurangan poin jika jawaban salah pada babak tertentu. Pada babak final, peserta akan diberikan soal studi kasus atau pertanyaan terbuka yang menuntut penalaran dan pemahaman iman secara lebih luas. Peserta dengan total poin tertinggi akan dinyatakan sebagai pemenang.</p>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <h1 class="fun-activities-title hidden">Fun Activities</h1>
+    <div class="fun-activities-lists">
+      <div class="fun-activities-list hidden">
+        <i class="bx bx-question-mark bx-tada"></i>
+        <p>Bucket of Faith</p>
+      </div>
+
+      <div class="fun-activities-list hidden">
+        <i class="bx bx-body bx-tada"></i>
+        <p>Squat Easter</p>
+      </div>
+
+      <div class="fun-activities-list hidden">
+        <i class="bx bxs-cylinder bx-tada"></i>
+        <p>Flip Cup</p>
+      </div>
+
+      <div class="fun-activities-list hidden">
+        <i class="bx bx-palette bx-tada"></i>
+        <p>Don't Touch the Color</p>
+      </div>
+
+      <div class="fun-activities-list hidden">
+        <i class="bx bx-balloon bx-tada"></i>
+        <p>Cup Stacking</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock isi %}
+
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='js/detail.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/shown_up.js') }}"></script>
+{% endblock %}

@@ -49,6 +49,10 @@ def about_us():
 def coming_soon():
     return render_template("coming_soon.html")
 
+@app.errorhandler(404)
+def handle_404(error):
+    return render_template("404.html"), 404
+
 @app.route("/meloria")
 def meloria():
     return render_template("e_meloria.html")
@@ -57,20 +61,17 @@ def meloria():
 def festiora():
     return render_template("e_festiora.html")
 
-@app.errorhandler(404)
-def handle_404(error):
-    return render_template("404.html"), 404
+@app.route("/cupids_corner")
+def cupids_corner():
+    return render_template("valentine_order.html")
 
 @app.route("/atthaira")
 def atthaira():
     return render_template("e_atthaira_regist.html")
 
-# ===============================
-# CUPID'S CORNER
-# ===============================
-@app.route("/cupids_corner")
-def cupids_corner():
-    return render_template("valentine_order.html")
+@app.route("/salvatore")
+def salvatore():
+    return render_template("e_salvatore.html")
 
 # ===============================
 # RUN
