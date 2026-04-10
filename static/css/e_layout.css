@@ -781,6 +781,9 @@ footer .footer-content a:hover {
   position: fixed;
   z-index: 9999;
 }
+.sidebar-brand {
+  text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
+}
 .sidebar-nav a:hover {
   text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
 }

@@ -1,0 +1,45 @@
+{% extends 'e_salvatore/regist_layout.html' %}
+
+{% block poster %}
+  <img
+    src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
+    alt="Story Telling Rohani"
+    width="420px"
+    height="560px"
+  >
+{% endblock %}
+
+{% block title %} Story Telling Rohani {% endblock %}
+{% block desc %}
+  <p>Peserta secara individu menyampaikan sebuah cerita yang berkaitan dengan makna Paskah, seperti kisah kebangkitan Yesus, pengorbanan Yesus, atau nilai kasih, pengampunan, dan harapan dalam kehidupan Kristiani. Setiap peserta diberi waktu sekitar 3-5 menit untuk menyampaikan cerita secara lisan tanpa membaca teks secara penuh. Peserta diperbolehkan menggunakan ekspresi wajah, gerakan tubuh, dan properti sederhana untuk mendukung penyampaian cerita agar lebih menarik. Penilaian dilakukan oleh juri berdasarkan kesesuaian cerita dengan tema Paskah, penghayatan dan ekspresi saat bercerita, kejelasan alur cerita serta pesan rohani yang disampaikan, kreativitas dalam penyampaian, dan kemampuan peserta dalam menguasai panggung.</p>
+{% endblock %}
+
+{% block form %}
+  <form class="form" id="form">
+    <h1>Registration Form</h1>
+    <label for="nama">Nama Lengkap : </label><br>
+    <input type="text" name="nama" placeholder="Nama Lengkap" required><br><br>
+
+    <label for="kategori">Kategori : </label><br>
+    <div class="radio">
+      <input type="radio" name="kategori" value="SMP" required><label for="SMP">SMP</label><br>
+      <input type="radio" name="kategori" value="SMA" required><label for="SMA">SMA</label>
+    </div><br>
+
+    <label for="kelas">Kelas : </label><br>
+    <input type="text" name="kelas" placeholder="Kelas" required><br><br>
+
+    <label for="agama">Agama : </label><br>
+    <div class="radio">
+      <input type="radio" name="agama" value="Kristen" required><label for="Kristen">Kristen</label><br>
+      <input type="radio" name="agama" value="Katolik" required><label for="Katolik">Katolik</label>
+    </div><br>
+
+    <label for="tema">Tema Bacaan : </label><br>
+    <div class="radio">
+      <input type="radio" name="tema" value="" required><label for="">placeholder</label>
+    </div><br>
+    
+    <button>Register</button>
+  </form>
+{% endblock %}

@@ -18,6 +18,11 @@
   <section class="gradient-banner"></section>
 </section>
 
+<!-- Deadline Badge -->
+<div class="deadline-container">
+  <div class="deadline-badge">Starts • April 17, 2026</div>
+</div>
+
 <!-- About Section -->
 <section class="about">
   <h1 class="about-title hidden">About {% block title %} Salvatoré {% endblock %}</h1>
@@ -45,7 +50,7 @@
     <h1 class="hidden">Competitions</h1>
     <p class="hidden">Click on a competition to register</p>
     <div class="lists">
-      <a href="{{ url_for('home' ) }}">
+      <a href="{{ url_for('mosaic' ) }}">
         <div class="list hidden" data-event-name="Egg Shell Mosaic Sprint" data-desc-event="Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri." data-image="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
           <!-- change temporary image when posters are done and delete width + height styles -->
           <img
@@ -63,7 +68,7 @@
         </div>
       </a>
       
-      <a href="{{ url_for('home' ) }}">
+      <a href="{{ url_for('storytelling' ) }}">
         <div class="list hidden" data-event-name="Story Telling Rohani" data-desc-event="Peserta secara individu menyampaikan sebuah cerita yang berkaitan dengan makna Paskah, seperti kisah kebangkitan Yesus, pengorbanan Yesus, atau nilai kasih, pengampunan, dan harapan dalam kehidupan Kristiani. Setiap peserta diberi waktu sekitar 3-5 menit untuk menyampaikan cerita secara lisan tanpa membaca teks secara penuh. Peserta diperbolehkan menggunakan ekspresi wajah, gerakan tubuh, dan properti sederhana untuk mendukung penyampaian cerita agar lebih menarik. Penilaian dilakukan oleh juri berdasarkan kesesuaian cerita dengan tema Paskah, penghayatan dan ekspresi saat bercerita, kejelasan alur cerita serta pesan rohani yang disampaikan, kreativitas dalam penyampaian, dan kemampuan peserta dalam menguasai panggung." data-image="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
           <!-- change temporary image when posters are done and delete width + height styles -->
           <img
@@ -81,7 +86,7 @@
         </div>
       </a>
       
-      <a href="{{ url_for('home' ) }}">
+      <a href="{{ url_for('nyanyi' ) }}">
         <div class="list hidden" data-event-name="Menyanyi Lagu Rohani" data-desc-event="Setiap peserta tampil secara individu dan menyanyikan satu lagu rohani yang telah dipilih sebelumnya. Waktu penampilan biasanya sekitar 3-5 menit sesuai dengan durasi lagu. Peserta diperbolehkan menggunakan instrumental ataupun dalam bentuk karaoke. Selama penampilan, peserta harus menyanyikan lagu dengan penghayatan, ekspresi, serta kejelasan vokal agar pesan rohani dari lagu dapat tersampaikan dengan baik kepada pendengar. Penilaian dilakukan oleh juri berdasarkan kualitas vokal, ketepatan nada dan tempo, penghayatan lagu, serta penampilan atau kepercayaan diri di atas panggung." data-image="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
           <!-- change temporary image when posters are done and delete width + height styles -->
           <img
@@ -99,7 +104,7 @@
         </div>
       </a>
       
-      <a href="{{ url_for('home' ) }}">
+      <a href="{{ url_for('kuis_alkitab' ) }}">
         <div class="list hidden" data-event-name="Quiz Alkitab & Pengetahuan Umum Agama" data-desc-event="Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri." data-image="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
           <!-- change temporary image when posters are done and delete width + height styles -->
           <img

@@ -11,7 +11,7 @@
   /* UI colors */
   --nav-headings: white;
   /* Navbar footer */
-  --navbar-hover: #aedfff;
+  --navbar-hover: #ffd3f1;
 }
 
 /* Reset and Base Styles */
@@ -88,7 +88,7 @@ section.about {
   align-items: center;
   width: 90vw;
   max-width: 90vw;
-  margin: 5vw;
+  margin: 2vw 5vw 5vw 5vw;
   background: linear-gradient(to bottom, var(--container-bg-color), var(--container-bg-color-dark));
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
   border-radius: 50px;
@@ -700,6 +700,9 @@ footer .footer-content a:hover {
   position: fixed;
   z-index: 9999;
 }
+.sidebar-brand {
+  text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
+}
 .sidebar-nav a:hover {
   text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
 }
@@ -733,4 +736,20 @@ footer .footer-content a:hover {
   padding: 20px;
   border-radius: 18px;
   backdrop-filter: blur(6px);
+}
+.deadline-container {
+  width: 100%;
+  margin-top: 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.deadline-badge {
+  display: inline-block;
+  background: var(--container-bg-color);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 1.5rem;
+  font-weight: 600;
 }

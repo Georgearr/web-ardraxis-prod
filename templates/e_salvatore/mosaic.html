@@ -1,0 +1,40 @@
+{% extends 'e_salvatore/regist_layout.html' %}
+
+{% block poster %}
+  <img
+    src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
+    alt="Egg Shell Mosaic Sprint"
+    width="420px"
+    height="560px"
+  >
+{% endblock %}
+
+{% block title %} Egg Shell Mosaic Sprint {% endblock %}
+{% block desc %}
+  <p>Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri.</p>
+{% endblock %}
+
+{% block form %}
+  <form class="form" id="form">
+    <h1>Registration Form</h1>
+    <label for="nama">Nama Lengkap : </label><br>
+    <input type="text" name="nama" placeholder="Nama Lengkap" required><br><br>
+
+    <label for="kategori">Kategori : </label><br>
+    <div class="radio">
+      <input type="radio" name="kategori" value="SMP" required><label for="SMP">SMP</label><br>
+      <input type="radio" name="kategori" value="SMA" required><label for="SMA">SMA</label>
+    </div><br>
+
+    <label for="kelas">Kelas : </label><br>
+    <input type="text" name="kelas" placeholder="Kelas" required><br><br>
+
+    <label for="agama">Agama : </label><br>
+    <div class="radio">
+      <input type="radio" name="agama" value="Kristen" required><label for="Kristen">Kristen</label><br>
+      <input type="radio" name="agama" value="Katolik" required><label for="Katolik">Katolik</label>
+    </div><br>
+    
+    <button>Register</button>
+  </form>
+{% endblock %}

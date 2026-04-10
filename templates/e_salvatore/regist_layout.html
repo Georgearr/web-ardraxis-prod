@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='css/e_salvatore_regist.css') }}"
+/>
+{% endblock %}
+
+{% block isi %}
+<div class="activity">
+  {% block poster %} {% endblock %}
+  <div class="activity-right">
+    <h1>{% block title %} {% endblock %}</h1>
+    {% block desc %} {% endblock %}
+
+    {% block form %} {% endblock %}
+  </div>
+</div>
+{% endblock isi %}
+
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='js/detail.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/shown_up.js') }}"></script>
+{% endblock %}
