@@ -20,7 +20,10 @@
 
 <!-- Deadline Badge -->
 <div class="deadline-container">
-  <div class="deadline-badge">Starts • April 17, 2026</div>
+  <div class="deadline-badge">
+    <h2>Starts • April 17, 2026</h2>
+    <p>See you by then!</p>
+  </div>
 </div>
 
 <!-- About Section -->
@@ -51,13 +54,10 @@
     <p class="hidden">Click on a competition to register</p>
     <div class="lists">
       <a href="{{ url_for('mosaic' ) }}">
-        <div class="list hidden" data-event-name="Egg Shell Mosaic Sprint" data-desc-event="Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri." data-image="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
-          <!-- change temporary image when posters are done and delete width + height styles -->
+        <div class="list hidden" data-event-name="Egg Shell Mosaic Sprint" data-desc-event="Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri." data-image="{{ url_for('static', filename='img/salvatore/egg-shell-mosaic-sprint.jpeg') }}">
           <img
-            src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
+            src="{{ url_for('static', filename='img/salvatore/egg-shell-mosaic-sprint.jpeg') }}"
             alt="Egg Shell Mosaic Sprint"
-            width="240px"
-            height="320px"
           >
           <div class="activity-desc">
             <div class="activity-text">
@@ -69,13 +69,10 @@
       </a>
       
       <a href="{{ url_for('storytelling' ) }}">
-        <div class="list hidden" data-event-name="Story Telling Rohani" data-desc-event="Peserta secara individu menyampaikan sebuah cerita yang berkaitan dengan makna Paskah, seperti kisah kebangkitan Yesus, pengorbanan Yesus, atau nilai kasih, pengampunan, dan harapan dalam kehidupan Kristiani. Setiap peserta diberi waktu sekitar 3-5 menit untuk menyampaikan cerita secara lisan tanpa membaca teks secara penuh. Peserta diperbolehkan menggunakan ekspresi wajah, gerakan tubuh, dan properti sederhana untuk mendukung penyampaian cerita agar lebih menarik. Penilaian dilakukan oleh juri berdasarkan kesesuaian cerita dengan tema Paskah, penghayatan dan ekspresi saat bercerita, kejelasan alur cerita serta pesan rohani yang disampaikan, kreativitas dalam penyampaian, dan kemampuan peserta dalam menguasai panggung." data-image="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
-          <!-- change temporary image when posters are done and delete width + height styles -->
+        <div class="list hidden" data-event-name="Story Telling Rohani" data-desc-event="Peserta secara individu menyampaikan sebuah cerita yang berkaitan dengan makna Paskah, seperti kisah kebangkitan Yesus, pengorbanan Yesus, atau nilai kasih, pengampunan, dan harapan dalam kehidupan Kristiani. Setiap peserta diberi waktu sekitar 3-5 menit untuk menyampaikan cerita secara lisan tanpa membaca teks secara penuh. Peserta diperbolehkan menggunakan ekspresi wajah, gerakan tubuh, dan properti sederhana untuk mendukung penyampaian cerita agar lebih menarik. Penilaian dilakukan oleh juri berdasarkan kesesuaian cerita dengan tema Paskah, penghayatan dan ekspresi saat bercerita, kejelasan alur cerita serta pesan rohani yang disampaikan, kreativitas dalam penyampaian, dan kemampuan peserta dalam menguasai panggung." data-image="{{ url_for('static', filename='img/salvatore/story-telling-rohani.jpeg') }}">
           <img
-            src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
+            src="{{ url_for('static', filename='img/salvatore/story-telling-rohani.jpeg') }}"
             alt="Story Telling Rohani"
-            width="240px"
-            height="320px"
           >
           <div class="activity-desc">
             <div class="activity-text">

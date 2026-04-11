@@ -10,7 +10,10 @@
 
 {% block isi %}
 <div class="activity">
-  {% block poster %} {% endblock %}
+  <div class="activity-left">
+    <a href="{{ url_for('salvatore' ) }}"><button>Back to Salvatoré</button></a>
+    {% block poster %} {% endblock %}
+  </div>
   <div class="activity-right">
     <h1>{% block title %} {% endblock %}</h1>
     {% block desc %} {% endblock %}

@@ -2,16 +2,16 @@
 
 :root {
   /* Primary colors */
-  --bg-color: #ffdaf4;
-  --container-bg-color: #ffa9e5;
-  --container-bg-color-dark: #ff8fdd;
-  --primary: #fface5;
-  --primary-dark: #e075be;
+  --bg-color: #ffe6da;
+  --container-bg-color: #ffc3a9;
+  --container-bg-color-dark: #ffa57f;
+  --primary: #ffc3a9;
+  --primary-dark: #ffa57f;
   --text-color-glow: #fef2f2;
   /* UI colors */
   --nav-headings: white;
   /* Navbar footer */
-  --navbar-hover: #ffd3f1;
+  --navbar-hover: #fff9f6;
 }
 
 /* Reset and Base Styles */
@@ -219,6 +219,12 @@ section.content .list:hover {
   background-color: var(--primary-dark);
 }
 
+section.content .list img {
+  object-fit: contain;
+  width: 18vw;
+  border-radius: 20px;
+}
+
 section.content .list i {
   font-size: 50pt;
   color: var(--box-list-colour);
@@ -281,7 +287,6 @@ section.content .fun-activities-list {
   align-items: center;
   margin: 1rem;
   transition: all 1.2s ease;
-  cursor: pointer;
 }
 
 section.content .fun-activities-list:hover {
@@ -745,11 +750,13 @@ footer .footer-content a:hover {
   align-items: center;
 }
 .deadline-badge {
+  width: 30%;
   display: inline-block;
   background: var(--container-bg-color);
   color: #fff;
   padding: 8px 16px;
   border-radius: 999px;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
+  text-align: center;
 }

@@ -2,16 +2,19 @@
 
 :root {
   /* Primary colors */
-  --bg-color: #ffdaf4;
-  --container-bg-color: #ffa9e5;
-  --container-bg-color-dark: #ff8fdd;
-  --primary: #fface5;
-  --primary-dark: #e075be;
+  --bg-color: #ffe6da;
+  --container-bg-color: #ffc3a9;
+  --container-bg-color-dark: #ffa57f;
+  --primary: #ffc3a9;
+  --primary-dark: #ffa57f;
   --text-color-glow: #fef2f2;
+  /* Span colors */
+  --warning-color: #ff58b1;
+  --highlight-color: #fff767;
   /* UI colors */
   --nav-headings: white;
   /* Navbar footer */
-  --navbar-hover: #ffd3f1;
+  --navbar-hover: #fff9f6;
 }
 
 /* Reset and Base Styles */
@@ -94,26 +97,71 @@ li {
 /* Registration Page */
 .activity {
   display: flex;
+  align-items: start;
   width: 90vw;
   max-width: 90vw;
   margin: 5vw;
   background: linear-gradient(to bottom, var(--container-bg-color), var(--container-bg-color-dark));
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 50px;
+  border-radius: 20px;
   padding: 2vw;
   gap: 20px;
 }
 
-.activity img {
-  border-radius: 50px;
+.activity-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.activity-left button {
+  width: 100%;
+  background-color: var(--bg-color);
+  border: 1px solid #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px var(--text-color-glow);
+  font-size: 1.25rem;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.activity-left button:hover {
+  background-color: var(--primary);
+  transform: scale(1.02);
+}
+
+.activity-left img {
+  object-fit: contain;
+  border-radius: 20px;
+  width: 36vw;
 }
 
 .activity-right h1 {
   font-size: 2.5rem;
 }
 
+.activity-right h2 {
+  font-size: 1.5rem;
+}
+
 .activity-right p {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
+}
+
+.activity-right span.warning {
+  font-weight: 700;
+  color: var(--warning-color);
+}
+
+.activity-right span.highlight {
+  font-weight: 700;
+  color: var(--highlight-color);
+}
+
+.activity-right li {
+  margin-left: 20px;
+  font-size: 1.15rem;
 }
 
 /* Form Style */

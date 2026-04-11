@@ -2,16 +2,58 @@
 
 {% block poster %}
   <img
-    src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
+    src="{{ url_for('static', filename='img/salvatore/story-telling-rohani.jpeg') }}"
     alt="Story Telling Rohani"
-    width="420px"
-    height="560px"
   >
 {% endblock %}
 
 {% block title %} Story Telling Rohani {% endblock %}
 {% block desc %}
-  <p>Peserta secara individu menyampaikan sebuah cerita yang berkaitan dengan makna Paskah, seperti kisah kebangkitan Yesus, pengorbanan Yesus, atau nilai kasih, pengampunan, dan harapan dalam kehidupan Kristiani. Setiap peserta diberi waktu sekitar 3-5 menit untuk menyampaikan cerita secara lisan tanpa membaca teks secara penuh. Peserta diperbolehkan menggunakan ekspresi wajah, gerakan tubuh, dan properti sederhana untuk mendukung penyampaian cerita agar lebih menarik. Penilaian dilakukan oleh juri berdasarkan kesesuaian cerita dengan tema Paskah, penghayatan dan ekspresi saat bercerita, kejelasan alur cerita serta pesan rohani yang disampaikan, kreativitas dalam penyampaian, dan kemampuan peserta dalam menguasai panggung.</p>
+  <p>
+    Peserta secara individu menyampaikan sebuah cerita yang berkaitan dengan makna Paskah, seperti kisah kebangkitan Yesus, pengorbanan Yesus, atau nilai kasih, pengampunan, dan harapan dalam kehidupan Kristiani. Setiap peserta diberi waktu sekitar 3-5 menit untuk menyampaikan cerita secara lisan tanpa membaca teks secara penuh. Peserta diperbolehkan menggunakan ekspresi wajah, gerakan tubuh, dan properti sederhana untuk mendukung penyampaian cerita agar lebih menarik. Penilaian dilakukan oleh juri berdasarkan kesesuaian cerita dengan tema Paskah, penghayatan dan ekspresi saat bercerita, kejelasan alur cerita serta pesan rohani yang disampaikan, kreativitas dalam penyampaian, dan kemampuan peserta dalam menguasai panggung.
+  </p><br>
+
+  <h2>Mekanisme</h2>
+  <ol>
+    <li>Peserta <b>WAJIB</b> menyampaikan cerita sesuai <b>TEMA</b> yang ditentukan.</li>
+    <li>Peserta diperbolehkan menggunakan ekspresi wajah, gerakan tubuh, dan properti sederhana untuk mendukung menyampaian cerita agar menjadi lebih menarik.</li>
+    <li>Penilaian dilakukan berdasarkan :
+      <ol type="a">
+        <li>Kesesuaian cerita dengan tema Paskah</li>
+        <li>Penghayatan</li>
+        <li>Ekspresi saat bercerita</li>
+        <li>Kejelasan alur</li>
+        <li>Pesan rohani yang disampaikan</li>
+        <li>Kreativitas dalam penyampaian</li>
+        <li>Kemampuan dalam menguasai panggung</li>
+      </ol>
+    </li>
+  </ol><br>
+
+  <h2>Rules</h2>
+  <ol>
+    <li>Peserta 1 orang/kelas</li>
+    <li>Untuk urutan tampil, peserta akan dipilih secara acak sesuai dengan kelas yang mendaftar.</li>
+    <li>Boleh membawa kertas yang berisi alur cerita, namun <span class="warning">tidak boleh mencontek secara full</span> karena akan menjadi penilaian.</li>
+    <li>Tema yang dibawakan tidak boleh berisi <span class="warning">SARA</span>, <span class="warning">PENISTAAN</span> ataupun <span class="warning">MENYINGGUNG PIHAK MANAPUN</span>.</li>
+  </ol><br>
+
+  <h2>Tema Paskah</h2>
+  <ol>
+    <li><span class="highlight">Cahaya di Tengah Kegelapan</span class="highlight"><br>
+    Menekankan Paskah sebagai bukti kemenangan harapan atas ketakutan dan kematian.</li>
+
+    <li><span class="highlight">Kasih yang Mematahkan Belenggu</span class="highlight"><br>
+    Kisah tentang pengorbanan di salib sebagai bentuk kasih terbesar yang membebaskan manusia dari dosa.</li>
+
+    <li><span class="highlight">Kisah Domba yang Hilang dan Ditemukan</span class="highlight"><br>
+    Fokus pada kasih Yesus yang mencari dan menyelamatkan, dikaitkan dengan makna Paskah.</li>
+
+    <li><span class="highlight">Misteri Kubur Kosong</span class="highlight"><br>
+    Bercerita dari sudut pandang para wanita yang pergi ke kubur, menekankan keajaiban dan sukacita kebangkitan.</li>
+  </ol><br>
+
+  <h2>Contact Person (LINE) : <span class="highlight">ruthabigaiill</span></h2>
 {% endblock %}
 
 {% block form %}
@@ -37,7 +79,10 @@
 
     <label for="tema">Tema Bacaan : </label><br>
     <div class="radio">
-      <input type="radio" name="tema" value="" required><label for="">placeholder</label>
+      <input type="radio" name="tema" value="Cahaya di Tengah Kegelapan" required><label for="Cahaya di Tengah Kegelapan">Cahaya di Tengah Kegelapan</label><br>
+      <input type="radio" name="tema" value="Kasih yang Mematahkan Belenggu" required><label for="Kasih yang Mematahkan Belenggu">Kasih yang Mematahkan Belenggu</label><br>
+      <input type="radio" name="tema" value="Kisah Domba yang Hilang dan Ditemukan" required><label for="Kisah Domba yang Hilang dan Ditemukan">Kisah Domba yang Hilang dan Ditemukan</label><br>
+      <input type="radio" name="tema" value="Misteri Kubur Kosong" required><label for="Misteri Kubur Kosong">Misteri Kubur Kosong</label>
     </div><br>
     
     <button>Register</button>
