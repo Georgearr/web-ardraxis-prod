@@ -46,6 +46,14 @@
   </div>
 </section>
 
+<!-- Gallery Section -->
+<section class="gallery-container">
+  <h1 class="hidden">Event Gallery</h1>
+  <div class="gallery">
+    <div class="images"></div>
+  </div>
+</section>
+
 <!-- Modal Detail: kiri deskripsi, kanan logo/icon -->
 <div class="detail" id="detail">
   <div class="detail-container">
@@ -72,12 +80,13 @@
   {% block event_dict %} {% endblock %}
   
   <script>
-    const container = document.querySelector(".lists");
+    const activityContainer = document.querySelector(".lists");
+    const imageContainer = document.querySelector(".images");
 
     for (activityIndex in activities) {
       const activity = activities[activityIndex];
       const activityContent = document.createElement("div");
-      container.append(activityContent);
+      activityContainer.append(activityContent);
 
       activityContent.innerHTML += `
       <div class="list hidden" data-event-name="${activity["aName"]}" data-class-event="${activity["aClass"]}" data-desc-event="${activity["aDesc"]}" data-image="{{ url_for('static', filename='img/festiora/test.jpg') }}">
@@ -87,6 +96,17 @@
           <button type="button" class="list-btn" onclick="showDetailFromList(this.closest('.list'), false)">Info</button>
         </div>
       </div>
+      `;
+    }
+
+    const staticBase = "{{ url_for('static', filename='') }}";
+    for (imageIndex in images) {
+      const image = images[imageIndex];
+      const imageContent = document.createElement("div");
+      imageContainer.append(imageContent);
+
+      imageContent.innerHTML += `
+        <img src="${staticBase}${image}" alt="Festiora Image ${parseInt(imageIndex) + 1}">
       `;
     }
   </script>
