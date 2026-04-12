@@ -3,7 +3,8 @@ import os
 import random
 from datetime import datetime
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2.service_account import Credentials
+from salvatore_sheets import save_registration
 
 app = Flask(__name__)
 
@@ -27,8 +28,8 @@ scope = [
     "https://www.googleapis.com/auth/drive"
 ]
 
-creds = ServiceAccountCredentials.from_json_keyfile_name(
-    "valentine-sheet.json", scope
+creds = Credentials.from_service_account_file(
+    "valentine-sheet.json", scopes=scope
 )
 client = gspread.authorize(creds)
 sheet = client.open("Valentine_Order").sheet1
@@ -92,6 +93,52 @@ def nyanyi():
 @app.route("/quiz_alkitab")
 def quiz_alkitab():
     return render_template("e_salvatore/quiz_alkitab.html")
+
+# =============================== 
+# API ROUTES
+# ===============================
+
+@app.route("/register/<competition>", methods=["POST"])
+def register_competition(competition):
+    try:
+        data = request.form.to_dict()
+        if save_registration(competition, data):
+            return jsonify({"success": True, "message": "Registration successful!"})
+        else:
+            return jsonify({"success": False, "message": "Failed to save registration."}), 500
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
+@app.route("/valentine_order", methods=["POST"])
+def valentine_order():
+    try:
+        # Get form data
+        name = request.form.get("name")
+        message = request.form.get("message")
+        file = request.files.get("file")
+
+        # Save file if uploaded
+        file_path = None
+        if file and allowed_file(file.filename):
+            filename = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{file.filename}"
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+
+        # Prepare data for sheets
+        row_data = [
+            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            name,
+            message,
+            file_path or ""
+        ]
+
+        # Append to sheet
+        sheet.append_row(row_data)
+
+        return jsonify({"success": True, "message": "Order submitted successfully!"})
+
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
 
 # ===============================
 # RUN
