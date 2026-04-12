@@ -54,14 +54,14 @@
     <p class="hidden">Click on a competition to register</p>
     <div class="lists">
       <a href="{{ url_for('mosaic' ) }}">
-        <div class="list hidden" data-event-name="Egg Shell Mosaic Sprint" data-desc-event="Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri." data-image="{{ url_for('static', filename='img/salvatore/egg-shell-mosaic-sprint.jpeg') }}">
+        <div class="list hidden" data-event-name="Egg Shell Mosaic" data-desc-event="Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri." data-image="{{ url_for('static', filename='img/salvatore/egg-shell-mosaic.jpeg') }}">
           <img
-            src="{{ url_for('static', filename='img/salvatore/egg-shell-mosaic-sprint.jpeg') }}"
-            alt="Egg Shell Mosaic Sprint"
+            src="{{ url_for('static', filename='img/salvatore/egg-shell-mosaic.jpeg') }}"
+            alt="Egg Shell Mosaic"
           >
           <div class="activity-desc">
             <div class="activity-text">
-              <h1>Egg Shell Mosaic Sprint</h1>
+              <h1>Egg Shell Mosaic</h1>
               <p>Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri.</p>
             </div>
           </div>
@@ -84,35 +84,29 @@
       </a>
       
       <a href="{{ url_for('nyanyi' ) }}">
-        <div class="list hidden" data-event-name="Menyanyi Lagu Rohani" data-desc-event="Setiap peserta tampil secara individu dan menyanyikan satu lagu rohani yang telah dipilih sebelumnya. Waktu penampilan biasanya sekitar 3-5 menit sesuai dengan durasi lagu. Peserta diperbolehkan menggunakan instrumental ataupun dalam bentuk karaoke. Selama penampilan, peserta harus menyanyikan lagu dengan penghayatan, ekspresi, serta kejelasan vokal agar pesan rohani dari lagu dapat tersampaikan dengan baik kepada pendengar. Penilaian dilakukan oleh juri berdasarkan kualitas vokal, ketepatan nada dan tempo, penghayatan lagu, serta penampilan atau kepercayaan diri di atas panggung." data-image="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
-          <!-- change temporary image when posters are done and delete width + height styles -->
+        <div class="list hidden" data-event-name="Bernyanyi Rohani" data-desc-event="Setiap peserta tampil secara individu dan menyanyikan satu lagu rohani yang telah dipilih sebelumnya. Waktu penampilan biasanya sekitar 3-5 menit sesuai dengan durasi lagu. Peserta diperbolehkan menggunakan instrumental ataupun dalam bentuk karaoke. Selama penampilan, peserta harus menyanyikan lagu dengan penghayatan, ekspresi, serta kejelasan vokal agar pesan rohani dari lagu dapat tersampaikan dengan baik kepada pendengar. Penilaian dilakukan oleh juri berdasarkan kualitas vokal, ketepatan nada dan tempo, penghayatan lagu, serta penampilan atau kepercayaan diri di atas panggung." data-image="{{ url_for('static', filename='img/salvatore/bernyanyi-rohani.jpg') }}">
           <img
-            src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
-            alt="Menyanyi Lagu Rohani"
-            width="240px"
-            height="320px"
+            src="{{ url_for('static', filename='img/salvatore/bernyanyi-rohani.jpg') }}"
+            alt="Bernyanyi Rohani"
           >
           <div class="activity-desc">
             <div class="activity-text">
-              <h1>Menyanyi Lagu Rohani</h1>
+              <h1>Bernyanyi Rohani</h1>
               <p>Setiap peserta tampil secara individu dan menyanyikan satu lagu rohani yang telah dipilih sebelumnya. Waktu penampilan biasanya sekitar 3-5 menit sesuai dengan durasi lagu. Peserta diperbolehkan menggunakan instrumental ataupun dalam bentuk karaoke. Selama penampilan, peserta harus menyanyikan lagu dengan penghayatan, ekspresi, serta kejelasan vokal agar pesan rohani dari lagu dapat tersampaikan dengan baik kepada pendengar. Penilaian dilakukan oleh juri berdasarkan kualitas vokal, ketepatan nada dan tempo, penghayatan lagu, serta penampilan atau kepercayaan diri di atas panggung.</p>
             </div>
           </div>
         </div>
       </a>
       
-      <a href="{{ url_for('kuis_alkitab' ) }}">
-        <div class="list hidden" data-event-name="Quiz Alkitab & Pengetahuan Umum Agama" data-desc-event="Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri." data-image="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
-          <!-- change temporary image when posters are done and delete width + height styles -->
+      <a href="{{ url_for('quiz_alkitab' ) }}">
+        <div class="list hidden" data-event-name="Quiz Alkitab" data-desc-event="Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri." data-image="{{ url_for('static', filename='img/salvatore/quiz-alkitab.png') }}">
           <img
-            src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
-            alt="Quiz Alkitab & Pengetahuan Umum Agama"
-            width="240px"
-            height="320px"
+            src="{{ url_for('static', filename='img/salvatore/quiz-alkitab.png') }}"
+            alt="Quiz Alkitab"
           >
           <div class="activity-desc">
             <div class="activity-text">
-              <h1>Quiz Alkitab & Pengetahuan Umum Agama</h1>
+              <h1>Quiz Alkitab</h1>
               <p>Peserta PER KELAS akan menyediakan 2 orang (bisa Katolik & Katolik, bisa Kristen & Kristen, bisa Katolik & Kristen) untuk mengikuti lomba Quiz ini. Pada babak awal, peserta menjawab soal pilihan ganda atau isian singkat seputar isi Alkitab, tokoh-tokoh, peristiwa penting, serta pengetahuan umum agama untuk menyaring peserta terbaik. Babak selanjutnya menggunakan sistem cepat tepat, di mana peserta yang lebih dulu menekan bel berhak menjawab pertanyaan, dan jika jawabannya salah, kesempatan diberikan kepada peserta lain. Tingkat kesulitan soal akan meningkat pada setiap babak, mulai dari pengetahuan dasar hingga pemahaman yang lebih mendalam. Penilaian didasarkan pada ketepatan dan kecepatan menjawab, dengan pengurangan poin jika jawaban salah pada babak tertentu. Pada babak final, peserta akan diberikan soal studi kasus atau pertanyaan terbuka yang menuntut penalaran dan pemahaman iman secara lebih luas. Peserta dengan total poin tertinggi akan dinyatakan sebagai pemenang.</p>
             </div>
           </div>
@@ -121,9 +115,15 @@
     </div>
 
     <h1 class="fun-activities-title hidden">Fun Activities</h1>
+    <p class="hidden">Click on a fun activity's poster to zoom in</p>
     <div class="fun-activities-lists">
       <div class="fun-activities-list hidden">
-        <i class="bx bx-question-mark bx-tada"></i>
+        <a href="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
+          <img
+            src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
+            alt="Bucket of Faith"
+          >
+        </a>
         <div class="fun-activities-desc">
           <h2>Bucket of Faith</h2>
           <p>Panitia akan menyediakan papan yang ditempelkan dengan keranjang/gelas plastik yang atasnya dikasih soal-soal rohani. Peserta harus memasukkan bola ke dalam keranjang/gelas plastik, jika berhasil masuk peserta harus menjawab soal yang telah disiapkan oleh panitia. Lalu jika peserta tidak bisa menjawab akan diberi suatu DARE/CHALLENGE oleh panitia, jika berhasil menjawab akan mendapatkan hadiah. Jika gagal, peserta akan gugur pada saat itu juga.</p>
@@ -131,7 +131,12 @@
       </div>
 
       <div class="fun-activities-list hidden">
-        <i class="bx bx-body bx-tada"></i>
+        <a href="{{ url_for('static', filename='img/salvatore/squat-easter.png') }}">
+          <img
+            src="{{ url_for('static', filename='img/salvatore/squat-easter.png') }}"
+            alt="Squat Easter"
+          >
+        </a>
         <div class="fun-activities-desc">
           <h2>Squat Easter</h2>
           <p>Peserta akan membentuk lingkaran dan salah satu peserta akan memegang bola. Saat salah satu peserta tersebut memegang bola, sebelah kanan dan kirinya harus jongkok. Jika tidak konsentrasi dan tidak sesuai dengan mekanisme, peserta tersebut akan gugur.<br>
@@ -140,25 +145,45 @@
       </div>
 
       <div class="fun-activities-list hidden">
-        <i class="bx bxs-cylinder bx-tada"></i>
+        <a href="{{ url_for('static', filename='img/salvatore/flip-the-cup.jpg') }}">
+          <img
+            src="{{ url_for('static', filename='img/salvatore/flip-the-cup.jpg') }}"
+            alt="Flip the Cup"
+          >
+        </a>
         <div class="fun-activities-desc">
-          <h2>Flip Cup</h2>
+          <h2>Flip the Cup</h2>
           <p>Panitia akan menyediakan sebuah gelas plastik yang dimana di atasnya terdapat telur. Gelas plastik tersebut akan ditaro kebalik, lalu peserta akan membalik gelas plastik itu dengan sewajarnya. Dan telur itu harus masuk kedalam gelas plastik tersebut. Jika tidak masuk, mereka akan mengulang permainan dari awal.<br>
-          (<a href="https://vt.tiktok.com/ZSuSJReKE/" target="_blank">https://vt.tiktok.com/ZSuSJReKE/</a>)</p>
+          (<a href="https://vt.tiktok.com/ZSuSJReKE/" target="_blank">https://vt.tiktok.com/ZSuSJReKE/</a>)<br><br>
+        
+          QR Code URL (Mekanisme dan Peraturan Fun Activity Flip the Cup)<br>
+          <a href="https://drive.google.com/file/d/19fTOimUqUSygQ6Kzmy9mK3gKUaxSgAR_/view?usp=drivesdk" target="_blank">
+            https://drive.google.com/file/d/19fTOimUqUSygQ6Kzmy9mK3gKUaxSgAR_/view?usp=drivesdk
+          </a></p>
         </div>
       </div>
 
       <div class="fun-activities-list hidden">
-        <i class="bx bx-palette bx-tada"></i>
+        <a href="{{ url_for('static', filename='img/salvatore/dont-touch-the-colour.png') }}">
+          <img
+            src="{{ url_for('static', filename='img/salvatore/dont-touch-the-colour.png') }}"
+            alt="Don't Touch the Colour"
+          >
+        </a>
         <div class="fun-activities-desc">
-          <h2>Don't Touch the Color</h2>
+          <h2>Don't Touch the Colour</h2>
           <p>Panitia akan menyediakan 4 kertas warna warni. Panitia akan menyebut warna secara cepat. Peserta terdiri dari 2 individu, mereka harus mengikuti arahan panitia, jika peserta tidak fokus/gagal mereka akan gugur. Jika 1 orang menang akan memdapatkan present.<br>
           (<a href="https://vt.tiktok.com/ZSuBos2Yn/" target="_blank">https://vt.tiktok.com/ZSuBos2Yn/</a>)</p>
         </div>
       </div>
 
       <div class="fun-activities-list hidden">
-        <i class="bx bx-balloon bx-tada"></i>
+        <a href="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}">
+          <img
+            src="{{ url_for('static', filename='img/salvatore/temporary-image.png') }}"
+            alt="Cup Stacking"
+          >
+        </a>
         <div class="fun-activities-desc">
           <h2>Cup Stacking</h2>
           <p>Panitia akan menyediakan 10 cup dan 1 balon. Peserta terdiri dari 2 individu, mereka harus melempar balon ke atas sambil menyusun 10 cup menjadi bentuk segitiga dan menyusunnya kembali seperti semula. Jika balon mengenai meja/lantai, maka lawannya menjadi pemenang.<br>

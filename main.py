@@ -77,7 +77,7 @@ def atthaira():
 def salvatore():
     return render_template("e_salvatore.html")
 
-@app.route("/egg_shell_mosaic_sprint")
+@app.route("/egg_shell_mosaic")
 def mosaic():
     return render_template("e_salvatore/mosaic.html")
 
@@ -85,13 +85,13 @@ def mosaic():
 def storytelling():
     return render_template("e_salvatore/storytelling.html")
 
-@app.route("/menyanyi_lagu_rohani")
+@app.route("/bernyanyi_rohani")
 def nyanyi():
     return render_template("e_salvatore/nyanyi.html")
 
-@app.route("/quiz_alkitab_dan_pengetahuan_umum_agama")
-def kuis_alkitab():
-    return render_template("e_salvatore/kuis_alkitab.html")
+@app.route("/quiz_alkitab")
+def quiz_alkitab():
+    return render_template("e_salvatore/quiz_alkitab.html")
 
 # ===============================
 # RUN
