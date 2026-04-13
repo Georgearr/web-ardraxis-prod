@@ -5,7 +5,6 @@ e-salvatore-sheets.json
 valentine-sheet.json
 .DS_Store
 salvatore_debug.log
-.env
 
 # Local data storage (contains user registration data)
 data/
