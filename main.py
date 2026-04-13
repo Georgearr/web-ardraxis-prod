@@ -1,9 +1,14 @@
 from flask import Flask, render_template, request, jsonify
+from dotenv import load_dotenv
 import os
 import random
 from datetime import datetime
 import gspread
 from google.oauth2.service_account import Credentials
+
+# Load environment variables FIRST
+load_dotenv()
+
 from salvatore_sheets import save_registration
 
 app = Flask(__name__)
@@ -102,12 +107,20 @@ def quiz_alkitab():
 def register_competition(competition):
     try:
         data = request.form.to_dict()
-        if save_registration(competition, data):
+        with open('salvatore_debug.log', 'a') as f:
+            f.write(f"[REGISTER] Competition: {competition}\n")
+            f.write(f"[REGISTER] Data: {data}\n")
+        result = save_registration(competition, data)
+        with open('salvatore_debug.log', 'a') as f:
+            f.write(f"[REGISTER] Result: {result}\n")
+        if result:
             return jsonify({"success": True, "message": "Registration successful!"})
         else:
-            return jsonify({"success": False, "message": "Failed to save registration."}), 500
+            return jsonify({"success": False, "message": "Failed to save registration to spreadsheet."}), 500
     except Exception as e:
-        return jsonify({"success": False, "message": str(e)}), 500
+        with open('salvatore_debug.log', 'a') as f:
+            f.write(f"[REGISTER ERROR] {str(e)}\n")
+        return jsonify({"success": False, "message": f"Error: {str(e)}"}), 500
 
 @app.route("/valentine_order", methods=["POST"])
 def valentine_order():

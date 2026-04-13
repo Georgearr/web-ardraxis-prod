@@ -9,16 +9,32 @@
 {% endblock %}
 
 {% block isi %}
-<div class="activity">
-  <div class="activity-left">
-    <a href="{{ url_for('salvatore' ) }}"><button>Back to Salvatoré</button></a>
-    {% block poster %} {% endblock %}
+<div class="activity-container">
+  <div class="activity">
+    <div class="activity-left">
+      {% block poster %} {% endblock %}
+      <a href="{{ url_for('salvatore' ) }}"><button>Back to Salvatoré</button></a>
+    </div>
+    <div class="activity-right">
+      <h1>{% block title %} {% endblock %}</h1>
+      {% block desc %} {% endblock %}
+  
+      {% block form %} {% endblock %}
+    </div>
   </div>
-  <div class="activity-right">
-    <h1>{% block title %} {% endblock %}</h1>
-    {% block desc %} {% endblock %}
+</div>
 
-    {% block form %} {% endblock %}
+<!-- Success Modal -->
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Registration Successful!</h2>
+    <p>Join our LINE group for updates and announcements:</p>
+    <a id="lineGroupLink" href="#" target="_blank">Join LINE Group</a>
+    <p style="margin-top: 15px; font-size: 0.9rem; color: #ffe6da;">
+      If the link doesn't work, copy and paste this URL manually:<br>
+      <span id="lineGroupUrl" style="word-break: break-all; background-color: rgba(255,255,255,0.1); padding: 5px; border-radius: 3px; font-family: monospace;"></span>
+    </p>
   </div>
 </div>
 {% endblock isi %}
@@ -29,12 +45,30 @@
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const form = document.getElementById('form');
+      const modal = document.getElementById('successModal');
+      const closeBtn = document.querySelector('.close');
+      const lineGroupLink = document.getElementById('lineGroupLink');
+      const lineGroupUrl = document.getElementById('lineGroupUrl');
+      
+      // LINE group links for each competition
+      const lineGroups = {
+        'egg_shell_mosaic': 'https://line.me/ti/g/G9x53XAYNp',
+        'story_telling_rohani': 'https://line.me/R/ti/g/RyBTSMr97d',
+        'bernyanyi_rohani': 'https://line.me/ti/g/Ax5RLmzx-n',
+        'quiz_alkitab': 'https://line.me/ti/g/e7Va9TwjGv'
+      };
+      
       if (form) {
         form.addEventListener('submit', function(e) {
           e.preventDefault();
           
+          const button = form.querySelector('button');
           const formData = new FormData(form);
           const competition = window.location.pathname.split('/').pop(); // Get competition from URL
+          
+          // Disable button and change text
+          button.disabled = true;
+          button.textContent = 'Sending...';
           
           fetch(`/register/${competition}`, {
             method: 'POST',
@@ -43,7 +77,13 @@
           .then(response => response.json())
           .then(data => {
             if (data.success) {
-              alert('Registration successful!');
+              // Show modal with LINE group link
+              const lineLink = lineGroups[competition] || '#';
+              lineGroupLink.href = lineLink;
+              lineGroupUrl.textContent = lineLink;
+              modal.style.display = 'block';
+              
+              // Reset form
               form.reset();
             } else {
               alert('Registration failed: ' + data.message);
@@ -52,9 +92,26 @@
           .catch(error => {
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
+          })
+          .finally(() => {
+            // Re-enable button
+            button.disabled = false;
+            button.textContent = 'Register';
           });
         });
       }
+      
+      // Close modal when clicking X
+      closeBtn.onclick = function() {
+        modal.style.display = 'none';
+      };
+      
+      // Close modal when clicking outside
+      window.onclick = function(event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      };
     });
   </script>
 {% endblock %}

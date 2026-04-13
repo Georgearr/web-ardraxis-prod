@@ -1,4 +1,18 @@
 # ignore service account file
 e-festiora-sheets-3bfd5f4f75a2.json
-.DS_Store
+e-salvatore-bot-7d89630ac40a.json
+e-salvatore-sheets.json
 valentine-sheet.json
+.DS_Store
+salvatore_debug.log
+.env
+
+# Local data storage (contains user registration data)
+data/
+exports/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
