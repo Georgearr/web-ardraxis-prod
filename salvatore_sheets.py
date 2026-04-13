@@ -38,6 +38,15 @@ SHEETS = {
     "story_telling_rohani": "Story_Telling_Rohani"
 }
 
+# Participant limits for each competition
+# Set to 0 or omit from dictionary for unlimited registrations
+PARTICIPANT_LIMITS = {
+    "egg_shell_mosaic": 30,  # Limit for Egg Shell Mosaic
+    "bernyanyi_rohani": 15,  # Limit for Bernyanyi Rohani
+    "story_telling_rohani": 20,  # Limit for Story Telling Rohani
+    "quiz_alkitab": 0,      # Limit for Quiz Alkitab (team-based)
+}
+
 def get_google_sheets_client():
     """Initialize and return Google Sheets client."""
     try:
@@ -133,6 +142,37 @@ def append_to_sheet(client, sheet_name, data):
             f.write(f"[ERROR] Error type: {type(e).__name__}\n")
         return False
 
+def get_registration_count(client, sheet_name):
+    """Get the current number of registrations for a competition."""
+    try:
+        spreadsheet = client.open_by_key(SPREADSHEET_ID)
+        sheet = spreadsheet.worksheet(sheet_name)
+        
+        # Get all values from the sheet
+        all_values = sheet.get_all_values()
+        
+        # Count non-empty rows (excluding header if exists)
+        # Assuming first row might be headers, start counting from row 2
+        count = 0
+        for row in all_values[1:]:  # Skip first row (headers)
+            # Count if at least one cell in the row has data
+            if any(cell.strip() for cell in row):
+                count += 1
+        
+        with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
+            f.write(f"[INFO] Current registration count for {sheet_name}: {count}\n")
+        
+        return count
+    except gspread.WorksheetNotFound:
+        # Sheet doesn't exist yet, so count is 0
+        with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
+            f.write(f"[INFO] Sheet {sheet_name} not found, count = 0\n")
+        return 0
+    except Exception as e:
+        with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
+            f.write(f"[ERROR] Error getting registration count for {sheet_name}: {str(e)}\n")
+        return 0
+
 def save_registration(competition, data_dict):
     """Save registration data for a specific competition."""
     try:
@@ -149,7 +189,24 @@ def save_registration(competition, data_dict):
         with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
             f.write(f"[save_registration] Sheet name: {sheet_name}\n")
 
-        # Convert data dict to list based on competition
+        # Check participant limit
+        limit = PARTICIPANT_LIMITS.get(competition, 0)  # Default to 0 (no limit) if not specified
+        with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
+            f.write(f"[save_registration] Getting client for limit check...\n")
+        try:
+            client = get_google_sheets_client()
+            current_count = get_registration_count(client, sheet_name)
+            with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
+                f.write(f"[save_registration] Current count: {current_count}, Limit: {limit}\n")
+            
+            if limit > 0 and current_count >= limit:
+                with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
+                    f.write(f"[ERROR] Registration limit reached for {competition}. Current: {current_count}, Limit: {limit}\n")
+                return "limit_reached"
+        except Exception as e:
+            with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
+                f.write(f"[save_registration] Error checking limit: {e}\n")
+            # Continue with registration if we can't check the limit (fail open)
         if competition == "bernyanyi_rohani":
             row_data = [
                 data_dict.get("nama", ""),

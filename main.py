@@ -9,7 +9,7 @@ from google.oauth2.service_account import Credentials
 # Load environment variables FIRST
 load_dotenv()
 
-from salvatore_sheets import save_registration
+from salvatore_sheets import save_registration, get_registration_count, get_google_sheets_client, SHEETS, PARTICIPANT_LIMITS
 
 app = Flask(__name__)
 
@@ -113,7 +113,10 @@ def register_competition(competition):
         result = save_registration(competition, data)
         with open('salvatore_debug.log', 'a') as f:
             f.write(f"[REGISTER] Result: {result}\n")
-        if result:
+        
+        if result == "limit_reached":
+            return jsonify({"success": False, "message": "Sorry, the registration limit for this competition has been reached."}), 400
+        elif result:
             return jsonify({"success": True, "message": "Registration successful!"})
         else:
             return jsonify({"success": False, "message": "Failed to save registration to spreadsheet."}), 500
@@ -121,6 +124,31 @@ def register_competition(competition):
         with open('salvatore_debug.log', 'a') as f:
             f.write(f"[REGISTER ERROR] {str(e)}\n")
         return jsonify({"success": False, "message": f"Error: {str(e)}"}), 500
+
+@app.route("/api/registration-status/<competition>")
+def get_registration_status(competition):
+    """Get current registration count and limit for a competition."""
+    try:
+        if competition not in SHEETS:
+            return jsonify({"error": "Unknown competition"}), 404
+        
+        limit = PARTICIPANT_LIMITS.get(competition, 0)
+        try:
+            client = get_google_sheets_client()
+            current_count = get_registration_count(client, SHEETS[competition])
+        except Exception as e:
+            # If we can't get the count, return limit as 0 (unlimited) to be safe
+            current_count = 0
+        
+        return jsonify({
+            "competition": competition,
+            "current_count": current_count,
+            "limit": limit,
+            "spots_left": max(0, limit - current_count) if limit > 0 else -1,  # -1 means unlimited
+            "is_full": limit > 0 and current_count >= limit
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/valentine_order", methods=["POST"])
 def valentine_order():

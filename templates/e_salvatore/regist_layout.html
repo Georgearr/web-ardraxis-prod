@@ -19,6 +19,11 @@
       <h1>{% block title %} {% endblock %}</h1>
       {% block desc %} {% endblock %}
   
+      <!-- Registration Status -->
+      <div id="registration-status" class="registration-status" style="margin-bottom: 20px; padding: 15px; background-color: rgba(255,255,255,0.1); border-radius: 8px; text-align: center;">
+        <p>Loading registration status...</p>
+      </div>
+  
       {% block form %} {% endblock %}
     </div>
   </div>
@@ -49,6 +54,7 @@
       const closeBtn = document.querySelector('.close');
       const lineGroupLink = document.getElementById('lineGroupLink');
       const lineGroupUrl = document.getElementById('lineGroupUrl');
+      const statusDiv = document.getElementById('registration-status');
       
       // LINE group links for each competition
       const lineGroups = {
@@ -58,13 +64,65 @@
         'quiz_alkitab': 'https://line.me/ti/g/e7Va9TwjGv'
       };
       
+      // Get competition from URL
+      const competition = window.location.pathname.split('/').pop();
+      
+      // Load registration status
+      fetch(`/api/registration-status/${competition}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            statusDiv.innerHTML = '<p style="color: #ff6b6b;">Unable to load registration status.</p>';
+            return;
+          }
+          
+          const { current_count, limit, spots_left, is_full } = data;
+          
+          let statusHtml = `<p><strong>Current Registrations:</strong> ${current_count}`;
+          
+          if (limit > 0) {
+            statusHtml += ` / ${limit}`;
+            if (spots_left > 0) {
+              statusHtml += ` (${spots_left} spots left)`;
+            } else if (is_full) {
+              statusHtml += ' (FULL)';
+              // Disable form if full
+              if (form) {
+                form.querySelector('button').disabled = true;
+                form.querySelector('button').textContent = 'Registration Full';
+                form.querySelector('button').style.backgroundColor = '#666';
+              }
+            }
+          } else {
+            statusHtml += ' (No limit)';
+          }
+          
+          statusHtml += '</p>';
+          statusDiv.innerHTML = statusHtml;
+          
+          // Update status color
+          if (is_full) {
+            statusDiv.style.backgroundColor = 'rgba(255,107,107,0.2)';
+            statusDiv.style.border = '1px solid #ff6b6b';
+          } else if (spots_left <= 5 && limit > 0) {
+            statusDiv.style.backgroundColor = 'rgba(255,193,7,0.2)';
+            statusDiv.style.border = '1px solid #ffc107';
+          } else {
+            statusDiv.style.backgroundColor = 'rgba(40,167,69,0.2)';
+            statusDiv.style.border = '1px solid #28a745';
+          }
+        })
+        .catch(error => {
+          console.error('Error loading registration status:', error);
+          statusDiv.innerHTML = '<p style="color: #ff6b6b;">Unable to load registration status.</p>';
+        });
+      
       if (form) {
         form.addEventListener('submit', function(e) {
           e.preventDefault();
           
           const button = form.querySelector('button');
           const formData = new FormData(form);
-          const competition = window.location.pathname.split('/').pop(); // Get competition from URL
           
           // Disable button and change text
           button.disabled = true;
@@ -86,7 +144,12 @@
               // Reset form
               form.reset();
             } else {
-              alert('Registration failed: ' + data.message);
+              // Handle different error types
+              if (data.message && data.message.includes('limit')) {
+                alert('Registration failed: ' + data.message + '\n\nPlease try registering for a different competition or contact the organizers.');
+              } else {
+                alert('Registration failed: ' + data.message);
+              }
             }
           })
           .catch(error => {
