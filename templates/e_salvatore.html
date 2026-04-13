@@ -10,11 +10,11 @@
 
 {% block isi %}
 <!-- Banner Section -->
-<section class="banner">
-  <img
+<section class="banner" style="height: 10vh;">
+  <!-- <img
     src="{{ url_for('static', filename='img/banner/festiora_banner.png') }}"
     alt="Salvatoré Banner"
-  />
+  /> -->
   <section class="gradient-banner"></section>
 </section>
 
@@ -48,149 +48,70 @@
 
 <!-- Content Section -->
 <section class="content">
-  <!-- Performance Section -->
-  <div class="performance">
+  <div class="header">
     <h1 class="hidden">Competitions</h1>
-    <p class="hidden">Click on a competition to register</p>
-    <div class="lists">
-      <a href="{{ url_for('mosaic' ) }}">
-        <div class="list hidden" data-event-name="Egg Shell Mosaic" data-desc-event="Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri." data-image="{{ url_for('static', filename='img/salvatore/egg-shell-mosaic.jpeg') }}">
+  </div>
+  <div class="posters-grid">
+    {% set lomba = [
+      {'file': 'egg-shell-mosaic.jpeg', 'name': 'Egg Shell Mosaic', 'endpoint': 'mosaic'},
+      {'file': 'story-telling-rohani.jpeg', 'name': 'Story Telling Rohani', 'endpoint': 'storytelling'},
+      {'file': 'bernyanyi-rohani.jpg', 'name': 'Bernyanyi Rohani', 'endpoint': 'nyanyi'},
+      {'file': 'quiz-alkitab.png', 'name': 'Quiz Alkitab', 'endpoint': 'quiz_alkitab'}
+    ] %}
+
+    {% for poster in lomba %}
+    <div class="poster-card" data-aos="fade-up">
+      <a href="{{ url_for(poster.endpoint) }}" class="poster-link">
+        <div class="poster-image-wrapper">
           <img
-            src="{{ url_for('static', filename='img/salvatore/egg-shell-mosaic.jpeg') }}"
-            alt="Egg Shell Mosaic"
-          >
-          <div class="activity-desc">
-            <div class="activity-text">
-              <h1>Egg Shell Mosaic</h1>
-              <p>Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri.</p>
-            </div>
-          </div>
-        </div>
-      </a>
-      
-      <a href="{{ url_for('storytelling' ) }}">
-        <div class="list hidden" data-event-name="Story Telling Rohani" data-desc-event="Peserta secara individu menyampaikan sebuah cerita yang berkaitan dengan makna Paskah, seperti kisah kebangkitan Yesus, pengorbanan Yesus, atau nilai kasih, pengampunan, dan harapan dalam kehidupan Kristiani. Setiap peserta diberi waktu sekitar 3-5 menit untuk menyampaikan cerita secara lisan tanpa membaca teks secara penuh. Peserta diperbolehkan menggunakan ekspresi wajah, gerakan tubuh, dan properti sederhana untuk mendukung penyampaian cerita agar lebih menarik. Penilaian dilakukan oleh juri berdasarkan kesesuaian cerita dengan tema Paskah, penghayatan dan ekspresi saat bercerita, kejelasan alur cerita serta pesan rohani yang disampaikan, kreativitas dalam penyampaian, dan kemampuan peserta dalam menguasai panggung." data-image="{{ url_for('static', filename='img/salvatore/story-telling-rohani.jpeg') }}">
-          <img
-            src="{{ url_for('static', filename='img/salvatore/story-telling-rohani.jpeg') }}"
-            alt="Story Telling Rohani"
-          >
-          <div class="activity-desc">
-            <div class="activity-text">
-              <h1>Story Telling Rohani</h1>
-              <p>Peserta secara individu menyampaikan sebuah cerita yang berkaitan dengan makna Paskah, seperti kisah kebangkitan Yesus, pengorbanan Yesus, atau nilai kasih, pengampunan, dan harapan dalam kehidupan Kristiani. Setiap peserta diberi waktu sekitar 3-5 menit untuk menyampaikan cerita secara lisan tanpa membaca teks secara penuh. Peserta diperbolehkan menggunakan ekspresi wajah, gerakan tubuh, dan properti sederhana untuk mendukung penyampaian cerita agar lebih menarik. Penilaian dilakukan oleh juri berdasarkan kesesuaian cerita dengan tema Paskah, penghayatan dan ekspresi saat bercerita, kejelasan alur cerita serta pesan rohani yang disampaikan, kreativitas dalam penyampaian, dan kemampuan peserta dalam menguasai panggung.</p>
-            </div>
-          </div>
-        </div>
-      </a>
-      
-      <a href="{{ url_for('nyanyi' ) }}">
-        <div class="list hidden" data-event-name="Bernyanyi Rohani" data-desc-event="Setiap peserta tampil secara individu dan menyanyikan satu lagu rohani yang telah dipilih sebelumnya. Waktu penampilan biasanya sekitar 3-5 menit sesuai dengan durasi lagu. Peserta diperbolehkan menggunakan instrumental ataupun dalam bentuk karaoke. Selama penampilan, peserta harus menyanyikan lagu dengan penghayatan, ekspresi, serta kejelasan vokal agar pesan rohani dari lagu dapat tersampaikan dengan baik kepada pendengar. Penilaian dilakukan oleh juri berdasarkan kualitas vokal, ketepatan nada dan tempo, penghayatan lagu, serta penampilan atau kepercayaan diri di atas panggung." data-image="{{ url_for('static', filename='img/salvatore/bernyanyi-rohani.jpg') }}">
-          <img
-            src="{{ url_for('static', filename='img/salvatore/bernyanyi-rohani.jpg') }}"
-            alt="Bernyanyi Rohani"
-          >
-          <div class="activity-desc">
-            <div class="activity-text">
-              <h1>Bernyanyi Rohani</h1>
-              <p>Setiap peserta tampil secara individu dan menyanyikan satu lagu rohani yang telah dipilih sebelumnya. Waktu penampilan biasanya sekitar 3-5 menit sesuai dengan durasi lagu. Peserta diperbolehkan menggunakan instrumental ataupun dalam bentuk karaoke. Selama penampilan, peserta harus menyanyikan lagu dengan penghayatan, ekspresi, serta kejelasan vokal agar pesan rohani dari lagu dapat tersampaikan dengan baik kepada pendengar. Penilaian dilakukan oleh juri berdasarkan kualitas vokal, ketepatan nada dan tempo, penghayatan lagu, serta penampilan atau kepercayaan diri di atas panggung.</p>
-            </div>
-          </div>
-        </div>
-      </a>
-      
-      <a href="{{ url_for('quiz_alkitab' ) }}">
-        <div class="list hidden" data-event-name="Quiz Alkitab" data-desc-event="Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri." data-image="{{ url_for('static', filename='img/salvatore/quiz-alkitab.png') }}">
-          <img
-            src="{{ url_for('static', filename='img/salvatore/quiz-alkitab.png') }}"
-            alt="Quiz Alkitab"
-          >
-          <div class="activity-desc">
-            <div class="activity-text">
-              <h1>Quiz Alkitab</h1>
-              <p>Peserta PER KELAS akan menyediakan 2 orang (bisa Katolik & Katolik, bisa Kristen & Kristen, bisa Katolik & Kristen) untuk mengikuti lomba Quiz ini. Pada babak awal, peserta menjawab soal pilihan ganda atau isian singkat seputar isi Alkitab, tokoh-tokoh, peristiwa penting, serta pengetahuan umum agama untuk menyaring peserta terbaik. Babak selanjutnya menggunakan sistem cepat tepat, di mana peserta yang lebih dulu menekan bel berhak menjawab pertanyaan, dan jika jawabannya salah, kesempatan diberikan kepada peserta lain. Tingkat kesulitan soal akan meningkat pada setiap babak, mulai dari pengetahuan dasar hingga pemahaman yang lebih mendalam. Penilaian didasarkan pada ketepatan dan kecepatan menjawab, dengan pengurangan poin jika jawaban salah pada babak tertentu. Pada babak final, peserta akan diberikan soal studi kasus atau pertanyaan terbuka yang menuntut penalaran dan pemahaman iman secara lebih luas. Peserta dengan total poin tertinggi akan dinyatakan sebagai pemenang.</p>
+            src="{{ url_for('static', filename='img/salvatore/' + poster.file) }}"
+            alt="{{ poster.name }}"
+            class="poster-image"
+            loading="lazy"
+          />
+          <div class="poster-overlay">
+            <div class="poster-info">
+              <h3 class="poster-name">{{ poster.name }}</h3>
+              <span class="poster-click">Click to Register →</span>
             </div>
           </div>
         </div>
       </a>
     </div>
+    {% endfor %}
+  </div><br>
 
-    <h1 class="fun-activities-title hidden">Fun Activities</h1>
-    <p class="hidden">Click on a fun activity's poster to zoom in</p>
-    <div class="fun-activities-lists">
-      <div class="fun-activities-list hidden">
-        <a href="{{ url_for('static', filename='img/salvatore/bucket-of-faith.png') }}">
-          <img
-            src="{{ url_for('static', filename='img/salvatore/bucket-of-faith.png') }}"
-            alt="Bucket of Faith"
-          >
-        </a>
-        <div class="fun-activities-desc">
-          <h2>Bucket of Faith</h2>
-          <p>Panitia akan menyediakan papan yang ditempelkan dengan keranjang/gelas plastik yang atasnya dikasih soal-soal rohani. Peserta harus memasukkan bola ke dalam keranjang/gelas plastik, jika berhasil masuk peserta harus menjawab soal yang telah disiapkan oleh panitia. Lalu jika peserta tidak bisa menjawab akan diberi suatu DARE/CHALLENGE oleh panitia, jika berhasil menjawab akan mendapatkan hadiah. Jika gagal, peserta akan gugur pada saat itu juga.</p>
-        </div>
-      </div>
+  <div class="header">
+    <h1 class="hidden">Fun Activities</h1>
+  </div>
+  <div class="posters-grid">
+    {% set fun_activities = [
+      {'file': 'bucket-of-faith.png', 'name': 'Bucket of Faith'},
+      {'file': 'squat-easter.png', 'name': 'Squat Easter'},
+      {'file': 'flip-the-cup.jpg', 'name': 'Flip the Cup'},
+      {'file': 'dont-touch-the-colour.png', 'name': "Don't Touch the Colour"},
+      {'file': 'cup-stacking.jpg', 'name': 'Cup Stacking'}
+    ] %}
 
-      <div class="fun-activities-list hidden">
-        <a href="{{ url_for('static', filename='img/salvatore/squat-easter.png') }}">
+    {% for poster in fun_activities %}
+    <div class="poster-card" data-aos="fade-up">
+      <a href="#" class="poster-link">
+        <div class="poster-image-wrapper">
           <img
-            src="{{ url_for('static', filename='img/salvatore/squat-easter.png') }}"
-            alt="Squat Easter"
-          >
-        </a>
-        <div class="fun-activities-desc">
-          <h2>Squat Easter</h2>
-          <p>Peserta akan membentuk lingkaran dan salah satu peserta akan memegang bola. Saat salah satu peserta tersebut memegang bola, sebelah kanan dan kirinya harus jongkok. Jika tidak konsentrasi dan tidak sesuai dengan mekanisme, peserta tersebut akan gugur.<br>
-          (<a href="https://vt.tiktok.com/ZSuBKMHoc/" target="_blank">https://vt.tiktok.com/ZSuBKMHoc/</a>)</p>
+            src="{{ url_for('static', filename='img/salvatore/' + poster.file) }}"
+            alt="{{ poster.name }}"
+            class="poster-image"
+            loading="lazy"
+          />
+          <div class="poster-overlay">
+            <div class="poster-info">
+              <h3 class="poster-name">{{ poster.name }}</h3>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div class="fun-activities-list hidden">
-        <a href="{{ url_for('static', filename='img/salvatore/flip-the-cup.jpg') }}">
-          <img
-            src="{{ url_for('static', filename='img/salvatore/flip-the-cup.jpg') }}"
-            alt="Flip the Cup"
-          >
-        </a>
-        <div class="fun-activities-desc">
-          <h2>Flip the Cup</h2>
-          <p>Panitia akan menyediakan sebuah gelas plastik yang dimana di atasnya terdapat telur. Gelas plastik tersebut akan ditaro kebalik, lalu peserta akan membalik gelas plastik itu dengan sewajarnya. Dan telur itu harus masuk kedalam gelas plastik tersebut. Jika tidak masuk, mereka akan mengulang permainan dari awal.<br>
-          (<a href="https://vt.tiktok.com/ZSuSJReKE/" target="_blank">https://vt.tiktok.com/ZSuSJReKE/</a>)<br><br>
-        
-          QR Code URL (Mekanisme dan Peraturan Fun Activity Flip the Cup)<br>
-          <a href="https://drive.google.com/file/d/19fTOimUqUSygQ6Kzmy9mK3gKUaxSgAR_/view?usp=drivesdk" target="_blank">
-            https://drive.google.com/file/d/19fTOimUqUSygQ6Kzmy9mK3gKUaxSgAR_/view?usp=drivesdk
-          </a></p>
-        </div>
-      </div>
-
-      <div class="fun-activities-list hidden">
-        <a href="{{ url_for('static', filename='img/salvatore/dont-touch-the-colour.png') }}">
-          <img
-            src="{{ url_for('static', filename='img/salvatore/dont-touch-the-colour.png') }}"
-            alt="Don't Touch the Colour"
-          >
-        </a>
-        <div class="fun-activities-desc">
-          <h2>Don't Touch the Colour</h2>
-          <p>Panitia akan menyediakan 4 kertas warna warni. Panitia akan menyebut warna secara cepat. Peserta terdiri dari 2 individu, mereka harus mengikuti arahan panitia, jika peserta tidak fokus/gagal mereka akan gugur. Jika 1 orang menang akan memdapatkan present.<br>
-          (<a href="https://vt.tiktok.com/ZSuBos2Yn/" target="_blank">https://vt.tiktok.com/ZSuBos2Yn/</a>)</p>
-        </div>
-      </div>
-
-      <div class="fun-activities-list hidden">
-        <a href="{{ url_for('static', filename='img/salvatore/cup-stacking.jpg') }}">
-          <img
-            src="{{ url_for('static', filename='img/salvatore/cup-stacking.jpg') }}"
-            alt="Cup Stacking"
-          >
-        </a>
-        <div class="fun-activities-desc">
-          <h2>Cup Stacking</h2>
-          <p>Panitia akan menyediakan 10 cup dan 1 balon. Peserta terdiri dari 2 individu, mereka harus melempar balon ke atas sambil menyusun 10 cup menjadi bentuk segitiga dan menyusunnya kembali seperti semula. Jika balon mengenai meja/lantai, maka lawannya menjadi pemenang.<br>
-          (<a href="https://vt.tiktok.com/ZSuXTEN19/" target="_blank">https://vt.tiktok.com/ZSuXTEN19/</a>)</p>
-        </div>
-      </div>
+      </a>
     </div>
+    {% endfor %}
   </div>
 </section>
 {% endblock isi %}

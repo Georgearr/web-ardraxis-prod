@@ -8,51 +8,29 @@
 {% endblock %}
 
 {% block title %} Bernyanyi Rohani {% endblock %}
-{% block desc %}
-  <p>
-    Setiap peserta tampil secara individu dan menyanyikan satu lagu rohani yang telah dipilih sebelumnya. Waktu penampilan biasanya sekitar 3-5 menit sesuai dengan durasi lagu. Peserta diperbolehkan menggunakan instrumental ataupun dalam bentuk karaoke. Selama penampilan, peserta harus menyanyikan lagu dengan penghayatan, ekspresi, serta kejelasan vokal agar pesan rohani dari lagu dapat tersampaikan dengan baik kepada pendengar. Penilaian dilakukan oleh juri berdasarkan kualitas vokal, ketepatan nada dan tempo, penghayatan lagu, serta penampilan atau kepercayaan diri di atas panggung.
-  </p><br>
-
-  <h2>Mekanisme</h2>
-  <ol>
-    <li>Lagu akan ditentukan oleh panitia, tetapi untuk audio karaoke tetap peserta yang menyiapkan.</li>
-    <li>Peserta akan tampil sesuai dengan nomor urut yang sudah diberikan oleh panitia.</li>
-    <li>Peserta tampil satu per satu. (Solo)</li>
-    <li>Juri akan memberikan penilaian sesuai dengan kriteria yang sudah ditetapkan.</li>
-    <li>Pengumuman pemenang.</li>
-  </ol><br>
-
-  <h2>Rules</h2>
-  <ol>
-    <li>Setiap kelas wajib mengirimkan 1 orang. (Performance Solo)</li>
-    <li>Urutan tampil akan ditentukan oleh panitia secara undian.</li>
-    <li>Peserta wajib hadir 15 menit sebelum lomba dimulai.</li>
-    <li>Keputusan juri mutlak dan tidak dapat diganggu.</li>
-  </ol><br>
-
-  <h2>Contact Person (LINE) : <span class="highlight">aurelbonnita</span></h2>
-{% endblock %}
 
 {% block form %}
   <form class="form" id="form">
     <h1>Registration Form</h1>
     <label for="nama">Nama Lengkap : </label><br>
-    <input type="text" name="nama" placeholder="Nama Lengkap" required><br><br>
+    <input type="text" name="nama" required><br><br>
 
     <label for="kategori">Kategori : </label><br>
-    <div class="radio">
-      <input type="radio" name="kategori" value="SMP" required><label for="SMP">SMP</label><br>
-      <input type="radio" name="kategori" value="SMA" required><label for="SMA">SMA</label>
-    </div><br>
+    <select name="kategori" required>
+      <option value="">Pilih Kategori</option>
+      <option value="SMP">SMP</option>
+      <option value="SMA">SMA</option>
+    </select><br><br>
 
     <label for="kelas">Kelas : </label><br>
-    <input type="text" name="kelas" placeholder="Kelas" required><br><br>
+    <input type="text" name="kelas" required><br><br>
 
     <label for="agama">Agama : </label><br>
-    <div class="radio">
-      <input type="radio" name="agama" value="Kristen" required><label for="Kristen">Kristen</label><br>
-      <input type="radio" name="agama" value="Katolik" required><label for="Katolik">Katolik</label>
-    </div><br>
+    <select name="agama" required>
+      <option value="">Pilih Agama</option>
+      <option value="Kristen">Kristen</option>
+      <option value="Katolik">Katolik</option>
+    </select><br>
     
     <button>Register</button>
   </form>

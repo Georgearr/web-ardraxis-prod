@@ -2,10 +2,10 @@
 
 :root {
   /* Primary colors */
-  --bg-color: #ffe6da;
-  --container-bg-color: #ffc3a9;
-  --container-bg-color-dark: #ffa57f;
-  --primary: #ffc3a9;
+  --bg-color: #ffd6c3;
+  --container-bg-color: #ffae8b;
+  --container-bg-color-dark: #ff9b70;
+  --primary: #ca5342;
   --primary-dark: #ffa57f;
   --text-color-glow: #fef2f2;
   /* Span colors */
@@ -105,76 +105,55 @@ li {
   padding: 2vw;
 }
 
-.activity-container button {
-  width: 100%;
-  background-color: var(--bg-color);
-  border: 1px solid #fff;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px var(--text-color-glow);
-  font-size: 1.25rem;
-  padding: 10px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.activity-container button:hover {
-  background-color: var(--primary);
-  transform: scale(1.02);
-}
-
 .activity {
+  width: 100%;
   display: flex;
   align-items: start;
   gap: 20px;
 }
 
 .activity-left {
+  width: 40%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .activity-left img {
   object-fit: contain;
   border-radius: 20px;
-  width: 36vw;
+  width: 100%;
 }
 
-.activity-right h1 {
-  font-size: 2.5rem;
+.activity-right {
+  width: 60%;
+  text-align: center;
 }
 
-.activity-right h2 {
-  font-size: 1.5rem;
-}
-
-.activity-right p {
+.activity-right button {
+  width: 200px;
+  color: #fff;
+  background-color: #ff8551;
+  border-radius: 10px;
+  border: none;
   font-size: 1.15rem;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 20px;
 }
 
-.activity-right span.warning {
-  font-weight: 700;
-  color: var(--warning-color);
-}
-
-.activity-right span.highlight {
-  font-weight: 700;
-  color: var(--highlight-color);
-}
-
-.activity-right li {
-  margin-left: 20px;
-  font-size: 1.15rem;
+.activity-right button:hover {
+  background-color: #ff9263;
+  transform: scale(1.02);
 }
 
 /* Form Style */
 .form {
   font-weight: 550;
   width: 100%;
-  background-color: var(--primary);
+  background-color: #ffba9d;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0px 0px 20px var(--text-color-glow);
   margin-top: 20px;
   transition: all 1.2s ease;
   text-align: left;
@@ -185,114 +164,27 @@ li {
   text-align: center;
 }
 
-.form input {
+.form input, .form select {
   width: 100%;
   margin-top: 5px;
   padding: 10px;
-  font-size: 1.25rem;
-  background-color: var(--bg-color);
+  font-size: 1rem;
   border-radius: 10px;
   border: none;
 }
 
-.radio {
-  gap: 20px;
-}
-
-.radio input {
-  transform: scale(1.5);
-  margin-right: 10px;
-  width: auto;
+.form select {
+  padding-right: 20px;
 }
 
 .form button {
-  width: 300px;
-  background-color: var(--bg-color);
-  border: 1px solid #fff;
-  border-radius: 20px;
-  box-shadow: 0px 0px 10px var(--text-color-glow);
-  font-size: 1.5rem;
-  padding: 10px;
-  cursor: pointer;
-  transition: 0.2s;
+  width: 100%;
+  color: #fff;
+  background-color: #ffa27a;
 }
 
 .form button:hover {
-  background-color: var(--primary);
-  transform: scale(1.02);
-}
-
-@media screen and (max-width: 768px) {
-  .activity {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .activity-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .activity-left img {
-    width: 80vw;
-  }
-
-  .activity-right h1 {
-    font-size: 2rem;
-  }
-
-  .activity-right h2 {
-    font-size: 1.25rem;
-  }
-
-  .activity-right p, .activity-right li {
-    font-size: 1rem;
-  }
-
-  .form button {
-    width: 100%;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .activity {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .activity-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .activity-right h1 {
-    font-size: 1.5rem;
-  }
-
-  .activity-right h2 {
-    font-size: 1.1rem;
-  }
-
-  .activity-right p, .activity-right li {
-    font-size: 0.9rem;
-  }
-
-  .form label {
-    font-size: 1rem;
-  }
-
-  .form input {
-    font-size: 1rem;
-  }
-
-  .form button {
-    width: 100%;
-    font-size: 1rem;
-  }
+  background-color: #ff9263;
 }
 
 /* Modal Styles */
@@ -309,7 +201,7 @@ li {
 }
 
 .modal-content {
-  background-color: var(--primary);
+  background-color: #ffa882;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
@@ -322,7 +214,7 @@ li {
 }
 
 .close {
-  color: #aaa;
+  color: #505050;
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -346,17 +238,17 @@ li {
 
 .modal-content a {
   display: inline-block;
-  background-color: var(--bg-color);
-  color: var(--primary);
+  background-color: #ff976b;
+  color: white;
   padding: 10px 20px;
   text-decoration: none;
   border-radius: 5px;
   font-weight: bold;
-  transition: background-color 0.3s;
+  transition: 0.3s;
 }
 
 .modal-content a:hover {
-  background-color: var(--primary-dark);
+  background-color: #ff7d46;
   color: white;
 }
 
@@ -370,4 +262,58 @@ li {
 .form button:disabled:hover {
   transform: none;
   background-color: #ccc;
+}
+
+@media screen and (max-width: 768px) {
+  .activity {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .activity-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .activity-right {
+    width: 100%;
+  }
+
+  .activity-left img {
+    width: 80vw;
+  }
+
+  .form button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .activity {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .activity-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .form label {
+    font-size: 1rem;
+  }
+
+  .form input, .form select {
+    font-size: 1rem;
+  }
+
+  .form button {
+    width: 100%;
+    font-size: 1rem;
+  }
 }

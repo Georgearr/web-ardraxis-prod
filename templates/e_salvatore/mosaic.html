@@ -8,53 +8,28 @@
 {% endblock %}
 
 {% block title %} Egg Shell Mosaic {% endblock %}
-{% block desc %}
-  <p>
-    Panitia akan menyediakan cangkang telur yang diberi warna warni. Peserta akan terdiri dari 3 orang, dimana 3 orang tersebut akan diundi untuk mendapatkan gambar yang akan mereka buat dengan cangkang telur. Mereka harus sudah membentuk gambar-gamber tersebut dengan cangkang telurnya sesuai kreasi mereka sendiri.
-  </p><br>
-    
-  <h2>Mekanisme</h2>
-  <ol>
-    <li>Setiap peserta yang mengikuti lomba wajib membawa Lem Fox dan Cotton Bud / alat lainnya yang bisa dijadikan media untuk menempelkan egg mosaic ke kertas.</li>
-    <li>Setiap peserta sudah harus berada di <span class="warning">T102 JAM 11.50 SIANG, BATAS WAKTU TELAT HANYA 5 MENIT</span>.</li>
-    <li>Peserta diperbolehkan memilih 1 gambar yang telah disediakan panitia.</li>
-    <li>Pembagian egg mosaic akan dibagi sama rata dan diambil sesuai keperluan.</li>
-    <li>Waktu pengerjaan 1 jam 30 menit.</li>
-    <li>Penilaian akan dilihat dari kebersihan dan kerapian hasil dari egg mosaic.</li>
-  </ol><br>
-
-  <h2>Rules</h2>
-  <ol>
-    <li>Peserta dilarang berkata kasar atau mengganggu peserta lain. Pelanggaran akan diberikan peringatan, dan jika diulangi akan didiskualifikasi.</li>
-    <li>Peserta wajib membawa lem pribadi. Peserta yang tidak membawa lem tidak diperkenankan mengikuti lomba.</li>
-    <li>Peserta tidak diperbolehkan meminjam atau meminjamkan lem kepada peserta lain.</li>
-    <li>Waktu pengerjaan adalah 1 jam 30 menit. Setelah waktu habis, peserta wajib segera berhenti. Karya yang masih dikerjakan tidak akan diterima.</li>
-  </ol><br>
-
-  <p>Note : Hanya <span class="warning">30 peserta pertama yang mendaftar</span> yang dapat mengikuti lomba ini.</p>
-  <h2>Contact Person (LINE) : <span class="highlight">cathyyxly.</span></h2>
-{% endblock %}
 
 {% block form %}
   <form class="form" id="form">
-    <h1>Registration Form</h1>
     <label for="nama">Nama Lengkap : </label><br>
-    <input type="text" name="nama" placeholder="Nama Lengkap" required><br><br>
+    <input type="text" name="nama" required><br><br>
 
     <label for="kategori">Kategori : </label><br>
-    <div class="radio">
-      <input type="radio" name="kategori" value="SMP" required><label for="SMP">SMP</label><br>
-      <input type="radio" name="kategori" value="SMA" required><label for="SMA">SMA</label>
-    </div><br>
+    <select name="kategori" required>
+      <option value="">Pilih Kategori</option>
+      <option value="SMP">SMP</option>
+      <option value="SMA">SMA</option>
+    </select><br><br>
 
     <label for="kelas">Kelas : </label><br>
-    <input type="text" name="kelas" placeholder="Kelas" required><br><br>
+    <input type="text" name="kelas" required><br><br>
 
     <label for="agama">Agama : </label><br>
-    <div class="radio">
-      <input type="radio" name="agama" value="Kristen" required><label for="Kristen">Kristen</label><br>
-      <input type="radio" name="agama" value="Katolik" required><label for="Katolik">Katolik</label>
-    </div><br>
+    <select name="agama" required>
+      <option value="">Pilih Agama</option>
+      <option value="Kristen">Kristen</option>
+      <option value="Katolik">Katolik</option>
+    </select><br>
     
     <button>Register</button>
   </form>
