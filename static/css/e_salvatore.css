@@ -1,5 +1,7 @@
-/* Root Variables - Color Scheme */
-
+/* =========================================
+   1. Root Variables - Color Scheme 
+   (TIDAK DIUBAH SAMA SEKALI)
+========================================= */
 :root {
   /* Primary colors */
   --bg-color: #ffd6c3;
@@ -14,28 +16,31 @@
   --navbar-hover: #fff9f6;
 }
 
-/* Reset and Base Styles */
+/* =========================================
+   2. Reset and Base Styles
+========================================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
   background-color: var(--bg-color);
   color: white;
-  width: 100vw;
+  width: 100%; /* PENTING: 100% mencegah horizontal scroll, jangan pakai 100vw */
+  min-height: 100vh;
   overflow-x: hidden;
+  font-family: sans-serif; /* Opsional: Sesuaikan dengan font project kamu */
 }
 
-p,
-li {
+p, li {
   font-size: 110%;
 }
 
-/* Layout Components */
-
+/* =========================================
+   3. Utility Classes & Layouts
+========================================= */
 .kewa {
   display: flex;
   flex-direction: row;
@@ -48,25 +53,37 @@ li {
   width: 100%;
 }
 
+.hidden {
+  transform: translateY(100%);
+  filter: blur(10px);
+  opacity: 0;
+  transition: all 0.7s ease-in-out;
+}
 
-/* Banner Section */
+.show {
+  transform: translateY(0);
+  filter: blur(0);
+  opacity: 1;
+}
 
+/* =========================================
+   4. Banner Section
+========================================= */
 section.banner {
-  --size: 100vw;
   position: relative;
-  width: var(--size);
-  height: calc(var(--size) / 1.6);
+  width: 100%;
+  height: clamp(30vh, 50vw, 60vh); /* Fluid height */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 0;
   background-color: var(--bg-color);
+  overflow: hidden;
 }
 
 section.banner img {
-  width: 100vw;
-  height: calc(100vw / 1.6);
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -80,81 +97,24 @@ section.banner .gradient-banner {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg-color));
 }
 
-/* Content Sections */
-
-section.about {
+/* =========================================
+   5. Main Sections (About & Content)
+========================================= */
+section.about, section.content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 90vw;
-  max-width: 90vw;
-  margin: 2vw 5vw 5vw 5vw;
+  width: 90%; /* Menggunakan % agar aman dari scrollbar */
+  max-width: 1200px;
+  margin: 2rem auto 4rem auto;
   background: linear-gradient(to bottom, var(--container-bg-color), var(--container-bg-color-dark));
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
   text-align: center;
-  padding: 2vw;
-}
-.about-title {
-  margin-bottom: 2vw;
-  font-size: 2.5rem;
-  font-weight: 800;
-  color: #fff;
-  letter-spacing: 2px;
-}
-.about-desc {
-  font-size: 1.2rem;
-  color: #fff;
-  max-width: 1700px;
-  background: none;
-  border: none;
-  padding-top: 2vw;
-  line-height: 1.4;
-  font-weight: 350;
-}
-.about-panitia-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0 2vw;
-  width: 100%;
-  max-width: 1600px;
-  justify-items: center;
-  align-items: start; 
-}
-.about-panitia-item {
-  padding: 0 8px;
-}
-.about-panitia-role {
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-}
-.about-panitia-name {
-  font-size: 1.2rem;
-  color: #fff;
-  font-weight: 400;
+  padding: 3rem 2rem;
 }
 
-section.about h1 {
-  font-weight: 700;
-}
-
-section.content {
-  display: flex;
-  flex-direction: column;
-  width: 90vw;
-  margin: 5vw;
-  background: linear-gradient(to bottom, var(--container-bg-color), var(--container-bg-color-dark));
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-  padding: 40px;
-  box-sizing: border-box;
-  align-items: center;
-  text-align: center;
-}
-
-section.content h1 {
+section.content h1, section.about h1 {
   font-weight: 700;
   color: white;
   margin: 0;
@@ -165,27 +125,105 @@ section.content h2 {
   color: white;
 }
 
-/* List Cards */
+/* =========================================
+   6. About Components
+========================================= */
+.about-title {
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
 
+.about-desc {
+  font-size: 1.15rem;
+  color: #fff;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 20px 30px;
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+  line-height: 1.5;
+  margin-bottom: 2.5rem;
+}
+
+.about-panitia-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.about-panitia-item {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 20px;
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-panitia-role {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.about-panitia-name {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-top: 8px;
+}
+
+/* =========================================
+   7. Deadline Badge
+========================================= */
+.deadline-container {
+  width: 100%;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deadline-badge {
+  display: inline-block;
+  background: var(--container-bg-color);
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 999px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.deadline-badge h2 { font-size: 1.2rem; margin-bottom: 4px; }
+.deadline-badge p { margin: 0; font-size: 1rem; opacity: 0.9; }
+
+/* =========================================
+   8. Posters & Cards Grid
+========================================= */
 section.content .header {
   text-align: center;
-  padding: 25px 80px;
+  padding: 15px 40px;
   background: #ffba9d;
   border-radius: 40px;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto 20px auto;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .posters-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
-  max-width: 1400px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+  width: 100%;
+  max-width: 1200px;
   margin-top: 20px;
-  padding: 0 20px;
 }
 
 .poster-card {
@@ -196,14 +234,14 @@ section.content .header {
   border-radius: 16px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
 
 .poster-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .poster-link {
@@ -217,7 +255,7 @@ section.content .header {
 .poster-image-wrapper {
   position: relative;
   width: 100%;
-  padding-top: 140%;
+  padding-top: 140%; /* Aspect ratio poster */
   overflow: hidden;
   background: rgba(0, 0, 0, 0.2);
 }
@@ -242,32 +280,25 @@ section.content .header {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
   display: flex;
   align-items: flex-end;
   padding: 20px;
-  box-sizing: border-box;
 }
 
 .poster-card:hover .poster-overlay {
   opacity: 1;
 }
 
-.poster-info {
-  width: 100%;
-}
+.poster-info { width: 100%; }
 
 .poster-name {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
   line-height: 1.3;
 }
@@ -284,12 +315,13 @@ section.content .header {
   transform: translateX(5px);
 }
 
-/* Footer */
-
+/* =========================================
+   9. Footer & Navigation
+========================================= */
 footer {
   margin-top: 0;
   background-color: var(--primary);
-  width: 100vw;
+  width: 100%;
   margin-bottom: 0;
 }
 
@@ -297,100 +329,13 @@ footer .gradient {
   background: linear-gradient(var(--bg-color), var(--primary));
 }
 
-footer .column2 a h1,
-footer .column3 a h2 {
-  margin: 0;
-  color: var(--bg-color);
-}
-
-footer .copyright {
+footer .column2 a h1, footer .column3 a h2, footer .copyright {
   color: var(--bg-color);
 }
 
 footer .footer-content a:hover {
   color: var(--nav-headings);
   animation: nav-hover-a 0.2s linear;
-}
-
-/* Utility Classes */
-
-.hidden {
-  transform: translateY(100%);
-  filter: blur(10px);
-}
-
-.show {
-  transform: translateY(0);
-  filter: blur(0);
-  transition: all 0.7s ease-in-out;
-}
-
-/* Animations */
-
-@keyframes colorLetters {
-  0% {
-    color: var(--nav-headings);
-    text-shadow: none;
-  }
-
-  25% {
-    color: rgb(228, 15, 115);
-    text-shadow: 0 0.05vh 0.5vh rgba(238, 98, 240, 0.8),
-      0 -0.4vh 0.5vh rgba(238, 98, 240, 0.8),
-      0.2vh 0 0.5vh rgba(238, 98, 240, 0.8),
-      -0.2vh 0 0.5vh rgba(238, 98, 240, 0.8);
-  }
-
-  50% {
-    color: rgb(172, 8, 84);
-    text-shadow: 0 0.3vh 0.5vh rgba(238, 98, 240, 0.8),
-      0 -0.3vh 0.5vh rgba(238, 98, 240, 0.8),
-      0.2vh 0 0.5vh rgba(238, 98, 240, 0.8),
-      -0.2vh 0 0.5vh rgba(238, 98, 240, 0.8);
-  }
-
-  75% {
-    color: rgb(228, 15, 115);
-    text-shadow: 0 0.4vh 0.5vh rgba(238, 98, 240, 0.8),
-      0 -0.05vh 0.5vh rgba(238, 98, 240, 0.8),
-      0.2vh 0 0.5vh rgba(238, 98, 240, 0.8),
-      -0.2vh 0 0.5vh rgba(238, 98, 240, 0.8);
-  }
-
-  100% {
-    color: var(--nav-headings);
-    text-shadow: none;
-  }
-}
-
-@keyframes hovering {
-  0% {
-    color: white;
-  }
-
-  100% {
-    color: var(--text-color-glow);
-  }
-}
-
-@keyframes box-hover {
-  0% {
-    background-color: var(--primary);
-  }
-
-  100% {
-    background-color: var(--primary-dark);
-  }
-}
-
-@keyframes box-size {
-  0% {
-    scale: 1;
-  }
-
-  100% {
-    scale: 1.02;
-  }
 }
 
 .navbar {
@@ -400,951 +345,106 @@ footer .footer-content a:hover {
   width: 100%;
   z-index: 5000;
 }
-/* Animasi nyala (fade-in) */
+
+/* =========================================
+   10. Animations
+========================================= */
 @keyframes glowUp {
-  from {
-    text-shadow: none;
-  }
-  to {
-    text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
-  }
+  from { text-shadow: none; }
+  to { text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white; }
 }
 
-/* Animasi mati (fade-out) */
 @keyframes glowDown {
-  from {
-    text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
-  }
-  to {
-    text-shadow: none;
-  }
-}
-/* Animasi nyala (fade-in) */
-@keyframes glowFade {
-  from {
-    text-shadow: none;
-  }
-  to {
-    text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
-  }
+  from { text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white; }
+  to { text-shadow: none; }
 }
 
-/* Animasi mati (fade-out) */
-@keyframes glowFadeOut {
-  from {
-    text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
-  }
-  to {
-    text-shadow: none;
-  }
-}
-.footer {
-  background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
-}
-.sidebar {
-  background: linear-gradient(to bottom, var(--primary-dark), var(--primary));
-  position: fixed;
-  z-index: 9999;
-}
-.sidebar-header {
-  background-color: var(--primary-dark);
-  position: fixed;
-  z-index: 9999;
-}
-.sidebar-brand {
-  text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
-}
-.sidebar-nav a:hover {
-  text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
-}
-.about-panitia-item {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  padding: 20px;
-  border-radius: 18px;
-  backdrop-filter: blur(6px);
-  height: 105px;
-  width: 250px;
-}
-.about-panitia-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-  max-width: 900px;
-  margin: 0;
-}
-.about-panitia-name {
-  margin-top: 8px;
-  font-size: 1.1rem;
-}
-.about-desc {
-  max-width: 900px;
-  max-height: 500px;
-  margin: 0 auto 40px;
-  font-size: 1.15rem;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  padding: 20px;
-  border-radius: 18px;
-  backdrop-filter: blur(6px);
-}
-.deadline-container {
-  width: 100%;
-  margin-top: 2vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.deadline-badge {
-  width: 70%;
-  display: inline-block;
-  background: var(--container-bg-color);
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-size: 1rem;
-  font-weight: 600;
-  text-align: center;
-}
-
-/* Media Queries */
-
-/* ===== 1440px - Large Desktop ===== */
-@media screen and (max-width: 1440px) {
-  section.content {
-    width: 90vw;
-    max-width: 1200px;
-    margin: 3vw auto;
-    padding: 30px;
-  }
-
-  section.content .list {
-    width: 100%;
-    max-width: 100%;
-    flex-direction: row;
-    gap: 20px;
-  }
-
-  section.content .list img {
-    width: 250px;
-    height: auto;
-    min-width: 250px;
-    flex-shrink: 0;
-  }
-
-  section.content .fun-activities-list {
-    width: 100%;
-    max-width: 100%;
-    flex-direction: row;
-    padding: 20px;
-    gap: 20px;
-  }
-
-  section.content .fun-activities-list img {
-    width: 200px;
-    height: auto;
-    min-width: 200px;
-    flex-shrink: 0;
-  }
-
-  .about-panitia-row {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .image-container {
-    width: calc(33.333% - 2rem);
-  }
-}
+/* =========================================
+   11. MEDIA QUERIES (Sangat Bersih & Responsif)
+========================================= */
 
 /* ===== 1024px - Tablet Landscape ===== */
 @media screen and (max-width: 1024px) {
-  section.content {
-    width: 90vw;
-    max-width: 950px;
-    margin: 3vw auto;
-    padding: 25px;
-  }
-
-  section.content .list {
-    width: 100%;
-    max-width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    gap: 15px;
-  }
-
-  section.content .list img {
-    width: 100%;
-    max-width: 300px;
-    height: auto;
-    min-width: unset;
-    flex-shrink: unset;
-  }
-
-  section.content .fun-activities-list {
-    width: 100%;
-    max-width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    gap: 15px;
-  }
-
-  section.content .fun-activities-list img {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
-    min-width: unset;
-    flex-shrink: unset;
-  }
-
-  .about-panitia-row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-
-  .about-panitia-item {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-    padding: 15px;
-  }
-
-  .image-container {
-    width: calc(50% - 2rem);
-    min-width: 280px;
-  }
-
-  .performance h1 {
-    font-size: 2.5rem;
-  }
-
-  p, li {
-    font-size: 100%;
-  }
-}
-
-/* ===== 768px - Tablet ===== */
-@media screen and (max-width: 768px) {
-  section.content {
-    width: 95vw;
-    max-width: 700px;
-    margin: 2vw auto;
-    padding: 20px;
-  }
-
-  section.about {
-    width: 95vw;
-    max-width: 700px;
-    margin: 2vw auto;
-    padding: 20px;
-  }
-
-  section.banner .gradient-banner {
-    height: 5rem;
-  }
-
-  .performance .gambar {
-    gap: 1.5rem;
-    padding: 1.5rem;
-  }
-
-  .image-container {
-    width: calc(100% - 2rem);
-    max-width: 400px;
-    min-width: unset;
-  }
-
-  .performance h1 {
-    font-size: 2rem;
-  }
-
-  .about-title {
-    font-size: 2rem;
-  }
-
-  .about-desc {
-    font-size: 1rem;
-    max-height: 400px;
-  }
-
-  .about-panitia-row {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-  }
-
-  .about-panitia-item {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    padding: 12px;
-  }
-
-  .about-panitia-role {
-    font-size: 1rem;
-  }
-
-  .about-panitia-name {
-    font-size: 1rem;
-  }
-
-  p, li {
-    font-size: 100%;
-  }
-}
-
-/* ===== 425px - Mobile Landscape ===== */
-@media screen and (max-width: 426px) {
-  section.content {
-    width: 95vw;
-    max-width: 100%;
-    margin: 1.5vw auto;
-    padding: 15px;
-    border-radius: 20px;
-  }
-
-  section.about {
-    width: 95vw;
-    max-width: 100%;
-    margin: 1.5vw auto;
-    padding: 15px;
-    border-radius: 20px;
-  }
-
-  section.banner {
-    height: calc(100vw / 2);
-  }
-
-  section.banner img {
-    height: calc(100vw / 2);
-  }
-
-  section.content .list {
-    width: 100%;
-    max-width: 100%;
-    flex-direction: column;
-    padding: 12px;
-    gap: 10px;
-    margin-top: 0.8rem;
-  }
-
-  section.content .list img {
-    width: 100%;
-    max-width: 200px;
-    height: auto;
-  }
-
-  section.content .list h1 {
-    font-size: 1.2rem;
-  }
-
-  section.content .fun-activities-list {
-    width: 100%;
-    max-width: 100%;
-    flex-direction: column;
-    padding: 12px;
-    gap: 10px;
-    margin-top: 0.8rem;
-  }
-
-  section.content .fun-activities-list img {
-    width: 100%;
-    max-width: 150px;
-    height: auto;
-  }
-
-  section.content .fun-activities-desc h2 {
-    font-size: 1.1rem;
-  }
-
-  section.content .fun-activities-desc p {
-    font-size: 0.9rem;
-  }
-
-  section.content .fun-activities-desc a {
-    word-break: break-all;
-  }
-
-  .performance .gambar {
-    gap: 1rem;
-    padding: 1rem;
-  }
-
-  .image-container {
-    width: calc(100% - 2rem);
-    max-width: 280px;
-  }
-
-  .performance h1 {
-    font-size: 1.5rem;
-  }
-
-  .overlay h5 {
-    font-size: 1rem;
-  }
-
-  .overlay .btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.85rem;
-  }
-
-  .about-title {
-    font-size: 1.6rem;
-    margin: 1.5rem 0 1rem 0;
-  }
-
-  .about-desc {
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-    max-height: 300px;
-  }
-
-  .about-panitia-row {
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
-  }
-
-  .about-panitia-item {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    padding: 8px;
-    border-radius: 12px;
-  }
-
-  .about-panitia-role {
-    font-size: 0.95rem;
-  }
-
-  .about-panitia-name {
-    font-size: 0.95rem;
-    margin-top: 0.5rem;
-  }
-
-  .deadline-badge {
-    width: 85%;
-    font-size: 0.9rem;
-    padding: 6px 12px;
-  }
-
-  p, li {
-    font-size: 95%;
-  }
-
-  header nav ul.menu-nav {
-    background-color: var(--bg-color);
-    border-color: white;
-    box-shadow: 0px 0px 10px white;
-  }
-
-  .detail .content {
-    width: 90vw;
-    height: 45vh;
-    flex-direction: column-reverse;
-    padding: 15px;
-  }
-
-  .detail .content .content-desc {
-    width: 100%;
-    max-height: 60%;
-    padding: 15px;
-  }
-
-  .detail .content .content-logo {
-    width: 150px;
-    height: 150px;
-    font-size: 100px;
-  }
-}
-
-/* ===== 375px - Mobile ===== */
-@media screen and (max-width: 375px) {
-  html, body {
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  section.content {
-    width: 95vw;
-    max-width: 100%;
-    margin: 1rem auto;
-    padding: 12px;
-  }
-
-  section.about {
-    width: 95vw;
-    max-width: 100%;
-    margin: 1rem auto;
-    padding: 12px;
-  }
-
-  section.banner {
-    height: calc(100vw / 1.8);
-  }
-
-  section.banner img {
-    height: calc(100vw / 1.8);
-  }
-
-  section.banner .gradient-banner {
-    height: 4rem;
-  }
-
-  section.content .list {
-    width: 100%;
-    max-width: 100%;
-    flex-direction: column;
-    padding: 10px;
-    gap: 8px;
-    margin-top: 0.6rem;
-  }
-
-  section.content .list img {
-    width: 100%;
-    max-width: 180px;
-    height: auto;
-  }
-
-  section.content .list h1 {
-    font-size: 1.1rem;
-    margin-bottom: 0;
-  }
-
-  section.content .fun-activities-list {
-    width: 100%;
-    max-width: 100%;
-    flex-direction: column;
-    padding: 10px;
-    gap: 8px;
-    margin-top: 0.6rem;
-  }
-
-  section.content .fun-activities-list img {
-    width: 100%;
-    max-width: 120px;
-    height: auto;
-  }
-
-  section.content .fun-activities-list i {
-    font-size: 40pt;
-  }
-
-  section.content .fun-activities-desc h2 {
-    font-size: 1rem;
-  }
-
-  section.content .fun-activities-desc p {
-    font-size: 0.85rem;
-    line-height: 1.3;
-  }
-
-  .performance .gambar {
-    gap: 0.8rem;
-    padding: 0.8rem;
-  }
-
-  .image-container {
-    width: calc(100% - 1.6rem);
-    max-width: 250px;
-  }
-
-  .overlay {
-    padding: 0.8rem;
-  }
-
-  .overlay h5 {
-    font-size: 0.95rem;
-  }
-
-  .overlay .btn {
-    padding: 0.3rem 0.6rem;
-    font-size: 0.8rem;
-  }
-
-  .performance h1 {
-    font-size: 1.4rem;
-  }
-
-  section.content h1 {
-    font-size: 1.3rem;
-  }
-
-  section.content h2 {
-    font-size: 1.1rem;
-  }
-
-  .about-title {
-    font-size: 1.4rem;
-    margin: 1.2rem 0 0.8rem 0;
-  }
-
-  .about-desc {
-    font-size: 0.9rem;
-    margin-bottom: 1.2rem;
-    max-height: 250px;
-    padding: 15px;
-  }
-
-  .about-panitia-row {
-    grid-template-columns: 1fr;
-    gap: 0.8rem;
-  }
-
-  .about-panitia-item {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    padding: 8px;
-    border-radius: 12px;
-  }
-
-  .about-panitia-role {
-    font-size: 0.9rem;
-  }
-
-  .about-panitia-name {
-    font-size: 0.9rem;
-    margin-top: 0.4rem;
-  }
-
-  .deadline-badge {
-    width: 90%;
-    font-size: 0.85rem;
-    padding: 5px 10px;
-  }
-
-  .deadline-badge h2 {
-    font-size: 0.95rem;
-    margin: 0;
-  }
-
-  .deadline-badge p {
-    font-size: 0.85rem;
-    margin: 0;
-  }
-
-  p, li {
-    font-size: 90%;
-  }
-
-  header nav ul.menu-nav {
-    background-color: var(--bg-color);
-    border-color: white;
-    box-shadow: 0px 0px 10px white;
-  }
-
-  .detail .content {
-    width: 92vw;
-    height: 40vh;
-    flex-direction: column-reverse;
-    padding: 12px;
-    border-radius: 10px;
-  }
-
-  .detail .content .content-desc {
-    width: 100%;
-    max-height: 55%;
-    padding: 12px;
-    border-radius: 10px;
-    overflow-y: auto;
-  }
-
-  .detail .content .content-desc .detail-banner {
-    max-width: 100%;
-    max-height: 80%;
-  }
-
-  .detail .content .content-logo {
-    width: 120px;
-    height: 120px;
-    font-size: 80px;
-    border-radius: 10px;
-  }
-
-  .detail .content .close {
-    font-size: 24px;
-    top: 15px;
-    right: 15px;
-  }
-}
-
-/* ===== 320px - Small Mobile ===== */
-@media screen and (max-width: 320px) {
-  html, body {
-    width: 100%;
-    overflow-x: hidden;
-  }
-
-  section.content {
-    width: 97vw;
-    max-width: 100%;
-    margin: 0.8rem auto;
-    padding: 10px;
-  }
-
-  section.about {
-    width: 97vw;
-    max-width: 100%;
-    margin: 0.8rem auto;
-    padding: 10px;
-  }
-
-  section.banner {
-    height: calc(100vw / 1.7);
-  }
-
-  section.banner img {
-    height: calc(100vw / 1.7);
-  }
-
-  section.banner .gradient-banner {
-    height: 3rem;
-  }
-
-  section.content .list {
-    width: 100%;
-    max-width: 100%;
-    flex-direction: column;
-    padding: 8px;
-    gap: 6px;
-    margin-top: 0.5rem;
-  }
-
-  section.content .list img {
-    width: 100%;
-    max-width: 150px;
-    height: auto;
-    border-radius: 10px;
-  }
-
-  section.content .list h1 {
-    font-size: 1rem;
-    margin-bottom: 0;
-  }
-
-  section.content .list .list-btn {
-    width: 120px;
-    height: 35px;
-    font-size: 0.9rem;
-  }
-
-  section.content .fun-activities-list {
-    width: 100%;
-    max-width: 100%;
-    flex-direction: column;
-    padding: 8px;
-    gap: 6px;
-    margin-top: 0.5rem;
-  }
-
-  section.content .fun-activities-list img {
-    width: 100%;
-    max-width: 100px;
-    height: auto;
-  }
-
-  section.content .fun-activities-list i {
-    font-size: 35pt;
-  }
-
-  section.content .fun-activities-desc h2 {
-    font-size: 0.95rem;
-    margin-bottom: 0.3rem;
-  }
-
-  section.content .fun-activities-desc p {
-    font-size: 0.8rem;
-    line-height: 1.2;
-  }
-
-  section.content .fun-activities-desc a {
-    font-size: 0.75rem;
-  }
-
-  .performance .gambar {
-    gap: 0.6rem;
-    padding: 0.6rem;
-  }
-
-  .image-container {
-    width: calc(100% - 1.2rem);
-    max-width: 220px;
-  }
-
-  .overlay {
-    padding: 0.6rem;
-    gap: 0.5rem;
-  }
-
-  .overlay h5 {
-    font-size: 0.9rem;
-  }
-
-  .overlay .btn {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
-  }
-
-  .performance h1 {
-    font-size: 1.2rem;
-  }
-
-  section.content h1 {
-    font-size: 1.1rem;
-  }
-
-  section.content h2 {
-    font-size: 1rem;
-  }
-
-  .about-title {
-    font-size: 1.3rem;
-    margin: 1rem 0 0.7rem 0;
-  }
-
-  .about-desc {
-    font-size: 0.85rem;
-    margin-bottom: 1rem;
-    max-height: 220px;
-    padding: 12px;
-    line-height: 1.3;
-  }
-
-  .about-panitia-row {
-    grid-template-columns: 1fr;
-    gap: 0.6rem;
-  }
-
-  .about-panitia-item {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    padding: 6px;
-    border-radius: 10px;
-  }
-
-  .about-panitia-role {
-    font-size: 0.85rem;
-  }
-
-  .about-panitia-name {
-    font-size: 0.85rem;
-    margin-top: 0.3rem;
-  }
-
-  .deadline-badge {
+  section.about, section.content {
     width: 95%;
-    font-size: 0.8rem;
-    padding: 4px 8px;
+    padding: 2rem 1.5rem;
   }
-
-  .deadline-badge h2 {
-    font-size: 0.9rem;
-    margin: 0;
-  }
-
-  .deadline-badge p {
-    font-size: 0.8rem;
-    margin: 0;
-  }
-
-  p, li {
-    font-size: 85%;
-  }
-
-  header nav ul.menu-nav {
-    background-color: var(--bg-color);
-    border-color: white;
-    box-shadow: 0px 0px 8px white;
-  }
-
-  .detail .content {
-    width: 94vw;
-    height: 35vh;
-    flex-direction: column-reverse;
-    padding: 10px;
-    border-radius: 8px;
-  }
-
-  .detail .content .content-desc {
-    width: 100%;
-    max-height: 50%;
-    padding: 10px;
-    border-radius: 8px;
-    overflow-y: auto;
-    font-size: 0.9rem;
-  }
-
-  .detail .content .content-desc .detail-banner {
-    max-width: 100%;
-    max-height: 70%;
-  }
-
-  .detail .content .content-logo {
-    width: 100px;
-    height: 100px;
-    font-size: 70px;
-    border-radius: 8px;
-  }
-
-  .detail .content .close {
-    font-size: 22px;
-    top: 10px;
-    right: 10px;
-  }
-}
-
-@media (max-width: 1200px) {
-  .posters-grid {
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px;
-  }
-}
-
-@media (max-width: 992px) {
+  
   .posters-grid {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 20px;
   }
+  
+  .about-panitia-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-@media (max-width: 768px) {
+/* ===== 768px - Tablet Portrait ===== */
+@media screen and (max-width: 768px) {
+  .about-title { font-size: 2rem; }
+  .about-desc { font-size: 1rem; padding: 15px 20px; }
+  
   .posters-grid {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 15px;
-    padding: 0 10px;
   }
   
-  .poster-name {
-    font-size: 1rem;
-  }
-  
-  .poster-click {
-    font-size: 0.85rem;
-  }
+  section.banner .gradient-banner { height: 6rem; }
 }
 
-@media (max-width: 480px) {
+/* ===== 480px - All Mobile Phones (Fluid) ===== */
+@media screen and (max-width: 480px) {
+  section.about, section.content {
+    margin: 1rem auto;
+    padding: 1.5rem 1rem;
+    border-radius: 15px;
+  }
+
+  .about-title { font-size: 1.6rem; margin-bottom: 1rem; }
+  .about-desc { font-size: 0.95rem; padding: 12px; margin-bottom: 1.5rem; }
+
+  /* Panitia jadi 1 kolom di HP */
+  .about-panitia-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .about-panitia-item { padding: 12px; }
+
+  /* Poster jadi 2 kolom sejajar di HP */
   .posters-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 10px;
+  }
+
+  .poster-overlay { padding: 10px; }
+  .poster-name { font-size: 0.9rem; margin-bottom: 2px; }
+  .poster-click { font-size: 0.75rem; }
+  
+  section.content .header {
+    padding: 10px 20px;
+    width: 90%;
   }
   
+  section.content .header h1 { font-size: 1.1rem; }
+  section.banner .gradient-banner { height: 4rem; }
+  .deadline-badge { width: 90%; padding: 8px 15px; }
+  .deadline-badge h2 { font-size: 1rem; }
+  .deadline-badge p { font-size: 0.85rem; }
+  p, li { font-size: 90%; }
+}
+
+/* =========================================
+   12. FIX UNTUK LAYAR SENTUH (HP/TABLET)
+========================================= */
+@media (hover: none) {
+  /* Di perangkat tanpa mouse (layar sentuh), overlay text selalu dimunculkan agar bisa dibaca tanpa harus di-tap dulu */
   .poster-overlay {
-    padding: 15px;
+    opacity: 1; 
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.85) 100%);
   }
-  
-  .poster-name {
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-  }
-  
   .poster-click {
-    font-size: 0.75rem;
+    transform: translateX(5px);
   }
 }
