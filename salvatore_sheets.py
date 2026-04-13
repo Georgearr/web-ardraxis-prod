@@ -50,29 +50,33 @@ PARTICIPANT_LIMITS = {
 def get_google_sheets_client():
     """Initialize and return Google Sheets client."""
     try:
-        # Use the original Salvatoré credentials from .env
-        import os
-        from dotenv import load_dotenv
-        load_dotenv()
-
+        # Try to load from environment variable first
         creds_info = os.getenv("SALVATORE_SHEETS_CREDENTIALS")
         
-        with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
-            f.write(f"[get_google_sheets_client] Loading credentials...\n")
-            if creds_info:
-                # Log first 50 chars of creds to verify it's loaded
-                f.write(f"[get_google_sheets_client] Creds found, starts with: {creds_info[:50]}...\n")
-            else:
-                f.write(f"[get_google_sheets_client] WARNING: No credentials found!\n")
+        if creds_info:
+            with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
+                f.write(f"[get_google_sheets_client] Loading credentials from environment variable...\n")
+            try:
+                creds_data = json.loads(creds_info)
+                with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
+                    f.write(f"[get_google_sheets_client] Parsed JSON credentials from env\n")
+            except json.JSONDecodeError as e:
+                with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
+                    f.write(f"[get_google_sheets_client] JSON decode error from env: {e}\n")
+                    f.write(f"[get_google_sheets_client] Falling back to JSON file\n")
+                # Fall back to loading from JSON file
+                with open("e-salvatore-bot-adffecd586f0.json", "r") as f:
+                    creds_data = json.load(f)
+                with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
+                    f.write(f"[get_google_sheets_client] Loaded credentials from JSON file\n")
+        else:
+            with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
+                f.write(f"[get_google_sheets_client] No credentials in env, loading from JSON file\n")
+            # Load from JSON file if environment variable not set
+            with open("e-salvatore-bot-adffecd586f0.json", "r") as f:
+                creds_data = json.load(f)
         
-        if not creds_info:
-            raise ValueError("SALVATORE_SHEETS_CREDENTIALS environment variable not set")
-
-        import json
-        creds_data = json.loads(creds_info)
-        
         with open('salvatore_debug.log', 'a', encoding='utf-8') as f:
-            f.write(f"[get_google_sheets_client] Parsed JSON credentials\n")
             f.write(f"[get_google_sheets_client] Service account email: {creds_data.get('client_email')}\n")
 
         creds = Credentials.from_service_account_info(creds_data, scopes=[
@@ -210,7 +214,7 @@ def save_registration(competition, data_dict):
         if competition == "bernyanyi_rohani":
             row_data = [
                 data_dict.get("nama", ""),
-               data_dict.get("kategori", ""),
+                data_dict.get("kategori", ""),
                 data_dict.get("kelas", ""),
                 data_dict.get("agama", ""),
                 data_dict.get("judul", "")
