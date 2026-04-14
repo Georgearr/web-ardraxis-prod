@@ -70,15 +70,16 @@ p, li {
    4. Banner Section
 ========================================= */
 section.banner {
+  --size: 100vw;
   position: relative;
-  width: 100%;
-  height: clamp(30vh, 50vw, 60vh); /* Fluid height */
+  width: var(--size);
+  height: calc(var(--size) / 1.6);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 0;
   background-color: var(--bg-color);
-  overflow: hidden;
 }
 
 section.banner img {
@@ -318,22 +319,18 @@ section.content .header {
 /* =========================================
    9. Footer & Navigation
 ========================================= */
-footer {
+.footer {
   margin-top: 0;
-  background-color: var(--primary);
+  background: linear-gradient(to bottom, var(--container-bg-color), var(--container-bg-color-dark));
   width: 100%;
   margin-bottom: 0;
 }
 
-footer .gradient {
-  background: linear-gradient(var(--bg-color), var(--primary));
-}
-
-footer .column2 a h1, footer .column3 a h2, footer .copyright {
+.footer .column2 a h1, .footer .column3 a h2, .footer .copyright {
   color: var(--bg-color);
 }
 
-footer .footer-content a:hover {
+.footer .footer-content a:hover {
   color: var(--nav-headings);
   animation: nav-hover-a 0.2s linear;
 }
@@ -344,6 +341,14 @@ footer .footer-content a:hover {
   top: 0;
   width: 100%;
   z-index: 5000;
+}
+
+.navbar a:hover {
+  animation: glowUp 0.3s forwards;
+}
+
+.navbar a:not(:hover) {
+  animation: glowDown 0.3s forwards;
 }
 
 /* =========================================

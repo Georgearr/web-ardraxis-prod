@@ -10,11 +10,11 @@
 
 {% block isi %}
 <!-- Banner Section -->
-<section class="banner" style="height: 10vh;">
-  <!-- <img
-    src="{{ url_for('static', filename='img/banner/festiora_banner.png') }}"
-    alt="Salvatoré Banner"
-  /> -->
+<section class="banner">
+  <img
+    src="{{ url_for('static', filename='img/banner/salvatore_banner.png') }}"
+    alt="Salvatore Banner"
+  />
   <section class="gradient-banner"></section>
 </section>
 
@@ -53,7 +53,7 @@
   </div>
   <div class="posters-grid">
     {% set lomba = [
-      {'file': 'egg-shell-mosaic.jpeg', 'name': 'Egg Shell Mosaic', 'endpoint': 'mosaic'},
+      {'file': 'egg_revisi.png', 'name': 'Egg Shell Mosaic', 'endpoint': 'mosaic'},
       {'file': 'story-telling-rohani.jpeg', 'name': 'Story Telling Rohani', 'endpoint': 'storytelling'},
       {'file': 'bernyanyi-rohani.jpg', 'name': 'Bernyanyi Rohani', 'endpoint': 'nyanyi'},
       {'file': 'quiz-alkitab.png', 'name': 'Quiz Alkitab', 'endpoint': 'quiz_alkitab'}
@@ -86,11 +86,11 @@
   </div>
   <div class="posters-grid">
     {% set fun_activities = [
-      {'file': 'bucket-of-faith.png', 'name': 'Bucket of Faith'},
+      {'file': 'bucket_revisi.png', 'name': 'Bucket of Faith'},
       {'file': 'squat-easter.png', 'name': 'Squat Easter'},
       {'file': 'flip-the-cup.jpg', 'name': 'Flip the Cup'},
       {'file': 'dont-touch-the-colour.png', 'name': "Don't Touch the Colour"},
-      {'file': 'cup-stacking.jpg', 'name': 'Cup Stacking'}
+      {'file': 'cup_revisi.jpg', 'name': 'Cup Stacking'}
     ] %}
 
     {% for poster in fun_activities %}
