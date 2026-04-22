@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
 {% extends "layout.html" %}
 
 {% block extra_css %}
@@ -57,13 +55,12 @@
     {% set lomba = [
       {'file': 'egg_revisi.png', 'name': 'Egg Shell Mosaic', 'endpoint': 'mosaic'},
       {'file': 'story-telling-rohani.jpeg', 'name': 'Story Telling Rohani', 'endpoint': 'storytelling'},
-      {'file': 'bernyanyi-rohani.jpg', 'name': 'Bernyanyi Rohani', 'endpoint': 'nyanyi'},
+      {'file': 'bernyanyi-rohani-1.jpg', 'name': 'Bernyanyi Rohani', 'endpoint': 'nyanyi'},
       {'file': 'quiz-alkitab.png', 'name': 'Quiz Alkitab', 'endpoint': 'quiz_alkitab'}
     ] %}
 
     {% for poster in lomba %}
     <div class="poster-card" data-aos="fade-up">
-      <a href="{{ url_for(poster.endpoint) }}" class="poster-link">
         <div class="poster-image-wrapper">
           <img
             src="{{ url_for('static', filename='img/salvatore/' + poster.file) }}"
@@ -74,11 +71,9 @@
           <div class="poster-overlay">
             <div class="poster-info">
               <h3 class="poster-name">{{ poster.name }}</h3>
-              <span class="poster-click">Click to Register →</span>
             </div>
           </div>
         </div>
-      </a>
     </div>
     {% endfor %}
   </div><br>
@@ -121,132 +116,4 @@
 {% block extra_js %}
   <script src="{{ url_for('static', filename='js/detail.js') }}"></script>
   <script src="{{ url_for('static', filename='js/shown_up.js') }}"></script>
-=======
-=======
->>>>>>> Stashed changes
-{% extends "layout.html" %}
-
-{% block extra_css %}
-<link
-  rel="stylesheet"
-  type="text/css"
-  href="{{ url_for('static', filename='css/e_salvatore.css') }}?v=1.1"
-/>
-{% endblock %}
-
-{% block isi %}
-<!-- Banner Section -->
-<section class="banner">
-  <img
-    src="{{ url_for('static', filename='img/banner/salvatore_banner.png') }}"
-    alt="Salvatore Banner"
-  />
-  <section class="gradient-banner"></section>
-</section>
-
-<!-- Deadline Badge -->
-<div class="deadline-container">
-  <div class="deadline-badge">
-    <h2>Starts • April 17, 2026</h2>
-    <p>See you by then!</p>
-  </div>
-</div>
-
-<!-- About Section -->
-<section class="about">
-  <h1 class="about-title hidden">About {% block title %} Salvatoré {% endblock %}</h1>
-  <div class="about-desc hidden">"Salvatorè" terinspirasi dari kata savior (Juru Selamat) dengan sentuhan modern. Nama ini mencerminkan bahwa sang penyelamat yaitu Yesus telah memberikan nyawa nya untuk seluruh umat manusia dengan wafat di kayu salib.</div> <!-- add more description -->
-  <div class="about-panitia-row">
-    <div class="about-panitia-item hidden">
-      <div><span class="about-panitia-role">Ketua Panitia</span></div>
-      <div class="about-panitia-name">Michaela Nathania</div>
-    </div>
-    <div class="about-panitia-item hidden">
-      <div><span class="about-panitia-role">Wakil Ketua Panitia</span></div>
-      <div class="about-panitia-name">Benedicta Andinica Keiko</div>
-    </div>
-    <div class="about-panitia-item hidden">
-      <div><span class="about-panitia-role">Ketua Acara</span></div>
-      <div class="about-panitia-name">Marcello Deven Husada</div>
-    </div>
-  </div>
-</section>
-
-<!-- Content Section -->
-<section class="content">
-  <div class="header">
-    <h1 class="hidden">Competitions</h1>
-  </div>
-  <div class="posters-grid">
-    {% set lomba = [
-      {'file': 'egg_revisi.png', 'name': 'Egg Shell Mosaic', 'endpoint': 'mosaic'},
-      {'file': 'story-telling-rohani.jpeg', 'name': 'Story Telling Rohani', 'endpoint': 'storytelling'},
-      {'file': 'bernyanyi-rohani.jpg', 'name': 'Bernyanyi Rohani', 'endpoint': 'nyanyi'},
-      {'file': 'quiz-alkitab.png', 'name': 'Quiz Alkitab', 'endpoint': 'quiz_alkitab'}
-    ] %}
-
-    {% for poster in lomba %}
-    <div class="poster-card" data-aos="fade-up">
-      <a href="{{ url_for(poster.endpoint) }}" class="poster-link">
-        <div class="poster-image-wrapper">
-          <img
-            src="{{ url_for('static', filename='img/salvatore/' + poster.file) }}"
-            alt="{{ poster.name }}"
-            class="poster-image"
-            loading="lazy"
-          />
-          <div class="poster-overlay">
-            <div class="poster-info">
-              <h3 class="poster-name">{{ poster.name }}</h3>
-              <span class="poster-click">Click to Register →</span>
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    {% endfor %}
-  </div><br>
-
-  <div class="header">
-    <h1 class="hidden">Fun Activities</h1>
-  </div>
-  <div class="posters-grid">
-    {% set fun_activities = [
-      {'file': 'bucket_revisi.png', 'name': 'Bucket of Faith'},
-      {'file': 'squat-easter.png', 'name': 'Squat Easter'},
-      {'file': 'flip-the-cup.jpg', 'name': 'Flip the Cup'},
-      {'file': 'dont-touch-the-colour.png', 'name': "Don't Touch the Colour"},
-      {'file': 'cup_revisi.jpg', 'name': 'Cup Stacking'}
-    ] %}
-
-    {% for poster in fun_activities %}
-    <div class="poster-card" data-aos="fade-up">
-      <a href="#" class="poster-link">
-        <div class="poster-image-wrapper">
-          <img
-            src="{{ url_for('static', filename='img/salvatore/' + poster.file) }}"
-            alt="{{ poster.name }}"
-            class="poster-image"
-            loading="lazy"
-          />
-          <div class="poster-overlay">
-            <div class="poster-info">
-              <h3 class="poster-name">{{ poster.name }}</h3>
-            </div>
-          </div>
-        </div>
-      </a>
-    </div>
-    {% endfor %}
-  </div>
-</section>
-{% endblock isi %}
-
-{% block extra_js %}
-  <script src="{{ url_for('static', filename='js/detail.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/shown_up.js') }}"></script>
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 {% endblock %}

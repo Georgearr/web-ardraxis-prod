@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'e_salvatore/regist_layout.html' %}
 
 {% block poster %}
@@ -37,4 +38,45 @@
 
     <button>Register</button>
   </form>
+=======
+{% extends 'e_salvatore/regist_layout.html' %}
+
+{% block poster %}
+  <img
+    src="{{ url_for('static', filename='img/salvatore/bernyanyi-rohani-1.jpg') }}"
+    alt="Bernyanyi Rohani"
+  >
+{% endblock %}
+
+{% block title %} Bernyanyi Rohani {% endblock %}
+
+{% block form %}
+  <form class="form" id="form">
+    <h1>Registration Form</h1>
+    <label for="nama">Nama Lengkap : </label><br>
+    <input type="text" name="nama" required><br><br>
+
+    <label for="kategori">Kategori : </label><br>
+    <select name="kategori" required>
+      <option value="">Pilih Kategori</option>
+      <option value="SMP">SMP</option>
+      <option value="SMA">SMA</option>
+    </select><br><br>
+
+    <label for="kelas">Kelas : </label><br>
+    <input type="text" name="kelas" required><br><br>
+
+    <label for="agama">Agama : </label><br>
+    <select name="agama" required>
+      <option value="">Pilih Agama</option>
+      <option value="Kristen">Kristen</option>
+      <option value="Katolik">Katolik</option>
+    </select><br><br>
+
+    <label for="judul">Judul Lagu : </label><br>
+    <input type="text" name="judul" required><br><br>
+
+    <button>Register</button>
+  </form>
+>>>>>>> dc283ed (Dari Server)
 {% endblock %}

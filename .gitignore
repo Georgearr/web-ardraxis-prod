@@ -15,4 +15,5 @@ exports/
 __pycache__/
 *.pyc
 *.pyo
-*.pyd
+*.pydenv
+.env

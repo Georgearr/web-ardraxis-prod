@@ -1,0 +1,982 @@
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [500]: Internal error encountered.
+Traceback (most recent call last):
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connection.py", line 790, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connection.py", line 969, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 480, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 524, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/opt/alt/python310/lib64/python3.10/ssl.py", line 513, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/opt/alt/python310/lib64/python3.10/ssl.py", line 1104, in _create
+    self.do_handshake()
+  File "/opt/alt/python310/lib64/python3.10/ssl.py", line 1375, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: EOF occurred in violation of protocol (_ssl.c:1017)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+urllib3.exceptions.SSLError: EOF occurred in violation of protocol (_ssl.c:1017)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='sheets.googleapis.com', port=443): Max retries exceeded with url: /v4/spreadsheets/1KEvSRTAvdBvAZ1DuEk77-SaL02XSbLQVRkiBBfSOrkg?includeGridData=false (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1017)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 114, in request
+    response = self.session.request(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/google/auth/transport/requests.py", line 540, in request
+    response = super(AuthorizedSession, self).request(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/requests/adapters.py", line 675, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='sheets.googleapis.com', port=443): Max retries exceeded with url: /v4/spreadsheets/1KEvSRTAvdBvAZ1DuEk77-SaL02XSbLQVRkiBBfSOrkg?includeGridData=false (Caused by SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1017)')))
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 80, in sheet1
+    return self.get_worksheet(0)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 248, in get_worksheet
+    sheet_data = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [500]: Internal error encountered.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 80, in sheet1
+    return self.get_worksheet(0)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 248, in get_worksheet
+    sheet_data = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [500]: Internal error encountered.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 80, in sheet1
+    return self.get_worksheet(0)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 248, in get_worksheet
+    sheet_data = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [500]: Internal error encountered.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 80, in sheet1
+    return self.get_worksheet(0)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 248, in get_worksheet
+    sheet_data = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [500]: Internal error encountered.
+[UID:1081][1131851] packetLen < 0
+[UID:1081][1161561] packetLen < 0
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 80, in sheet1
+    return self.get_worksheet(0)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 248, in get_worksheet
+    sheet_data = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 80, in sheet1
+    return self.get_worksheet(0)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 248, in get_worksheet
+    sheet_data = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connectionpool.py", line 464, in _make_request
+    self._validate_conn(conn)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1093, in _validate_conn
+    conn.connect()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connection.py", line 790, in connect
+    sock_and_verified = _ssl_wrap_socket_and_match_hostname(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connection.py", line 969, in _ssl_wrap_socket_and_match_hostname
+    ssl_sock = ssl_wrap_socket(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 480, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(sock, context, tls_in_tls, server_hostname)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 524, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/opt/alt/python310/lib64/python3.10/ssl.py", line 513, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/opt/alt/python310/lib64/python3.10/ssl.py", line 1104, in _create
+    self.do_handshake()
+  File "/opt/alt/python310/lib64/python3.10/ssl.py", line 1375, in do_handshake
+    self._sslobj.do_handshake()
+TimeoutError: _ssl.c:1000: The handshake operation timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/util/retry.py", line 474, in increment
+    raise reraise(type(error), error, _stacktrace)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/util/util.py", line 39, in reraise
+    raise value
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connectionpool.py", line 488, in _make_request
+    raise new_e
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connectionpool.py", line 466, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=conn.timeout)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/urllib3/connectionpool.py", line 367, in _raise_timeout
+    raise ReadTimeoutError(
+urllib3.exceptions.ReadTimeoutError: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Read timed out. (read timeout=120)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/google/auth/transport/requests.py", line 187, in __call__
+    response = self.session.request(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/requests/adapters.py", line 690, in send
+    raise ReadTimeout(e, request=request)
+requests.exceptions.ReadTimeout: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Read timed out. (read timeout=120)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 145, in open
+    spreadsheet_files, response = self._list_spreadsheet_files(title, folder_id)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 118, in _list_spreadsheet_files
+    response = self.http_client.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 114, in request
+    response = self.session.request(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/google/auth/transport/requests.py", line 535, in request
+    self.credentials.before_request(auth_request, method, url, request_headers)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/google/auth/credentials.py", line 228, in before_request
+    self._blocking_refresh(request)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/google/auth/credentials.py", line 191, in _blocking_refresh
+    self.refresh(request)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/google/auth/credentials.py", line 365, in refresh
+    self._refresh_token(request)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/google/oauth2/service_account.py", line 459, in _refresh_token
+    access_token, expiry, _ = _client.jwt_grant(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/google/oauth2/_client.py", line 299, in jwt_grant
+    response_data = _token_endpoint_request(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/google/oauth2/_client.py", line 259, in _token_endpoint_request
+    response_status_ok, response_data, retryable_error = _token_endpoint_request_no_throw(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/google/oauth2/_client.py", line 192, in _token_endpoint_request_no_throw
+    response = request(
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/google/auth/transport/requests.py", line 194, in __call__
+    raise new_exc from caught_exc
+google.auth.exceptions.TransportError: HTTPSConnectionPool(host='oauth2.googleapis.com', port=443): Read timed out. (read timeout=120)
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [500]: Internal error encountered.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 80, in sheet1
+    return self.get_worksheet(0)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 248, in get_worksheet
+    sheet_data = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 13, in <module>
+    spec.loader.exec_module(wsgi)
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 34, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+[2026-04-13 17:18:44,481] ERROR in app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/main.py", line 42, in home
+    # ===============================
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/templating.py", line 131, in _render
+    rv = template.render(context)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/templates/index.html", line 1, in top-level template code
+    {% extends 'layout.html' %} {% block title %}Ardraxis{% endblock %} {% block
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/templates/layout.html", line 79, in top-level template code
+    {% block isi %}{% endblock %}
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/templates/index.html", line 29, in block 'isi'
+    <a href="{{ url_for('salvatore') }}" class="events-now-link">
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 1074, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 1063, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/werkzeug/routing/map.py", line 919, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'salvatore'. Did you mean 'festiora' instead?
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 8, in <module>
+    wsgi = imp.load_source('wsgi', 'main.py')
+  File "/opt/alt/python310/lib64/python3.10/imp.py", line 172, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 719, in _load
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "main.py", line 40, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 8, in <module>
+    wsgi = imp.load_source('wsgi', 'main.py')
+  File "/opt/alt/python310/lib64/python3.10/imp.py", line 172, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 719, in _load
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "main.py", line 40, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+[2026-04-14 10:19:52,422] ERROR in app: Exception on /salvatore [GET]
+Traceback (most recent call last):
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "main.py", line 84, in salvatore
+    return render_template("e_salvatore.html")
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 768, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/templates/e_salvatore.html", line 252, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
+[2026-04-14 10:20:00,028] ERROR in app: Exception on /salvatore [GET]
+Traceback (most recent call last):
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "main.py", line 84, in salvatore
+    return render_template("e_salvatore.html")
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 768, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/templates/e_salvatore.html", line 252, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
+[2026-04-14 10:21:46,675] ERROR in app: Exception on /salvatore [GET]
+Traceback (most recent call last):
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "main.py", line 84, in salvatore
+    return render_template("e_salvatore.html")
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 768, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/templates/e_salvatore.html", line 252, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
+[2026-04-14 10:35:40,095] ERROR in app: Exception on /salvatore [GET]
+Traceback (most recent call last):
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "main.py", line 84, in salvatore
+    return render_template("e_salvatore.html")
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 768, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/templates/e_salvatore.html", line 252, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
+[2026-04-14 10:38:12,105] ERROR in app: Exception on /salvatore [GET]
+Traceback (most recent call last):
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "main.py", line 84, in salvatore
+    return render_template("e_salvatore.html")
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 1081, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/loaders.py", line 137, in load
+    code = environment.compile(source, name, filename)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 768, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/templates/e_salvatore.html", line 252, in template
+    {% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 8, in <module>
+    wsgi = imp.load_source('wsgi', 'main.py')
+  File "/opt/alt/python310/lib64/python3.10/imp.py", line 172, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 719, in _load
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "main.py", line 40, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 80, in sheet1
+    return self.get_worksheet(0)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 248, in get_worksheet
+    sheet_data = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 8, in <module>
+    wsgi = imp.load_source('wsgi', 'main.py')
+  File "/opt/alt/python310/lib64/python3.10/imp.py", line 172, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 719, in _load
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "main.py", line 40, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 8, in <module>
+    wsgi = imp.load_source('wsgi', 'main.py')
+  File "/opt/alt/python310/lib64/python3.10/imp.py", line 172, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 719, in _load
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "main.py", line 40, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 8, in <module>
+    wsgi = imp.load_source('wsgi', 'main.py')
+  File "/opt/alt/python310/lib64/python3.10/imp.py", line 172, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 719, in _load
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "main.py", line 40, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 80, in sheet1
+    return self.get_worksheet(0)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 248, in get_worksheet
+    sheet_data = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 8, in <module>
+    wsgi = imp.load_source('wsgi', 'main.py')
+  File "/opt/alt/python310/lib64/python3.10/imp.py", line 172, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 719, in _load
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "main.py", line 40, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
+Traceback (most recent call last):
+  File "/home/osissma1/osissmaigs.com/web-ardraxis-prod/passenger_wsgi.py", line 8, in <module>
+    wsgi = imp.load_source('wsgi', 'main.py')
+  File "/opt/alt/python310/lib64/python3.10/imp.py", line 172, in load_source
+    module = _load(spec)
+  File "<frozen importlib._bootstrap>", line 719, in _load
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "main.py", line 40, in <module>
+    sheet = client.open("Valentine_Order").sheet1
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/client.py", line 157, in open
+    return Spreadsheet(self.http_client, properties)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 29, in __init__
+    metadata = self.fetch_sheet_metadata()
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/spreadsheet.py", line 230, in fetch_sheet_metadata
+    return self.client.fetch_sheet_metadata(self.id, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 305, in fetch_sheet_metadata
+    r = self.request("get", url, params=params)
+  File "/home/osissma1/virtualenv/osissmaigs.com/web-ardraxis-prod/3.10/lib/python3.10/site-packages/gspread/http_client.py", line 128, in request
+    raise APIError(response)
+gspread.exceptions.APIError: APIError: [503]: The service is currently unavailable.
