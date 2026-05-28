@@ -1,0 +1,463 @@
+/* =========================================
+   1. Root Variables - Color Scheme 
+   (TIDAK DIUBAH SAMA SEKALI)
+========================================= */
+:root {
+  /* Primary colors */
+  --bg-color: #ffd6c3;
+  --container-bg-color: #ffae8b;
+  --container-bg-color-dark: #ff9b70;
+  --primary: #ca5342;
+  --primary-dark: #a93320;
+  --text-color-glow: #fef2f2;
+  /* UI colors */
+  --nav-headings: white;
+  /* Navbar footer */
+  --navbar-hover: #fff9f6;
+}
+
+/* =========================================
+   2. Reset and Base Styles
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  background-color: var(--bg-color);
+  color: white;
+  width: 100%; /* PENTING: 100% mencegah horizontal scroll, jangan pakai 100vw */
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: sans-serif; /* Opsional: Sesuaikan dengan font project kamu */
+}
+
+p, li {
+  font-size: 110%;
+}
+
+/* =========================================
+   3. Utility Classes & Layouts
+========================================= */
+.kewa {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.kepan {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.hidden {
+  transform: translateY(100%);
+  filter: blur(10px);
+  opacity: 0;
+  transition: all 0.7s ease-in-out;
+}
+
+.show {
+  transform: translateY(0);
+  filter: blur(0);
+  opacity: 1;
+}
+
+/* =========================================
+   4. Banner Section
+========================================= */
+section.banner {
+  --size: 100vw;
+  position: relative;
+  width: var(--size);
+  height: calc(var(--size) / 1.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 0;
+  background-color: var(--bg-color);
+}
+
+section.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+section.banner .gradient-banner {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  bottom: 0;
+  height: 10rem;
+  width: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), var(--bg-color));
+}
+
+/* =========================================
+   5. Main Sections (About & Content)
+========================================= */
+section.about, section.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%; /* Menggunakan % agar aman dari scrollbar */
+  max-width: 1200px;
+  margin: 2rem auto 4rem auto;
+  background: linear-gradient(to bottom, var(--container-bg-color), var(--container-bg-color-dark));
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+section.content h1, section.about h1 {
+  font-weight: 700;
+  color: white;
+  margin: 0;
+}
+
+section.content h2 {
+  font-weight: 700;
+  color: white;
+}
+
+/* =========================================
+   6. About Components
+========================================= */
+.about-title {
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.about-desc {
+  font-size: 1.15rem;
+  color: #fff;
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 20px 30px;
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+  line-height: 1.5;
+  margin-bottom: 2.5rem;
+}
+
+.about-panitia-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.about-panitia-item {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 20px;
+  border-radius: 18px;
+  backdrop-filter: blur(6px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.about-panitia-role {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.about-panitia-name {
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin-top: 8px;
+}
+
+/* =========================================
+   7. Deadline Badge
+========================================= */
+.deadline-container {
+  width: 100%;
+  margin: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deadline-badge {
+  display: inline-block;
+  background: var(--container-bg-color);
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 999px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.deadline-badge h2 { font-size: 1.2rem; margin-bottom: 4px; }
+.deadline-badge p { margin: 0; font-size: 1rem; opacity: 0.9; }
+
+/* =========================================
+   8. Posters & Cards Grid
+========================================= */
+section.content .header {
+  text-align: center;
+  padding: 15px 40px;
+  background: #ffba9d;
+  border-radius: 40px;
+  max-width: 600px;
+  margin: 0 auto 20px auto;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.posters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 25px;
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 20px;
+}
+
+.poster-card {
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.poster-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.poster-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+.poster-image-wrapper {
+  position: relative;
+  width: 100%;
+  padding-top: 140%; /* Aspect ratio poster */
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.poster-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.poster-card:hover .poster-image {
+  transform: scale(1.05);
+}
+
+.poster-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.8) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px;
+}
+
+.poster-card:hover .poster-overlay {
+  opacity: 1;
+}
+
+.poster-info { width: 100%; }
+
+.poster-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  line-height: 1.3;
+}
+
+.poster-limit {
+  display: block;
+  font-size: 0.85rem;
+  color: #ffe6da;
+  margin-bottom: 6px;
+  opacity: 0.95;
+}
+
+.poster-click {
+  font-size: 0.9rem;
+  color: #e1dec2;
+  font-weight: 500;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.poster-card:hover .poster-click {
+  transform: translateX(5px);
+}
+
+/* =========================================
+   9. Footer & Navigation
+========================================= */
+.footer {
+  margin-top: 0;
+  background: linear-gradient(to bottom, var(--container-bg-color), var(--container-bg-color-dark));
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.footer .column2 a h1, .footer .column3 a h2, .footer .copyright {
+  color: var(--bg-color);
+}
+
+.footer .footer-content a:hover {
+  color: var(--nav-headings);
+  animation: nav-hover-a 0.2s linear;
+}
+
+.navbar {
+  background-color: var(--primary);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 5000;
+}
+
+.navbar a:hover {
+  animation: glowUp 0.3s forwards;
+}
+
+.navbar a:not(:hover) {
+  animation: glowDown 0.3s forwards;
+}
+
+/* =========================================
+   10. Animations
+========================================= */
+@keyframes glowUp {
+  from { text-shadow: none; }
+  to { text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white; }
+}
+
+@keyframes glowDown {
+  from { text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white; }
+  to { text-shadow: none; }
+}
+
+/* =========================================
+   11. MEDIA QUERIES (Sangat Bersih & Responsif)
+========================================= */
+
+/* ===== 1024px - Tablet Landscape ===== */
+@media screen and (max-width: 1024px) {
+  section.about, section.content {
+    width: 95%;
+    padding: 2rem 1.5rem;
+  }
+  
+  .posters-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  
+  .about-panitia-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== 768px - Tablet Portrait ===== */
+@media screen and (max-width: 768px) {
+  .about-title { font-size: 2rem; }
+  .about-desc { font-size: 1rem; padding: 15px 20px; }
+  
+  .posters-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+  }
+  
+  section.banner .gradient-banner { height: 6rem; }
+}
+
+/* ===== 480px - All Mobile Phones (Fluid) ===== */
+@media screen and (max-width: 480px) {
+  section.about, section.content {
+    margin: 1rem auto;
+    padding: 1.5rem 1rem;
+    border-radius: 15px;
+  }
+
+  .about-title { font-size: 1.6rem; margin-bottom: 1rem; }
+  .about-desc { font-size: 0.95rem; padding: 12px; margin-bottom: 1.5rem; }
+
+  /* Panitia jadi 1 kolom di HP */
+  .about-panitia-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  
+  .about-panitia-item { padding: 12px; }
+
+  /* Poster jadi 2 kolom sejajar di HP */
+  .posters-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .poster-overlay { padding: 10px; }
+  .poster-name { font-size: 0.9rem; margin-bottom: 2px; }
+  .poster-click { font-size: 0.75rem; }
+  
+  section.content .header {
+    padding: 10px 20px;
+    width: 90%;
+  }
+  
+  section.content .header h1 { font-size: 1.1rem; }
+  section.banner .gradient-banner { height: 4rem; }
+  .deadline-badge { width: 90%; padding: 8px 15px; }
+  .deadline-badge h2 { font-size: 1rem; }
+  .deadline-badge p { font-size: 0.85rem; }
+  p, li { font-size: 90%; }
+}
+
+/* =========================================
+   12. FIX UNTUK LAYAR SENTUH (HP/TABLET)
+========================================= */
+@media (hover: none) {
+  /* Di perangkat tanpa mouse (layar sentuh), overlay text selalu dimunculkan agar bisa dibaca tanpa harus di-tap dulu */
+  .poster-overlay {
+    opacity: 1; 
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.85) 100%);
+  }
+  .poster-click {
+    transform: translateX(5px);
+  }
+}

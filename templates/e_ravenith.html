@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='css/e_ravenith.css') }}?v=1"
+/>
+{% endblock %}
+
+{% block title %}Ravenith{% endblock %}
+
+{% block isi %}
+<!-- Banner: ganti file di static/img/banner/ (atur nama di ravenith_config.py → RAVENITH_BANNER) -->
+<section class="banner">
+  <img
+    src="{{ url_for('static', filename='img/banner/' + banner_file) }}"
+    alt="Ravenith Banner"
+  />
+  <section class="gradient-banner"></section>
+</section>
+
+<!-- Opsional: edit teks deadline di bawah -->
+<div class="deadline-container">
+  <div class="deadline-badge">
+    <h2>Pendaftaran Lomba • Ravenith</h2>
+    <p>Klik poster untuk mendaftar</p>
+  </div>
+</div>
+
+<section class="about">
+  <h1 class="about-title hidden">About Ravenith</h1>
+  <div class="about-desc hidden">
+    Ikuti berbagai lomba seru dalam rangkaian acara Ravenith. Pilih lomba di bawah dan daftar melalui formulir resmi.
+  </div>
+  <div class="about-panitia-row">
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Ketua Panitia</span></div>
+      <div class="about-panitia-name">—</div>
+    </div>
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Wakil Ketua Panitia</span></div>
+      <div class="about-panitia-name">—</div>
+    </div>
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Ketua Acara</span></div>
+      <div class="about-panitia-name">—</div>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="header">
+    <h1 class="hidden">Pendaftaran Lomba</h1>
+  </div>
+  <div class="posters-grid">
+    {% for comp_id in lomba_order %}
+    {% set meta = competitions[comp_id] %}
+    <div class="poster-card hidden" data-aos="fade-up">
+      <a href="{{ url_for('ravenith_lomba', competition=comp_id) }}" class="poster-link">
+        <div class="poster-image-wrapper">
+          <img
+            src="{{ url_for('static', filename=poster_dir + '/' + meta.poster) }}"
+            alt="{{ meta.title }}"
+            class="poster-image"
+            loading="lazy"
+          />
+          <div class="poster-overlay">
+            <div class="poster-info">
+              <h3 class="poster-name">{{ meta.title }}</h3>
+              {% if meta.limit > 0 %}
+              <span class="poster-limit">
+                Max {{ meta.limit }}
+                {% if meta.limit_type == 'participant' %}peserta{% else %}tim{% endif %}
+              </span>
+              {% endif %}
+              <span class="poster-click">Klik untuk Daftar →</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/shown_up.js') }}"></script>
+{% endblock %}

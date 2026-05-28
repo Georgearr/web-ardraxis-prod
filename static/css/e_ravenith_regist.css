@@ -1,0 +1,370 @@
+/* Root Variables - Color Scheme */
+
+:root {
+  /* Primary colors */
+  --bg-color: #ffd6c3;
+  --container-bg-color: #ffae8b;
+  --container-bg-color-dark: #ff9b70;
+  --primary: #ca5342;
+  --primary-dark: #ffa57f;
+  --text-color-glow: #fef2f2;
+  /* Span colors */
+  --warning-color: #ff58b1;
+  --highlight-color: #fff767;
+  /* UI colors */
+  --nav-headings: white;
+  /* Navbar footer */
+  --navbar-hover: #fff9f6;
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: var(--bg-color);
+  color: white;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+p,
+li {
+  font-size: 110%;
+}
+
+/* Recolors */
+.navbar {
+  background-color: var(--primary);
+}
+
+/* Animasi nyala (fade-in) */
+@keyframes glowUp {
+  from {
+    text-shadow: none;
+  }
+  to {
+    text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
+  }
+}
+
+/* Animasi mati (fade-out) */
+@keyframes glowDown {
+  from {
+    text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
+  }
+  to {
+    text-shadow: none;
+  }
+}
+
+/* Animasi nyala (fade-in) */
+@keyframes glowFade {
+  from {
+    text-shadow: none;
+  }
+  to {
+    text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
+  }
+}
+
+/* Animasi mati (fade-out) */
+@keyframes glowFadeOut {
+  from {
+    text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
+  }
+  to {
+    text-shadow: none;
+  }
+}
+
+.sidebar-brand {
+  text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
+}
+
+.sidebar-nav a:hover {
+  text-shadow: 0 0 5px var(--navbar-hover), 0 0 2px white;
+}
+
+.footer {
+  background: linear-gradient(to bottom, var(--container-bg-color), var(--container-bg-color-dark));
+}
+
+/* Registration Page */
+.activity-container {
+  width: 90vw;
+  max-width: 90vw;
+  margin: 5vw;
+  background: linear-gradient(to bottom, var(--container-bg-color), var(--container-bg-color-dark));
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 2vw;
+}
+
+.activity {
+  width: 100%;
+  display: flex;
+  align-items: start;
+  gap: 20px;
+}
+
+.activity-left {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+}
+
+.activity-left img {
+  object-fit: contain;
+  border-radius: 20px;
+  width: 100%;
+}
+
+.activity-right {
+  width: 60%;
+  text-align: center;
+}
+
+.activity-right button {
+  width: 200px;
+  color: #fff;
+  background-color: #ff8551;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.15rem;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-top: 20px;
+}
+
+.activity-right button:hover {
+  background-color: #ff9263;
+  transform: scale(1.02);
+}
+
+/* Form Style */
+.form {
+  font-weight: 550;
+  width: 100%;
+  background-color: #ffba9d;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  transition: all 1.2s ease;
+  text-align: left;
+  font-size: 1.25rem;
+}
+
+.form h1 {
+  text-align: center;
+}
+
+.form input, .form select {
+  width: 100%;
+  margin-top: 5px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: none;
+}
+
+.form select {
+  padding-right: 20px;
+}
+
+.form button {
+  width: 100%;
+  color: #fff;
+  background-color: #ffa27a;
+}
+
+.form button:hover {
+  background-color: #ff9263;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background-color: #ffa882;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0px 0px 20px var(--text-color-glow);
+  color: white;
+}
+
+.close {
+  color: #505050;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+.modal-content h2 {
+  margin-bottom: 15px;
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.modal-content a {
+  display: inline-block;
+  background-color: #ff976b;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.modal-content a:hover {
+  background-color: #ff7d46;
+  color: white;
+}
+
+/* Disabled button style */
+.form button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form button:disabled:hover {
+  transform: none;
+  background-color: #ccc;
+}
+
+@media screen and (max-width: 768px) {
+  .activity {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .activity-left {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .activity-right {
+    width: 100%;
+  }
+
+  .activity-left img {
+    width: 80vw;
+  }
+
+  .form button {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .activity {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .activity-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .form label {
+    font-size: 1rem;
+  }
+
+  .form input, .form select {
+    font-size: 1rem;
+  }
+
+  .form button {
+    width: 100%;
+    font-size: 1rem;
+  }
+}
+
+.registration-status {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.registration-status.status--ok {
+  border: 1px solid #28a745;
+  background: rgba(40, 167, 69, 0.2);
+}
+
+.registration-status.status--warn {
+  border: 1px solid #ffc107;
+  background: rgba(255, 193, 7, 0.2);
+}
+
+.registration-status.status--full {
+  border: 1px solid #ff6b6b;
+  background: rgba(255, 107, 107, 0.2);
+}
+
+.regist-limit-note {
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.form-notes {
+  text-align: left;
+  font-size: 0.95rem;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.form-notes a {
+  color: #fff;
+  font-weight: 600;
+}
+
+.activity-right .btn-back {
+  margin-top: 16px;
+  background-color: #e89a7a;
+}
+
+.line-url-copy {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  word-break: break-all;
+}

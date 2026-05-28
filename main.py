@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, abort
 from dotenv import load_dotenv
 import os
 import random
@@ -10,6 +10,13 @@ from google.oauth2.service_account import Credentials
 load_dotenv()
 
 from salvatore_sheets import save_registration, get_registration_count, get_google_sheets_client, SHEETS, PARTICIPANT_LIMITS
+from ravenith_config import (
+    RAVENITH_APPS_SCRIPT_URL,
+    RAVENITH_BANNER,
+    RAVENITH_COMPETITIONS,
+    RAVENITH_LOMBA_ORDER,
+    RAVENITH_POSTER_DIR,
+)
 
 app = Flask(__name__)
 
@@ -74,6 +81,32 @@ def cupids_corner():
 @app.route("/atthaira")
 def atthaira():
     return render_template("e_atthaira_regist.html")
+
+# ===============================
+# RAVENITH
+# ===============================
+
+@app.route("/ravenith")
+def ravenith():
+    return render_template(
+        "e_ravenith.html",
+        competitions=RAVENITH_COMPETITIONS,
+        lomba_order=RAVENITH_LOMBA_ORDER,
+        banner_file=RAVENITH_BANNER,
+        poster_dir=RAVENITH_POSTER_DIR,
+    )
+
+
+@app.route("/ravenith/<competition>")
+def ravenith_lomba(competition):
+    if competition not in RAVENITH_COMPETITIONS:
+        abort(404)
+    return render_template(
+        f"e_ravenith/{competition}.html",
+        competition_id=competition,
+        meta=RAVENITH_COMPETITIONS[competition],
+        apps_script_url=RAVENITH_APPS_SCRIPT_URL,
+    )
 
 # ===============================
 # SALVATORE

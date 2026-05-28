@@ -1,0 +1,30 @@
+{% extends "e_ravenith/regist_layout.html" %}
+{% block form_notes %}
+<p class="form-notes">
+  <strong>Catatan:</strong><br />
+  (1) Seluruh kelompok wajib menempelkan kertas nama pada tas kamera.<br />
+  (2) Wajib menggunakan kamera; tidak boleh menggunakan HP.
+</p>
+{% endblock %}
+{% block form_fields %}
+<label for="nama_kelompok">Nama Kelompok</label>
+<input type="text" id="nama_kelompok" name="nama_kelompok" required />
+
+<label for="anggota_1">Anggota 1</label>
+<input type="text" id="anggota_1" name="anggota_1" required />
+
+<label for="anggota_2">Anggota 2</label>
+<input type="text" id="anggota_2" name="anggota_2" required />
+
+<label for="kelas">Kelas</label>
+<input type="text" id="kelas" name="kelas" required />
+
+<label for="id_line">ID LINE (salah satu peserta)</label>
+<input type="text" id="id_line" name="id_line" required />
+
+<label for="kamera">Nama dan seri kamera</label>
+<input type="text" id="kamera" name="kamera" required />
+
+<label for="gear">List gear</label>
+<textarea id="gear" name="gear" rows="3" required></textarea>
+{% endblock %}

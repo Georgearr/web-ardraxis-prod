@@ -1,0 +1,20 @@
+{% extends "e_ravenith/regist_layout.html" %}
+{% block form_notes %}
+<p class="form-notes">
+  Upload bukti pembayaran ke Google Drive dengan format nama file: <strong>nama - kelas</strong>.<br />
+  <a href="{{ meta.payment_drive }}" target="_blank" rel="noopener">Buka folder Drive pembayaran</a>
+</p>
+{% endblock %}
+{% block form_fields %}
+<label for="nama_peserta">Nama Peserta</label>
+<input type="text" id="nama_peserta" name="nama_peserta" required />
+
+<label for="kelas">Kelas</label>
+<input type="text" id="kelas" name="kelas" required />
+
+<label for="id_line">ID LINE</label>
+<input type="text" id="id_line" name="id_line" required />
+
+<label for="bukti_pembayaran">Link bukti pembayaran (Google Drive)</label>
+<input type="url" id="bukti_pembayaran" name="bukti_pembayaran" placeholder="https://drive.google.com/..." required />
+{% endblock %}

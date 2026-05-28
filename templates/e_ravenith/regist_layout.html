@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='css/e_ravenith_regist.css') }}"
+/>
+{% endblock %}
+
+{% block title %}{{ meta.title }}{% endblock %}
+
+{% block isi %}
+<div class="activity-container">
+  <div class="activity">
+    <div class="activity-left">
+      {% block poster %}
+      <img
+        src="{{ url_for('static', filename='img/ravenith/' + meta.poster) }}"
+        alt="{{ meta.title }}"
+      />
+      {% endblock %}
+    </div>
+    <div class="activity-right">
+      <div id="registration-status" class="registration-status">
+        <p>Memuat status pendaftaran...</p>
+      </div>
+
+      {% if meta.limit > 0 %}
+      <p class="regist-limit-note">
+        Kuota: maks. {{ meta.limit }}
+        {% if meta.limit_type == 'participant' %}peserta{% else %}tim{% endif %}
+      </p>
+      {% endif %}
+
+      {% block form_notes %}{% endblock %}
+
+      <form class="form" id="ravenith-form">
+        {% block form_fields %}{% endblock %}
+        <button type="submit">Daftar</button>
+      </form>
+
+      <a href="{{ url_for('ravenith') }}"><button type="button" class="btn-back">Kembali ke Ravenith</button></a>
+    </div>
+  </div>
+</div>
+
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Pendaftaran Berhasil!</h2>
+    <p>Bergabung ke grup LINE untuk info lebih lanjut:</p>
+    {% if meta.line_group %}
+    <a id="lineGroupLink" href="{{ meta.line_group }}" target="_blank" rel="noopener">Join Grup LINE</a>
+    <p class="line-url-copy">
+      <span id="lineGroupUrl">{{ meta.line_group }}</span>
+    </p>
+    {% else %}
+    <p>Link grup LINE akan diumumkan oleh panitia.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  window.RAVENITH_REGIST = {
+    scriptUrl: {{ apps_script_url | tojson }},
+    competition: {{ competition_id | tojson }},
+    lineGroup: {{ meta.line_group | tojson }}
+  };
+</script>
+<script src="{{ url_for('static', filename='js/ravenith_regist.js') }}"></script>
+{% endblock %}
