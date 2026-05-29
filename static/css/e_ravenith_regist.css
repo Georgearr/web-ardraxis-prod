@@ -175,6 +175,7 @@ li {
 }
 
 .form img {
+  width: 400px;
   border: 10px solid white;
   border-radius: 30px;
 }
@@ -312,6 +313,10 @@ li {
 
   .form input, .form select {
     font-size: 1rem;
+  }
+
+  .form img {
+    width: 100%;
   }
 
   .form button {
