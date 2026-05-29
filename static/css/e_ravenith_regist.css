@@ -2,15 +2,12 @@
 
 :root {
   /* Primary colors */
-  --bg-color: #ffd6c3;
-  --container-bg-color: #ffae8b;
-  --container-bg-color-dark: #ff9b70;
-  --primary: #ca5342;
-  --primary-dark: #ffa57f;
+  --bg-color: #e4a464;
+  --container-bg-color: #c68441;
+  --container-bg-color-dark: #b67637;
+  --primary: #c08141;
+  --primary-dark: #a93320;
   --text-color-glow: #fef2f2;
-  /* Span colors */
-  --warning-color: #ff58b1;
-  --highlight-color: #fff767;
   /* UI colors */
   --nav-headings: white;
   /* Navbar footer */
@@ -132,7 +129,7 @@ li {
 .activity-right button {
   width: 200px;
   color: #fff;
-  background-color: #ff8551;
+  background-color: #e2b486;
   border-radius: 10px;
   border: none;
   font-size: 1.15rem;
@@ -143,7 +140,7 @@ li {
 }
 
 .activity-right button:hover {
-  background-color: #ff9263;
+  background-color: #cc9e70;
   transform: scale(1.02);
 }
 
@@ -151,7 +148,7 @@ li {
 .form {
   font-weight: 550;
   width: 100%;
-  background-color: #ffba9d;
+  background-color: var(--bg-color);
   padding: 20px;
   border-radius: 10px;
   margin-top: 20px;
@@ -185,11 +182,11 @@ li {
 .form button {
   width: 100%;
   color: #fff;
-  background-color: #ffa27a;
+  background-color: #e2b486;
 }
 
 .form button:hover {
-  background-color: #ff9263;
+  background-color: #cc9e70;
 }
 
 /* Modal Styles */
@@ -206,7 +203,7 @@ li {
 }
 
 .modal-content {
-  background-color: #ffa882;
+  background-color: var(--bg-color);
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
@@ -243,7 +240,7 @@ li {
 
 .modal-content a {
   display: inline-block;
-  background-color: #ff976b;
+  background-color: #e2b486;
   color: white;
   padding: 10px 20px;
   text-decoration: none;
@@ -253,7 +250,7 @@ li {
 }
 
 .modal-content a:hover {
-  background-color: #ff7d46;
+  background-color: #cc9e70;
   color: white;
 }
 
@@ -365,7 +362,7 @@ li {
 
 .activity-right .btn-back {
   margin-top: 16px;
-  background-color: #e89a7a;
+  background-color: #e2b486;
 }
 
 .line-url-copy {

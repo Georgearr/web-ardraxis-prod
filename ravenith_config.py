@@ -41,7 +41,7 @@ RAVENITH_COMPETITIONS = {
     },
     "family_100": {
         "title": "Family 100",
-        "poster": "family_100.png",
+        "poster": "family_100.jpg",
         "sheet_name": "Family_100",
         "limit": 0,
         "limit_type": "team",
@@ -49,15 +49,15 @@ RAVENITH_COMPETITIONS = {
     },
     "badminton": {
         "title": "Badminton",
-        "poster": "badminton.png",
+        "poster": "badminton.jpg",
         "sheet_name": "Badminton",
         "limit": 12,
         "limit_type": "team",
         "line_group": "https://line.me/R/ti/g/t6vtrWjXKE",
     },
     "design_disguise": {
-        "title": "Workshop Design Your Disguise",
-        "poster": "design_disguise.png",
+        "title": "Design your Disguise Workshop",
+        "poster": "design_your_disguise.png",
         "sheet_name": "Design_Disguise",
         "limit": 20,
         "limit_type": "participant",
@@ -66,7 +66,7 @@ RAVENITH_COMPETITIONS = {
     },
     "futsal": {
         "title": "Lomba Futsal",
-        "poster": "futsal.png",
+        "poster": "futsal.jpg",
         "sheet_name": "Futsal",
         "limit": 16,
         "limit_type": "team",
@@ -74,7 +74,7 @@ RAVENITH_COMPETITIONS = {
     },
     "fotografi": {
         "title": "Fotografi",
-        "poster": "fotografi.png",
+        "poster": "photography.jpg",
         "sheet_name": "Fotografi",
         "limit": 15,
         "limit_type": "team",
@@ -82,7 +82,7 @@ RAVENITH_COMPETITIONS = {
     },
     "esport": {
         "title": "E-Sport (Mobile Legends)",
-        "poster": "esport.png",
+        "poster": "esport.jpg",
         "sheet_name": "E_Sport",
         "limit": 16,
         "limit_type": "team",

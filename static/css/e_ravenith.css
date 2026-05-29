@@ -1,13 +1,12 @@
 /* =========================================
-   1. Root Variables - Color Scheme 
-   (TIDAK DIUBAH SAMA SEKALI)
+   1. Root Variables - Color Scheme
 ========================================= */
 :root {
   /* Primary colors */
-  --bg-color: #ffd6c3;
-  --container-bg-color: #ffae8b;
-  --container-bg-color-dark: #ff9b70;
-  --primary: #ca5342;
+  --bg-color: #e4a464;
+  --container-bg-color: #c68441;
+  --container-bg-color-dark: #b67637;
+  --primary: #c08141;
   --primary-dark: #a93320;
   --text-color-glow: #fef2f2;
   /* UI colors */
@@ -31,7 +30,6 @@ html, body {
   width: 100%; /* PENTING: 100% mencegah horizontal scroll, jangan pakai 100vw */
   min-height: 100vh;
   overflow-x: hidden;
-  font-family: sans-serif; /* Opsional: Sesuaikan dengan font project kamu */
 }
 
 p, li {
@@ -211,7 +209,7 @@ section.content h2 {
 section.content .header {
   text-align: center;
   padding: 15px 40px;
-  background: #ffba9d;
+  background: var(--bg-color);
   border-radius: 40px;
   max-width: 600px;
   margin: 0 auto 20px auto;

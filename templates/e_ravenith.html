@@ -23,7 +23,7 @@
 <!-- Opsional: edit teks deadline di bawah -->
 <div class="deadline-container">
   <div class="deadline-badge">
-    <h2>Pendaftaran Lomba • Ravenith</h2>
+    <h2>Ravenith • 4 Juni 2026</h2>
     <p>Klik poster untuk mendaftar</p>
   </div>
 </div>
@@ -31,20 +31,24 @@
 <section class="about">
   <h1 class="about-title hidden">About Ravenith</h1>
   <div class="about-desc hidden">
-    Ikuti berbagai lomba seru dalam rangkaian acara Ravenith. Pilih lomba di bawah dan daftar melalui formulir resmi.
+    Berasal dari “Raven” (gagak) yang melambangkan misteri, pengamat, dan rahasia, serta akhiran “-ith” yang memberi nuansa fantasy. Ravenith menggambarkan momen penuh teka-teki dan suasana misterius yang sejalan dengan tema.
   </div>
   <div class="about-panitia-row">
     <div class="about-panitia-item hidden">
       <div><span class="about-panitia-role">Ketua Panitia</span></div>
-      <div class="about-panitia-name">—</div>
+      <div class="about-panitia-name">Celeste Wisman</div>
     </div>
     <div class="about-panitia-item hidden">
-      <div><span class="about-panitia-role">Wakil Ketua Panitia</span></div>
-      <div class="about-panitia-name">—</div>
+      <div><span class="about-panitia-role">Wakil Ketua Panitia 1</span></div>
+      <div class="about-panitia-name">Sydney Gracelyn Wang</div>
+    </div>
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Wakil Ketua Panitia 2</span></div>
+      <div class="about-panitia-name">Rainazia Mikaila Dopong</div>
     </div>
     <div class="about-panitia-item hidden">
       <div><span class="about-panitia-role">Ketua Acara</span></div>
-      <div class="about-panitia-name">—</div>
+      <div class="about-panitia-name">Tifanie Elvaretta</div>
     </div>
   </div>
 </section>
@@ -75,6 +79,39 @@
               </span>
               {% endif %}
               <span class="poster-click">Klik untuk Daftar →</span>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div><br>
+
+  <div class="header">
+    <h1 class="hidden">Fun Activities</h1>
+  </div>
+  <div class="posters-grid">
+    {% set fun_activities = [
+      {'file': 'find_the_anomaly.jpg', 'name': 'Find the Anomaly'},
+      {'file': 'luck_or_locked.png', 'name': 'Luck or Locked'},
+      {'file': 'observe_and_recall.png', 'name': 'Observe and Recall'},
+      {'file': 'photobox.png', 'name': "Photobox"},
+      {'file': 'unlock_numbers.png', 'name': 'Unlock Numbers'}
+    ] %}
+
+    {% for poster in fun_activities %}
+    <div class="poster-card" data-aos="fade-up">
+      <a href="#" class="poster-link">
+        <div class="poster-image-wrapper">
+          <img
+            src="{{ url_for('static', filename='img/ravenith/' + poster.file) }}"
+            alt="{{ poster.name }}"
+            class="poster-image"
+            loading="lazy"
+          />
+          <div class="poster-overlay">
+            <div class="poster-info">
+              <h3 class="poster-name">{{ poster.name }}</h3>
             </div>
           </div>
         </div>
