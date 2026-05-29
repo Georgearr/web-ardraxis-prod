@@ -82,6 +82,10 @@ def cupids_corner():
 def atthaira():
     return render_template("e_atthaira_regist.html")
 
+@app.route("/salvatore")
+def salvatore():
+    return render_template("e_salvatore.html")
+
 # ===============================
 # RAVENITH
 # ===============================
@@ -107,30 +111,6 @@ def ravenith_lomba(competition):
         meta=RAVENITH_COMPETITIONS[competition],
         apps_script_url=RAVENITH_APPS_SCRIPT_URL,
     )
-
-# ===============================
-# SALVATORE
-# ===============================
-
-@app.route("/salvatore")
-def salvatore():
-    return render_template("e_salvatore.html")
-
-@app.route("/egg_shell_mosaic")
-def mosaic():
-    return render_template("e_salvatore/mosaic.html")
-
-@app.route("/story_telling_rohani")
-def storytelling():
-    return render_template("e_salvatore/storytelling.html")
-
-@app.route("/bernyanyi_rohani")
-def nyanyi():
-    return render_template("e_salvatore/nyanyi.html")
-
-@app.route("/quiz_alkitab")
-def quiz_alkitab():
-    return render_template("e_salvatore/quiz_alkitab.html")
 
 # =============================== 
 # API ROUTES

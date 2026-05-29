@@ -3,7 +3,7 @@
 import os
 
 # Ganti nama file di static/img/banner/ (bebas, sesuaikan ekstensi .png / .jpg)
-RAVENITH_BANNER = "salvatore_banner.png"
+RAVENITH_BANNER = "ravenith_banner.png"
 
 # Poster tiap lomba: taruh di static/img/ravenith/ (ganti nama file di bawah)
 RAVENITH_POSTER_DIR = "img/ravenith"
@@ -16,7 +16,7 @@ RAVENITH_APPS_SCRIPT_URL = os.getenv(
 # limit: 0 = tidak ada batas; limit_type: "team" | "participant"
 RAVENITH_COMPETITIONS = {
     "sweet_evidence": {
-        "title": "Lomba Sweet Evidence",
+        "title": "Sweet Evidence",
         "poster": "sweet_evidence.png",
         "sheet_name": "Sweet_Evidence",
         "limit": 10,
@@ -94,7 +94,7 @@ RAVENITH_COMPETITIONS = {
         "sheet_name": "Ultimate_Heist",
         "limit": 0,
         "limit_type": "team",
-        "line_group": "",
+        "line_group": "https://line.me/ti/g/Bvkj95tmYG",
     },
 }
 
