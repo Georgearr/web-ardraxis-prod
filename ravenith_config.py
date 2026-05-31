@@ -47,14 +47,6 @@ RAVENITH_COMPETITIONS = {
         "limit_type": "team",
         "line_group": "https://line.me/R/ti/g/trLe7TC_2M",
     },
-    "badminton": {
-        "title": "Badminton",
-        "poster": "badminton.jpg",
-        "sheet_name": "Badminton",
-        "limit": 12,
-        "limit_type": "team",
-        "line_group": "https://line.me/R/ti/g/t6vtrWjXKE",
-    },
     "design_disguise": {
         "title": "Design your Disguise Workshop",
         "poster": "design_your_disguise.png",
@@ -104,7 +96,6 @@ RAVENITH_LOMBA_ORDER = [
     "escape_room",
     "secret_investigation",
     "family_100",
-    "badminton",
     "design_disguise",
     "futsal",
     "fotografi",
