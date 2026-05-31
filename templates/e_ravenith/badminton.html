@@ -1,14 +1,29 @@
 {% extends "e_ravenith/regist_layout.html" %}
+
+{% block extra_css %}
+{{ super() }}
+<style>
+    /* Hanya sembunyikan isi form agar layout tidak rusak */
+    #ravenith-form > *:not(.closed-notice) {
+        display: none !important;
+    }
+</style>
+{% endblock %}
+
 {% block form_fields %}
-<label for="nama_peserta_1">Nama Peserta 1</label>
-<input type="text" id="nama_peserta_1" name="nama_peserta_1" required />
+    <div class="closed-notice" style="display: block !important; text-align: center; padding: 20px; margin: 10px 0;">
+        <h3>Pendaftaran Ditutup Sementara</h3>
+    </div>
 
-<label for="nama_peserta_2">Nama Peserta 2</label>
-<input type="text" id="nama_peserta_2" name="nama_peserta_2" required />
+    <label for="nama_peserta_1">Nama Peserta 1</label>
+    <input type="text" id="nama_peserta_1" name="nama_peserta_1" />
 
-<label for="kelas">Kelas</label>
-<input type="text" id="kelas" name="kelas" required />
+    <label for="nama_peserta_2">Nama Peserta 2</label>
+    <input type="text" id="nama_peserta_2" name="nama_peserta_2" />
 
-<label for="id_line">ID LINE (salah satu peserta)</label>
-<input type="text" id="id_line" name="id_line" required />
+    <label for="kelas">Kelas</label>
+    <input type="text" id="kelas" name="kelas" />
+
+    <label for="id_line">ID LINE (salah satu peserta)</label>
+    <input type="text" id="id_line" name="id_line" />
 {% endblock %}
