@@ -61,7 +61,7 @@
     {% for comp_id in lomba_order %}
     {% set meta = competitions[comp_id] %}
     <div class="poster-card hidden" data-aos="fade-up">
-      <a href="{{ url_for('ravenith_lomba', competition=comp_id) }}" class="poster-link">
+      <a href="#" class="poster-link registration-closed">
         <div class="poster-image-wrapper">
           <img
             src="{{ url_for('static', filename=poster_dir + '/' + meta.poster) }}"
@@ -120,8 +120,48 @@
     {% endfor %}
   </div>
 </section>
+
+<div id="closedModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Pendaftaran Telah Ditutup!</h2>
+    <p>Mohon maaf, masa pendaftaran Ravenith telah berakhir.</p>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block extra_js %}
 <script src="{{ url_for('static', filename='js/shown_up.js') }}"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const modal = document.getElementById("closedModal");
+
+  if (!modal) return;
+
+  const closeBtn = modal.querySelector(".close");
+
+  document.querySelectorAll(".registration-closed").forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      modal.style.display = "block";
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.onclick = function () {
+      modal.style.display = "none";
+    };
+  }
+
+  window.addEventListener("click", function (e) {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+});
+</script>
 {% endblock %}

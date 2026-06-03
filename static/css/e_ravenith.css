@@ -145,6 +145,7 @@ section.content h2 {
   backdrop-filter: blur(6px);
   line-height: 1.5;
   margin-bottom: 2.5rem;
+  margin-top: 20px;
 }
 
 .about-panitia-row {
@@ -458,4 +459,35 @@ section.content .header {
   .poster-click {
     transform: translateX(5px);
   }
+}
+
+/* Tutup Regist */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  background: rgba(0,0,0,.7);
+  color: black;
+}
+
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 24px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 10px;
+}
+
+.close {
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
 }
