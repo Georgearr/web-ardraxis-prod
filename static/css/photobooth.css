@@ -1,0 +1,406 @@
+/**
+ * Ravenith Photobooth — tema Ravenith / Bodhivara + Poppins
+ */
+
+:root {
+  --bg-color: #e4a464;
+  --container-bg: #c68441;
+  --container-dark: #b67637;
+  --primary: #c08141;
+  --primary-dark: #a93320;
+  --text-white: #ffffff;
+  --accent: #fff9f6;
+  --card-bg: rgba(0, 0, 0, 0.2);
+  --shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  --font: "Poppins", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: var(--font);
+  background: var(--bg-color);
+  color: var(--text-white);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Navbar */
+.photobooth-nav {
+  background: var(--primary-dark);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.photobooth-nav .navbar-brand,
+.photobooth-nav .nav-link {
+  color: var(--text-white) !important;
+  font-weight: 500;
+}
+
+.photobooth-nav .photobooth-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+}
+
+.photobooth-brand-logo {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.photobooth-brand span {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.photobooth-nav .nav-link.active {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.photobooth-nav .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.photobooth-nav .navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* Hero */
+.hero-section {
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.hero-banner-wrap {
+  position: relative;
+  width: 100%;
+  height: min(50vh, 420px);
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--container-bg), var(--container-dark));
+}
+
+.hero-banner {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(169, 51, 32, 0.45) 70%,
+    var(--bg-color) 100%
+  );
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 6vw, 3.25rem);
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  margin-bottom: 0.35rem;
+}
+
+.hero-subtitle {
+  font-size: clamp(1rem, 3vw, 1.35rem);
+  font-weight: 400;
+  opacity: 0.95;
+  margin: 0;
+}
+
+/* Gallery section */
+.gallery-section {
+  padding-bottom: 3rem;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-box i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--primary-dark);
+  z-index: 2;
+}
+
+.search-box .form-control {
+  padding-left: 2.75rem;
+  border: none;
+  border-radius: 999px;
+  font-family: var(--font);
+  font-size: 1rem;
+  box-shadow: var(--shadow);
+}
+
+.btn-refresh {
+  background: var(--container-dark);
+  color: var(--text-white);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 600;
+  font-family: var(--font);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.btn-refresh:hover {
+  background: var(--primary);
+  color: var(--text-white);
+  transform: scale(1.03);
+}
+
+.gallery-meta {
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+/* States */
+.state-panel {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background: linear-gradient(to bottom, var(--container-bg), var(--container-dark));
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+}
+
+.state-icon {
+  font-size: 3.5rem;
+  opacity: 0.85;
+  margin-bottom: 1rem;
+}
+
+.state-loading .spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+.state-error h2,
+.state-empty h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Photo cards */
+.photo-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  box-shadow: var(--shadow);
+}
+
+.photo-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+}
+
+.photo-card-inner {
+  position: relative;
+  padding-top: 100%;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.photo-card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.photo-card img.img-broken {
+  opacity: 0;
+}
+
+.photo-card-inner.img-broken::after {
+  content: "Gagal memuat";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.photo-card:hover img {
+  transform: scale(1.08);
+}
+
+.photo-card-footer {
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.btn-load-more {
+  background: var(--primary);
+  color: var(--text-white);
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  font-family: var(--font);
+  box-shadow: var(--shadow);
+}
+
+.btn-load-more:hover {
+  background: var(--primary-dark);
+  color: var(--text-white);
+}
+
+/* Footer */
+.photobooth-footer {
+  background: linear-gradient(to bottom, var(--container-bg), var(--primary-dark));
+  font-size: 0.9rem;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.lightbox-inner {
+  max-width: 95vw;
+  max-height: 90vh;
+  text-align: center;
+}
+
+.lightbox-inner img {
+  max-width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-caption {
+  margin: 1rem 0 0.75rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.btn-download {
+  background: #06c755;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-download:hover {
+  background: #05a847;
+  color: #fff;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.lightbox-prev {
+  left: 1rem;
+}
+
+.lightbox-next {
+  right: 1rem;
+}
+
+@media (max-width: 576px) {
+  .hero-banner-wrap {
+    height: 38vh;
+  }
+
+  .lightbox-nav {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+  }
+
+  .lightbox-prev {
+    left: 0.5rem;
+  }
+
+  .lightbox-next {
+    right: 0.5rem;
+  }
+}

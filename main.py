@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify, abort
+from flask import Flask, Response, render_template, request, jsonify, abort
 from dotenv import load_dotenv
 import os
 import random
@@ -17,6 +17,8 @@ from ravenith_config import (
     RAVENITH_LOMBA_ORDER,
     RAVENITH_POSTER_DIR,
 )
+from photobooth_config import PHOTOBOOTH_BANNER, PHOTOBOOTH_PAGE_SIZE
+from services.google_drive import get_photos, search_photos, clear_cache, fetch_drive_image
 
 app = Flask(__name__)
 
@@ -101,6 +103,16 @@ def ravenith():
     )
 
 
+@app.route("/ravenith/photobooth")
+def photobooth_page():
+    return render_template(
+        "photobooth/index.html",
+        banner_file=PHOTOBOOTH_BANNER,
+        api_photos_url="/api/photobooth/photos",
+        page_size=PHOTOBOOTH_PAGE_SIZE,
+    )
+
+
 @app.route("/ravenith/<competition>")
 def ravenith_lomba(competition):
     if competition not in RAVENITH_COMPETITIONS:
@@ -111,6 +123,38 @@ def ravenith_lomba(competition):
         meta=RAVENITH_COMPETITIONS[competition],
         apps_script_url=RAVENITH_APPS_SCRIPT_URL,
     )
+
+
+@app.route("/api/photobooth/photos")
+def api_photobooth_photos():
+    keyword = request.args.get("q", "").strip()
+    force = request.args.get("refresh") == "1"
+    if keyword:
+        result = search_photos(keyword, force_refresh=force)
+    else:
+        result = get_photos(force_refresh=force)
+    return jsonify(result)
+
+
+@app.route("/api/photobooth/image/<file_id>")
+def api_photobooth_image(file_id):
+    """Proxy gambar Drive agar bisa ditampilkan di <img> (hotlink Drive sering gagal)."""
+    fetched = fetch_drive_image(file_id)
+    if not fetched:
+        abort(404)
+    data, mime = fetched
+    return Response(
+        data,
+        mimetype=mime,
+        headers={"Cache-Control": "public, max-age=86400"},
+    )
+
+
+@app.route("/api/photobooth/refresh", methods=["POST"])
+def api_photobooth_refresh():
+    clear_cache()
+    return jsonify({"success": True, "message": "Cache cleared."})
+
 
 # =============================== 
 # API ROUTES
