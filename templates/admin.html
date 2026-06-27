@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Absensi MPLS IGS 2026</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    
+    <style>
+        :root {
+            --primary: #1d696e;
+            --primary-dark: #144e53;
+            --primary-light: #3d8f94;
+            --secondary: #eef8f8;
+            --bg: #f5f8fa;
+            --card-bg: #ffffff;
+            --text-main: #2d3436;
+            --text-muted: #636e72;
+            --shadow: 0 10px 30px rgba(29, 105, 110, 0.08);
+            --radius: 16px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar Style */
+        .admin-nav {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 22px;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-link-custom {
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .nav-link-custom:hover, .nav-link-custom.active {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Cards Style */
+        .glass-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid rgba(29, 105, 110, 0.08);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(29, 105, 110, 0.12);
+        }
+
+        .stat-card {
+            padding: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            background-color: var(--secondary);
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .glass-card:hover .stat-icon {
+            background-color: var(--primary);
+            color: #fff;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 2px;
+            color: var(--primary-dark);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Tab panels */
+        .tab-content {
+            padding-top: 30px;
+        }
+
+        /* Section Title */
+        .section-header {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .section-title {
+            font-weight: 700;
+            color: var(--primary-dark);
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            bottom: 5px;
+            width: 5px;
+            background-color: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* Drag & Drop Upload box */
+        .upload-area {
+            border: 2px dashed var(--primary-light);
+            border-radius: var(--radius);
+            padding: 40px 20px;
+            text-align: center;
+            background-color: #fcfefe;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .upload-area:hover, .upload-area.dragover {
+            background-color: var(--secondary);
+            border-color: var(--primary-dark);
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* Custom Table design */
+        .table-responsive {
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .table-custom {
+            margin-bottom: 0;
+        }
+
+        .table-custom th {
+            background-color: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 15px;
+            border: none;
+        }
+
+        .table-custom td {
+            padding: 15px;
+            vertical-align: middle;
+            background-color: #fff;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .table-custom tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table-custom tr:hover td {
+            background-color: #fafcfc;
+        }
+
+        /* Progress bars */
+        .progress-custom {
+            height: 10px;
+            border-radius: 10px;
+            background-color: #e9ecef;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-bar-fill {
+            background: linear-gradient(90deg, var(--primary-light), var(--primary));
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease-out;
+        }
+
+        /* QR Section */
+        .qr-session-card {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(29, 105, 110, 0.08);
+        }
+
+        #qrSessionDisplay {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Loader inside components */
+        .component-loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: auto;
+            padding: 20px 0;
+            text-align: center;
+            background-color: #fff;
+            color: var(--text-muted);
+            border-top: 1px solid #eaeef0;
+            font-size: 14px;
+        }
+
+        /* Search inputs */
+        .search-control {
+            border-radius: 30px;
+            padding-left: 20px;
+            padding-right: 20px;
+            border: 1px solid #ced4da;
+            box-shadow: none;
+        }
+
+        .search-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(29, 105, 110, 0.15);
+        }
+
+        .btn-custom {
+            background-color: var(--primary);
+            color: white;
+            border-radius: 30px;
+            padding: 8px 24px;
+            font-weight: 500;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-custom:hover {
+            background-color: var(--primary-dark);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .badge-present {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+
+        .badge-absent {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- NAVBAR -->
+    <!-- ========================================== -->
+    <nav class="navbar navbar-expand-lg navbar-dark admin-nav py-3">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="/admin">
+                <img src="{{ url_for('static', filename='img/IGS.png') }}" alt="IGS" height="40" class="me-2">
+                <span>MPLS IGS 2026 Admin</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#adminNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="adminNavbar">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom active" id="dashboard-tab-nav" href="#" onclick="switchTab('dashboard')">
+                            <i class="bi bi-grid-fill me-1"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" id="students-tab-nav" href="#" onclick="switchTab('students')">
+                            <i class="bi bi-people-fill me-1"></i> Kelola Siswa
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom" id="attendance-tab-nav" href="#" onclick="switchTab('attendance')">
+                            <i class="bi bi-journal-check me-1"></i> Log Kehadiran
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom border border-light" href="/cek_data_siswa2026" target="_blank">
+                            <i class="bi bi-arrow-up-right-circle me-1"></i> Portal Siswa
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ========================================== -->
+    <div class="container my-5">
+        
+        <!-- Tab 1: Dashboard Overview -->
+        <div id="tab-dashboard" class="tab-pane-custom">
+            
+            <div class="section-header">
+                <h3 class="section-title mb-0">Overview Absensi Real-Time</h3>
+                <button class="btn btn-outline-secondary btn-sm rounded-pill" onclick="refreshDashboardStats()">
+                    <i class="bi bi-arrow-clockwise me-1"></i> Refresh Data
+                </button>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="row g-4 mb-5">
+                <div class="col-md-3 col-sm-6">
+                    <div class="glass-card stat-card">
+                        <div>
+                            <div class="stat-number" id="stat-total-students">0</div>
+                            <div class="stat-label">Total Siswa Terdaftar</div>
+                        </div>
+                        <div class="stat-icon"><i class="bi bi-people"></i></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="glass-card stat-card">
+                        <div>
+                            <div class="stat-number text-success" id="stat-present">0</div>
+                            <div class="stat-label">Hadir</div>
+                        </div>
+                        <div class="stat-icon bg-success bg-opacity-10 text-success"><i class="bi bi-person-check"></i></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="glass-card stat-card">
+                        <div>
+                            <div class="stat-number text-warning" id="stat-absent">0</div>
+                            <div class="stat-label">Belum Hadir</div>
+                        </div>
+                        <div class="stat-icon bg-warning bg-opacity-10 text-warning"><i class="bi bi-person-dash"></i></div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="glass-card stat-card">
+                        <div>
+                            <div class="stat-number text-primary" id="stat-percentage">0%</div>
+                            <div class="stat-label">Persentase Kehadiran</div>
+                        </div>
+                        <div class="stat-icon bg-primary bg-opacity-10 text-primary"><i class="bi bi-percent"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Analytics Section -->
+            <div class="row g-4">
+                <!-- Class Stats -->
+                <div class="col-lg-6">
+                    <div class="glass-card p-4 h-100">
+                        <h5 class="fw-bold mb-4 text-primary-dark"><i class="bi bi-building me-2"></i>Kehadiran Per Kelas</h5>
+                        <div class="table-responsive" style="max-height: 380px;">
+                            <table class="table table-hover align-middle mb-0">
+                                <thead class="table-light sticky-top">
+                                    <tr>
+                                        <th>Kelas</th>
+                                        <th>Hadir / Total</th>
+                                        <th>Persentase</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="class-stats-body">
+                                    <tr><td colspan="3" class="text-center py-4 text-muted">Belum ada data siswa</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Session QR Card -->
+                <div class="col-lg-6">
+                    <div class="qr-session-card h-100 d-flex flex-column justify-content-center align-items-center">
+                        <h5 class="fw-bold text-primary-dark mb-2"><i class="bi bi-qr-code me-2"></i>QR Code Sesi Absen</h5>
+                        <p class="text-muted small px-3">Tampilkan QR Code ini di layar utama proyektor agar siswa dapat memindai secara mandiri melalui Portal Siswa di HP mereka.</p>
+                        
+                        <div class="border p-3 bg-white rounded-3 my-3" style="box-shadow: 0 4px 15px rgba(0,0,0,0.05)">
+                            <div id="qrSessionDisplay"></div>
+                        </div>
+                        <h6 class="fw-bold text-primary mb-3">SESSION_ABSEN_MPLS_2026</h6>
+                        <button class="btn btn-custom" onclick="window.print()"><i class="bi bi-printer me-2"></i>Cetak QR Sesi</button>
+                    </div>
+                </div>
+                
+                <!-- Group Stats -->
+                <div class="col-lg-12">
+                    <div class="glass-card p-4">
+                        <h5 class="fw-bold mb-4 text-primary-dark"><i class="bi bi-bookmark-star me-2"></i>Kehadiran Per Kelompok</h5>
+                        <div class="row g-3" id="group-stats-container">
+                            <div class="col-12 text-center py-4 text-muted">Belum ada data kelompok</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 2: Manage Students -->
+        <div id="tab-students" class="tab-pane-custom d-none">
+            <div class="section-header">
+                <h3 class="section-title mb-0">Kelola Database Siswa</h3>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-danger btn-sm rounded-pill" onclick="clearDatabase()">
+                        <i class="bi bi-trash3 me-1"></i> Kosongkan Database
+                    </button>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <!-- CSV Upload Section -->
+                <div class="col-md-5">
+                    <div class="glass-card p-4 mb-4">
+                        <h5 class="fw-bold mb-3 text-primary-dark"><i class="bi bi-file-earmark-arrow-up me-2"></i>Impor Daftar Siswa (CSV)</h5>
+                        <p class="text-muted small">Unggah daftar nama siswa baru untuk memulai sesi absensi. Format CSV harus memiliki nama kolom berikut:</p>
+                        
+                        <div class="table-responsive mb-3" style="font-size: 11px;">
+                            <table class="table table-bordered table-sm text-center mb-0 bg-light">
+                                <thead>
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Kelas</th>
+                                        <th>Kelompok</th>
+                                        <th>Jenis</th>
+                                        <th>Sub-Kelompok</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Andi Wijaya</td>
+                                        <td>10.1</td>
+                                        <td>Kelompok 1</td>
+                                        <td>Mayor</td>
+                                        <td>A</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="upload-area" id="drop-zone">
+                            <i class="bi bi-cloud-arrow-up upload-icon"></i>
+                            <h6 class="fw-bold mb-1">Drag & Drop file CSV Anda di sini</h6>
+                            <p class="text-muted small mb-3">atau klik untuk memilih file dari komputer</p>
+                            <input type="file" id="csvFileInput" accept=".csv" class="d-none">
+                            <button class="btn btn-outline-primary btn-sm rounded-pill" onclick="document.getElementById('csvFileInput').click()">Pilih File</button>
+                        </div>
+                        
+                        <div id="uploadStatus" class="mt-3"></div>
+                    </div>
+                </div>
+
+                <!-- Students List Table -->
+                <div class="col-md-7">
+                    <div class="glass-card p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                            <h5 class="fw-bold text-primary-dark m-0"><i class="bi bi-list-columns-reverse me-2"></i>Daftar Siswa Terdaftar</h5>
+                            <div style="width: 200px;">
+                                <input type="text" id="studentSearchKey" class="form-control form-control-sm search-control" placeholder="Cari nama..." onkeyup="filterStudentListTable()">
+                            </div>
+                        </div>
+                        
+                        <div class="table-responsive" style="max-height: 450px;">
+                            <table class="table table-hover align-middle mb-0" id="student-list-table">
+                                <thead class="table-light sticky-top">
+                                    <tr>
+                                        <th>Nama</th>
+                                        <th>Kelas</th>
+                                        <th>Kelompok</th>
+                                        <th>Kakak Pembina</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="student-list-body">
+                                    <tr><td colspan="4" class="text-center py-4 text-muted">Memuat data siswa...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab 3: Attendance Log -->
+        <div id="tab-attendance" class="tab-pane-custom d-none">
+            <div class="section-header">
+                <h3 class="section-title mb-0">Log Riwayat Kehadiran</h3>
+                <div class="d-flex gap-2">
+                    <a href="/api/admin/attendance/export" class="btn btn-custom btn-sm rounded-pill">
+                        <i class="bi bi-file-earmark-excel me-1"></i> Ekspor Rekap (CSV)
+                    </a>
+                    <button class="btn btn-outline-secondary btn-sm rounded-pill" onclick="loadAttendanceLog()">
+                        <i class="bi bi-arrow-clockwise me-1"></i> Refresh Log
+                    </button>
+                </div>
+            </div>
+
+            <div class="glass-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                    <h5 class="fw-bold text-primary-dark m-0"><i class="bi bi-clock-history me-2"></i>Siswa Yang Telah Melakukan Absen</h5>
+                    <div style="width: 250px;">
+                        <input type="text" id="attendanceSearchKey" class="form-control form-control-sm search-control" placeholder="Cari nama/kelas/pembina..." onkeyup="filterAttendanceTable()">
+                    </div>
+                </div>
+
+                <div class="table-responsive" style="max-height: 500px;">
+                    <table class="table table-hover align-middle mb-0" id="attendance-log-table">
+                        <thead class="table-light sticky-top">
+                            <tr>
+                                <th>Waktu Scan</th>
+                                <th>Nama</th>
+                                <th>Kelas</th>
+                                <th>Kelompok</th>
+                                <th>Kakak Pembina</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendance-list-body">
+                            <tr><td colspan="6" class="text-center py-4 text-muted">Memuat log absensi...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ========================================== -->
+    <!-- FOOTER -->
+    <!-- ========================================== -->
+    <footer>
+        <div class="container">
+            © 2026 MPLS SMA IGS • Powered by OSIS Ardraxis
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- QRCode.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        // Tab switcher
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-pane-custom').forEach(pane => {
+                pane.classList.add('d-none');
+            });
+            document.querySelectorAll('.nav-link-custom').forEach(link => {
+                link.classList.remove('active');
+            });
+
+            document.getElementById(`tab-${tabId}`).classList.remove('d-none');
+            document.getElementById(`${tabId}-tab-nav`).classList.add('active');
+
+            if (tabId === 'dashboard') {
+                refreshDashboardStats();
+            } else if (tabId === 'students') {
+                loadStudentsList();
+            } else if (tabId === 'attendance') {
+                loadAttendanceLog();
+            }
+        }
+
+        // Initialize variables
+        const studentsBody = document.getElementById("student-list-body");
+        const attendanceBody = document.getElementById("attendance-list-body");
+        const classStatsBody = document.getElementById("class-stats-body");
+        const groupStatsContainer = document.getElementById("group-stats-container");
+        let allStudents = [];
+        let allAttendance = [];
+
+        document.addEventListener("DOMContentLoaded", function() {
+            // Load dashboard data first
+            refreshDashboardStats();
+
+            // Generate Session QR Code
+            const qrSessionContainer = document.getElementById("qrSessionDisplay");
+            if (qrSessionContainer) {
+                new QRCode(qrSessionContainer, {
+                    text: "SESSION_ABSEN_MPLS_2026",
+                    width: 200,
+                    height: 200,
+                    colorDark: "#144e53",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+            }
+
+            // Drag & Drop CSV Event Listeners
+            const dropZone = document.getElementById("drop-zone");
+            const fileInput = document.getElementById("csvFileInput");
+
+            if (dropZone && fileInput) {
+                dropZone.addEventListener("dragover", function(e) {
+                    e.preventDefault();
+                    dropZone.classList.add("dragover");
+                });
+
+                dropZone.addEventListener("dragleave", function() {
+                    dropZone.classList.remove("dragover");
+                });
+
+                dropZone.addEventListener("drop", function(e) {
+                    e.preventDefault();
+                    dropZone.classList.remove("dragover");
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0 && files[0].name.endsWith(".csv")) {
+                        uploadCSV(files[0]);
+                    } else {
+                        showUploadStatus("Hanya file CSV yang diperbolehkan!", "danger");
+                    }
+                });
+
+                fileInput.addEventListener("change", function() {
+                    if (fileInput.files.length > 0) {
+                        uploadCSV(fileInput.files[0]);
+                    }
+                });
+            }
+        });
+
+        // Refresh statistics
+        function refreshDashboardStats() {
+            fetch("/api/admin/stats")
+                .then(res => res.json())
+                .then(stats => {
+                    document.getElementById("stat-total-students").innerText = stats.total_students;
+                    document.getElementById("stat-present").innerText = stats.total_present;
+                    document.getElementById("stat-absent").innerText = stats.total_absent;
+                    document.getElementById("stat-percentage").innerText = `${stats.percentage}%`;
+
+                    // Generate Class Stats Table
+                    classStatsBody.innerHTML = "";
+                    if (Object.keys(stats.class_stats).length > 0) {
+                        Object.keys(stats.class_stats).sort().forEach(cls => {
+                            const data = stats.class_stats[cls];
+                            const percent = data.total > 0 ? Math.round(data.present / data.total * 100) : 0;
+                            const row = document.createElement("tr");
+                            row.innerHTML = `
+                                <td class="fw-bold text-primary-dark">${cls}</td>
+                                <td>${data.present} <span class="text-muted">/ ${data.total}</span></td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="flex-grow-1 progress-custom" style="width: 100px;">
+                                            <div class="progress-bar-fill" style="width: ${percent}%;"></div>
+                                        </div>
+                                        <span class="small fw-bold text-muted">${percent}%</span>
+                                    </div>
+                                </td>
+                            `;
+                            classStatsBody.appendChild(row);
+                        });
+                    } else {
+                        classStatsBody.innerHTML = `<tr><td colspan="3" class="text-center py-4 text-muted">Belum ada data siswa</td></tr>`;
+                    }
+
+                    // Generate Group Stats Cards
+                    groupStatsContainer.innerHTML = "";
+                    const sortedGroups = Object.keys(stats.group_stats).sort((a,b) => {
+                        // Extract numbers to sort numerically if possible
+                        const numA = parseInt(a.replace(/\D/g, '')) || 0;
+                        const numB = parseInt(b.replace(/\D/g, '')) || 0;
+                        return numA - numB;
+                    });
+
+                    if (sortedGroups.length > 0) {
+                        sortedGroups.forEach(grp => {
+                            const data = stats.group_stats[grp];
+                            const percent = data.total > 0 ? Math.round(data.present / data.total * 100) : 0;
+                            
+                            const col = document.createElement("div");
+                            col.classList.add("col-xl-3", "col-md-4", "col-sm-6");
+                            col.innerHTML = `
+                                <div class="p-3 bg-light border rounded-3 h-100" style="transition: var(--transition);">
+                                    <div class="fw-bold small text-truncate text-primary-dark" title="${grp}">${grp}</div>
+                                    <div class="d-flex justify-content-between align-items-end mt-2">
+                                        <div class="fs-5 fw-bold">${data.present}<span class="fs-6 text-muted font-monospace">/${data.total}</span></div>
+                                        <span class="badge ${percent === 100 ? 'bg-success' : 'bg-primary'} bg-opacity-10 text-${percent === 100 ? 'success' : 'primary'} fs-7 fw-bold">${percent}%</span>
+                                    </div>
+                                    <div class="progress-custom mt-2">
+                                        <div class="progress-bar-fill" style="width: ${percent}%;"></div>
+                                    </div>
+                                </div>
+                            `;
+                            groupStatsContainer.appendChild(col);
+                        });
+                    } else {
+                        groupStatsContainer.innerHTML = `<div class="col-12 text-center py-4 text-muted">Belum ada data kelompok</div>`;
+                    }
+                })
+                .catch(err => console.error("Error loading dashboard statistics:", err));
+        }
+
+        // Load Student List
+        function loadStudentsList() {
+            studentsBody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-muted"><div class="spinner-border text-primary spinner-border-sm me-2"></div>Memuat data...</td></tr>`;
+            
+            fetch("/api/admin/stats")
+                .then(res => res.json())
+                .then(stats => {
+                    // Let's pull student data. Since we don't have a direct API to stream all students, we can query it using search with empty query, which returns empty list, or we fetch a custom log. Wait!
+                    // Let's make an API endpoint /api/admin/students to list all students!
+                    // Let's write code for this in javascript by requesting details. But wait, we don't have /api/admin/students, we only have search.
+                    // Wait, let's look at `api_admin_stats` or `api_admin_attendance_export`!
+                    // Can we create an endpoint to fetch all students? Yes! We should add it to main.py, or we can just fetch attendance log and stats.
+                    // Wait, let's verify if we already added `/api/admin/attendance`. Yes, that only returns present students.
+                    // Let's create `/api/admin/students` endpoint in `main.py` if we need to, OR we can modify search API to return all students if query is "*".
+                    // Let's see: `main.py` search route:
+                    // `query = request.args.get("q", "").strip().lower()`
+                    // If we fetch `/api/students/search` without query it returns `[]`, but what if we add `/api/admin/students` endpoint? Let's check if we added it in `main.py`.
+                    // In `main.py` we didn't add `/api/admin/students`!
+                    // Let's double check if we can add it, or if we can use search with query to search.
+                    // Wait! To make managing students seamless, we should definitely have a way to view all students. Let's add the route `/api/admin/students` to `main.py` using `replace_file_content`.
+                    // But wait, let's see if we can do that. Yes, we can! Let's write the javascript to fetch from `/api/admin/students`!
+                    // Let's call `/api/admin/students` to populate the table.
+                });
+
+            fetch("/api/admin/students")
+                .then(res => res.json())
+                .then(students => {
+                    allStudents = students;
+                    renderStudentTable(students);
+                })
+                .catch(err => {
+                    console.error("Error loading students list:", err);
+                    studentsBody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-danger">Gagal memuat data siswa</td></tr>`;
+                });
+        }
+
+        // Render Student List Table
+        function renderStudentTable(students) {
+            studentsBody.innerHTML = "";
+            if (students.length > 0) {
+                students.forEach(student => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td><strong>${student.nama}</strong></td>
+                        <td>${student.kelas}</td>
+                        <td>${student.kelompok} <span class="badge bg-secondary bg-opacity-10 text-secondary fs-8">${student.jenis}</span></td>
+                        <td>${student.mentor || '-'}</td>
+                    `;
+                    studentsBody.appendChild(row);
+                });
+            } else {
+                studentsBody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-muted">Tidak ada data siswa terdaftar</td></tr>`;
+            }
+        }
+
+        // Load Attendance Log
+        function loadAttendanceLog() {
+            attendanceBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted"><div class="spinner-border text-primary spinner-border-sm me-2"></div>Memuat data...</td></tr>`;
+            
+            fetch("/api/admin/attendance")
+                .then(res => res.json())
+                .then(attendance => {
+                    allAttendance = attendance;
+                    renderAttendanceTable(attendance);
+                })
+                .catch(err => {
+                    console.error("Error loading attendance log:", err);
+                    attendanceBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-danger">Gagal memuat data log kehadiran</td></tr>`;
+                });
+        }
+
+        // Render Attendance Table
+        function renderAttendanceTable(attendance) {
+            attendanceBody.innerHTML = "";
+            if (attendance.length > 0) {
+                attendance.forEach(log => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td class="font-monospace small text-muted">${log.timestamp}</td>
+                        <td><strong>${log.nama}</strong></td>
+                        <td>${log.kelas}</td>
+                        <td>${log.kelompok} <span class="badge bg-secondary bg-opacity-10 text-secondary fs-8">${log.jenis}</span></td>
+                        <td>${log.mentor}</td>
+                        <td><span class="badge-present"><i class="bi bi-check-circle-fill me-1"></i>Hadir</span></td>
+                    `;
+                    attendanceBody.appendChild(row);
+                });
+            } else {
+                attendanceBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted">Belum ada siswa yang melakukan absensi</td></tr>`;
+            }
+        }
+
+        // Upload CSV File
+        function uploadCSV(file) {
+            const formData = new FormData();
+            formData.append("file", file);
+
+            showUploadStatus(`<div class="spinner-border text-primary spinner-border-sm me-2"></div>Mengunggah file...`, "info");
+
+            fetch("/api/admin/students/upload", {
+                method: "POST",
+                body: formData
+            })
+            .then(res => res.json())
+            .then(res => {
+                if (res.success) {
+                    showUploadStatus(`<i class="bi bi-check-circle-fill"></i> ${res.message}`, "success");
+                    loadStudentsList();
+                    refreshDashboardStats();
+                } else {
+                    showUploadStatus(`<i class="bi bi-x-circle-fill"></i> Gagal: ${res.message}`, "danger");
+                }
+            })
+            .catch(err => {
+                console.error("Upload error:", err);
+                showUploadStatus(`<i class="bi bi-exclamation-circle-fill"></i> Terjadi kesalahan jaringan saat mengunggah.`, "danger");
+            });
+        }
+
+        function showUploadStatus(msg, type) {
+            const statusDiv = document.getElementById("uploadStatus");
+            statusDiv.innerHTML = `<div class="alert alert-${type} py-2 px-3 small border-0">${msg}</div>`;
+        }
+
+        // Clear Database
+        function clearDatabase() {
+            if (confirm("Apakah Anda yakin ingin mengosongkan seluruh database siswa dan log absensi?\nTindakan ini tidak dapat dibatalkan!")) {
+                fetch("/api/admin/students/clear", {
+                    method: "POST"
+                })
+                .then(res => res.json())
+                .then(res => {
+                    if (res.success) {
+                        alert(res.message);
+                        loadStudentsList();
+                        refreshDashboardStats();
+                    }
+                })
+                .catch(err => console.error("Error clearing database:", err));
+            }
+        }
+
+        // Filter Student List Table Local Search
+        function filterStudentListTable() {
+            const searchKey = document.getElementById("studentSearchKey").value.toLowerCase();
+            const filtered = allStudents.filter(s => 
+                s.nama.toLowerCase().includes(searchKey) ||
+                s.kelas.toLowerCase().includes(searchKey) ||
+                s.kelompok.toLowerCase().includes(searchKey) ||
+                (s.mentor && s.mentor.toLowerCase().includes(searchKey))
+            );
+            renderStudentTable(filtered);
+        }
+
+        // Filter Attendance Table Local Search
+        function filterAttendanceTable() {
+            const searchKey = document.getElementById("attendanceSearchKey").value.toLowerCase();
+            const filtered = allAttendance.filter(a => 
+                a.nama.toLowerCase().includes(searchKey) ||
+                a.kelas.toLowerCase().includes(searchKey) ||
+                a.kelompok.toLowerCase().includes(searchKey) ||
+                a.mentor.toLowerCase().includes(searchKey)
+            );
+            renderAttendanceTable(filtered);
+        }
+    </script>
+</body>
+</html>

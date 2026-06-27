@@ -1,7 +1,11 @@
-from flask import Flask, Response, render_template, request, jsonify, abort
+from flask import Flask, Response, make_response, render_template, request, jsonify, abort
 from dotenv import load_dotenv
 import os
 import random
+import json
+import csv
+import io
+import re
 from datetime import datetime
 import gspread
 from google.oauth2.service_account import Credentials
@@ -237,6 +241,432 @@ def valentine_order():
 
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
+
+# ===============================
+# STUDENTS & ATTENDANCE SYSTEM
+# ===============================
+
+STUDENTS_FILE = os.path.join(app.static_folder, 'data', 'students.json')
+ATTENDANCE_FILE = os.path.join(app.static_folder, 'data', 'attendance.json')
+MENTORS_FILE = os.path.join(app.static_folder, 'data', 'mentors.json')
+
+os.makedirs(os.path.join(app.static_folder, 'data'), exist_ok=True)
+
+def load_json_file(file_path, default_val):
+    if not os.path.exists(file_path):
+        return default_val
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except Exception:
+        return default_val
+
+def save_json_file(file_path, data):
+    try:
+        with open(file_path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=4)
+        return True
+    except Exception:
+        return False
+
+def get_student_mentor(student_jenis, student_kelompok, student_sub_kelompok):
+    mentors = load_json_file(MENTORS_FILE, {})
+    
+    # Normalize types
+    jenis = "Mayor" if student_jenis and "mayor" in student_jenis.lower() else "CGC"
+    
+    # Normalize kelompok: e.g. "Kelompok 1" -> extract 1 -> "Kelompok 1"
+    kelompok_num = None
+    if student_kelompok:
+        match = re.search(r'\d+', str(student_kelompok))
+        if match:
+            kelompok_num = match.group(0)
+            
+    kelompok_key = f"Kelompok {kelompok_num}" if kelompok_num else str(student_kelompok).strip()
+    sub_key = str(student_sub_kelompok).upper().strip() if student_sub_kelompok else "A"
+    if sub_key not in ["A", "B"]:
+        sub_key = "A" # fallback
+        
+    try:
+        return mentors[jenis][kelompok_key][sub_key]['name']
+    except KeyError:
+        try:
+            return mentors[jenis][kelompok_key][sub_key]
+        except KeyError:
+            return "Belum ditentukan"
+
+@app.route("/cek_data_siswa2026")
+def cek_data_siswa_page():
+    return render_template("cek_data_siswa2026.html")
+
+@app.route("/admin")
+def admin_page():
+    return render_template("admin.html")
+
+@app.route("/api/students/search")
+def api_students_search():
+    query = request.args.get("q", "").strip().lower()
+    if not query:
+        return jsonify([])
+        
+    students = load_json_file(STUDENTS_FILE, [])
+    matches = []
+    for s in students:
+        if query in s.get("nama", "").lower():
+            matches.append({
+                "id": s.get("id"),
+                "nama": s.get("nama"),
+                "kelas": s.get("kelas"),
+                "kelompok": s.get("kelompok"),
+                "jenis": s.get("jenis")
+            })
+            if len(matches) >= 15: # limit to top 15 results
+                break
+    return jsonify(matches)
+
+@app.route("/api/students/<student_id>")
+def api_student_detail(student_id):
+    students = load_json_file(STUDENTS_FILE, [])
+    student = None
+    for s in students:
+        if s.get("id") == student_id:
+            student = s
+            break
+            
+    if not student:
+        return jsonify({"success": False, "message": "Siswa tidak ditemukan"}), 404
+        
+    mentor = get_student_mentor(
+        student.get("jenis"),
+        student.get("kelompok"),
+        student.get("sub_kelompok")
+    )
+    
+    attendance = load_json_file(ATTENDANCE_FILE, [])
+    is_present = any(a.get("student_id") == student_id for a in attendance)
+    
+    checkin_time = ""
+    if is_present:
+        for a in attendance:
+            if a.get("student_id") == student_id:
+                checkin_time = a.get("timestamp", "")
+                break
+                
+    response_data = {
+        "success": True,
+        "student": {
+            "id": student.get("id"),
+            "nama": student.get("nama"),
+            "kelas": student.get("kelas"),
+            "kelompok": student.get("kelompok"),
+            "jenis": student.get("jenis"),
+            "sub_kelompok": student.get("sub_kelompok"),
+            "mentor": mentor,
+            "is_present": is_present,
+            "checkin_time": checkin_time
+        }
+    }
+    return jsonify(response_data)
+
+@app.route("/api/attendance/checkin", methods=["POST"])
+def api_attendance_checkin():
+    # Supports JSON, URL-encoded form data, and raw text (for direct QR scanners scanning raw ID)
+    if request.is_json:
+        data = request.get_json(silent=True) or {}
+        student_id = data.get("student_id")
+    else:
+        student_id = request.form.get("student_id")
+        
+    # If not found yet, maybe the scanner sent raw body
+    if not student_id:
+        try:
+            # Check if raw data is student ID
+            raw_data = request.data.decode('utf-8').strip()
+            if raw_data.startswith("STUDENT_"):
+                student_id = raw_data
+        except Exception:
+            pass
+            
+    if not student_id:
+        return jsonify({"success": False, "message": "ID Siswa diperlukan"}), 400
+        
+    students = load_json_file(STUDENTS_FILE, [])
+    student = None
+    for s in students:
+        if s.get("id") == student_id:
+            student = s
+            break
+            
+    if not student:
+        return jsonify({"success": False, "message": "Siswa tidak terdaftar"}), 404
+        
+    attendance = load_json_file(ATTENDANCE_FILE, [])
+    for a in attendance:
+        if a.get("student_id") == student_id:
+            mentor = get_student_mentor(student.get("jenis"), student.get("kelompok"), student.get("sub_kelompok"))
+            return jsonify({
+                "success": True,
+                "message": f"Siswa {student.get('nama')} sudah absen sebelumnya.",
+                "student": {
+                    "nama": student.get("nama"),
+                    "kelas": student.get("kelas"),
+                    "kelompok": student.get("kelompok"),
+                    "jenis": student.get("jenis"),
+                    "mentor": mentor,
+                    "checkin_time": a.get("timestamp")
+                }
+            })
+            
+    now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    new_record = {
+        "student_id": student_id,
+        "nama": student.get("nama"),
+        "kelas": student.get("kelas"),
+        "kelompok": student.get("kelompok"),
+        "jenis": student.get("jenis"),
+        "timestamp": now_str
+    }
+    attendance.append(new_record)
+    save_json_file(ATTENDANCE_FILE, attendance)
+    
+    mentor = get_student_mentor(student.get("jenis"), student.get("kelompok"), student.get("sub_kelompok"))
+    
+    return jsonify({
+        "success": True,
+        "message": f"Absen berhasil untuk {student.get('nama')}!",
+        "student": {
+            "nama": student.get("nama"),
+            "kelas": student.get("kelas"),
+            "kelompok": student.get("kelompok"),
+            "jenis": student.get("jenis"),
+            "mentor": mentor,
+            "checkin_time": now_str
+        }
+    })
+
+@app.route("/api/admin/students", methods=["GET"])
+def api_admin_students():
+    students = load_json_file(STUDENTS_FILE, [])
+    for s in students:
+        s["mentor"] = get_student_mentor(s.get("jenis"), s.get("kelompok"), s.get("sub_kelompok"))
+    return jsonify(students)
+
+@app.route("/api/admin/students/upload", methods=["POST"])
+def api_admin_students_upload():
+    if 'file' not in request.files:
+        return jsonify({"success": False, "message": "Tidak ada file yang diunggah"}), 400
+        
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({"success": False, "message": "Nama file kosong"}), 400
+        
+    if not file.filename.endswith('.csv'):
+        return jsonify({"success": False, "message": "Hanya file CSV yang diperbolehkan"}), 400
+        
+    try:
+        stream = io.StringIO(file.stream.read().decode("utf-8"), newline=None)
+        csv_reader = csv.reader(stream)
+        
+        headers = next(csv_reader, None)
+        if not headers:
+            return jsonify({"success": False, "message": "File CSV kosong"}), 400
+            
+        cleaned_headers = [h.strip().lower() for h in headers]
+        
+        idx_nama = -1
+        idx_kelas = -1
+        idx_kelompok = -1
+        idx_jenis = -1
+        idx_sub = -1
+        
+        for idx, h in enumerate(cleaned_headers):
+            if 'nama' in h:
+                idx_nama = idx
+            elif 'kelas' in h:
+                idx_kelas = idx
+            elif 'kelompok' in h or 'group' in h:
+                idx_kelompok = idx
+            elif 'jenis' in h or 'type' in h or 'kategori' in h:
+                idx_jenis = idx
+            elif 'sub' in h or 'pembina' in h or 'sub kelompok' in h or 'sub-kelompok' in h:
+                idx_sub = idx
+                
+        if idx_nama == -1 or idx_kelas == -1 or idx_kelompok == -1:
+            return jsonify({
+                "success": False, 
+                "message": f"Header CSV harus berisi Nama, Kelas, Kelompok. Ditemukan: {', '.join(headers)}"
+            }), 400
+            
+        new_students = []
+        import_count = 0
+        
+        for row in csv_reader:
+            if not row or len(row) <= max(idx_nama, idx_kelas, idx_kelompok):
+                continue
+                
+            nama = row[idx_nama].strip()
+            if not nama:
+                continue
+                
+            kelas = row[idx_kelas].strip()
+            kelompok = row[idx_kelompok].strip()
+            
+            if kelompok and not kelompok.lower().startswith('kelompok'):
+                kelompok = f"Kelompok {kelompok}"
+                
+            jenis = "Mayor"
+            if idx_jenis != -1 and idx_jenis < len(row):
+                val_jenis = row[idx_jenis].strip()
+                if val_jenis.lower() == 'cgc':
+                    jenis = 'CGC'
+                    
+            sub_kelompok = "A"
+            if idx_sub != -1 and idx_sub < len(row):
+                val_sub = row[idx_sub].strip().upper()
+                if val_sub in ['A', 'B']:
+                    sub_kelompok = val_sub
+                    
+            student_id = f"STUDENT_{import_count + 1:04d}_{int(random.random()*10000):04d}"
+            
+            new_students.append({
+                "id": student_id,
+                "nama": nama,
+                "kelas": kelas,
+                "kelompok": kelompok,
+                "jenis": jenis,
+                "sub_kelompok": sub_kelompok
+            })
+            import_count += 1
+            
+        if not new_students:
+            return jsonify({"success": False, "message": "Tidak ada data siswa valid ditemukan dalam file CSV"}), 400
+            
+        save_json_file(STUDENTS_FILE, new_students)
+        save_json_file(ATTENDANCE_FILE, [])
+        
+        return jsonify({
+            "success": True, 
+            "message": f"Berhasil mengimpor {import_count} data siswa dan mengosongkan log absensi sebelumnya."
+        })
+        
+    except Exception as e:
+        return jsonify({"success": False, "message": f"Gagal memproses file CSV: {str(e)}"}), 500
+
+@app.route("/api/admin/students/clear", methods=["POST"])
+def api_admin_students_clear():
+    save_json_file(STUDENTS_FILE, [])
+    save_json_file(ATTENDANCE_FILE, [])
+    return jsonify({"success": True, "message": "Database siswa dan absensi telah dikosongkan."})
+
+@app.route("/api/admin/attendance", methods=["GET"])
+def api_admin_attendance():
+    attendance = load_json_file(ATTENDANCE_FILE, [])
+    students = load_json_file(STUDENTS_FILE, [])
+    
+    result = []
+    for a in attendance:
+        student_id = a.get("student_id")
+        student = next((s for s in students if s.get("id") == student_id), None)
+        
+        mentor = "Belum ditentukan"
+        sub_kelompok = "-"
+        if student:
+            sub_kelompok = student.get("sub_kelompok", "-")
+            mentor = get_student_mentor(student.get("jenis"), student.get("kelompok"), sub_kelompok)
+            
+        result.append({
+            "student_id": student_id,
+            "nama": a.get("nama"),
+            "kelas": a.get("kelas"),
+            "kelompok": a.get("kelompok"),
+            "jenis": a.get("jenis"),
+            "sub_kelompok": sub_kelompok,
+            "mentor": mentor,
+            "timestamp": a.get("timestamp")
+        })
+    return jsonify(result)
+
+@app.route("/api/admin/stats", methods=["GET"])
+def api_admin_stats():
+    students = load_json_file(STUDENTS_FILE, [])
+    attendance = load_json_file(ATTENDANCE_FILE, [])
+    
+    total = len(students)
+    present = len(attendance)
+    absent = max(0, total - present)
+    
+    percentage = (present / total * 100) if total > 0 else 0
+    
+    class_stats = {}
+    group_stats = {}
+    
+    for s in students:
+        cls = s.get("kelas", "Lainnya")
+        grp = f"{s.get('kelompok')} ({s.get('jenis')})"
+        
+        if cls not in class_stats:
+            class_stats[cls] = {"total": 0, "present": 0}
+        if grp not in group_stats:
+            group_stats[grp] = {"total": 0, "present": 0}
+            
+        class_stats[cls]["total"] += 1
+        group_stats[grp]["total"] += 1
+        
+    for a in attendance:
+        s_id = a.get("student_id")
+        student = next((s for s in students if s.get("id") == s_id), None)
+        if student:
+            cls = student.get("kelas", "Lainnya")
+            grp = f"{student.get('kelompok')} ({student.get('jenis')})"
+            
+            if cls in class_stats:
+                class_stats[cls]["present"] += 1
+            if grp in group_stats:
+                group_stats[grp]["present"] += 1
+                
+    return jsonify({
+        "total_students": total,
+        "total_present": present,
+        "total_absent": absent,
+        "percentage": round(percentage, 1),
+        "class_stats": class_stats,
+        "group_stats": group_stats
+    })
+
+@app.route("/api/admin/attendance/export", methods=["GET"])
+def api_admin_attendance_export():
+    students = load_json_file(STUDENTS_FILE, [])
+    attendance = load_json_file(ATTENDANCE_FILE, [])
+    
+    dest = io.StringIO()
+    writer = csv.writer(dest)
+    
+    writer.writerow(["ID Siswa", "Nama Siswa", "Kelas", "Kelompok", "Jenis", "Sub-Kelompok", "Kakak Pembina", "Status Kehadiran", "Waktu Absen"])
+    
+    for s in students:
+        student_id = s.get("id")
+        att = next((a for a in attendance if a.get("student_id") == student_id), None)
+        status = "Hadir" if att else "Belum Hadir"
+        time_str = att.get("timestamp") if att else "-"
+        
+        mentor = get_student_mentor(s.get("jenis"), s.get("kelompok"), s.get("sub_kelompok"))
+        
+        writer.writerow([
+            student_id,
+            s.get("nama"),
+            s.get("kelas"),
+            s.get("kelompok"),
+            s.get("jenis"),
+            s.get("sub_kelompok"),
+            mentor,
+            status,
+            time_str
+        ])
+        
+    output = make_response(dest.getvalue())
+    output.headers["Content-Disposition"] = "attachment; filename=rekap_absensi_mpls_2026.csv"
+    output.headers["Content-type"] = "text/csv; charset=utf-8"
+    return output
 
 # ===============================
 # RUN
