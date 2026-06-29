@@ -341,6 +341,11 @@
                             <i class="bi bi-arrow-up-right-circle me-1"></i> Portal Siswa
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-custom text-danger" href="#" onclick="handleLogout()">
+                            <i class="bi bi-box-arrow-right me-1"></i> Logout
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -356,9 +361,15 @@
             
             <div class="section-header">
                 <h3 class="section-title mb-0">Overview Absensi Real-Time</h3>
-                <button class="btn btn-outline-secondary btn-sm rounded-pill" onclick="refreshDashboardStats()">
-                    <i class="bi bi-arrow-clockwise me-1"></i> Refresh Data
-                </button>
+                <div class="d-flex gap-2 align-items-center flex-wrap">
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="small text-muted mb-0">Tanggal:</label>
+                        <input type="date" id="attendanceDate" class="form-control form-control-sm" style="width: 150px;" onchange="refreshDashboardStats()">
+                    </div>
+                    <button class="btn btn-outline-secondary btn-sm rounded-pill" onclick="refreshDashboardStats()">
+                        <i class="bi bi-arrow-clockwise me-1"></i> Refresh
+                    </button>
+                </div>
             </div>
 
             <!-- Stats Grid -->
@@ -521,10 +532,11 @@
                                         <th>Kelas</th>
                                         <th>Kelompok</th>
                                         <th>Kakak Pembina</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody id="student-list-body">
-                                    <tr><td colspan="4" class="text-center py-4 text-muted">Memuat data siswa...</td></tr>
+                                    <tr><td colspan="5" class="text-center py-4 text-muted">Memuat data siswa...</td></tr>
                                 </tbody>
                             </table>
                         </div>
@@ -537,12 +549,16 @@
         <div id="tab-attendance" class="tab-pane-custom d-none">
             <div class="section-header">
                 <h3 class="section-title mb-0">Log Riwayat Kehadiran</h3>
-                <div class="d-flex gap-2">
+                <div class="d-flex gap-2 align-items-center flex-wrap">
+                    <div class="d-flex align-items-center gap-2">
+                        <label class="small text-muted mb-0">Tanggal:</label>
+                        <input type="date" id="attendanceLogDate" class="form-control form-control-sm" style="width: 150px;" onchange="loadAttendanceLog()">
+                    </div>
                     <a href="/api/admin/attendance/export" class="btn btn-custom btn-sm rounded-pill">
                         <i class="bi bi-file-earmark-excel me-1"></i> Ekspor Rekap (CSV)
                     </a>
                     <button class="btn btn-outline-secondary btn-sm rounded-pill" onclick="loadAttendanceLog()">
-                        <i class="bi bi-arrow-clockwise me-1"></i> Refresh Log
+                        <i class="bi bi-arrow-clockwise me-1"></i> Refresh
                     </button>
                 </div>
             </div>
@@ -559,12 +575,12 @@
                     <table class="table table-hover align-middle mb-0" id="attendance-log-table">
                         <thead class="table-light sticky-top">
                             <tr>
+                                <th>Tanggal</th>
                                 <th>Waktu Scan</th>
                                 <th>Nama</th>
                                 <th>Kelas</th>
                                 <th>Kelompok</th>
                                 <th>Kakak Pembina</th>
-                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody id="attendance-list-body">
@@ -622,6 +638,14 @@
         let allAttendance = [];
 
         document.addEventListener("DOMContentLoaded", function() {
+            // Initialize date inputs with today's date
+            const today = new Date().toISOString().split('T')[0];
+            const attendanceDateInput = document.getElementById("attendanceDate");
+            const attendanceLogDateInput = document.getElementById("attendanceLogDate");
+            
+            if (attendanceDateInput) attendanceDateInput.value = today;
+            if (attendanceLogDateInput) attendanceLogDateInput.value = today;
+            
             // Load dashboard data first
             refreshDashboardStats();
 
@@ -674,7 +698,10 @@
 
         // Refresh statistics
         function refreshDashboardStats() {
-            fetch("/api/admin/stats")
+            const dateInput = document.getElementById("attendanceDate").value;
+            const url = dateInput ? `/api/admin/stats?date=${dateInput}` : "/api/admin/stats";
+            
+            fetch(url)
                 .then(res => res.json())
                 .then(stats => {
                     document.getElementById("stat-total-students").innerText = stats.total_students;
@@ -791,11 +818,16 @@
                         <td>${student.kelas}</td>
                         <td>${student.kelompok} <span class="badge bg-secondary bg-opacity-10 text-secondary fs-8">${student.jenis}</span></td>
                         <td>${student.mentor || '-'}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-primary" onclick="viewStudentAttendance('${student.id}')">
+                                <i class="bi bi-calendar-check"></i> Lihat Absensi
+                            </button>
+                        </td>
                     `;
                     studentsBody.appendChild(row);
                 });
             } else {
-                studentsBody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-muted">Tidak ada data siswa terdaftar</td></tr>`;
+                studentsBody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted">Tidak ada data siswa terdaftar</td></tr>`;
             }
         }
 
@@ -803,7 +835,10 @@
         function loadAttendanceLog() {
             attendanceBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted"><div class="spinner-border text-primary spinner-border-sm me-2"></div>Memuat data...</td></tr>`;
             
-            fetch("/api/admin/attendance")
+            const dateInput = document.getElementById("attendanceLogDate").value;
+            const url = dateInput ? `/api/admin/attendance?date=${dateInput}` : "/api/admin/attendance";
+            
+            fetch(url)
                 .then(res => res.json())
                 .then(attendance => {
                     allAttendance = attendance;
@@ -822,12 +857,12 @@
                 attendance.forEach(log => {
                     const row = document.createElement("tr");
                     row.innerHTML = `
+                        <td class="font-monospace small text-muted">${log.date || '-'}</td>
                         <td class="font-monospace small text-muted">${log.timestamp}</td>
                         <td><strong>${log.nama}</strong></td>
                         <td>${log.kelas}</td>
                         <td>${log.kelompok} <span class="badge bg-secondary bg-opacity-10 text-secondary fs-8">${log.jenis}</span></td>
                         <td>${log.mentor}</td>
-                        <td><span class="badge-present"><i class="bi bi-check-circle-fill me-1"></i>Hadir</span></td>
                     `;
                     attendanceBody.appendChild(row);
                 });
@@ -908,6 +943,135 @@
                 a.mentor.toLowerCase().includes(searchKey)
             );
             renderAttendanceTable(filtered);
+        }
+
+        // Handle Logout
+        function handleLogout() {
+            if (confirm("Apakah Anda yakin ingin logout?")) {
+                fetch("/api/admin/logout", {
+                    method: "POST"
+                })
+                .then(res => res.json())
+                .then(res => {
+                    if (res.success) {
+                        window.location.href = "/admin/login";
+                    }
+                })
+                .catch(err => {
+                    console.error("Logout error:", err);
+                    window.location.href = "/admin/login";
+                });
+            }
+        }
+
+        // View Student Attendance Detail
+        function viewStudentAttendance(studentId) {
+            fetch(`/api/admin/student/${studentId}/attendance`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        showStudentAttendanceModal(data);
+                    } else {
+                        alert(data.message || "Gagal memuat data absensi siswa");
+                    }
+                })
+                .catch(err => {
+                    console.error("Error loading student attendance:", err);
+                    alert("Terjadi kesalahan saat memuat data absensi");
+                });
+        }
+
+        function showStudentAttendanceModal(data) {
+            const student = data.student;
+            const summary = data.attendance_summary;
+            
+            let attendanceHtml = summary.map(day => {
+                const statusClass = day.is_present ? 'bg-success' : 'bg-danger';
+                const statusText = day.is_present ? 'Hadir' : 'Tidak Hadir';
+                const timeText = day.timestamp ? day.timestamp.split(' ')[1] : '-';
+                
+                return `
+                    <tr>
+                        <td class="font-monospace small">${day.date}</td>
+                        <td><span class="badge ${statusClass}">${statusText}</span></td>
+                        <td class="font-monospace small">${timeText}</td>
+                    </tr>
+                `;
+            }).join('');
+            
+            const modalHtml = `
+                <div class="modal fade" id="studentAttendanceModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fw-bold">
+                                    <i class="bi bi-person-lines-fill me-2"></i>
+                                    Riwayat Absensi: ${student.nama}
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <strong>Kelas:</strong> ${student.kelas}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Kelompok:</strong> ${student.kelompok}
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <strong>Jenis:</strong> ${student.jenis}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Kakak Pembina:</strong> ${student.mentor}
+                                    </div>
+                                </div>
+                                <div class="alert alert-info">
+                                    <strong>Total Hadir:</strong> ${data.total_present} / ${data.total_days} hari
+                                </div>
+                                <h6 class="fw-bold mb-3">Detail Kehadiran:</h6>
+                                <div class="table-responsive">
+                                    <table class="table table-sm table-bordered">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Tanggal</th>
+                                                <th>Status</th>
+                                                <th>Waktu</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            ${attendanceHtml}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                ${data.absent_dates.length > 0 ? `
+                                    <div class="mt-3">
+                                        <strong>Tanggal Tidak Hadir:</strong>
+                                        <span class="text-danger">${data.absent_dates.join(', ')}</span>
+                                    </div>
+                                ` : ''}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remove existing modal if any
+            const existingModal = document.getElementById('studentAttendanceModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Add new modal
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            
+            // Show modal
+            const modal = new bootstrap.Modal(document.getElementById('studentAttendanceModal'));
+            modal.show();
         }
     </script>
 </body>

@@ -1,4 +1,4 @@
-from flask import Flask, Response, make_response, render_template, request, jsonify, abort
+from flask import Flask, Response, make_response, render_template, request, jsonify, abort, session, redirect, url_for
 from dotenv import load_dotenv
 import os
 import random
@@ -25,6 +25,7 @@ from photobooth_config import PHOTOBOOTH_BANNER, PHOTOBOOTH_PAGE_SIZE
 from services.google_drive import get_photos, search_photos, clear_cache, fetch_drive_image
 
 app = Flask(__name__)
+app.secret_key = 'mpls_igs_2026_secret_key_for_session_management'
 
 # ===============================
 # CONFIG
@@ -32,6 +33,25 @@ app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB max upload
 app.config['UPLOAD_FOLDER'] = 'static/uploads/valentine'
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp", "pdf"}
+
+# MPLS Configuration
+MPLS_CONFIG = {
+    "start_date": "2026-07-01",
+    "end_date": "2026-07-07",
+    "holidays": ["2026-07-04", "2026-07-05"],  # Sabtu & Minggu
+    "event_days": ["2026-07-01", "2026-07-02", "2026-07-03", "2026-07-06", "2026-07-07"]
+}
+
+def get_mpls_config():
+    return MPLS_CONFIG
+
+def is_valid_mpls_date(date_str):
+    """Check if date is within MPLS event days (excluding holidays)"""
+    return date_str in MPLS_CONFIG["event_days"]
+
+def get_mpls_days():
+    """Get all valid MPLS event days"""
+    return MPLS_CONFIG["event_days"]
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
@@ -301,7 +321,36 @@ def cek_data_siswa_page():
 
 @app.route("/admin")
 def admin_page():
+    # Check if user is authenticated
+    if not session.get('admin_authenticated'):
+        return redirect(url_for('admin_login'))
     return render_template("admin.html")
+
+@app.route("/admin/login")
+def admin_login():
+    return render_template("admin_login.html")
+
+@app.route("/api/admin/login", methods=["POST"])
+def api_admin_login():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
+    
+    # Hardcoded credentials as requested
+    if username == 'osismpls' and password == 'OSISMPLS123':
+        session['admin_authenticated'] = True
+        return jsonify({"success": True, "message": "Login berhasil"})
+    else:
+        return jsonify({"success": False, "message": "Username atau password salah"}), 401
+
+@app.route("/api/admin/check-auth")
+def api_admin_check_auth():
+    return jsonify({"authenticated": session.get('admin_authenticated', False)})
+
+@app.route("/api/admin/logout", methods=["POST"])
+def api_admin_logout():
+    session.pop('admin_authenticated', None)
+    return jsonify({"success": True, "message": "Logout berhasil"})
 
 @app.route("/api/students/search")
 def api_students_search():
@@ -343,14 +392,22 @@ def api_student_detail(student_id):
     )
     
     attendance = load_json_file(ATTENDANCE_FILE, [])
-    is_present = any(a.get("student_id") == student_id for a in attendance)
+    today = datetime.now().strftime("%Y-%m-%d")
     
+    # Check if student is present TODAY
+    is_present = False
     checkin_time = ""
-    if is_present:
-        for a in attendance:
-            if a.get("student_id") == student_id:
+    attendance_history = []
+    
+    for a in attendance:
+        if a.get("student_id") == student_id:
+            attendance_history.append({
+                "date": a.get("date"),
+                "timestamp": a.get("timestamp")
+            })
+            if a.get("date") == today:
+                is_present = True
                 checkin_time = a.get("timestamp", "")
-                break
                 
     response_data = {
         "success": True,
@@ -363,7 +420,9 @@ def api_student_detail(student_id):
             "sub_kelompok": student.get("sub_kelompok"),
             "mentor": mentor,
             "is_present": is_present,
-            "checkin_time": checkin_time
+            "checkin_time": checkin_time,
+            "attendance_history": attendance_history,
+            "total_days_present": len(attendance_history)
         }
     }
     return jsonify(response_data)
@@ -399,31 +458,46 @@ def api_attendance_checkin():
             
     if not student:
         return jsonify({"success": False, "message": "Siswa tidak terdaftar"}), 404
+    
+    # Get current date for multi-day tracking
+    today = datetime.now().strftime("%Y-%m-%d")
+    now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Validate if today is a valid MPLS event day
+    if not is_valid_mpls_date(today):
+        return jsonify({
+            "success": False, 
+            "message": f"Hari ini ({today}) bukan hari kegiatan MPLS atau hari libur."
+        }), 400
         
     attendance = load_json_file(ATTENDANCE_FILE, [])
+    
+    # Check if student already checked in TODAY
     for a in attendance:
-        if a.get("student_id") == student_id:
+        if a.get("student_id") == student_id and a.get("date") == today:
             mentor = get_student_mentor(student.get("jenis"), student.get("kelompok"), student.get("sub_kelompok"))
             return jsonify({
                 "success": True,
-                "message": f"Siswa {student.get('nama')} sudah absen sebelumnya.",
+                "message": f"Siswa {student.get('nama')} sudah absen hari ini.",
                 "student": {
                     "nama": student.get("nama"),
                     "kelas": student.get("kelas"),
                     "kelompok": student.get("kelompok"),
                     "jenis": student.get("jenis"),
                     "mentor": mentor,
-                    "checkin_time": a.get("timestamp")
+                    "checkin_time": a.get("timestamp"),
+                    "date": a.get("date")
                 }
             })
             
-    now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # New check-in for today
     new_record = {
         "student_id": student_id,
         "nama": student.get("nama"),
         "kelas": student.get("kelas"),
         "kelompok": student.get("kelompok"),
         "jenis": student.get("jenis"),
+        "date": today,
         "timestamp": now_str
     }
     attendance.append(new_record)
@@ -440,7 +514,8 @@ def api_attendance_checkin():
             "kelompok": student.get("kelompok"),
             "jenis": student.get("jenis"),
             "mentor": mentor,
-            "checkin_time": now_str
+            "checkin_time": now_str,
+            "date": today
         }
     })
 
@@ -563,8 +638,19 @@ def api_admin_attendance():
     attendance = load_json_file(ATTENDANCE_FILE, [])
     students = load_json_file(STUDENTS_FILE, [])
     
+    # Get date filter from query params (default to today)
+    date_filter = request.args.get("date", "")
+    today = datetime.now().strftime("%Y-%m-%d")
+    
+    # If no date filter, use today
+    if not date_filter:
+        date_filter = today
+    
+    # Filter attendance by date
+    filtered_attendance = [a for a in attendance if a.get("date") == date_filter]
+    
     result = []
-    for a in attendance:
+    for a in filtered_attendance:
         student_id = a.get("student_id")
         student = next((s for s in students if s.get("id") == student_id), None)
         
@@ -582,6 +668,7 @@ def api_admin_attendance():
             "jenis": a.get("jenis"),
             "sub_kelompok": sub_kelompok,
             "mentor": mentor,
+            "date": a.get("date"),
             "timestamp": a.get("timestamp")
         })
     return jsonify(result)
@@ -591,8 +678,19 @@ def api_admin_stats():
     students = load_json_file(STUDENTS_FILE, [])
     attendance = load_json_file(ATTENDANCE_FILE, [])
     
+    # Get date filter from query params (default to today)
+    date_filter = request.args.get("date", "")
+    today = datetime.now().strftime("%Y-%m-%d")
+    
+    # If no date filter, use today
+    if not date_filter:
+        date_filter = today
+    
+    # Filter attendance by date
+    filtered_attendance = [a for a in attendance if a.get("date") == date_filter]
+    
     total = len(students)
-    present = len(attendance)
+    present = len(filtered_attendance)
     absent = max(0, total - present)
     
     percentage = (present / total * 100) if total > 0 else 0
@@ -612,7 +710,7 @@ def api_admin_stats():
         class_stats[cls]["total"] += 1
         group_stats[grp]["total"] += 1
         
-    for a in attendance:
+    for a in filtered_attendance:
         s_id = a.get("student_id")
         student = next((s for s in students if s.get("id") == s_id), None)
         if student:
@@ -667,6 +765,62 @@ def api_admin_attendance_export():
     output.headers["Content-Disposition"] = "attachment; filename=rekap_absensi_mpls_2026.csv"
     output.headers["Content-type"] = "text/csv; charset=utf-8"
     return output
+
+@app.route("/api/admin/student/<student_id>/attendance", methods=["GET"])
+def api_student_attendance_detail(student_id):
+    """Get detailed attendance history for a specific student"""
+    students = load_json_file(STUDENTS_FILE, [])
+    student = next((s for s in students if s.get("id") == student_id), None)
+    
+    if not student:
+        return jsonify({"success": False, "message": "Siswa tidak ditemukan"}), 404
+    
+    attendance = load_json_file(ATTENDANCE_FILE, [])
+    mpls_days = get_mpls_days()
+    
+    # Get all attendance records for this student
+    student_attendance = [a for a in attendance if a.get("student_id") == student_id]
+    attended_dates = {a.get("date") for a in student_attendance}
+    
+    # Build attendance summary for each MPLS day
+    attendance_summary = []
+    for day in mpls_days:
+        is_present = day in attended_dates
+        record = next((a for a in student_attendance if a.get("date") == day), None)
+        
+        attendance_summary.append({
+            "date": day,
+            "is_present": is_present,
+            "timestamp": record.get("timestamp") if record else None
+        })
+    
+    mentor = get_student_mentor(student.get("jenis"), student.get("kelompok"), student.get("sub_kelompok"))
+    
+    return jsonify({
+        "success": True,
+        "student": {
+            "id": student.get("id"),
+            "nama": student.get("nama"),
+            "kelas": student.get("kelas"),
+            "kelompok": student.get("kelompok"),
+            "jenis": student.get("jenis"),
+            "sub_kelompok": student.get("sub_kelompok"),
+            "mentor": mentor
+        },
+        "mpls_config": MPLS_CONFIG,
+        "attendance_summary": attendance_summary,
+        "total_present": len(attended_dates),
+        "total_days": len(mpls_days),
+        "absent_dates": [day for day in mpls_days if day not in attended_dates]
+    })
+
+@app.route("/api/mpls/config", methods=["GET"])
+def api_mpls_config():
+    """Get MPLS configuration"""
+    return jsonify({
+        "success": True,
+        "config": MPLS_CONFIG
+    })
 
 # ===============================
 # RUN

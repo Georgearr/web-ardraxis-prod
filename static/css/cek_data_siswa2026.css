@@ -247,16 +247,33 @@ section.container {
 ========================== */
 .student-card {
     background: white;
-    border-radius: 24px;
+    border-radius: 28px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(29, 105, 110, 0.12);
-    border: 1px solid rgba(29, 105, 110, 0.08);
+    box-shadow: 0 25px 60px rgba(29, 105, 110, 0.15);
+    border: 1px solid rgba(29, 105, 110, 0.1);
     margin-top: 0;
     position: relative;
     z-index: 10;
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.45s ease, transform 0.45s ease;
+    transform: translateY(30px);
+    transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.student-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light), var(--primary));
+    background-size: 200% 100%;
+    animation: gradientMove 3s ease infinite;
+}
+
+@keyframes gradientMove {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .student-card.show {
@@ -267,109 +284,145 @@ section.container {
 /* Header */
 .student-card__header {
     text-align: center;
-    padding: 36px 32px 28px;
-    background: linear-gradient(180deg, rgba(29, 105, 110, 0.06) 0%, transparent 100%);
-    border-bottom: 1px solid rgba(29, 105, 110, 0.08);
+    padding: 42px 36px 32px;
+    background: linear-gradient(180deg, rgba(29, 105, 110, 0.08) 0%, rgba(29, 105, 110, 0.02) 100%);
+    border-bottom: 1px solid rgba(29, 105, 110, 0.1);
+    position: relative;
 }
 
 .student-card__avatar-wrap {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+    position: relative;
 }
 
 .student-card__name {
-    font-size: clamp(1.25rem, 4vw, 1.6rem);
-    font-weight: 700;
+    font-size: clamp(1.4rem, 4.5vw, 1.8rem);
+    font-weight: 800;
     color: var(--text);
-    margin: 0 0 6px;
+    margin: 0 0 8px;
     line-height: 1.3;
     word-break: break-word;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .student-card__subtitle {
     margin: 0;
-    font-size: 0.875rem;
-    color: #64748b;
-    font-weight: 500;
+    font-size: 0.95rem;
+    color: #5a6b7c;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 .avatar {
-    width: 88px;
-    height: 88px;
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 50%, var(--primary-dark) 100%);
     color: white;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    font-size: 2.25rem;
-    box-shadow: 0 8px 24px rgba(29, 105, 110, 0.25);
-    border: 4px solid white;
-    outline: 2px solid rgba(29, 105, 110, 0.15);
+    font-size: 2.5rem;
+    box-shadow: 0 12px 32px rgba(29, 105, 110, 0.35);
+    border: 5px solid white;
+    outline: 3px solid rgba(29, 105, 110, 0.2);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
 }
 
 /* Info grid */
 .student-card__info {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    padding: 24px 28px;
+    gap: 16px;
+    padding: 28px 32px;
 }
 
 /* ==========================
    INFO BOX STYLING
 ========================== */
 .info-box {
-    background: #f8fbfb;
-    border: 1px solid rgba(29, 105, 110, 0.08);
-    border-radius: 14px;
-    padding: 16px 18px;
-    min-height: 88px;
+    background: linear-gradient(135deg, #f8fbfb 0%, #ffffff 100%);
+    border: 1px solid rgba(29, 105, 110, 0.1);
+    border-radius: 16px;
+    padding: 18px 20px;
+    min-height: 92px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.info-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--primary), var(--primary-light));
+    opacity: 0;
     transition: var(--transition);
 }
 
 .info-box:hover {
     background: #fff;
-    border-color: rgba(29, 105, 110, 0.18);
-    box-shadow: 0 6px 20px rgba(29, 105, 110, 0.06);
+    border-color: rgba(29, 105, 110, 0.25);
+    box-shadow: 0 8px 24px rgba(29, 105, 110, 0.1);
+    transform: translateY(-2px);
+}
+
+.info-box:hover::before {
+    opacity: 1;
 }
 
 .info-box--highlight {
-    background: linear-gradient(135deg, #eef8f8 0%, #f4fbfb 100%);
-    border-color: rgba(29, 105, 110, 0.15);
+    background: linear-gradient(135deg, #e8f4f4 0%, #f0f9f9 100%);
+    border-color: rgba(29, 105, 110, 0.2);
     grid-column: 1 / -1;
+}
+
+.info-box--highlight::before {
+    opacity: 1;
 }
 
 .info-box label {
     display: flex;
     align-items: center;
-    gap: 6px;
-    font-weight: 600;
+    gap: 8px;
+    font-weight: 700;
     font-size: 0.7rem;
     color: var(--primary);
-    margin-bottom: 8px;
-    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
 .info-box label i {
-    font-size: 0.85rem;
-    opacity: 0.85;
+    font-size: 0.9rem;
+    opacity: 0.9;
 }
 
 .info-box span {
     display: block;
-    font-size: 1rem;
+    font-size: 1.05rem;
     color: var(--text);
-    font-weight: 600;
-    line-height: 1.45;
+    font-weight: 700;
+    line-height: 1.4;
     word-break: break-word;
 }
 
 .info-box--highlight span {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     color: var(--primary-dark);
 }
 
@@ -378,112 +431,124 @@ section.container {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0;
-    border-top: 1px solid rgba(29, 105, 110, 0.08);
-    background: #fafcfd;
+    border-top: 1px solid rgba(29, 105, 110, 0.12);
+    background: linear-gradient(180deg, #fafcfd 0%, #f5f8f9 100%);
 }
 
 /* ==========================
    ATTENDANCE BOX & STATUS
 ========================== */
 .attendance-box {
-    padding: 28px 24px;
+    padding: 32px 28px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-right: 1px solid rgba(29, 105, 110, 0.08);
+    border-right: 1px solid rgba(29, 105, 110, 0.12);
+    position: relative;
 }
 
 .attendance-box label {
     display: block;
-    font-weight: 600;
+    font-weight: 700;
     font-size: 0.7rem;
     color: var(--primary);
-    margin-bottom: 12px;
-    letter-spacing: 0.04em;
+    margin-bottom: 14px;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
 .attendance-time {
-    margin: 10px 0 0;
-    font-size: 0.8rem;
-    color: #64748b;
-    line-height: 1.4;
+    margin: 12px 0 0;
+    font-size: 0.85rem;
+    color: #5a6b7c;
+    line-height: 1.5;
+    font-weight: 500;
 }
 
 .badge-status {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.9rem;
-    font-weight: 700;
-    padding: 8px 22px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    padding: 10px 26px;
     border-radius: 999px;
     transition: var(--transition);
-    background-color: #fff3cd;
-    color: #856404;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .badge-status.present {
-    background-color: #d4edda;
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
     color: #155724;
+    border: 1px solid #c3e6cb;
 }
 
 .badge-status.absent {
-    background-color: #fff3cd;
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
     color: #856404;
+    border: 1px solid #ffeeba;
 }
 
 /* ==========================
    QR CODE WRAPPER
 ========================== */
 .student-card__qr {
-    padding: 28px 24px;
+    padding: 32px 28px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .qr-section-title {
-    margin: 0 0 14px;
+    margin: 0 0 16px;
     font-size: 0.7rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--primary);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
 .qr-wrapper {
     background: white;
-    padding: 12px;
-    border-radius: 14px;
-    box-shadow: 0 4px 16px rgba(29, 105, 110, 0.08);
+    padding: 14px;
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(29, 105, 110, 0.12);
     display: inline-block;
-    border: 1px solid rgba(29, 105, 110, 0.1);
+    border: 2px solid rgba(29, 105, 110, 0.15);
     line-height: 0;
+    transition: var(--transition);
+}
+
+.qr-wrapper:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 32px rgba(29, 105, 110, 0.18);
 }
 
 .qr-wrapper img,
 #qrcode img {
     display: block;
-    width: 140px;
-    height: 140px;
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
 }
 
 .qr-guide {
-    margin: 14px 0 0;
-    max-width: 260px;
-    font-size: 0.75rem;
-    color: #64748b;
-    line-height: 1.55;
+    margin: 16px 0 0;
+    max-width: 280px;
+    font-size: 0.8rem;
+    color: #5a6b7c;
+    line-height: 1.6;
+    font-weight: 500;
 }
 
 .qr-guide i {
     color: var(--primary);
-    margin-right: 4px;
+    margin-right: 5px;
 }
 
 /* ==========================

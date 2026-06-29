@@ -105,6 +105,14 @@ document.addEventListener("DOMContentLoaded", function() {
                         checkinTime.classList.add("d-none");
                     }
 
+                    // Display total days attended
+                    if (student.total_days_present > 0) {
+                        const daysInfo = document.createElement("p");
+                        daysInfo.className = "mt-2 small text-muted";
+                        daysInfo.innerHTML = `<i class="bi bi-calendar-check"></i> Total hadir: ${student.total_days_present} hari`;
+                        checkinTime.parentNode.insertBefore(daysInfo, checkinTime.nextSibling);
+                    }
+
                     // Generate QR Code containing the student ID
                     qrcodeContainer.innerHTML = "";
                     new QRCode(qrcodeContainer, {
