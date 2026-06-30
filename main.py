@@ -370,9 +370,10 @@ def api_students_search():
         return jsonify([])
     students = load_json_file(STUDENTS_FILE, [])
     matches = []
+    # Cari nama yang mengandung query (partial match, case-insensitive)
     for s in students:
-        # Wajib nama lengkap: hanya exact match (case-insensitive)
-        if s.get("nama", "").strip().lower() == query:
+        nama = s.get("nama", "").strip().lower()
+        if query in nama:
             matches.append({
                 "id": s.get("id"),
                 "nama": s.get("nama"),
@@ -380,7 +381,13 @@ def api_students_search():
                 "sekolah": s.get("sekolah"),
                 "kelompok": s.get("kelompok")
             })
-    return jsonify(matches)
+    # Urutkan: yang paling relevan (awalan nama) di atas
+    matches.sort(key=lambda x: (
+        0 if x["nama"].strip().lower().startswith(query) else 1,
+        x["nama"]
+    ))
+    # Batasi max 10 hasil biar ga overload
+    return jsonify(matches[:1])
 
 @app.route("/api/students/<student_id>")
 def api_student_detail(student_id):

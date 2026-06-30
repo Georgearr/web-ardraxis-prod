@@ -23,6 +23,15 @@ document.addEventListener("DOMContentLoaded", function() {
         showStudentDetail(savedStudentId);
     }
 
+    searchInput.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+            const firstItem = suggestions.querySelector(".suggestion");
+            if (firstItem) {
+                firstItem.click();
+            }
+        }
+    });
+
     searchInput.addEventListener("input", function() {
         const val = searchInput.value.trim();
         if (val.length < 1) {
