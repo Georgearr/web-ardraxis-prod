@@ -295,9 +295,9 @@ def find_student(students, student_id):
             return s
     return None
 
-def get_mentor_name(kelompok):
+def get_mentor_name(kelompok, sekolah):
     mentors = load_json_file(MENTORS_FILE, {})
-    return mentors.get(kelompok, {}).get("name", "Belum ditentukan")
+    return mentors.get(sekolah, {}).get(kelompok, {}).get("name", "Belum ditentukan")
 
 def get_attendance_status(student_id, date_str, attendance_list):
     for a in attendance_list:
@@ -392,7 +392,7 @@ def api_student_detail(student_id):
             "kelas": student.get("kelas"),
             "sekolah": student.get("sekolah"),
             "kelompok": student.get("kelompok"),
-            "mentor": get_mentor_name(student.get("kelompok", "")),
+            "mentor": get_mentor_name(student.get("kelompok", ""), student.get("sekolah")),
             "attendance_5day": five_day,
             "total_hadir": total_hadir,
             "total_days": len(mpls_days)
@@ -444,7 +444,7 @@ def api_attendance_checkin():
                     "kelas": student.get("kelas"),
                     "sekolah": student.get("sekolah"),
                     "kelompok": student.get("kelompok"),
-                    "mentor": get_mentor_name(student.get("kelompok", "")),
+                    "mentor": get_mentor_name(student.get("kelompok", ""), student.get("sekolah")),
                     "checkin_time": a.get("timestamp"),
                     "date": a.get("date")
                 }
@@ -470,7 +470,7 @@ def api_attendance_checkin():
             "kelas": student.get("kelas"),
             "sekolah": student.get("sekolah"),
             "kelompok": student.get("kelompok"),
-            "mentor": get_mentor_name(student.get("kelompok", "")),
+            "mentor": get_mentor_name(student.get("kelompok", ""), student.get("sekolah")),
             "checkin_time": now_str,
             "date": today
         }
@@ -487,7 +487,7 @@ def api_admin_students():
             "kelas": s.get("kelas"),
             "sekolah": s.get("sekolah"),
             "kelompok": s.get("kelompok"),
-            "mentor": get_mentor_name(s.get("kelompok", ""))
+            "mentor": get_mentor_name(s.get("kelompok", ""), s.get("sekolah"))
         })
     return jsonify(result)
 
@@ -505,7 +505,7 @@ def api_admin_students_detail():
             "kelas": s.get("kelas"),
             "sekolah": s.get("sekolah"),
             "kelompok": s.get("kelompok"),
-            "mentor": get_mentor_name(s.get("kelompok", "")),
+            "mentor": get_mentor_name(s.get("kelompok", ""), s.get("sekolah")),
             "attendance_5day": five_day,
             "total_hadir": sum(1 for d in five_day if d['status'] == 'Hadir'),
             "total_days": len(mpls_days)
@@ -694,7 +694,7 @@ def api_admin_attendance_export():
             s.get("sekolah"),
             s.get("kelas"),
             s.get("kelompok"),
-            get_mentor_name(s.get("kelompok", ""))
+            get_mentor_name(s.get("kelompok", ""), s.get("sekolah"))
         ]
         for day in mpls_days:
             status, ts = get_attendance_status(s["id"], day, attendance)
@@ -728,7 +728,7 @@ def api_student_attendance_detail(student_id):
             "kelas": student.get("kelas"),
             "sekolah": student.get("sekolah"),
             "kelompok": student.get("kelompok"),
-            "mentor": get_mentor_name(student.get("kelompok", ""))
+            "mentor": get_mentor_name(student.get("kelompok", ""), student.get("sekolah"))
         },
         "mpls_config": MPLS_CONFIG,
         "attendance_summary": five_day,
