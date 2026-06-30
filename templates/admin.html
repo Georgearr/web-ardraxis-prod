@@ -531,6 +531,9 @@
                     <button class="btn btn-outline-secondary btn-sm rounded-pill" onclick="loadAttendanceLog()">
                         <i class="bi bi-arrow-clockwise me-1"></i> Refresh
                     </button>
+                    <button class="btn btn-outline-danger btn-sm rounded-pill" onclick="clearAttendance()">
+                        <i class="bi bi-trash me-1"></i> Hapus Semua
+                    </button>
                 </div>
             </div>
 
@@ -544,11 +547,12 @@
                                 <th>Sekolah</th>
                                 <th>Kelas</th>
                                 <th>Kelompok</th>
+                                <th style="width:50px"></th>
                             </tr>
                         </thead>
                         <tbody id="attendance-list-body">
                             <tr>
-                                <td colspan="5" class="text-center py-4 text-muted">Memuat log...</td>
+                                <td colspan="6" class="text-center py-4 text-muted">Memuat log...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -777,25 +781,63 @@
             }
         }
 
+        function deleteAttendanceRow(btn) {
+            var tr = btn.closest("tr");
+            var student_id = tr.dataset.studentId;
+            var date = tr.dataset.date;
+            if (!confirm("Hapus kehadiran " + tr.querySelector("td:nth-child(2)").innerText + "?")) return;
+            fetch("/api/admin/attendance/delete", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ student_id: student_id, date: date })
+            }).then(r => r.json()).then(res => {
+                if (res.success) {
+                    tr.remove();
+                    var tbody = document.getElementById("attendance-list-body");
+                    if (tbody.children.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-muted">Belum ada scan pada tanggal ini</td></tr>';
+                    }
+                    refreshDashboardStats();
+                } else {
+                    alert(res.message);
+                }
+            });
+        }
+
+        function clearAttendance() {
+            if (!confirm("Yakin hapus semua data kehadiran?")) return;
+            fetch("/api/admin/attendance/clear", { method: "POST" })
+                .then(r => r.json())
+                .then(res => {
+                    if (res.success) {
+                        loadAttendanceLog();
+                        refreshDashboardStats();
+                    }
+                });
+        }
+
         function loadAttendanceLog() {
             const tbody = document.getElementById("attendance-list-body");
-            tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted"><div class="spinner-border text-primary spinner-border-sm me-2"></div>Memuat...</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted"><div class="spinner-border text-primary spinner-border-sm me-2"></div>Memuat...</td></tr>`;
             const date = document.getElementById("attendanceLogDate").value;
             const url = date ? `/api/admin/attendance?date=${date}` : "/api/admin/attendance";
             fetch(url).then(r => r.json()).then(data => {
                 tbody.innerHTML = "";
                 if (data.length === 0) {
-                    tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted">Belum ada scan pada tanggal ini</td></tr>`;
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted">Belum ada scan pada tanggal ini</td></tr>`;
                     return;
                 }
                 data.forEach(a => {
                     const tr = document.createElement("tr");
+                    tr.dataset.studentId = a.student_id;
+                    tr.dataset.date = a.date;
                     tr.innerHTML = `
                         <td class="font-monospace small">${a.timestamp || '-'}</td>
                         <td><strong>${a.nama}</strong></td>
                         <td>${a.sekolah || '-'}</td>
                         <td>${a.kelas}</td>
                         <td><span class="badge bg-primary bg-opacity-10 text-primary">${a.kelompok || '-'}</span></td>
+                        <td><button class="btn btn-sm btn-outline-danger border-0" onclick="deleteAttendanceRow(this)" title="Hapus"><i class="bi bi-x"></i></button></td>
                     `;
                     tbody.appendChild(tr);
                 });

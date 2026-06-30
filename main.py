@@ -625,6 +625,25 @@ def api_admin_students_clear():
     save_json_file(ATTENDANCE_FILE, [])
     return jsonify({"success": True, "message": "Database siswa dan absensi telah dikosongkan."})
 
+@app.route("/api/admin/attendance/clear", methods=["POST"])
+def api_admin_attendance_clear():
+    save_json_file(ATTENDANCE_FILE, [])
+    return jsonify({"success": True, "message": "Semua data kehadiran telah dikosongkan."})
+
+@app.route("/api/admin/attendance/delete", methods=["POST"])
+def api_admin_attendance_delete():
+    data = request.get_json(silent=True) or {}
+    student_id = data.get("student_id")
+    date = data.get("date")
+    if not student_id or not date:
+        return jsonify({"success": False, "message": "student_id dan date diperlukan"}), 400
+    attendance = load_json_file(ATTENDANCE_FILE, [])
+    new_list = [a for a in attendance if not (a.get("student_id") == student_id and a.get("date") == date)]
+    if len(new_list) == len(attendance):
+        return jsonify({"success": False, "message": "Data tidak ditemukan"}), 404
+    save_json_file(ATTENDANCE_FILE, new_list)
+    return jsonify({"success": True, "message": "Data kehadiran berhasil dihapus."})
+
 @app.route("/api/admin/attendance", methods=["GET"])
 def api_admin_attendance():
     attendance = load_json_file(ATTENDANCE_FILE, [])
