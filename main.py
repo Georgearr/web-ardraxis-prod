@@ -512,6 +512,36 @@ def api_admin_students_detail():
         })
     return jsonify(result)
 
+@app.route("/api/admin/students/by-school", methods=["GET"])
+def api_admin_students_by_school():
+    """Return students grouped by school (CGC/Mayor) with attendance for new admin panel."""
+    students = load_json_file(STUDENTS_FILE, [])
+    attendance = load_json_file(ATTENDANCE_FILE, [])
+    mpls_days = get_mpls_days()
+    
+    # Group students by school
+    schools = {}
+    
+    for s in students:
+        school = s.get("sekolah", "Lainnya")
+        if school not in schools:
+            schools[school] = []
+        
+        five_day = get_student_5day(s["id"], attendance, mpls_days)
+        schools[school].append({
+            "id": s.get("id"),
+            "nama": s.get("nama"),
+            "attendance_5day": five_day,
+            "total_hadir": sum(1 for d in five_day if d['status'] == 'Hadir'),
+            "total_days": len(mpls_days)
+        })
+    
+    return jsonify({
+        "success": True,
+        "schools": schools,
+        "mpls_days": mpls_days
+    })
+
 @app.route("/api/admin/students/upload", methods=["POST"])
 def api_admin_students_upload():
     if 'file' not in request.files:

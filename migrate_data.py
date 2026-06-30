@@ -57,22 +57,29 @@ class_groups = defaultdict(list)
 for s in students:
     class_groups[s['kelas']].append(s)
 
-new_students = []
+# Create a mapping from student ID to their assigned kelompok (preserving CSV order)
+student_kelompok = {}
 for kelas, group in class_groups.items():
-    group.sort(key=lambda x: x['nama'])
     half = (len(group) + 1) // 2
+    # Extract only the X.N part (e.g. X.1, X.10) from the full class name
+    m_cls = re.match(r'(X\.\d+)', kelas)
+    kelas_short = m_cls.group(1) if m_cls else kelas
     for i, s in enumerate(group):
         sub = 'A' if i < half else 'B'
-        sekolah = extract_school(s['id'])
-        new_students.append({
-            'id': s['id'],
-            'nama': s['nama'],
-            'kelas': kelas,
-            'sekolah': sekolah,
-            'kelompok': f'{kelas}{sub}'
-        })
+        student_kelompok[s['id']] = f"{kelas_short} {sub}"
 
-new_students.sort(key=lambda x: (x['sekolah'], x['kelas'], x['nama']))
+# Reconstruct new_students preserving original CSV order
+new_students = []
+for s in students:
+    kelompok = student_kelompok[s['id']]
+    sekolah = extract_school(s['id'])
+    new_students.append({
+        'id': s['id'],
+        'nama': s['nama'],
+        'kelas': s['kelas'],
+        'sekolah': sekolah,
+        'kelompok': kelompok
+    })
 
 with open(STUDENTS_OUT, 'w', encoding='utf-8') as f:
     json.dump(new_students, f, indent=4, ensure_ascii=False)
