@@ -23,46 +23,51 @@ document.addEventListener("DOMContentLoaded", function() {
         showStudentDetail(savedStudentId);
     }
 
-    searchInput.addEventListener("keydown", function(e) {
-        if (e.key === "Enter") {
-            const firstItem = suggestions.querySelector(".suggestion");
-            if (firstItem) {
-                firstItem.click();
-            }
-        }
-    });
+    var searchTimer = null;
 
     searchInput.addEventListener("input", function() {
         const val = searchInput.value.trim();
-        if (val.length < 1) {
+        if (searchTimer) clearTimeout(searchTimer);
+        if (val.length < 3) {
             suggestions.innerHTML = "";
             suggestions.style.display = "none";
             return;
         }
-        fetch(`/api/students/search?q=${encodeURIComponent(val)}`)
-            .then(res => res.json())
-            .then(data => {
-                suggestions.innerHTML = "";
-                if (data.length > 0) {
-                    data.forEach(student => {
+        // Tunggu 400ms setelah berhenti ngetik baru cari
+        searchTimer = setTimeout(function() {
+            fetch(`/api/students/search?q=${encodeURIComponent(val)}`)
+                .then(res => res.json())
+                .then(data => {
+                    suggestions.innerHTML = "";
+                    if (data.length > 0) {
+                        const s = data[0];
                         const item = document.createElement("div");
                         item.classList.add("suggestion");
-                        item.innerHTML = `<strong>${student.nama}</strong> - ${student.kelas} <span class="text-muted small">(${student.sekolah || '-'})</span>`;
-                        item.addEventListener("click", () => {
-                            searchInput.value = student.nama;
+                        item.innerHTML = `<strong>${s.nama}</strong> - ${s.kelas} <span class="text-muted small">(${s.sekolah || '-'})</span>`;
+                        item.addEventListener("click", function() {
+                            searchInput.value = s.nama;
                             suggestions.innerHTML = "";
                             suggestions.style.display = "none";
-                            showStudentDetail(student.id);
+                            showStudentDetail(s.id);
                         });
                         suggestions.appendChild(item);
-                    });
-                    suggestions.style.display = "block";
-                } else {
-                    suggestions.innerHTML = `<div class="suggestion text-muted">Siswa tidak ditemukan</div>`;
-                    suggestions.style.display = "block";
-                }
-            })
-            .catch(err => console.error("Error searching students:", err));
+                        suggestions.style.display = "block";
+                    } else {
+                        suggestions.style.display = "none";
+                    }
+                })
+                .catch(function() {});
+        }, 400);
+    });
+
+    searchInput.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            const firstItem = suggestions.querySelector(".suggestion");
+            if (firstItem && suggestions.style.display !== "none") {
+                firstItem.click();
+            }
+        }
     });
 
     document.addEventListener("click", function(e) {
