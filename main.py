@@ -34,6 +34,13 @@ app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB max upload
 app.config['UPLOAD_FOLDER'] = 'static/uploads/valentine'
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp", "pdf"}
 
+# ===============================
+# FEATURE FLAGS
+# ===============================
+# Set True untuk menampilkan QR Code absensi di halaman cek data siswa,
+# Set False untuk menyembunyikannya (ubah di sini, bukan di frontend)
+SHOW_QRIS = False
+
 # MPLS Configuration
 MPLS_CONFIG = {
     "start_date": "2026-07-01",
@@ -320,7 +327,7 @@ def get_student_5day(student_id, attendance_list, mpls_days):
 
 @app.route("/cek_data_siswa2026")
 def cek_data_siswa_page():
-    return render_template("cek_data_siswa2026.html")
+    return render_template("cek_data_siswa2026.html", show_qris=SHOW_QRIS)
 
 @app.route("/admin")
 def admin_page():
@@ -360,7 +367,8 @@ def api_students_search():
     students = load_json_file(STUDENTS_FILE, [])
     matches = []
     for s in students:
-        if query in s.get("nama", "").lower():
+        # Wajib nama lengkap: hanya exact match (case-insensitive)
+        if s.get("nama", "").strip().lower() == query:
             matches.append({
                 "id": s.get("id"),
                 "nama": s.get("nama"),
@@ -368,8 +376,6 @@ def api_students_search():
                 "sekolah": s.get("sekolah"),
                 "kelompok": s.get("kelompok")
             })
-            if len(matches) >= 15:
-                break
     return jsonify(matches)
 
 @app.route("/api/students/<student_id>")

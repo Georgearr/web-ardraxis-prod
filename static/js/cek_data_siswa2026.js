@@ -107,16 +107,18 @@ document.addEventListener("DOMContentLoaded", function() {
                         attendanceSummary.innerHTML = `<strong>Total Hadir:</strong> ${student.total_hadir} / ${student.total_days} hari`;
                     }
 
-                    // Generate QR Code
-                    qrcodeContainer.innerHTML = "";
-                    new QRCode(qrcodeContainer, {
-                        text: student.id,
-                        width: 180,
-                        height: 180,
-                        colorDark: "#1d696e",
-                        colorLight: "#ffffff",
-                        correctLevel: QRCode.CorrectLevel.H
-                    });
+                    // Generate QR Code (hanya jika SHOW_QRIS aktif)
+                    if (typeof SHOW_QRIS !== 'undefined' && SHOW_QRIS && typeof QRCode !== 'undefined' && qrcodeContainer) {
+                        qrcodeContainer.innerHTML = "";
+                        new QRCode(qrcodeContainer, {
+                            text: student.id,
+                            width: 180,
+                            height: 180,
+                            colorDark: "#1d696e",
+                            colorLight: "#ffffff",
+                            correctLevel: QRCode.CorrectLevel.H
+                        });
+                    }
 
                     studentCard.classList.remove("d-none");
                     setTimeout(() => studentCard.classList.add("show"), 50);
