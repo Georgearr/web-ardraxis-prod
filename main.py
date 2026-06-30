@@ -371,9 +371,7 @@ def api_students_search():
     students = load_json_file(STUDENTS_FILE, [])
     matches = []
     for s in students:
-        nama = s.get("nama", "").strip().lower()
-        # Cocokkan dari awal nama (prefix match)
-        if nama.startswith(query):
+        if s.get("nama", "").strip().lower() == query:
             matches.append({
                 "id": s.get("id"),
                 "nama": s.get("nama"),

@@ -23,55 +23,64 @@ document.addEventListener("DOMContentLoaded", function() {
         showStudentDetail(savedStudentId);
     }
 
-    var searchTimer = null;
-
     searchInput.addEventListener("input", function() {
         const val = searchInput.value.trim();
-        if (searchTimer) clearTimeout(searchTimer);
         if (val.length < 3) {
             suggestions.innerHTML = "";
             suggestions.style.display = "none";
             return;
         }
-        // Tunggu 400ms setelah berhenti ngetik baru cari
-        searchTimer = setTimeout(function() {
-            fetch(`/api/students/search?q=${encodeURIComponent(val)}`)
-                .then(res => res.json())
-                .then(data => {
-                    suggestions.innerHTML = "";
-                    if (data.length > 0) {
-                        const s = data[0];
-                        const item = document.createElement("div");
-                        item.classList.add("suggestion");
-                        item.innerHTML = `<strong>${s.nama}</strong> - ${s.kelas} <span class="text-muted small">(${s.sekolah || '-'})</span>`;
-                        item.addEventListener("click", function() {
-                            searchInput.value = s.nama;
-                            suggestions.innerHTML = "";
-                            suggestions.style.display = "none";
-                            showStudentDetail(s.id);
-                        });
-                        suggestions.appendChild(item);
-                        suggestions.style.display = "block";
-                    } else {
+        fetch(`/api/students/search?q=${encodeURIComponent(val)}`)
+            .then(res => res.json())
+            .then(data => {
+                suggestions.innerHTML = "";
+                if (data.length > 0) {
+                    const s = data[0];
+                    const item = document.createElement("div");
+                    item.classList.add("suggestion");
+                    item.innerHTML = `<strong>${s.nama}</strong> - ${s.kelas} <span class="text-muted small">(${s.sekolah || '-'})</span>`;
+                    item.addEventListener("click", function() {
+                        searchInput.value = s.nama;
+                        suggestions.innerHTML = "";
                         suggestions.style.display = "none";
-                    }
-                })
-                .catch(function() {});
-        }, 400);
+                        showStudentDetail(s.id);
+                    });
+                    suggestions.appendChild(item);
+                    suggestions.style.display = "block";
+                }
+            });
     });
 
     searchInput.addEventListener("keydown", function(e) {
         if (e.key === "Enter") {
             e.preventDefault();
+            const val = searchInput.value.trim();
+            if (!val) return;
             const firstItem = suggestions.querySelector(".suggestion");
             if (firstItem && suggestions.style.display !== "none") {
                 firstItem.click();
+                return;
             }
+            // Fallback: search langsung
+            fetch(`/api/students/search?q=${encodeURIComponent(val)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        showStudentDetail(data[0].id);
+                    } else {
+                        suggestions.innerHTML = '<div class="suggestion text-muted">Siswa tidak ditemukan</div>';
+                        suggestions.style.display = "block";
+                        setTimeout(function() {
+                            suggestions.innerHTML = "";
+                            suggestions.style.display = "none";
+                        }, 2000);
+                    }
+                });
         }
     });
 
     document.addEventListener("click", function(e) {
-        if (e.target !== searchInput && e.target !== suggestions) {
+        if (e.target !== searchInput && !suggestions.contains(e.target)) {
             suggestions.innerHTML = "";
             suggestions.style.display = "none";
         }
