@@ -329,6 +329,10 @@ def get_student_5day(student_id, attendance_list, mpls_days):
 def cek_data_siswa_page():
     return render_template("cek_data_siswa2026.html", show_qris=SHOW_QRIS)
 
+@app.route("/scanner")
+def scanner_page():
+    return render_template("scanner.html")
+
 @app.route("/admin")
 def admin_page():
     if not session.get('admin_authenticated'):

@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const dataStr = decodedText.trim();
         if (dataStr.startsWith("STUDENT_")) {
             processCheckin(dataStr);
-        } else if (dataStr.startsWith("SESSION_") || dataStr.includes("/absen") || dataStr.toLowerCase().includes("absen")) {
+        } else if (dataStr.startsWith("SESSION_") || dataStr.includes("cek_data_siswa") || dataStr.includes("/absen") || dataStr.toLowerCase().includes("absen")) {
             const myId = localStorage.getItem("my_student_id");
             if (myId) {
                 processCheckin(myId, true);

@@ -1,0 +1,290 @@
+{% extends "layout.html" %}
+{% block title %}Scan QR Absensi{% endblock %}
+{% block extra_css %}
+<style>
+  :root {
+    --primary: #1d696e;
+    --primary-dark: #144e53;
+    --radius: 16px;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    background: #f4f6f9;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .scanner-wrapper {
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .scanner-header {
+    text-align: center;
+    margin-bottom: 24px;
+    width: 100%;
+    max-width: 500px;
+  }
+  .scanner-header h1 {
+    font-size: 22px;
+    color: var(--primary-dark);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .scanner-header p {
+    font-size: 14px;
+    color: #6c757d;
+  }
+  #reader {
+    width: 100%;
+    max-width: 500px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    background: #000;
+  }
+  #reader video {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+  }
+  #reader__dashboard_section {
+    padding: 12px;
+    background: #fff;
+  }
+  #reader__dashboard_section button {
+    background: var(--primary) !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  #reader__dashboard_section button:hover {
+    background: var(--primary-dark) !important;
+  }
+  .scan-result {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+    padding: 16px 20px;
+    border-radius: var(--radius);
+    display: none;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .scan-result.success {
+    display: block;
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  .scan-result.error {
+    display: block;
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+  .scan-result.info {
+    display: block;
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+  }
+  .scan-result .detail {
+    font-weight: 400;
+    font-size: 13px;
+    margin-top: 6px;
+    opacity: 0.9;
+  }
+  .student-info {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 16px;
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    display: none;
+  }
+  .student-info.show {
+    display: block;
+  }
+  .student-info h3 {
+    font-size: 18px;
+    color: var(--primary-dark);
+    margin-bottom: 8px;
+  }
+  .student-info p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 4px;
+  }
+</style>
+{% endblock %}
+{% block isi %}
+<div class="scanner-wrapper">
+  <div class="scanner-header">
+    <h1><i class="bi bi-qr-code-scan me-2"></i>Scan QR Absensi</h1>
+    <p>Arahkan kamera ke QR Code siswa atau sesi absensi</p>
+  </div>
+
+  <div id="reader"></div>
+
+  <button id="toggleScanBtn" class="btn btn-sm btn-outline-secondary mt-3" style="display:none;">
+    <i class="bi bi-camera me-1"></i>Mulai Scan Lagi
+  </button>
+
+  <div id="scanResult" class="scan-result"></div>
+
+  <div id="studentInfo" class="student-info"></div>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script>
+(function() {
+  const readerEl = document.getElementById("reader");
+  const scanResultEl = document.getElementById("scanResult");
+  const studentInfoEl = document.getElementById("studentInfo");
+  const toggleBtn = document.getElementById("toggleScanBtn");
+  let html5Qrcode = null;
+  let isScanning = false;
+
+  function playBeep() {
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = "sine";
+      osc.frequency.value = 880;
+      gain.gain.setValueAtTime(0.25, ctx.currentTime);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.12);
+    } catch (e) {}
+  }
+
+  function showResult(type, message, detail) {
+    scanResultEl.className = "scan-result " + type;
+    scanResultEl.innerHTML = message + (detail ? '<div class="detail">' + detail + '</div>' : '');
+  }
+
+  function showStudentCard(data) {
+    const s = data.student || data;
+    studentInfoEl.className = "student-info show";
+    studentInfoEl.innerHTML = `
+      <h3><i class="bi bi-person-check-fill me-2"></i>${s.nama}</h3>
+      <p><strong>Kelas:</strong> ${s.kelas}</p>
+      <p><strong>Sekolah:</strong> ${s.sekolah || '-'}</p>
+      <p><strong>Kelompok:</strong> ${s.kelompok || '-'}</p>
+      <p><strong>Mentor:</strong> ${s.mentor || '-'}</p>
+      ${s.checkin_time ? '<p class="mt-2 text-success"><i class="bi bi-check-circle-fill"></i> Waktu absen: ' + s.checkin_time + '</p>' : ''}
+    `;
+  }
+
+  function processCheckin(studentId) {
+    fetch("/api/attendance/checkin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ student_id: studentId })
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.success) {
+        showResult("success", '<i class="bi bi-check-circle-fill me-2"></i>Absen Berhasil!', res.message);
+        showStudentCard(res);
+      } else {
+        showResult("error", '<i class="bi bi-exclamation-triangle-fill me-2"></i>Absen Gagal', res.message);
+      }
+    })
+    .catch(function(err) {
+      showResult("error", '<i class="bi bi-exclamation-triangle-fill me-2"></i>Kesalahan Jaringan', "Terjadi kesalahan jaringan saat mencatat absensi.");
+    });
+  }
+
+  function onScanSuccess(decodedText) {
+    if (!isScanning) return;
+    stopScanner();
+    playBeep();
+
+    const dataStr = decodedText.trim();
+    showResult("info", '<i class="bi bi-arrow-repeat me-2"></i>Memproses...', dataStr);
+
+    if (dataStr.startsWith("STUDENT_")) {
+      processCheckin(dataStr);
+    } else if (dataStr.startsWith("SESSION_") || dataStr.includes("cek_data_siswa") || dataStr.toLowerCase().includes("absen")) {
+      const myId = localStorage.getItem("my_student_id");
+      if (myId) {
+        processCheckin(myId);
+      } else {
+        showResult("error", '<i class="bi bi-exclamation-triangle-fill me-2"></i>Absen Mandiri Gagal', "Silakan cari nama Anda di halaman Cek Data Siswa terlebih dahulu.");
+        stopScanner();
+      }
+    } else {
+      processCheckin(dataStr);
+    }
+  }
+
+  function onScanFailure() {}
+
+  function startScanner() {
+    if (html5Qrcode) {
+      stopScanner();
+    }
+    scanResultEl.className = "scan-result";
+    studentInfoEl.className = "student-info";
+    toggleBtn.style.display = "none";
+
+    html5Qrcode = new Html5Qrcode("reader");
+    isScanning = true;
+
+    html5Qrcode.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: { width: 250, height: 250 } },
+      onScanSuccess,
+      onScanFailure
+    ).catch(function(err) {
+      isScanning = false;
+      readerEl.innerHTML = `
+        <div style="padding:30px;background:#f8d7da;color:#721c24;border-radius:12px;text-align:center;">
+          <i class="bi bi-exclamation-triangle-fill" style="font-size:32px;"></i><br><br>
+          Kamera tidak dapat diakses.<br>
+          Pastikan izin kamera telah diberikan dan gunakan HTTPS/localhost.
+        </div>
+      `;
+      toggleBtn.style.display = "inline-block";
+      toggleBtn.innerHTML = '<i class="bi bi-arrow-repeat me-1"></i>Coba Lagi';
+    });
+  }
+
+  function stopScanner() {
+    isScanning = false;
+    if (html5Qrcode) {
+      if (html5Qrcode.isScanning) {
+        html5Qrcode.stop().then(function() {
+          html5Qrcode.clear();
+          html5Qrcode = null;
+        }).catch(function() {});
+      } else {
+        html5Qrcode = null;
+      }
+    }
+    toggleBtn.style.display = "inline-block";
+    toggleBtn.innerHTML = '<i class="bi bi-camera me-1"></i>Scan Lagi';
+  }
+
+  toggleBtn.addEventListener("click", startScanner);
+
+  startScanner();
+})();
+</script>
+{% endblock %}

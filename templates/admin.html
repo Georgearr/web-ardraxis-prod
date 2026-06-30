@@ -435,7 +435,7 @@
                         <div class="border p-3 bg-white rounded-3 my-3" style="box-shadow: 0 4px 15px rgba(0,0,0,0.05)">
                             <div id="qrSessionDisplay"></div>
                         </div>
-                        <h6 class="fw-bold text-primary mb-3">SESSION_ABSEN_MPLS_2026</h6>
+                        <h6 class="fw-bold text-primary mb-3">https://osissmaigs.com/cek_data_siswa2026</h6>
                         <button class="btn btn-custom" onclick="window.print()"><i class="bi bi-printer me-2"></i>Cetak
                             QR</button>
                     </div>
@@ -588,12 +588,27 @@
             loadSchoolTables();
             const qrEl = document.getElementById("qrSessionDisplay");
             if (qrEl) {
-                new QRCode(qrEl, {
-                    text: "SESSION_ABSEN_MPLS_2026",
-                    width: 200, height: 200,
+                qrEl.innerHTML = "";
+                const tmp = document.createElement("div");
+                new QRCode(tmp, {
+                    text: "https://osissmaigs.com/cek_data_siswa2026",
+                    width: 400, height: 400,
                     colorDark: "#144e53", colorLight: "#ffffff",
-                    correctLevel: QRCode.CorrectLevel.H
+                    correctLevel: QRCode.CorrectLevel.L
                 });
+                const canvas = tmp.querySelector("canvas");
+                if (canvas) {
+                    const img = document.createElement("img");
+                    img.src = canvas.toDataURL("image/png");
+                    img.style.width = "400px";
+                    img.style.height = "400px";
+                    img.style.display = "block";
+                    img.alt = "QR Code Portal Siswa";
+                    qrEl.appendChild(img);
+                } else {
+                    // fallback: tampilkan langsung dari tmp
+                    while (tmp.firstChild) qrEl.appendChild(tmp.firstChild);
+                }
             }
             fetch("/api/mpls/config").then(r => r.json()).then(d => {
                 if (d.success) {
