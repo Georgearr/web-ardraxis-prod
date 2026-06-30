@@ -284,36 +284,39 @@ def load_json_file(file_path, default_val):
 def save_json_file(file_path, data):
     try:
         with open(file_path, 'w', encoding='utf-8') as f:
-            json.dump(data, f, indent=4)
+            json.dump(data, f, indent=4, ensure_ascii=False)
         return True
     except Exception:
         return False
 
-def get_student_mentor(student_jenis, student_kelompok, student_sub_kelompok):
+def find_student(students, student_id):
+    for s in students:
+        if s.get("id") == student_id:
+            return s
+    return None
+
+def get_mentor_name(kelompok):
     mentors = load_json_file(MENTORS_FILE, {})
-    
-    # Normalize types
-    jenis = "Mayor" if student_jenis and "mayor" in student_jenis.lower() else "CGC"
-    
-    # Normalize kelompok: e.g. "Kelompok 1" -> extract 1 -> "Kelompok 1"
-    kelompok_num = None
-    if student_kelompok:
-        match = re.search(r'\d+', str(student_kelompok))
-        if match:
-            kelompok_num = match.group(0)
-            
-    kelompok_key = f"Kelompok {kelompok_num}" if kelompok_num else str(student_kelompok).strip()
-    sub_key = str(student_sub_kelompok).upper().strip() if student_sub_kelompok else "A"
-    if sub_key not in ["A", "B"]:
-        sub_key = "A" # fallback
-        
-    try:
-        return mentors[jenis][kelompok_key][sub_key]['name']
-    except KeyError:
-        try:
-            return mentors[jenis][kelompok_key][sub_key]
-        except KeyError:
-            return "Belum ditentukan"
+    return mentors.get(kelompok, {}).get("name", "Belum ditentukan")
+
+def get_attendance_status(student_id, date_str, attendance_list):
+    for a in attendance_list:
+        if a.get("student_id") == student_id and a.get("date") == date_str:
+            return "Hadir", a.get("timestamp", "")
+    today = datetime.now().strftime("%Y-%m-%d")
+    if date_str < today:
+        return "Tidak Hadir", ""
+    elif date_str == today:
+        return "Belum Absen", ""
+    else:
+        return "-", ""
+
+def get_student_5day(student_id, attendance_list, mpls_days):
+    result = []
+    for day in mpls_days:
+        status, ts = get_attendance_status(student_id, day, attendance_list)
+        result.append({"date": day, "status": status, "timestamp": ts})
+    return result
 
 @app.route("/cek_data_siswa2026")
 def cek_data_siswa_page():
@@ -321,7 +324,6 @@ def cek_data_siswa_page():
 
 @app.route("/admin")
 def admin_page():
-    # Check if user is authenticated
     if not session.get('admin_authenticated'):
         return redirect(url_for('admin_login'))
     return render_template("admin.html")
@@ -335,8 +337,6 @@ def api_admin_login():
     data = request.get_json()
     username = data.get('username')
     password = data.get('password')
-    
-    # Hardcoded credentials as requested
     if username == 'osismpls' and password == 'OSISMPLS123':
         session['admin_authenticated'] = True
         return jsonify({"success": True, "message": "Login berhasil"})
@@ -357,7 +357,6 @@ def api_students_search():
     query = request.args.get("q", "").strip().lower()
     if not query:
         return jsonify([])
-        
     students = load_json_file(STUDENTS_FILE, [])
     matches = []
     for s in students:
@@ -366,154 +365,112 @@ def api_students_search():
                 "id": s.get("id"),
                 "nama": s.get("nama"),
                 "kelas": s.get("kelas"),
-                "kelompok": s.get("kelompok"),
-                "jenis": s.get("jenis")
+                "sekolah": s.get("sekolah"),
+                "kelompok": s.get("kelompok")
             })
-            if len(matches) >= 15: # limit to top 15 results
+            if len(matches) >= 15:
                 break
     return jsonify(matches)
 
 @app.route("/api/students/<student_id>")
 def api_student_detail(student_id):
     students = load_json_file(STUDENTS_FILE, [])
-    student = None
-    for s in students:
-        if s.get("id") == student_id:
-            student = s
-            break
-            
+    student = find_student(students, student_id)
     if not student:
         return jsonify({"success": False, "message": "Siswa tidak ditemukan"}), 404
-        
-    mentor = get_student_mentor(
-        student.get("jenis"),
-        student.get("kelompok"),
-        student.get("sub_kelompok")
-    )
-    
+
     attendance = load_json_file(ATTENDANCE_FILE, [])
-    today = datetime.now().strftime("%Y-%m-%d")
-    
-    # Check if student is present TODAY
-    is_present = False
-    checkin_time = ""
-    attendance_history = []
-    
-    for a in attendance:
-        if a.get("student_id") == student_id:
-            attendance_history.append({
-                "date": a.get("date"),
-                "timestamp": a.get("timestamp")
-            })
-            if a.get("date") == today:
-                is_present = True
-                checkin_time = a.get("timestamp", "")
-                
-    response_data = {
+    mpls_days = get_mpls_days()
+    five_day = get_student_5day(student_id, attendance, mpls_days)
+    total_hadir = sum(1 for d in five_day if d['status'] == 'Hadir')
+
+    return jsonify({
         "success": True,
         "student": {
             "id": student.get("id"),
             "nama": student.get("nama"),
             "kelas": student.get("kelas"),
+            "sekolah": student.get("sekolah"),
             "kelompok": student.get("kelompok"),
-            "jenis": student.get("jenis"),
-            "sub_kelompok": student.get("sub_kelompok"),
-            "mentor": mentor,
-            "is_present": is_present,
-            "checkin_time": checkin_time,
-            "attendance_history": attendance_history,
-            "total_days_present": len(attendance_history)
+            "mentor": get_mentor_name(student.get("kelompok", "")),
+            "attendance_5day": five_day,
+            "total_hadir": total_hadir,
+            "total_days": len(mpls_days)
         }
-    }
-    return jsonify(response_data)
+    })
 
 @app.route("/api/attendance/checkin", methods=["POST"])
 def api_attendance_checkin():
-    # Supports JSON, URL-encoded form data, and raw text (for direct QR scanners scanning raw ID)
     if request.is_json:
         data = request.get_json(silent=True) or {}
         student_id = data.get("student_id")
     else:
         student_id = request.form.get("student_id")
-        
-    # If not found yet, maybe the scanner sent raw body
+
     if not student_id:
         try:
-            # Check if raw data is student ID
             raw_data = request.data.decode('utf-8').strip()
             if raw_data.startswith("STUDENT_"):
                 student_id = raw_data
         except Exception:
             pass
-            
+
     if not student_id:
         return jsonify({"success": False, "message": "ID Siswa diperlukan"}), 400
-        
+
     students = load_json_file(STUDENTS_FILE, [])
-    student = None
-    for s in students:
-        if s.get("id") == student_id:
-            student = s
-            break
-            
+    student = find_student(students, student_id)
     if not student:
         return jsonify({"success": False, "message": "Siswa tidak terdaftar"}), 404
-    
-    # Get current date for multi-day tracking
+
     today = datetime.now().strftime("%Y-%m-%d")
     now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
-    # Validate if today is a valid MPLS event day
+
     if not is_valid_mpls_date(today):
         return jsonify({
-            "success": False, 
+            "success": False,
             "message": f"Hari ini ({today}) bukan hari kegiatan MPLS atau hari libur."
         }), 400
-        
+
     attendance = load_json_file(ATTENDANCE_FILE, [])
-    
-    # Check if student already checked in TODAY
+
     for a in attendance:
         if a.get("student_id") == student_id and a.get("date") == today:
-            mentor = get_student_mentor(student.get("jenis"), student.get("kelompok"), student.get("sub_kelompok"))
             return jsonify({
                 "success": True,
-                "message": f"Siswa {student.get('nama')} sudah absen hari ini.",
+                "message": f"{student.get('nama')} sudah absen hari ini.",
                 "student": {
                     "nama": student.get("nama"),
                     "kelas": student.get("kelas"),
+                    "sekolah": student.get("sekolah"),
                     "kelompok": student.get("kelompok"),
-                    "jenis": student.get("jenis"),
-                    "mentor": mentor,
+                    "mentor": get_mentor_name(student.get("kelompok", "")),
                     "checkin_time": a.get("timestamp"),
                     "date": a.get("date")
                 }
             })
-            
-    # New check-in for today
+
     new_record = {
         "student_id": student_id,
         "nama": student.get("nama"),
         "kelas": student.get("kelas"),
+        "sekolah": student.get("sekolah"),
         "kelompok": student.get("kelompok"),
-        "jenis": student.get("jenis"),
         "date": today,
         "timestamp": now_str
     }
     attendance.append(new_record)
     save_json_file(ATTENDANCE_FILE, attendance)
-    
-    mentor = get_student_mentor(student.get("jenis"), student.get("kelompok"), student.get("sub_kelompok"))
-    
+
     return jsonify({
         "success": True,
         "message": f"Absen berhasil untuk {student.get('nama')}!",
         "student": {
             "nama": student.get("nama"),
             "kelas": student.get("kelas"),
+            "sekolah": student.get("sekolah"),
             "kelompok": student.get("kelompok"),
-            "jenis": student.get("jenis"),
-            "mentor": mentor,
+            "mentor": get_mentor_name(student.get("kelompok", "")),
             "checkin_time": now_str,
             "date": today
         }
@@ -522,108 +479,104 @@ def api_attendance_checkin():
 @app.route("/api/admin/students", methods=["GET"])
 def api_admin_students():
     students = load_json_file(STUDENTS_FILE, [])
+    result = []
     for s in students:
-        s["mentor"] = get_student_mentor(s.get("jenis"), s.get("kelompok"), s.get("sub_kelompok"))
-    return jsonify(students)
+        result.append({
+            "id": s.get("id"),
+            "nama": s.get("nama"),
+            "kelas": s.get("kelas"),
+            "sekolah": s.get("sekolah"),
+            "kelompok": s.get("kelompok"),
+            "mentor": get_mentor_name(s.get("kelompok", ""))
+        })
+    return jsonify(result)
+
+@app.route("/api/admin/students/detail", methods=["GET"])
+def api_admin_students_detail():
+    students = load_json_file(STUDENTS_FILE, [])
+    attendance = load_json_file(ATTENDANCE_FILE, [])
+    mpls_days = get_mpls_days()
+    result = []
+    for s in students:
+        five_day = get_student_5day(s["id"], attendance, mpls_days)
+        result.append({
+            "id": s.get("id"),
+            "nama": s.get("nama"),
+            "kelas": s.get("kelas"),
+            "sekolah": s.get("sekolah"),
+            "kelompok": s.get("kelompok"),
+            "mentor": get_mentor_name(s.get("kelompok", "")),
+            "attendance_5day": five_day,
+            "total_hadir": sum(1 for d in five_day if d['status'] == 'Hadir'),
+            "total_days": len(mpls_days)
+        })
+    return jsonify(result)
 
 @app.route("/api/admin/students/upload", methods=["POST"])
 def api_admin_students_upload():
     if 'file' not in request.files:
         return jsonify({"success": False, "message": "Tidak ada file yang diunggah"}), 400
-        
+
     file = request.files['file']
     if file.filename == '':
         return jsonify({"success": False, "message": "Nama file kosong"}), 400
-        
+
     if not file.filename.endswith('.csv'):
         return jsonify({"success": False, "message": "Hanya file CSV yang diperbolehkan"}), 400
-        
+
     try:
         stream = io.StringIO(file.stream.read().decode("utf-8"), newline=None)
         csv_reader = csv.reader(stream)
-        
+
         headers = next(csv_reader, None)
         if not headers:
             return jsonify({"success": False, "message": "File CSV kosong"}), 400
-            
+
         cleaned_headers = [h.strip().lower() for h in headers]
-        
         idx_nama = -1
         idx_kelas = -1
-        idx_kelompok = -1
-        idx_jenis = -1
-        idx_sub = -1
-        
+
         for idx, h in enumerate(cleaned_headers):
             if 'nama' in h:
                 idx_nama = idx
             elif 'kelas' in h:
                 idx_kelas = idx
-            elif 'kelompok' in h or 'group' in h:
-                idx_kelompok = idx
-            elif 'jenis' in h or 'type' in h or 'kategori' in h:
-                idx_jenis = idx
-            elif 'sub' in h or 'pembina' in h or 'sub kelompok' in h or 'sub-kelompok' in h:
-                idx_sub = idx
-                
-        if idx_nama == -1 or idx_kelas == -1 or idx_kelompok == -1:
+
+        if idx_nama == -1 or idx_kelas == -1:
             return jsonify({
-                "success": False, 
-                "message": f"Header CSV harus berisi Nama, Kelas, Kelompok. Ditemukan: {', '.join(headers)}"
+                "success": False,
+                "message": f"Header CSV harus berisi Nama, Kelas. Ditemukan: {', '.join(headers)}"
             }), 400
-            
+
         new_students = []
         import_count = 0
-        
+
         for row in csv_reader:
-            if not row or len(row) <= max(idx_nama, idx_kelas, idx_kelompok):
+            if not row or len(row) <= max(idx_nama, idx_kelas):
                 continue
-                
             nama = row[idx_nama].strip()
             if not nama:
                 continue
-                
             kelas = row[idx_kelas].strip()
-            kelompok = row[idx_kelompok].strip()
-            
-            if kelompok and not kelompok.lower().startswith('kelompok'):
-                kelompok = f"Kelompok {kelompok}"
-                
-            jenis = "Mayor"
-            if idx_jenis != -1 and idx_jenis < len(row):
-                val_jenis = row[idx_jenis].strip()
-                if val_jenis.lower() == 'cgc':
-                    jenis = 'CGC'
-                    
-            sub_kelompok = "A"
-            if idx_sub != -1 and idx_sub < len(row):
-                val_sub = row[idx_sub].strip().upper()
-                if val_sub in ['A', 'B']:
-                    sub_kelompok = val_sub
-                    
             student_id = f"STUDENT_{import_count + 1:04d}_{int(random.random()*10000):04d}"
-            
             new_students.append({
                 "id": student_id,
                 "nama": nama,
-                "kelas": kelas,
-                "kelompok": kelompok,
-                "jenis": jenis,
-                "sub_kelompok": sub_kelompok
+                "kelas": kelas
             })
             import_count += 1
-            
+
         if not new_students:
             return jsonify({"success": False, "message": "Tidak ada data siswa valid ditemukan dalam file CSV"}), 400
-            
+
         save_json_file(STUDENTS_FILE, new_students)
         save_json_file(ATTENDANCE_FILE, [])
-        
+
         return jsonify({
-            "success": True, 
+            "success": True,
             "message": f"Berhasil mengimpor {import_count} data siswa dan mengosongkan log absensi sebelumnya."
         })
-        
+
     except Exception as e:
         return jsonify({"success": False, "message": f"Gagal memproses file CSV: {str(e)}"}), 500
 
@@ -636,38 +589,20 @@ def api_admin_students_clear():
 @app.route("/api/admin/attendance", methods=["GET"])
 def api_admin_attendance():
     attendance = load_json_file(ATTENDANCE_FILE, [])
-    students = load_json_file(STUDENTS_FILE, [])
-    
-    # Get date filter from query params (default to today)
     date_filter = request.args.get("date", "")
     today = datetime.now().strftime("%Y-%m-%d")
-    
-    # If no date filter, use today
     if not date_filter:
         date_filter = today
-    
-    # Filter attendance by date
-    filtered_attendance = [a for a in attendance if a.get("date") == date_filter]
-    
+
+    filtered = [a for a in attendance if a.get("date") == date_filter]
     result = []
-    for a in filtered_attendance:
-        student_id = a.get("student_id")
-        student = next((s for s in students if s.get("id") == student_id), None)
-        
-        mentor = "Belum ditentukan"
-        sub_kelompok = "-"
-        if student:
-            sub_kelompok = student.get("sub_kelompok", "-")
-            mentor = get_student_mentor(student.get("jenis"), student.get("kelompok"), sub_kelompok)
-            
+    for a in filtered:
         result.append({
-            "student_id": student_id,
+            "student_id": a.get("student_id"),
             "nama": a.get("nama"),
             "kelas": a.get("kelas"),
+            "sekolah": a.get("sekolah"),
             "kelompok": a.get("kelompok"),
-            "jenis": a.get("jenis"),
-            "sub_kelompok": sub_kelompok,
-            "mentor": mentor,
             "date": a.get("date"),
             "timestamp": a.get("timestamp")
         })
@@ -677,150 +612,103 @@ def api_admin_attendance():
 def api_admin_stats():
     students = load_json_file(STUDENTS_FILE, [])
     attendance = load_json_file(ATTENDANCE_FILE, [])
-    
-    # Get date filter from query params (default to today)
-    date_filter = request.args.get("date", "")
+    mpls_days = get_mpls_days()
+
+    # Per-date stats based on computed status
+    date_stats = {}
+    for day in mpls_days:
+        hadir = 0
+        for s in students:
+            status, _ = get_attendance_status(s["id"], day, attendance)
+            if status == "Hadir":
+                hadir += 1
+        date_stats[day] = {
+            "total": len(students),
+            "hadir": hadir,
+            "tidak_hadir": len(students) - hadir
+        }
+
+    # Today's quick stats
     today = datetime.now().strftime("%Y-%m-%d")
-    
-    # If no date filter, use today
-    if not date_filter:
-        date_filter = today
-    
-    # Filter attendance by date
-    filtered_attendance = [a for a in attendance if a.get("date") == date_filter]
-    
-    total = len(students)
-    present = len(filtered_attendance)
-    absent = max(0, total - present)
-    
-    percentage = (present / total * 100) if total > 0 else 0
-    
-    class_stats = {}
-    group_stats = {}
-    
-    for s in students:
-        cls = s.get("kelas", "Lainnya")
-        grp = f"{s.get('kelompok')} ({s.get('jenis')})"
-        
-        if cls not in class_stats:
-            class_stats[cls] = {"total": 0, "present": 0}
-        if grp not in group_stats:
-            group_stats[grp] = {"total": 0, "present": 0}
-            
-        class_stats[cls]["total"] += 1
-        group_stats[grp]["total"] += 1
-        
-    for a in filtered_attendance:
-        s_id = a.get("student_id")
-        student = next((s for s in students if s.get("id") == s_id), None)
-        if student:
-            cls = student.get("kelas", "Lainnya")
-            grp = f"{student.get('kelompok')} ({student.get('jenis')})"
-            
-            if cls in class_stats:
-                class_stats[cls]["present"] += 1
-            if grp in group_stats:
-                group_stats[grp]["present"] += 1
-                
+    today_present = 0
+    for a in attendance:
+        if a.get("date") == today:
+            today_present += 1
+
     return jsonify({
-        "total_students": total,
-        "total_present": present,
-        "total_absent": absent,
-        "percentage": round(percentage, 1),
-        "class_stats": class_stats,
-        "group_stats": group_stats
+        "total_students": len(students),
+        "total_present": today_present,
+        "total_absent": max(0, len(students) - today_present),
+        "percentage": round(today_present / len(students) * 100, 1) if students else 0,
+        "date_stats": date_stats
     })
 
 @app.route("/api/admin/attendance/export", methods=["GET"])
 def api_admin_attendance_export():
     students = load_json_file(STUDENTS_FILE, [])
     attendance = load_json_file(ATTENDANCE_FILE, [])
-    
+    mpls_days = get_mpls_days()
+
     dest = io.StringIO()
     writer = csv.writer(dest)
-    
-    writer.writerow(["ID Siswa", "Nama Siswa", "Kelas", "Kelompok", "Jenis", "Sub-Kelompok", "Kakak Pembina", "Status Kehadiran", "Waktu Absen"])
-    
-    for s in students:
-        student_id = s.get("id")
-        att = next((a for a in attendance if a.get("student_id") == student_id), None)
-        status = "Hadir" if att else "Belum Hadir"
-        time_str = att.get("timestamp") if att else "-"
-        
-        mentor = get_student_mentor(s.get("jenis"), s.get("kelompok"), s.get("sub_kelompok"))
-        
-        writer.writerow([
-            student_id,
+
+    header_row = ["No", "Nama", "Sekolah", "Kelas", "Kelompok", "Mentor"]
+    for i, day in enumerate(mpls_days, 1):
+        header_row.append(f"Hari {i} ({day})")
+    writer.writerow(header_row)
+
+    for idx, s in enumerate(students, 1):
+        row = [
+            idx,
             s.get("nama"),
+            s.get("sekolah"),
             s.get("kelas"),
             s.get("kelompok"),
-            s.get("jenis"),
-            s.get("sub_kelompok"),
-            mentor,
-            status,
-            time_str
-        ])
-        
+            get_mentor_name(s.get("kelompok", ""))
+        ]
+        for day in mpls_days:
+            status, ts = get_attendance_status(s["id"], day, attendance)
+            if status == "Hadir" and ts:
+                row.append(f"Hadir {ts.split()[-1]}")
+            else:
+                row.append(status)
+        writer.writerow(row)
+
     output = make_response(dest.getvalue())
     output.headers["Content-Disposition"] = "attachment; filename=rekap_absensi_mpls_2026.csv"
-    output.headers["Content-type"] = "text/csv; charset=utf-8"
+    output.headers["Content-type"] = "text/csv; charset=utf-8-sig"
     return output
 
 @app.route("/api/admin/student/<student_id>/attendance", methods=["GET"])
 def api_student_attendance_detail(student_id):
-    """Get detailed attendance history for a specific student"""
     students = load_json_file(STUDENTS_FILE, [])
-    student = next((s for s in students if s.get("id") == student_id), None)
-    
+    student = find_student(students, student_id)
     if not student:
         return jsonify({"success": False, "message": "Siswa tidak ditemukan"}), 404
-    
+
     attendance = load_json_file(ATTENDANCE_FILE, [])
     mpls_days = get_mpls_days()
-    
-    # Get all attendance records for this student
-    student_attendance = [a for a in attendance if a.get("student_id") == student_id]
-    attended_dates = {a.get("date") for a in student_attendance}
-    
-    # Build attendance summary for each MPLS day
-    attendance_summary = []
-    for day in mpls_days:
-        is_present = day in attended_dates
-        record = next((a for a in student_attendance if a.get("date") == day), None)
-        
-        attendance_summary.append({
-            "date": day,
-            "is_present": is_present,
-            "timestamp": record.get("timestamp") if record else None
-        })
-    
-    mentor = get_student_mentor(student.get("jenis"), student.get("kelompok"), student.get("sub_kelompok"))
-    
+    five_day = get_student_5day(student_id, attendance, mpls_days)
+
     return jsonify({
         "success": True,
         "student": {
             "id": student.get("id"),
             "nama": student.get("nama"),
             "kelas": student.get("kelas"),
+            "sekolah": student.get("sekolah"),
             "kelompok": student.get("kelompok"),
-            "jenis": student.get("jenis"),
-            "sub_kelompok": student.get("sub_kelompok"),
-            "mentor": mentor
+            "mentor": get_mentor_name(student.get("kelompok", ""))
         },
         "mpls_config": MPLS_CONFIG,
-        "attendance_summary": attendance_summary,
-        "total_present": len(attended_dates),
-        "total_days": len(mpls_days),
-        "absent_dates": [day for day in mpls_days if day not in attended_dates]
+        "attendance_summary": five_day,
+        "total_hadir": sum(1 for d in five_day if d['status'] == 'Hadir'),
+        "total_days": len(mpls_days)
     })
 
 @app.route("/api/mpls/config", methods=["GET"])
 def api_mpls_config():
-    """Get MPLS configuration"""
-    return jsonify({
-        "success": True,
-        "config": MPLS_CONFIG
-    })
+    return jsonify({"success": True, "config": MPLS_CONFIG})
 
 # ===============================
 # RUN

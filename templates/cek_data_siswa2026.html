@@ -25,8 +25,8 @@
             </div>
 
             <div class="hero-card">
-                <h2>Selamat Datang 👋</h2>
-                <p>Cari nama Anda untuk mengetahui kelompok MPLS dan kakak pembina.</p>
+                <h2>Selamat Datang</h2>
+                <p>Cari nama Anda untuk melakukan absensi kehadiran.</p>
 
                 <div class="search-area">
                     <div class="search-box">
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <h2 id="studentName" class="student-card__name">-</h2>
-                <p class="student-card__subtitle">Informasi Kelompok MPLS</p>
+                <p class="student-card__subtitle">Informasi Absensi Siswa</p>
             </div>
 
             <div class="student-card__info">
@@ -60,26 +60,54 @@
                     <span id="studentClass">-</span>
                 </div>
                 <div class="info-box">
-                    <label><i class="bi bi-people-fill"></i> Kelompok</label>
-                    <span id="studentGroup">-</span>
+                    <label><i class="bi bi-building"></i> Sekolah</label>
+                    <span id="studentSekolah">-</span>
                 </div>
                 <div class="info-box">
-                    <label><i class="bi bi-diagram-3-fill"></i> Jenis Kelompok</label>
-                    <span id="studentType">-</span>
+                    <label><i class="bi bi-people-fill"></i> Kelompok</label>
+                    <span id="studentKelompok">-</span>
                 </div>
-                <div class="info-box info-box--highlight">
-                    <label><i class="bi bi-person-heart"></i> Kakak Pembina</label>
+                <div class="info-box">
+                    <label><i class="bi bi-person-badge"></i> Pembina</label>
                     <span id="studentMentor">-</span>
                 </div>
             </div>
 
-            <div class="student-card__bottom">
-                <div class="attendance-box">
-                    <label>Status Kehadiran</label>
-                    <span id="studentAttendanceStatus" class="badge-status">Belum Absen</span>
-                    <p id="studentCheckinTime" class="attendance-time d-none"></p>
+            <div class="student-card__attendance">
+                <h5 class="mb-3 fw-bold text-primary-dark"><i class="bi bi-calendar-check me-2"></i>Rekap Kehadiran 5 Hari</h5>
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered text-center mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Hari 1</th>
+                                <th>Hari 2</th>
+                                <th>Hari 3</th>
+                                <th>Hari 4</th>
+                                <th>Hari 5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="attendanceRow">
+                                <td id="day-0">-</td>
+                                <td id="day-1">-</td>
+                                <td id="day-2">-</td>
+                                <td id="day-3">-</td>
+                                <td id="day-4">-</td>
+                            </tr>
+                            <tr id="attendanceTimeRow" class="small text-muted">
+                                <td id="time-0"></td>
+                                <td id="time-1"></td>
+                                <td id="time-2"></td>
+                                <td id="time-3"></td>
+                                <td id="time-4"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
+                <div class="mt-2 text-center" id="attendanceSummary"></div>
+            </div>
 
+            <div class="student-card__bottom">
                 <div class="student-card__qr">
                     <p class="qr-section-title">QR Code Absensi</p>
                     <div class="qr-wrapper">
@@ -87,7 +115,7 @@
                     </div>
                     <p class="qr-guide">
                         <i class="bi bi-info-circle-fill"></i>
-                        Tunjukkan QR Code ke Kakak Pembina, atau scan QR Sesi Absen via tombol di kanan bawah.
+                        Tunjukkan QR Code untuk absen, atau scan QR Sesi Absen via tombol di kanan bawah.
                     </p>
                 </div>
             </div>

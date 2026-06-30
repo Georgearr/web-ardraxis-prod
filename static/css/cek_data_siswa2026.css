@@ -426,10 +426,42 @@ section.container {
     color: var(--primary-dark);
 }
 
-/* Bottom: attendance + QR */
+/* Attendance Rekap */
+.student-card__attendance {
+    padding: 24px 32px;
+    border-top: 1px solid rgba(29, 105, 110, 0.12);
+    background: #fff;
+}
+
+.student-card__attendance .table {
+    font-size: 13px;
+    margin-bottom: 0;
+}
+
+.student-card__attendance .table th {
+    font-weight: 600;
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-muted, #636e72);
+    padding: 8px 6px;
+}
+
+.student-card__attendance .table td {
+    padding: 10px 6px;
+    vertical-align: middle;
+}
+
+.student-card__attendance .badge-status {
+    font-size: 11px;
+    padding: 4px 12px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+/* Bottom: QR only */
 .student-card__bottom {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     gap: 0;
     border-top: 1px solid rgba(29, 105, 110, 0.12);
     background: linear-gradient(180deg, #fafcfd 0%, #f5f8f9 100%);
@@ -709,14 +741,8 @@ section.container {
         grid-column: auto;
     }
 
-    .student-card__bottom {
-        grid-template-columns: 1fr;
-    }
-
-    .attendance-box {
-        border-right: none;
-        border-bottom: 1px solid rgba(29, 105, 110, 0.08);
-        padding: 22px 20px;
+    .student-card__attendance {
+        padding: 20px;
     }
 
     .student-card__qr {

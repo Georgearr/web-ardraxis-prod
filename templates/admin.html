@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Admin - Absensi MPLS IGS 2026</title>
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    
+
     <style>
         :root {
             --primary: #1d696e;
@@ -27,7 +24,7 @@
             --radius: 16px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
+        * { box-sizing: border-box; }
         body {
             font-family: 'Poppins', sans-serif;
             background-color: var(--bg);
@@ -36,280 +33,89 @@
             display: flex;
             flex-direction: column;
         }
-
-        /* Navbar Style */
         .admin-nav {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-
-        .navbar-brand {
-            font-weight: 700;
-            font-size: 22px;
-            letter-spacing: 0.5px;
-        }
-
+        .navbar-brand { font-weight: 700; font-size: 22px; letter-spacing: 0.5px; }
         .nav-link-custom {
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255,255,255,0.85);
             font-weight: 500;
             padding: 8px 16px;
             border-radius: 8px;
             transition: var(--transition);
         }
-
         .nav-link-custom:hover, .nav-link-custom.active {
             color: #fff;
-            background-color: rgba(255, 255, 255, 0.15);
+            background-color: rgba(255,255,255,0.15);
         }
-
-        /* Cards Style */
         .glass-card {
             background-color: var(--card-bg);
             border-radius: var(--radius);
-            border: 1px solid rgba(29, 105, 110, 0.08);
+            border: 1px solid rgba(29,105,110,0.08);
             box-shadow: var(--shadow);
             transition: var(--transition);
             overflow: hidden;
             height: 100%;
         }
-
         .glass-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(29, 105, 110, 0.12);
+            box-shadow: 0 15px 35px rgba(29,105,110,0.12);
         }
-
-        .stat-card {
-            padding: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
+        .stat-card { padding: 24px; display: flex; align-items: center; justify-content: space-between; }
         .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            background-color: var(--secondary);
-            color: var(--primary);
+            width: 60px; height: 60px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px; background-color: var(--secondary); color: var(--primary);
             transition: var(--transition);
         }
-
-        .glass-card:hover .stat-icon {
-            background-color: var(--primary);
-            color: #fff;
-        }
-
-        .stat-number {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 2px;
-            color: var(--primary-dark);
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: var(--text-muted);
-            font-weight: 500;
-        }
-
-        /* Tab panels */
-        .tab-content {
-            padding-top: 30px;
-        }
-
-        /* Section Title */
+        .glass-card:hover .stat-icon { background-color: var(--primary); color: #fff; }
+        .stat-number { font-size: 32px; font-weight: 700; margin-bottom: 2px; color: var(--primary-dark); }
+        .stat-label { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+        .tab-content { padding-top: 30px; }
         .section-header {
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
+            margin-bottom: 25px; display: flex; align-items: center;
+            justify-content: space-between; flex-wrap: wrap; gap: 15px;
         }
-
         .section-title {
-            font-weight: 700;
-            color: var(--primary-dark);
-            position: relative;
-            padding-left: 15px;
+            font-weight: 700; color: var(--primary-dark);
+            position: relative; padding-left: 15px;
         }
-
         .section-title::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 5px;
-            bottom: 5px;
-            width: 5px;
-            background-color: var(--primary);
-            border-radius: 4px;
+            content: ''; position: absolute; left: 0; top: 5px; bottom: 5px;
+            width: 5px; background-color: var(--primary); border-radius: 4px;
         }
-
-        /* Drag & Drop Upload box */
         .upload-area {
-            border: 2px dashed var(--primary-light);
-            border-radius: var(--radius);
-            padding: 40px 20px;
-            text-align: center;
-            background-color: #fcfefe;
-            cursor: pointer;
+            border: 2px dashed var(--primary-light); border-radius: var(--radius);
+            padding: 40px 20px; text-align: center; background-color: #fcfefe; cursor: pointer;
             transition: var(--transition);
         }
-
-        .upload-area:hover, .upload-area.dragover {
-            background-color: var(--secondary);
-            border-color: var(--primary-dark);
-        }
-
-        .upload-icon {
-            font-size: 48px;
-            color: var(--primary);
-            margin-bottom: 15px;
-        }
-
-        /* Custom Table design */
-        .table-responsive {
-            border-radius: var(--radius);
-            overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .table-custom {
-            margin-bottom: 0;
-        }
-
+        .upload-area:hover, .upload-area.dragover { background-color: var(--secondary); border-color: var(--primary-dark); }
+        .upload-icon { font-size: 48px; color: var(--primary); margin-bottom: 15px; }
+        .table-responsive { border-radius: var(--radius); overflow: hidden; border: 1px solid rgba(0,0,0,0.05); }
+        .table-custom { margin-bottom: 0; }
         .table-custom th {
-            background-color: var(--primary);
-            color: white;
-            font-weight: 600;
-            padding: 15px;
-            border: none;
+            background-color: var(--primary); color: white; font-weight: 600;
+            padding: 12px 10px; border: none; white-space: nowrap; font-size: 13px;
         }
-
-        .table-custom td {
-            padding: 15px;
-            vertical-align: middle;
-            background-color: #fff;
-            border-bottom: 1px solid #f1f3f4;
-        }
-
-        .table-custom tr:last-child td {
-            border-bottom: none;
-        }
-
-        .table-custom tr:hover td {
-            background-color: #fafcfc;
-        }
-
-        /* Progress bars */
-        .progress-custom {
-            height: 10px;
-            border-radius: 10px;
-            background-color: #e9ecef;
-            overflow: hidden;
-            margin-top: 5px;
-        }
-
-        .progress-bar-fill {
-            background: linear-gradient(90deg, var(--primary-light), var(--primary));
-            height: 100%;
-            border-radius: 10px;
-            transition: width 1s ease-out;
-        }
-
-        /* QR Section */
-        .qr-session-card {
-            background-color: var(--card-bg);
-            border-radius: var(--radius);
-            padding: 30px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(29, 105, 110, 0.08);
-        }
-
-        #qrSessionDisplay {
-            margin: 20px auto;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Loader inside components */
-        .component-loader {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 200px;
-        }
-
-        /* Footer */
-        footer {
-            margin-top: auto;
-            padding: 20px 0;
-            text-align: center;
-            background-color: #fff;
-            color: var(--text-muted);
-            border-top: 1px solid #eaeef0;
-            font-size: 14px;
-        }
-
-        /* Search inputs */
-        .search-control {
-            border-radius: 30px;
-            padding-left: 20px;
-            padding-right: 20px;
-            border: 1px solid #ced4da;
-            box-shadow: none;
-        }
-
-        .search-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 0.25rem rgba(29, 105, 110, 0.15);
-        }
-
-        .btn-custom {
-            background-color: var(--primary);
-            color: white;
-            border-radius: 30px;
-            padding: 8px 24px;
-            font-weight: 500;
-            border: none;
-            transition: var(--transition);
-        }
-
-        .btn-custom:hover {
-            background-color: var(--primary-dark);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .badge-present {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 6px 12px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 12px;
-        }
-
-        .badge-absent {
-            background-color: #fff3cd;
-            color: #856404;
-            padding: 6px 12px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 12px;
-        }
+        .table-custom td { padding: 10px; vertical-align: middle; background-color: #fff; border-bottom: 1px solid #f1f3f4; font-size: 13px; }
+        .table-custom tr:last-child td { border-bottom: none; }
+        .table-custom tr:hover td { background-color: #fafcfc; }
+        .status-hadir { color: #155724; background: #d4edda; padding: 3px 10px; border-radius: 20px; font-weight: 600; font-size: 11px; display: inline-block; }
+        .status-tidak { color: #721c24; background: #f8d7da; padding: 3px 10px; border-radius: 20px; font-weight: 600; font-size: 11px; display: inline-block; }
+        .status-belum { color: #856404; background: #fff3cd; padding: 3px 10px; border-radius: 20px; font-weight: 600; font-size: 11px; display: inline-block; }
+        .btn-custom { background-color: var(--primary); color: white; border-radius: 30px; padding: 8px 24px; font-weight: 500; border: none; transition: var(--transition); }
+        .btn-custom:hover { background-color: var(--primary-dark); color: white; transform: translateY(-2px); }
+        .search-control { border-radius: 30px; padding-left: 20px; padding-right: 20px; border: 1px solid #ced4da; box-shadow: none; }
+        .search-control:focus { border-color: var(--primary); box-shadow: 0 0 0 0.25rem rgba(29,105,110,0.15); }
+        .day-header { font-size: 11px; writing-mode: vertical-lr; text-orientation: mixed; transform: rotate(180deg); height: 80px; white-space: nowrap; }
+        .sticky-col { position: sticky; left: 0; z-index: 2; background: #fff !important; }
+        footer { margin-top: auto; padding: 20px 0; text-align: center; color: var(--text-muted); border-top: 1px solid #eaeef0; font-size: 14px; }
+        .badge-date { font-size: 10px; color: var(--text-muted); font-weight: 400; display: block; }
     </style>
 </head>
 <body>
 
-    <!-- ========================================== -->
-    <!-- NAVBAR -->
-    <!-- ========================================== -->
     <nav class="navbar navbar-expand-lg navbar-dark admin-nav py-3">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="/admin">
@@ -328,12 +134,12 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom" id="students-tab-nav" href="#" onclick="switchTab('students')">
-                            <i class="bi bi-people-fill me-1"></i> Kelola Siswa
+                            <i class="bi bi-people-fill me-1"></i> Data Absensi
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link nav-link-custom" id="attendance-tab-nav" href="#" onclick="switchTab('attendance')">
-                            <i class="bi bi-journal-check me-1"></i> Log Kehadiran
+                            <i class="bi bi-journal-check me-1"></i> Log Scan
                         </a>
                     </li>
                     <li class="nav-item">
@@ -351,34 +157,23 @@
         </div>
     </nav>
 
-    <!-- ========================================== -->
-    <!-- MAIN CONTENT -->
-    <!-- ========================================== -->
     <div class="container my-5">
-        
-        <!-- Tab 1: Dashboard Overview -->
+
+        <!-- TAB 1: DASHBOARD -->
         <div id="tab-dashboard" class="tab-pane-custom">
-            
             <div class="section-header">
-                <h3 class="section-title mb-0">Overview Absensi Real-Time</h3>
-                <div class="d-flex gap-2 align-items-center flex-wrap">
-                    <div class="d-flex align-items-center gap-2">
-                        <label class="small text-muted mb-0">Tanggal:</label>
-                        <input type="date" id="attendanceDate" class="form-control form-control-sm" style="width: 150px;" onchange="refreshDashboardStats()">
-                    </div>
-                    <button class="btn btn-outline-secondary btn-sm rounded-pill" onclick="refreshDashboardStats()">
-                        <i class="bi bi-arrow-clockwise me-1"></i> Refresh
-                    </button>
-                </div>
+                <h3 class="section-title mb-0">Overview Absensi</h3>
+                <button class="btn btn-outline-secondary btn-sm rounded-pill" onclick="refreshDashboardStats()">
+                    <i class="bi bi-arrow-clockwise me-1"></i> Refresh
+                </button>
             </div>
 
-            <!-- Stats Grid -->
             <div class="row g-4 mb-5">
                 <div class="col-md-3 col-sm-6">
                     <div class="glass-card stat-card">
                         <div>
                             <div class="stat-number" id="stat-total-students">0</div>
-                            <div class="stat-label">Total Siswa Terdaftar</div>
+                            <div class="stat-label">Total Siswa</div>
                         </div>
                         <div class="stat-icon"><i class="bi bi-people"></i></div>
                     </div>
@@ -387,7 +182,7 @@
                     <div class="glass-card stat-card">
                         <div>
                             <div class="stat-number text-success" id="stat-present">0</div>
-                            <div class="stat-label">Hadir</div>
+                            <div class="stat-label">Hadir Hari Ini</div>
                         </div>
                         <div class="stat-icon bg-success bg-opacity-10 text-success"><i class="bi bi-person-check"></i></div>
                     </div>
@@ -396,7 +191,7 @@
                     <div class="glass-card stat-card">
                         <div>
                             <div class="stat-number text-warning" id="stat-absent">0</div>
-                            <div class="stat-label">Belum Hadir</div>
+                            <div class="stat-label">Belum/Tidak Hadir</div>
                         </div>
                         <div class="stat-icon bg-warning bg-opacity-10 text-warning"><i class="bi bi-person-dash"></i></div>
                     </div>
@@ -405,158 +200,104 @@
                     <div class="glass-card stat-card">
                         <div>
                             <div class="stat-number text-primary" id="stat-percentage">0%</div>
-                            <div class="stat-label">Persentase Kehadiran</div>
+                            <div class="stat-label">Kehadiran Hari Ini</div>
                         </div>
                         <div class="stat-icon bg-primary bg-opacity-10 text-primary"><i class="bi bi-percent"></i></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Dashboard Analytics Section -->
             <div class="row g-4">
-                <!-- Class Stats -->
-                <div class="col-lg-6">
-                    <div class="glass-card p-4 h-100">
-                        <h5 class="fw-bold mb-4 text-primary-dark"><i class="bi bi-building me-2"></i>Kehadiran Per Kelas</h5>
-                        <div class="table-responsive" style="max-height: 380px;">
+                <div class="col-lg-7">
+                    <div class="glass-card p-4">
+                        <h5 class="fw-bold mb-4 text-primary-dark"><i class="bi bi-calendar-check me-2"></i>Rekap Per Hari</h5>
+                        <div class="table-responsive">
                             <table class="table table-hover align-middle mb-0">
-                                <thead class="table-light sticky-top">
+                                <thead class="table-light">
                                     <tr>
-                                        <th>Kelas</th>
-                                        <th>Hadir / Total</th>
-                                        <th>Persentase</th>
+                                        <th>Hari</th>
+                                        <th>Tanggal</th>
+                                        <th>Hadir</th>
+                                        <th>Tidak Hadir</th>
+                                        <th>%</th>
+                                        <th>Progress</th>
                                     </tr>
                                 </thead>
-                                <tbody id="class-stats-body">
-                                    <tr><td colspan="3" class="text-center py-4 text-muted">Belum ada data siswa</td></tr>
+                                <tbody id="daily-stats-body">
+                                    <tr><td colspan="6" class="text-center py-4 text-muted">Memuat...</td></tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-
-                <!-- Session QR Card -->
-                <div class="col-lg-6">
-                    <div class="qr-session-card h-100 d-flex flex-column justify-content-center align-items-center">
+                <div class="col-lg-5">
+                    <div class="qr-session-card p-4 glass-card d-flex flex-column justify-content-center align-items-center">
                         <h5 class="fw-bold text-primary-dark mb-2"><i class="bi bi-qr-code me-2"></i>QR Code Sesi Absen</h5>
-                        <p class="text-muted small px-3">Tampilkan QR Code ini di layar utama proyektor agar siswa dapat memindai secara mandiri melalui Portal Siswa di HP mereka.</p>
-                        
+                        <p class="text-muted small px-3">Tampilkan QR ini di proyektor agar siswa scan mandiri via Portal Siswa.</p>
                         <div class="border p-3 bg-white rounded-3 my-3" style="box-shadow: 0 4px 15px rgba(0,0,0,0.05)">
                             <div id="qrSessionDisplay"></div>
                         </div>
                         <h6 class="fw-bold text-primary mb-3">SESSION_ABSEN_MPLS_2026</h6>
-                        <button class="btn btn-custom" onclick="window.print()"><i class="bi bi-printer me-2"></i>Cetak QR Sesi</button>
-                    </div>
-                </div>
-                
-                <!-- Group Stats -->
-                <div class="col-lg-12">
-                    <div class="glass-card p-4">
-                        <h5 class="fw-bold mb-4 text-primary-dark"><i class="bi bi-bookmark-star me-2"></i>Kehadiran Per Kelompok</h5>
-                        <div class="row g-3" id="group-stats-container">
-                            <div class="col-12 text-center py-4 text-muted">Belum ada data kelompok</div>
-                        </div>
+                        <button class="btn btn-custom" onclick="window.print()"><i class="bi bi-printer me-2"></i>Cetak QR</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Tab 2: Manage Students -->
+        <!-- TAB 2: FULL ATTENDANCE DATA -->
         <div id="tab-students" class="tab-pane-custom d-none">
             <div class="section-header">
-                <h3 class="section-title mb-0">Kelola Database Siswa</h3>
-                <div class="d-flex gap-2">
-                    <button class="btn btn-danger btn-sm rounded-pill" onclick="clearDatabase()">
-                        <i class="bi bi-trash3 me-1"></i> Kosongkan Database
+                <h3 class="section-title mb-0">Data Absensi Seluruh Siswa</h3>
+                <div class="d-flex gap-2 align-items-center flex-wrap">
+                    <div style="width: 250px;">
+                        <input type="text" id="studentSearchKey" class="form-control form-control-sm search-control" placeholder="Cari nama/sekolah/kelas/kelompok..." onkeyup="filterMainTable()">
+                    </div>
+                    <a href="/api/admin/attendance/export" class="btn btn-custom btn-sm rounded-pill">
+                        <i class="bi bi-file-earmark-excel me-1"></i> Export CSV
+                    </a>
+                    <button class="btn btn-outline-secondary btn-sm rounded-pill" onclick="loadMainTable()">
+                        <i class="bi bi-arrow-clockwise me-1"></i> Refresh
                     </button>
                 </div>
             </div>
 
-            <div class="row g-4">
-                <!-- CSV Upload Section -->
-                <div class="col-md-5">
-                    <div class="glass-card p-4 mb-4">
-                        <h5 class="fw-bold mb-3 text-primary-dark"><i class="bi bi-file-earmark-arrow-up me-2"></i>Impor Daftar Siswa (CSV)</h5>
-                        <p class="text-muted small">Unggah daftar nama siswa baru untuk memulai sesi absensi. Format CSV harus memiliki nama kolom berikut:</p>
-                        
-                        <div class="table-responsive mb-3" style="font-size: 11px;">
-                            <table class="table table-bordered table-sm text-center mb-0 bg-light">
-                                <thead>
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>Kelas</th>
-                                        <th>Kelompok</th>
-                                        <th>Jenis</th>
-                                        <th>Sub-Kelompok</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Andi Wijaya</td>
-                                        <td>10.1</td>
-                                        <td>Kelompok 1</td>
-                                        <td>Mayor</td>
-                                        <td>A</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        
-                        <div class="upload-area" id="drop-zone">
-                            <i class="bi bi-cloud-arrow-up upload-icon"></i>
-                            <h6 class="fw-bold mb-1">Drag & Drop file CSV Anda di sini</h6>
-                            <p class="text-muted small mb-3">atau klik untuk memilih file dari komputer</p>
-                            <input type="file" id="csvFileInput" accept=".csv" class="d-none">
-                            <button class="btn btn-outline-primary btn-sm rounded-pill" onclick="document.getElementById('csvFileInput').click()">Pilih File</button>
-                        </div>
-                        
-                        <div id="uploadStatus" class="mt-3"></div>
-                    </div>
+            <div class="glass-card p-4">
+                <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
+                    <table class="table table-hover align-middle mb-0 table-custom" id="main-table">
+                        <thead class="sticky-top">
+                            <tr>
+                                <th class="sticky-col" style="left:0; background:var(--primary) !important; color:white; min-width:40px;">#</th>
+                                <th style="min-width:180px;">Nama</th>
+                                <th style="min-width:80px;">Sekolah</th>
+                                <th style="min-width:100px;">Kelas</th>
+                                <th style="min-width:100px;">Kelompok</th>
+                                <th style="min-width:140px;">Pembina</th>
+                                <th style="min-width:60px; text-align:center;">Total</th>
+                                <th id="day-header-0" style="min-width:90px; text-align:center;">Hari 1</th>
+                                <th id="day-header-1" style="min-width:90px; text-align:center;">Hari 2</th>
+                                <th id="day-header-2" style="min-width:90px; text-align:center;">Hari 3</th>
+                                <th id="day-header-3" style="min-width:90px; text-align:center;">Hari 4</th>
+                                <th id="day-header-4" style="min-width:90px; text-align:center;">Hari 5</th>
+                            </tr>
+                        </thead>
+                        <tbody id="main-table-body">
+                            <tr><td colspan="12" class="text-center py-5 text-muted">Memuat data...</td></tr>
+                        </tbody>
+                    </table>
                 </div>
-
-                <!-- Students List Table -->
-                <div class="col-md-7">
-                    <div class="glass-card p-4">
-                        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-                            <h5 class="fw-bold text-primary-dark m-0"><i class="bi bi-list-columns-reverse me-2"></i>Daftar Siswa Terdaftar</h5>
-                            <div style="width: 200px;">
-                                <input type="text" id="studentSearchKey" class="form-control form-control-sm search-control" placeholder="Cari nama..." onkeyup="filterStudentListTable()">
-                            </div>
-                        </div>
-                        
-                        <div class="table-responsive" style="max-height: 450px;">
-                            <table class="table table-hover align-middle mb-0" id="student-list-table">
-                                <thead class="table-light sticky-top">
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>Kelas</th>
-                                        <th>Kelompok</th>
-                                        <th>Kakak Pembina</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="student-list-body">
-                                    <tr><td colspan="5" class="text-center py-4 text-muted">Memuat data siswa...</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <div class="mt-3 text-muted small" id="table-info">Memuat...</div>
             </div>
         </div>
 
-        <!-- Tab 3: Attendance Log -->
+        <!-- TAB 3: RAW SCAN LOG -->
         <div id="tab-attendance" class="tab-pane-custom d-none">
             <div class="section-header">
-                <h3 class="section-title mb-0">Log Riwayat Kehadiran</h3>
+                <h3 class="section-title mb-0">Log Scan Absensi</h3>
                 <div class="d-flex gap-2 align-items-center flex-wrap">
                     <div class="d-flex align-items-center gap-2">
                         <label class="small text-muted mb-0">Tanggal:</label>
                         <input type="date" id="attendanceLogDate" class="form-control form-control-sm" style="width: 150px;" onchange="loadAttendanceLog()">
                     </div>
-                    <a href="/api/admin/attendance/export" class="btn btn-custom btn-sm rounded-pill">
-                        <i class="bi bi-file-earmark-excel me-1"></i> Ekspor Rekap (CSV)
-                    </a>
                     <button class="btn btn-outline-secondary btn-sm rounded-pill" onclick="loadAttendanceLog()">
                         <i class="bi bi-arrow-clockwise me-1"></i> Refresh
                     </button>
@@ -564,27 +305,19 @@
             </div>
 
             <div class="glass-card p-4">
-                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-                    <h5 class="fw-bold text-primary-dark m-0"><i class="bi bi-clock-history me-2"></i>Siswa Yang Telah Melakukan Absen</h5>
-                    <div style="width: 250px;">
-                        <input type="text" id="attendanceSearchKey" class="form-control form-control-sm search-control" placeholder="Cari nama/kelas/pembina..." onkeyup="filterAttendanceTable()">
-                    </div>
-                </div>
-
                 <div class="table-responsive" style="max-height: 500px;">
-                    <table class="table table-hover align-middle mb-0" id="attendance-log-table">
-                        <thead class="table-light sticky-top">
+                    <table class="table table-hover align-middle mb-0 table-custom">
+                        <thead class="sticky-top">
                             <tr>
-                                <th>Tanggal</th>
                                 <th>Waktu Scan</th>
                                 <th>Nama</th>
+                                <th>Sekolah</th>
                                 <th>Kelas</th>
                                 <th>Kelompok</th>
-                                <th>Kakak Pembina</th>
                             </tr>
                         </thead>
                         <tbody id="attendance-list-body">
-                            <tr><td colspan="6" class="text-center py-4 text-muted">Memuat log absensi...</td></tr>
+                            <tr><td colspan="5" class="text-center py-4 text-muted">Memuat log...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -593,485 +326,187 @@
 
     </div>
 
-    <!-- ========================================== -->
-    <!-- FOOTER -->
-    <!-- ========================================== -->
     <footer>
-        <div class="container">
-            © 2026 MPLS SMA IGS • Powered by OSIS Ardraxis
-        </div>
+        <div class="container">© 2026 MPLS SMA IGS • Powered by OSIS Ardraxis</div>
     </footer>
 
-    <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- QRCode.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
     <script>
-        // Tab switcher
-        function switchTab(tabId) {
-            document.querySelectorAll('.tab-pane-custom').forEach(pane => {
-                pane.classList.add('d-none');
-            });
-            document.querySelectorAll('.nav-link-custom').forEach(link => {
-                link.classList.remove('active');
-            });
+        let allDetailData = [];
+        let mplsDays = [];
 
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-pane-custom').forEach(p => p.classList.add('d-none'));
+            document.querySelectorAll('.nav-link-custom').forEach(l => l.classList.remove('active'));
             document.getElementById(`tab-${tabId}`).classList.remove('d-none');
             document.getElementById(`${tabId}-tab-nav`).classList.add('active');
-
-            if (tabId === 'dashboard') {
-                refreshDashboardStats();
-            } else if (tabId === 'students') {
-                loadStudentsList();
-            } else if (tabId === 'attendance') {
-                loadAttendanceLog();
-            }
+            if (tabId === 'dashboard') refreshDashboardStats();
+            else if (tabId === 'students') loadMainTable();
+            else if (tabId === 'attendance') loadAttendanceLog();
         }
 
-        // Initialize variables
-        const studentsBody = document.getElementById("student-list-body");
-        const attendanceBody = document.getElementById("attendance-list-body");
-        const classStatsBody = document.getElementById("class-stats-body");
-        const groupStatsContainer = document.getElementById("group-stats-container");
-        let allStudents = [];
-        let allAttendance = [];
-
-        document.addEventListener("DOMContentLoaded", function() {
-            // Initialize date inputs with today's date
+        document.addEventListener("DOMContentLoaded", function () {
             const today = new Date().toISOString().split('T')[0];
-            const attendanceDateInput = document.getElementById("attendanceDate");
-            const attendanceLogDateInput = document.getElementById("attendanceLogDate");
-            
-            if (attendanceDateInput) attendanceDateInput.value = today;
-            if (attendanceLogDateInput) attendanceLogDateInput.value = today;
-            
-            // Load dashboard data first
+            const logDate = document.getElementById("attendanceLogDate");
+            if (logDate) logDate.value = today;
             refreshDashboardStats();
-
-            // Generate Session QR Code
-            const qrSessionContainer = document.getElementById("qrSessionDisplay");
-            if (qrSessionContainer) {
-                new QRCode(qrSessionContainer, {
+            const qrEl = document.getElementById("qrSessionDisplay");
+            if (qrEl) {
+                new QRCode(qrEl, {
                     text: "SESSION_ABSEN_MPLS_2026",
-                    width: 200,
-                    height: 200,
-                    colorDark: "#144e53",
-                    colorLight: "#ffffff",
+                    width: 200, height: 200,
+                    colorDark: "#144e53", colorLight: "#ffffff",
                     correctLevel: QRCode.CorrectLevel.H
                 });
             }
-
-            // Drag & Drop CSV Event Listeners
-            const dropZone = document.getElementById("drop-zone");
-            const fileInput = document.getElementById("csvFileInput");
-
-            if (dropZone && fileInput) {
-                dropZone.addEventListener("dragover", function(e) {
-                    e.preventDefault();
-                    dropZone.classList.add("dragover");
-                });
-
-                dropZone.addEventListener("dragleave", function() {
-                    dropZone.classList.remove("dragover");
-                });
-
-                dropZone.addEventListener("drop", function(e) {
-                    e.preventDefault();
-                    dropZone.classList.remove("dragover");
-                    
-                    const files = e.dataTransfer.files;
-                    if (files.length > 0 && files[0].name.endsWith(".csv")) {
-                        uploadCSV(files[0]);
-                    } else {
-                        showUploadStatus("Hanya file CSV yang diperbolehkan!", "danger");
-                    }
-                });
-
-                fileInput.addEventListener("change", function() {
-                    if (fileInput.files.length > 0) {
-                        uploadCSV(fileInput.files[0]);
-                    }
-                });
-            }
+            fetch("/api/mpls/config").then(r => r.json()).then(d => {
+                if (d.success) {
+                    mplsDays = d.config.event_days || [];
+                    mplsDays.forEach((day, i) => {
+                        const h = document.getElementById(`day-header-${i}`);
+                        if (h) h.innerHTML = `Hari ${i+1}<span class="badge-date">${day}</span>`;
+                    });
+                }
+            });
         });
 
-        // Refresh statistics
         function refreshDashboardStats() {
-            const dateInput = document.getElementById("attendanceDate").value;
-            const url = dateInput ? `/api/admin/stats?date=${dateInput}` : "/api/admin/stats";
-            
-            fetch(url)
-                .then(res => res.json())
-                .then(stats => {
-                    document.getElementById("stat-total-students").innerText = stats.total_students;
-                    document.getElementById("stat-present").innerText = stats.total_present;
-                    document.getElementById("stat-absent").innerText = stats.total_absent;
-                    document.getElementById("stat-percentage").innerText = `${stats.percentage}%`;
-
-                    // Generate Class Stats Table
-                    classStatsBody.innerHTML = "";
-                    if (Object.keys(stats.class_stats).length > 0) {
-                        Object.keys(stats.class_stats).sort().forEach(cls => {
-                            const data = stats.class_stats[cls];
-                            const percent = data.total > 0 ? Math.round(data.present / data.total * 100) : 0;
-                            const row = document.createElement("tr");
-                            row.innerHTML = `
-                                <td class="fw-bold text-primary-dark">${cls}</td>
-                                <td>${data.present} <span class="text-muted">/ ${data.total}</span></td>
-                                <td>
-                                    <div class="d-flex align-items-center gap-2">
-                                        <div class="flex-grow-1 progress-custom" style="width: 100px;">
-                                            <div class="progress-bar-fill" style="width: ${percent}%;"></div>
-                                        </div>
-                                        <span class="small fw-bold text-muted">${percent}%</span>
-                                    </div>
-                                </td>
-                            `;
-                            classStatsBody.appendChild(row);
-                        });
-                    } else {
-                        classStatsBody.innerHTML = `<tr><td colspan="3" class="text-center py-4 text-muted">Belum ada data siswa</td></tr>`;
-                    }
-
-                    // Generate Group Stats Cards
-                    groupStatsContainer.innerHTML = "";
-                    const sortedGroups = Object.keys(stats.group_stats).sort((a,b) => {
-                        // Extract numbers to sort numerically if possible
-                        const numA = parseInt(a.replace(/\D/g, '')) || 0;
-                        const numB = parseInt(b.replace(/\D/g, '')) || 0;
-                        return numA - numB;
-                    });
-
-                    if (sortedGroups.length > 0) {
-                        sortedGroups.forEach(grp => {
-                            const data = stats.group_stats[grp];
-                            const percent = data.total > 0 ? Math.round(data.present / data.total * 100) : 0;
-                            
-                            const col = document.createElement("div");
-                            col.classList.add("col-xl-3", "col-md-4", "col-sm-6");
-                            col.innerHTML = `
-                                <div class="p-3 bg-light border rounded-3 h-100" style="transition: var(--transition);">
-                                    <div class="fw-bold small text-truncate text-primary-dark" title="${grp}">${grp}</div>
-                                    <div class="d-flex justify-content-between align-items-end mt-2">
-                                        <div class="fs-5 fw-bold">${data.present}<span class="fs-6 text-muted font-monospace">/${data.total}</span></div>
-                                        <span class="badge ${percent === 100 ? 'bg-success' : 'bg-primary'} bg-opacity-10 text-${percent === 100 ? 'success' : 'primary'} fs-7 fw-bold">${percent}%</span>
-                                    </div>
-                                    <div class="progress-custom mt-2">
-                                        <div class="progress-bar-fill" style="width: ${percent}%;"></div>
-                                    </div>
+            fetch("/api/admin/stats").then(r => r.json()).then(stats => {
+                document.getElementById("stat-total-students").innerText = stats.total_students;
+                document.getElementById("stat-present").innerText = stats.total_present;
+                document.getElementById("stat-absent").innerText = stats.total_absent;
+                document.getElementById("stat-percentage").innerText = `${stats.percentage}%`;
+                const tbody = document.getElementById("daily-stats-body");
+                tbody.innerHTML = "";
+                const days = stats.date_stats || {};
+                const dayNames = Object.keys(days);
+                if (dayNames.length > 0) {
+                    dayNames.sort().forEach((day, i) => {
+                        const d = days[day];
+                        const pct = d.total > 0 ? Math.round(d.hadir / d.total * 100) : 0;
+                        const tr = document.createElement("tr");
+                        tr.innerHTML = `
+                            <td class="fw-bold">Hari ${i+1}</td>
+                            <td class="font-monospace small">${day}</td>
+                            <td class="text-success fw-bold">${d.hadir}</td>
+                            <td class="text-danger">${d.tidak_hadir}</td>
+                            <td class="fw-bold">${pct}%</td>
+                            <td style="width:150px;">
+                                <div class="progress" style="height:8px;">
+                                    <div class="progress-bar bg-success" style="width:${pct}%"></div>
                                 </div>
-                            `;
-                            groupStatsContainer.appendChild(col);
-                        });
-                    } else {
-                        groupStatsContainer.innerHTML = `<div class="col-12 text-center py-4 text-muted">Belum ada data kelompok</div>`;
-                    }
-                })
-                .catch(err => console.error("Error loading dashboard statistics:", err));
-        }
-
-        // Load Student List
-        function loadStudentsList() {
-            studentsBody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-muted"><div class="spinner-border text-primary spinner-border-sm me-2"></div>Memuat data...</td></tr>`;
-            
-            fetch("/api/admin/stats")
-                .then(res => res.json())
-                .then(stats => {
-                    // Let's pull student data. Since we don't have a direct API to stream all students, we can query it using search with empty query, which returns empty list, or we fetch a custom log. Wait!
-                    // Let's make an API endpoint /api/admin/students to list all students!
-                    // Let's write code for this in javascript by requesting details. But wait, we don't have /api/admin/students, we only have search.
-                    // Wait, let's look at `api_admin_stats` or `api_admin_attendance_export`!
-                    // Can we create an endpoint to fetch all students? Yes! We should add it to main.py, or we can just fetch attendance log and stats.
-                    // Wait, let's verify if we already added `/api/admin/attendance`. Yes, that only returns present students.
-                    // Let's create `/api/admin/students` endpoint in `main.py` if we need to, OR we can modify search API to return all students if query is "*".
-                    // Let's see: `main.py` search route:
-                    // `query = request.args.get("q", "").strip().lower()`
-                    // If we fetch `/api/students/search` without query it returns `[]`, but what if we add `/api/admin/students` endpoint? Let's check if we added it in `main.py`.
-                    // In `main.py` we didn't add `/api/admin/students`!
-                    // Let's double check if we can add it, or if we can use search with query to search.
-                    // Wait! To make managing students seamless, we should definitely have a way to view all students. Let's add the route `/api/admin/students` to `main.py` using `replace_file_content`.
-                    // But wait, let's see if we can do that. Yes, we can! Let's write the javascript to fetch from `/api/admin/students`!
-                    // Let's call `/api/admin/students` to populate the table.
-                });
-
-            fetch("/api/admin/students")
-                .then(res => res.json())
-                .then(students => {
-                    allStudents = students;
-                    renderStudentTable(students);
-                })
-                .catch(err => {
-                    console.error("Error loading students list:", err);
-                    studentsBody.innerHTML = `<tr><td colspan="4" class="text-center py-4 text-danger">Gagal memuat data siswa</td></tr>`;
-                });
-        }
-
-        // Render Student List Table
-        function renderStudentTable(students) {
-            studentsBody.innerHTML = "";
-            if (students.length > 0) {
-                students.forEach(student => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td><strong>${student.nama}</strong></td>
-                        <td>${student.kelas}</td>
-                        <td>${student.kelompok} <span class="badge bg-secondary bg-opacity-10 text-secondary fs-8">${student.jenis}</span></td>
-                        <td>${student.mentor || '-'}</td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-primary" onclick="viewStudentAttendance('${student.id}')">
-                                <i class="bi bi-calendar-check"></i> Lihat Absensi
-                            </button>
-                        </td>
-                    `;
-                    studentsBody.appendChild(row);
-                });
-            } else {
-                studentsBody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted">Tidak ada data siswa terdaftar</td></tr>`;
-            }
-        }
-
-        // Load Attendance Log
-        function loadAttendanceLog() {
-            attendanceBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted"><div class="spinner-border text-primary spinner-border-sm me-2"></div>Memuat data...</td></tr>`;
-            
-            const dateInput = document.getElementById("attendanceLogDate").value;
-            const url = dateInput ? `/api/admin/attendance?date=${dateInput}` : "/api/admin/attendance";
-            
-            fetch(url)
-                .then(res => res.json())
-                .then(attendance => {
-                    allAttendance = attendance;
-                    renderAttendanceTable(attendance);
-                })
-                .catch(err => {
-                    console.error("Error loading attendance log:", err);
-                    attendanceBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-danger">Gagal memuat data log kehadiran</td></tr>`;
-                });
-        }
-
-        // Render Attendance Table
-        function renderAttendanceTable(attendance) {
-            attendanceBody.innerHTML = "";
-            if (attendance.length > 0) {
-                attendance.forEach(log => {
-                    const row = document.createElement("tr");
-                    row.innerHTML = `
-                        <td class="font-monospace small text-muted">${log.date || '-'}</td>
-                        <td class="font-monospace small text-muted">${log.timestamp}</td>
-                        <td><strong>${log.nama}</strong></td>
-                        <td>${log.kelas}</td>
-                        <td>${log.kelompok} <span class="badge bg-secondary bg-opacity-10 text-secondary fs-8">${log.jenis}</span></td>
-                        <td>${log.mentor}</td>
-                    `;
-                    attendanceBody.appendChild(row);
-                });
-            } else {
-                attendanceBody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted">Belum ada siswa yang melakukan absensi</td></tr>`;
-            }
-        }
-
-        // Upload CSV File
-        function uploadCSV(file) {
-            const formData = new FormData();
-            formData.append("file", file);
-
-            showUploadStatus(`<div class="spinner-border text-primary spinner-border-sm me-2"></div>Mengunggah file...`, "info");
-
-            fetch("/api/admin/students/upload", {
-                method: "POST",
-                body: formData
-            })
-            .then(res => res.json())
-            .then(res => {
-                if (res.success) {
-                    showUploadStatus(`<i class="bi bi-check-circle-fill"></i> ${res.message}`, "success");
-                    loadStudentsList();
-                    refreshDashboardStats();
+                            </td>
+                        `;
+                        tbody.appendChild(tr);
+                    });
                 } else {
-                    showUploadStatus(`<i class="bi bi-x-circle-fill"></i> Gagal: ${res.message}`, "danger");
+                    tbody.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-muted">Belum ada data</td></tr>`;
                 }
-            })
-            .catch(err => {
-                console.error("Upload error:", err);
-                showUploadStatus(`<i class="bi bi-exclamation-circle-fill"></i> Terjadi kesalahan jaringan saat mengunggah.`, "danger");
+            }).catch(err => console.error("Stats error:", err));
+        }
+
+        function loadMainTable() {
+            const tbody = document.getElementById("main-table-body");
+            tbody.innerHTML = `<tr><td colspan="12" class="text-center py-5 text-muted"><div class="spinner-border text-primary spinner-border-sm me-2"></div>Memuat ${allDetailData.length > 0 ? allDetailData.length + ' siswa...' : 'data...'}</td></tr>`;
+            fetch("/api/admin/students/detail").then(r => r.json()).then(data => {
+                allDetailData = data;
+                renderMainTable(data);
+            }).catch(err => {
+                console.error("Error:", err);
+                tbody.innerHTML = `<tr><td colspan="12" class="text-center py-4 text-danger">Gagal memuat data</td></tr>`;
             });
         }
 
-        function showUploadStatus(msg, type) {
-            const statusDiv = document.getElementById("uploadStatus");
-            statusDiv.innerHTML = `<div class="alert alert-${type} py-2 px-3 small border-0">${msg}</div>`;
-        }
-
-        // Clear Database
-        function clearDatabase() {
-            if (confirm("Apakah Anda yakin ingin mengosongkan seluruh database siswa dan log absensi?\nTindakan ini tidak dapat dibatalkan!")) {
-                fetch("/api/admin/students/clear", {
-                    method: "POST"
-                })
-                .then(res => res.json())
-                .then(res => {
-                    if (res.success) {
-                        alert(res.message);
-                        loadStudentsList();
-                        refreshDashboardStats();
-                    }
-                })
-                .catch(err => console.error("Error clearing database:", err));
+        function renderMainTable(data) {
+            const tbody = document.getElementById("main-table-body");
+            tbody.innerHTML = "";
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="12" class="text-center py-4 text-muted">Tidak ada data siswa</td></tr>`;
+                document.getElementById("table-info").innerText = "0 siswa";
+                return;
             }
+            data.sort((a, b) => {
+                if (a.sekolah !== b.sekolah) return a.sekolah.localeCompare(b.sekolah);
+                if (a.kelas !== b.kelas) return a.kelas.localeCompare(b.kelas);
+                return a.nama.localeCompare(b.nama);
+            });
+            data.forEach((s, i) => {
+                const tr = document.createElement("tr");
+                let daysHtml = "";
+                const days = s.attendance_5day || [];
+                days.forEach(d => {
+                    let cls = "status-belum", label = d.status;
+                    if (d.status === "Hadir") { cls = "status-hadir"; label = "H"; }
+                    else if (d.status === "Tidak Hadir") { cls = "status-tidak"; label = "TH"; }
+                    daysHtml += `<td style="text-align:center;"><span class="${cls}">${label}</span></td>`;
+                });
+                while (daysHtml === "" && mplsDays.length > 0) {
+                    daysHtml += `<td style="text-align:center;">-</td>`;
+                }
+                tr.innerHTML = `
+                    <td class="sticky-col text-muted small" style="left:0;">${i+1}</td>
+                    <td><strong>${s.nama}</strong></td>
+                    <td>${s.sekolah || '-'}</td>
+                    <td>${s.kelas}</td>
+                    <td><span class="badge bg-primary bg-opacity-10 text-primary">${s.kelompok}</span></td>
+                    <td class="small">${s.mentor}</td>
+                    <td style="text-align:center;"><strong>${s.total_hadir}/${s.total_days}</strong></td>
+                    ${daysHtml}
+                `;
+                tbody.appendChild(tr);
+            });
+            document.getElementById("table-info").innerText = `${data.length} siswa`;
         }
 
-        // Filter Student List Table Local Search
-        function filterStudentListTable() {
-            const searchKey = document.getElementById("studentSearchKey").value.toLowerCase();
-            const filtered = allStudents.filter(s => 
-                s.nama.toLowerCase().includes(searchKey) ||
-                s.kelas.toLowerCase().includes(searchKey) ||
-                s.kelompok.toLowerCase().includes(searchKey) ||
-                (s.mentor && s.mentor.toLowerCase().includes(searchKey))
+        function filterMainTable() {
+            const q = document.getElementById("studentSearchKey").value.toLowerCase();
+            if (!q) { renderMainTable(allDetailData); return; }
+            const filtered = allDetailData.filter(s =>
+                s.nama.toLowerCase().includes(q) ||
+                (s.sekolah || '').toLowerCase().includes(q) ||
+                s.kelas.toLowerCase().includes(q) ||
+                s.kelompok.toLowerCase().includes(q) ||
+                (s.mentor || '').toLowerCase().includes(q)
             );
-            renderStudentTable(filtered);
+            renderMainTable(filtered);
         }
 
-        // Filter Attendance Table Local Search
-        function filterAttendanceTable() {
-            const searchKey = document.getElementById("attendanceSearchKey").value.toLowerCase();
-            const filtered = allAttendance.filter(a => 
-                a.nama.toLowerCase().includes(searchKey) ||
-                a.kelas.toLowerCase().includes(searchKey) ||
-                a.kelompok.toLowerCase().includes(searchKey) ||
-                a.mentor.toLowerCase().includes(searchKey)
-            );
-            renderAttendanceTable(filtered);
+        function loadAttendanceLog() {
+            const tbody = document.getElementById("attendance-list-body");
+            tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted"><div class="spinner-border text-primary spinner-border-sm me-2"></div>Memuat...</td></tr>`;
+            const date = document.getElementById("attendanceLogDate").value;
+            const url = date ? `/api/admin/attendance?date=${date}` : "/api/admin/attendance";
+            fetch(url).then(r => r.json()).then(data => {
+                tbody.innerHTML = "";
+                if (data.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-muted">Belum ada scan pada tanggal ini</td></tr>`;
+                    return;
+                }
+                data.forEach(a => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td class="font-monospace small">${a.timestamp || '-'}</td>
+                        <td><strong>${a.nama}</strong></td>
+                        <td>${a.sekolah || '-'}</td>
+                        <td>${a.kelas}</td>
+                        <td><span class="badge bg-primary bg-opacity-10 text-primary">${a.kelompok || '-'}</span></td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }).catch(err => {
+                console.error("Log error:", err);
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-danger">Gagal memuat</td></tr>`;
+            });
         }
 
-        // Handle Logout
         function handleLogout() {
             if (confirm("Apakah Anda yakin ingin logout?")) {
-                fetch("/api/admin/logout", {
-                    method: "POST"
-                })
-                .then(res => res.json())
-                .then(res => {
-                    if (res.success) {
-                        window.location.href = "/admin/login";
-                    }
-                })
-                .catch(err => {
-                    console.error("Logout error:", err);
-                    window.location.href = "/admin/login";
-                });
+                fetch("/api/admin/logout", { method: "POST" })
+                    .then(() => window.location.href = "/admin/login")
+                    .catch(() => window.location.href = "/admin/login");
             }
-        }
-
-        // View Student Attendance Detail
-        function viewStudentAttendance(studentId) {
-            fetch(`/api/admin/student/${studentId}/attendance`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        showStudentAttendanceModal(data);
-                    } else {
-                        alert(data.message || "Gagal memuat data absensi siswa");
-                    }
-                })
-                .catch(err => {
-                    console.error("Error loading student attendance:", err);
-                    alert("Terjadi kesalahan saat memuat data absensi");
-                });
-        }
-
-        function showStudentAttendanceModal(data) {
-            const student = data.student;
-            const summary = data.attendance_summary;
-            
-            let attendanceHtml = summary.map(day => {
-                const statusClass = day.is_present ? 'bg-success' : 'bg-danger';
-                const statusText = day.is_present ? 'Hadir' : 'Tidak Hadir';
-                const timeText = day.timestamp ? day.timestamp.split(' ')[1] : '-';
-                
-                return `
-                    <tr>
-                        <td class="font-monospace small">${day.date}</td>
-                        <td><span class="badge ${statusClass}">${statusText}</span></td>
-                        <td class="font-monospace small">${timeText}</td>
-                    </tr>
-                `;
-            }).join('');
-            
-            const modalHtml = `
-                <div class="modal fade" id="studentAttendanceModal" tabindex="-1">
-                    <div class="modal-dialog modal-dialog-centered modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title fw-bold">
-                                    <i class="bi bi-person-lines-fill me-2"></i>
-                                    Riwayat Absensi: ${student.nama}
-                                </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <strong>Kelas:</strong> ${student.kelas}
-                                    </div>
-                                    <div class="col-md-6">
-                                        <strong>Kelompok:</strong> ${student.kelompok}
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <strong>Jenis:</strong> ${student.jenis}
-                                    </div>
-                                    <div class="col-md-6">
-                                        <strong>Kakak Pembina:</strong> ${student.mentor}
-                                    </div>
-                                </div>
-                                <div class="alert alert-info">
-                                    <strong>Total Hadir:</strong> ${data.total_present} / ${data.total_days} hari
-                                </div>
-                                <h6 class="fw-bold mb-3">Detail Kehadiran:</h6>
-                                <div class="table-responsive">
-                                    <table class="table table-sm table-bordered">
-                                        <thead class="table-light">
-                                            <tr>
-                                                <th>Tanggal</th>
-                                                <th>Status</th>
-                                                <th>Waktu</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            ${attendanceHtml}
-                                        </tbody>
-                                    </table>
-                                </div>
-                                ${data.absent_dates.length > 0 ? `
-                                    <div class="mt-3">
-                                        <strong>Tanggal Tidak Hadir:</strong>
-                                        <span class="text-danger">${data.absent_dates.join(', ')}</span>
-                                    </div>
-                                ` : ''}
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // Remove existing modal if any
-            const existingModal = document.getElementById('studentAttendanceModal');
-            if (existingModal) {
-                existingModal.remove();
-            }
-            
-            // Add new modal
-            document.body.insertAdjacentHTML('beforeend', modalHtml);
-            
-            // Show modal
-            const modal = new bootstrap.Modal(document.getElementById('studentAttendanceModal'));
-            modal.show();
         }
     </script>
 </body>
