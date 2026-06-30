@@ -39,7 +39,7 @@ ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp", "pdf"}
 # ===============================
 # Set True untuk menampilkan QR Code absensi di halaman cek data siswa,
 # Set False untuk menyembunyikannya (ubah di sini, bukan di frontend)
-SHOW_QRIS = False
+SHOW_QRIS = True
 
 # MPLS Configuration
 MPLS_CONFIG = {
