@@ -1,0 +1,226 @@
+{
+  "Ketua dan Wakil Ketua OSIS": {
+    "id": "ketua_dan_wakil_ketua_osis",
+    "description": "Calon Ketua dan Wakil Ketua OSIS wajib mengerjakan tugas berikut sebagai bagian dari proses seleksi.",
+    "requirements": [
+      "Membuat sebuah file mengenai visi, misi, dan program kerja yang akan dijalankan apabila terpilih menjadi Ketua/Wakil Ketua OSIS.",
+      "Menjawab study case menurut pendapat sendiri (maksimal 350 kata).",
+      "Study case: Sekolah memiliki lebih dari 1.600 siswa. Pada beberapa event yang diselenggarakan OSIS, beberapa siswa merasa acara OSIS membosankan, terlalu formal, atau tidak sesuai minat mereka. Bagaimana cara mengatasi hal tersebut? Acara utama apa saja yang harus diprioritaskan oleh OSIS?",
+      "Melampirkan pengalaman atau keterangan pernah memimpin kegiatan atau organisasi."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Sekretaris": {
+    "id": "sekretaris",
+    "description": "Calon Sekretaris wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat proposal kegiatan acara 17 Agustus.",
+      "Proposal dibuat dalam format Microsoft Word kemudian dikonversi ke PDF.",
+      "Upload file Word dan PDF ke Google Drive."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Bendahara": {
+    "id": "bendahara",
+    "description": "Calon Bendahara wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat Excel atau Google Spreadsheet data keuangan kegiatan 17 Agustus."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Bela Negara": {
+    "id": "bela_negara",
+    "description": "Calon Bela Negara wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat rundown kegiatan 17 Agustus.",
+      "Membuat tabel penjelasan tata cara pelaksanaan setiap games atau mini games pada rundown.",
+      "Rundown dan tabel games wajib dipisah pada sheet yang berbeda.",
+      "Seluruh tugas dibuat dalam Google Spreadsheet."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Multimedia On-Field": {
+    "id": "multimedia_onfield",
+    "description": "Calon Multimedia On-Field wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Jelaskan pemahaman mengenai peran Multimedia On-Field.",
+      "Sebutkan seluruh peralatan yang digunakan di lapangan beserta fungsinya.",
+      "Kumpulkan dalam format PDF."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Multimedia Website": {
+    "id": "multimedia_website",
+    "description": "Calon Multimedia Website wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat website portofolio diri sendiri.",
+      "Cantumkan teknologi (bahasa) yang digunakan.",
+      "Cantumkan pengalaman pemrograman.",
+      "Jika menggunakan LLM, sertakan model dan teknologi yang digunakan.",
+      "Deploy website menggunakan GitHub Pages, Vercel, atau platform deployment lainnya."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Hubungan Masyarakat dan Publikasi": {
+    "id": "hubungan_masyarakat_dan_publikasi",
+    "description": "Calon Humas dan Publikasi wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat video promosi mengenai Event Classmeet.",
+      "Membuat 1 desain poster Event Classmeet bertema bebas.",
+      "Cantumkan link Canva dengan akses 'Anyone with the link'.",
+      "Tidak menggunakan AI."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Sub Sekbid Desain (DDV)": {
+    "id": "sub_sekbid_desain_ddv",
+    "description": "Calon Sub Sekbid Desain wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Menggambar dan menganimasikan banner MPLS ukuran 1567x1045 px bertema Adventure Time tanpa menghilangkan citra MPLS.",
+      "Nilai tambah apabila desain kreatif dan inovatif.",
+      "Nilai tambah apabila membuat poster referensi menggunakan Canva atau aplikasi lainnya."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Sub Sekbid Dokumentasi (DDV)": {
+    "id": "sub_sekbid_dokumentasi_ddv",
+    "description": "Calon Dokumentasi wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Mengirim minimal 4 hasil foto pribadi tanpa editing.",
+      "Mengirim video cinematic durasi 25-30 detik.",
+      "Mengirim dokumen equipment yang dimiliki (kamera, lensa, tripod, gimbal, drone, dll)."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Sub Sekbid Kreatif (DDV)": {
+    "id": "sub_sekbid_kreatif_ddv",
+    "description": "Calon Kreatif wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Sketsa ide photobooth 17 Agustus.",
+      "Sketsa ide hadiah pemenang selain piala dan medali.",
+      "Rancangan kasar backdrop tema 17 Agustus.",
+      "Tidak diperbolehkan menggunakan AI.",
+      "Boleh mengumpulkan lebih dari satu sketsa/rancangan."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Ketuhanan Yang Maha Esa": {
+    "id": "ketuhanan_yang_maha_esa",
+    "description": "Calon Sekbid Ketuhanan wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat rundown hari raya besar keagamaan sesuai agama masing-masing.",
+      "Membuat ice breaking yang kreatif.",
+      "Membuat lomba hari raya besar keagamaan.",
+      "Folder Google Drive diberi nama NAMA LENGKAP_KELAS_RUNDOWN."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Sosial": {
+    "id": "sosial",
+    "description": "Calon Sekbid Sosial wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat dan menyampaikan speech berdurasi 2-4 menit bertema 'Beyond Kindness: Building a Culture of Care.'"
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Sub Sekbid Environment": {
+    "id": "sub_sekbid_environment",
+    "description": "Calon Environment wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat video kerajinan dengan prinsip 3R.",
+      "Menjelaskan bahan dan alat.",
+      "Menjelaskan proses pembuatan.",
+      "Menjelaskan hasil dan fungsi.",
+      "Menjelaskan alasan memilih produk, prinsip 3R, manfaat bagi kehidupan dan lingkungan."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Sub Sekbid Governance": {
+    "id": "sub_sekbid_governance",
+    "description": "Calon Governance wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat 1 halaman mind map strategi mengatasi masalah organisasi.",
+      "Boleh digital atau manual.",
+      "Memuat akar masalah, dampak, dan solusi nyata."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Komunikasi": {
+    "id": "komunikasi",
+    "description": "Calon Komunikasi wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat video simulasi MC HUT RI maksimal 5 menit.",
+      "Melampirkan naskah MC.",
+      "Dokumentasi/sertifikat pengalaman MC bersifat opsional."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Bahasa": {
+    "id": "bahasa",
+    "description": "Calon Sekbid Bahasa wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat nama event 17 Agustus yang unik dan bermakna.",
+      "Membuat caption Instagram.",
+      "Membuat speech 3 menit bertema 'Speak with Purpose: The Importance of Communication Skills'."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Apresiasi Seni dan Olahraga": {
+    "id": "apresiasi_seni_dan_olahraga",
+    "description": "Calon Sekbid Apresiasi Seni dan Olahraga wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Menjelaskan pemahaman tentang apresiasi seni dan olahraga.",
+      "Membuat video penampilan bakat.",
+      "Folder Google Drive: NAMA LENGKAP_BAKAT YANG DIMILIKI."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Sub Sekbid Illustrator": {
+    "id": "sub_sekbid_illustrator",
+    "description": "Calon Illustrator wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat PPT/Slides minigames Event Paskah.",
+      "Tema dan aplikasi bebas.",
+      "Sekreatif mungkin.",
+      "Nilai tambah jika menggunakan style pubmat."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Sub Sekbid Video Editor": {
+    "id": "sub_sekbid_video_editor",
+    "description": "Calon Video Editor wajib mengerjakan tugas berikut.",
+    "requirements": [
+      "Membuat video edit bertema bebas dengan durasi maksimal 3 menit."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  },
+  "Sub Sekbid Producer": {
+    "id": "sub_sekbid_producer",
+    "description": "Calon Producer wajib mengerjakan salah satu bidang berikut.",
+    "requirements": [
+      "Pemeran: Membuat 3 ide alur cerita short movie bertema Valentine, Paskah, dan Prom Night.",
+      "Script Writer: Menuliskan naskah cerita bebas dari awal sampai akhir."
+    ],
+    "youtube": "",
+    "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+  }
+}

@@ -10,6 +10,7 @@ salvatore_debug.log
 # Local data storage (contains user registration data)
 data/
 exports/
+progress_data/
 
 # Python cache
 __pycache__/

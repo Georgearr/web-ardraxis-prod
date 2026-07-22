@@ -23,6 +23,12 @@ from ravenith_config import (
 )
 from photobooth_config import PHOTOBOOTH_BANNER, PHOTOBOOTH_PAGE_SIZE
 from services.google_drive import get_photos, search_photos, clear_cache, fetch_drive_image
+from recruitment_config import (
+    SEKBID_SHEETS, PROGRESS_DIR, AUTOSAVE_DELAY, SESSION_TIMEOUT,
+)
+from recruitment_helpers import (
+    GoogleSheetsManager, ProgressManager, ValidationHelper, ConfigLoader,
+)
 
 app = Flask(__name__)
 app.secret_key = 'mpls_igs_2026_secret_key_for_session_management'
@@ -61,6 +67,9 @@ def get_mpls_days():
     return MPLS_CONFIG["event_days"]
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+recruit_progress = ProgressManager()
+recruit_sheets = GoogleSheetsManager()
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -767,6 +776,130 @@ def api_student_attendance_detail(student_id):
 @app.route("/api/mpls/config", methods=["GET"])
 def api_mpls_config():
     return jsonify({"success": True, "config": MPLS_CONFIG})
+
+# ===============================
+# RECRUITMENT
+# ===============================
+
+@app.route("/recruitment")
+def recruitment():
+    sekbid_list = ConfigLoader.get_sekbid_list()
+    return render_template(
+        "recruitment.html",
+        sekbid_list=sekbid_list,
+        autosave_delay=AUTOSAVE_DELAY,
+    )
+
+
+@app.route("/recruitment/progress")
+def recruitment_progress():
+    session_id = session.get("recruit_session_id")
+    if not session_id:
+        return jsonify({"success": False, "progress": None})
+    data = recruit_progress.load(session_id)
+    return jsonify({"success": True, "progress": data})
+
+
+@app.route("/recruitment/autosave", methods=["POST"])
+def recruitment_autosave():
+    try:
+        data = request.get_json()
+        if not data or "progress" not in data:
+            return jsonify({"success": False, "message": "No data"}), 400
+        session_id = session.get("recruit_session_id")
+        if not session_id:
+            import uuid
+            session_id = str(uuid.uuid4())
+            session["recruit_session_id"] = session_id
+        recruit_progress.save(session_id, data["progress"])
+        return jsonify({"success": True})
+    except Exception as e:
+        return jsonify({"success": False, "message": str(e)}), 500
+
+
+@app.route("/recruitment/clear", methods=["POST"])
+def recruitment_clear():
+    session_id = session.get("recruit_session_id")
+    if session_id:
+        recruit_progress.clear(session_id)
+        session.pop("recruit_session_id", None)
+    return jsonify({"success": True})
+
+
+@app.route("/recruitment/submit", methods=["POST"])
+def recruitment_submit():
+    try:
+        session_id = session.get("recruit_session_id")
+        progress = recruit_progress.load(session_id) if session_id else None
+
+        nama = request.form.get("nama") or (progress.get("nama") if progress else "")
+        kelas = request.form.get("kelas") or (progress.get("kelas") if progress else "")
+        sekbid_list = request.form.getlist("sekbid") or (progress.get("sekbid") if progress else [])
+        if isinstance(sekbid_list, str):
+            sekbid_list = [sekbid_list]
+        visi_misi = request.form.get("visi_misi") or (progress.get("visi_misi") if progress else "")
+        motivasi = request.form.get("motivasi") or (progress.get("motivasi") if progress else "")
+        kelebihan = request.form.get("kelebihan") or (progress.get("kelebihan") if progress else "")
+        kekurangan = request.form.get("kekurangan") or (progress.get("kekurangan") if progress else "")
+        pengalaman = request.form.get("pengalaman") or (progress.get("pengalaman") if progress else "")
+        prioritas = request.form.get("prioritas") or (progress.get("prioritas") if progress else "")
+        google_drive_link = request.form.get("google_drive_link") or (progress.get("google_drive_link") if progress else "")
+
+        if session.get("recruit_submitted"):
+            return jsonify({"success": False, "message": "Anda sudah melakukan pendaftaran sebelumnya. Tidak dapat mendaftar ulang."}), 400
+
+        errors_step1 = ValidationHelper.validate_step1({"nama": nama, "kelas": kelas})
+        if errors_step1:
+            return jsonify({"success": False, "message": "Data diri tidak valid: " + "; ".join(errors_step1.values())}), 400
+
+        errors_step2 = ValidationHelper.validate_step2({"sekbid": sekbid_list})
+        if errors_step2:
+            return jsonify({"success": False, "message": "Form tidak valid: " + "; ".join(errors_step2.values())}), 400
+
+        errors_step3 = ValidationHelper.validate_step3({
+            "visi_misi": visi_misi, "motivasi": motivasi,
+            "kelebihan": kelebihan, "kekurangan": kekurangan,
+            "prioritas": prioritas,
+        })
+        if errors_step3:
+            return jsonify({"success": False, "message": "Pertanyaan umum tidak valid: " + "; ".join(errors_step3.values())}), 400
+
+        errors_step4 = ValidationHelper.validate_step4({"google_drive_link": google_drive_link})
+        if errors_step4:
+            return jsonify({"success": False, "message": "Link Google Drive tidak valid: " + "; ".join(errors_step4.values())}), 400
+
+        data = {
+            "nama": nama,
+            "kelas": kelas,
+            "visi_misi": visi_misi,
+            "motivasi": motivasi,
+            "kelebihan": kelebihan,
+            "kekurangan": kekurangan,
+            "pengalaman": pengalaman,
+            "prioritas": prioritas,
+            "google_drive_link": google_drive_link,
+        }
+
+        sekbid_ids = []
+        all_sekbid = ConfigLoader.load_sekbid()
+        for item in sekbid_list:
+            for key, val in all_sekbid.items():
+                if val.get("id") == item:
+                    sekbid_ids.append(val["id"])
+                    break
+
+        success, message = recruit_sheets.save_submission(sekbid_ids or sekbid_list, data)
+        if not success:
+            return jsonify({"success": False, "message": message}), 500
+
+        session["recruit_submitted"] = True
+        recruit_progress.clear(session_id)
+
+        return jsonify({"success": True, "message": "Pendaftaran berhasil dikirim! Tim kami akan meninjau dan menghubungi Anda."})
+
+    except Exception as e:
+        return jsonify({"success": False, "message": "Terjadi kesalahan: " + str(e)}), 500
+
 
 # ===============================
 # RUN
