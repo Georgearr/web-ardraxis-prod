@@ -1,6 +1,7 @@
 (function () {
   var autosaveTimer = null;
   var isSubmitting = false;
+  var apiPrefix = window.RECRUITMENT_API_PREFIX || "/recruitment";
 
   var els = {
     landing: document.getElementById("recruit-landing"),
@@ -213,7 +214,7 @@
     var data = gatherAllData();
     if (!data.nama && !data.kelas) return;
     setAutosaveStatus("saving");
-    fetch("/recruitment/autosave", {
+      fetch(apiPrefix + "/autosave", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ progress: data }),
@@ -248,7 +249,7 @@
   }
 
   function loadProgress() {
-    fetch("/recruitment/progress")
+    fetch(apiPrefix + "/progress")
       .then(function (r) { return r.json(); })
       .then(function (res) {
         if (!res.success || !res.progress) return;
@@ -276,7 +277,7 @@
   }
 
   function clearProgress() {
-    fetch("/recruitment/clear", { method: "POST" }).catch(function () {});
+    fetch(apiPrefix + "/clear", { method: "POST" }).catch(function () {});
   }
 
   function buildStep4() {
@@ -540,7 +541,7 @@
     btn.disabled = true;
     btn.innerHTML = '<div class="recruit-spinner"></div> Mengirim...';
 
-    fetch("/recruitment/submit", {
+    fetch(apiPrefix + "/submit", {
       method: "POST",
       body: fd,
     })

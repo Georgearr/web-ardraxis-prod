@@ -23,8 +23,11 @@ from ravenith_config import (
 )
 from photobooth_config import PHOTOBOOTH_BANNER, PHOTOBOOTH_PAGE_SIZE
 from services.google_drive import get_photos, search_photos, clear_cache, fetch_drive_image
+from services.google_sheets import submit_recruitment
 from recruitment_config import (
-    SEKBID_SHEETS, PROGRESS_DIR, AUTOSAVE_DELAY, SESSION_TIMEOUT,
+    AUTOSAVE_DELAY, SESSION_TIMEOUT, VALID_SCHOOLS,
+    get_sekbid_data, get_school_metadata, get_progress_dir, get_spreadsheet_id,
+    load_school_json,
 )
 from recruitment_helpers import (
     GoogleSheetsManager, ProgressManager, ValidationHelper, ConfigLoader,
@@ -68,8 +71,11 @@ def get_mpls_days():
 
 os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
-recruit_progress = ProgressManager()
-recruit_sheets = GoogleSheetsManager()
+def get_recruit_progress(school_key=None):
+    return ProgressManager(progress_dir=get_progress_dir(school_key))
+
+def get_recruit_sheets(school_key=None):
+    return GoogleSheetsManager(spreadsheet_id=get_spreadsheet_id(school_key))
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -781,56 +787,120 @@ def api_mpls_config():
 # RECRUITMENT
 # ===============================
 
-@app.route("/recruitment")
-def recruitment():
-    sekbid_list = ConfigLoader.get_sekbid_list()
+# ===============================
+# RECRUITMENT HELPERS
+# ===============================
+
+def _recruit_school_from_url():
+    path = request.path
+    for s in VALID_SCHOOLS:
+        if path.startswith(f"/recruitment-{s}"):
+            return s
+    return None
+
+
+def _session_key(base, school):
+    return f"{base}_{school}" if school else base
+
+
+def _render_recruitment(school_key):
+    sekbid_list = ConfigLoader.get_sekbid_list(school_key)
+    school_cfg = ConfigLoader.get_school_config(school_key)
     return render_template(
         "recruitment.html",
         sekbid_list=sekbid_list,
         autosave_delay=AUTOSAVE_DELAY,
+        recruitment_api_prefix=f"/recruitment-{school_key}" if school_key else "/recruitment",
+        school_config=school_cfg,
     )
 
 
-@app.route("/recruitment/progress")
+# ===============================
+# RECRUITMENT ROUTES
+# ===============================
+
+@app.route("/recruitment")
+def recruitment_old():
+    abort(404)
+
+
+@app.route("/recruitment-sma-mayor")
+def recruitment_sma_mayor():
+    return _render_recruitment("sma-mayor")
+
+
+@app.route("/recruitment-sma-cgc")
+def recruitment_sma_cgc():
+    return _render_recruitment("sma-cgc")
+
+
+# --- Progress ---
+
+@app.route("/recruitment-sma-mayor/progress")
+@app.route("/recruitment-sma-cgc/progress")
 def recruitment_progress():
-    session_id = session.get("recruit_session_id")
+    school = _recruit_school_from_url()
+    sk = _session_key("recruit_session_id", school)
+    session_id = session.get(sk)
     if not session_id:
         return jsonify({"success": False, "progress": None})
-    data = recruit_progress.load(session_id)
+    pm = get_recruit_progress(school)
+    data = pm.load(session_id)
     return jsonify({"success": True, "progress": data})
 
 
-@app.route("/recruitment/autosave", methods=["POST"])
+# --- Autosave ---
+
+@app.route("/recruitment-sma-mayor/autosave", methods=["POST"])
+@app.route("/recruitment-sma-cgc/autosave", methods=["POST"])
 def recruitment_autosave():
     try:
         data = request.get_json()
         if not data or "progress" not in data:
             return jsonify({"success": False, "message": "No data"}), 400
-        session_id = session.get("recruit_session_id")
+        school = _recruit_school_from_url()
+        sk = _session_key("recruit_session_id", school)
+        session_id = session.get(sk)
         if not session_id:
             import uuid
             session_id = str(uuid.uuid4())
-            session["recruit_session_id"] = session_id
-        recruit_progress.save(session_id, data["progress"])
+            session[sk] = session_id
+        pm = get_recruit_progress(school)
+        pm.save(session_id, data["progress"])
         return jsonify({"success": True})
     except Exception as e:
         return jsonify({"success": False, "message": str(e)}), 500
 
 
-@app.route("/recruitment/clear", methods=["POST"])
+# --- Clear ---
+
+@app.route("/recruitment-sma-mayor/clear", methods=["POST"])
+@app.route("/recruitment-sma-cgc/clear", methods=["POST"])
 def recruitment_clear():
-    session_id = session.get("recruit_session_id")
+    school = _recruit_school_from_url()
+    sk = _session_key("recruit_session_id", school)
+    session_id = session.get(sk)
     if session_id:
-        recruit_progress.clear(session_id)
-        session.pop("recruit_session_id", None)
+        pm = get_recruit_progress(school)
+        pm.clear(session_id)
+        session.pop(sk, None)
     return jsonify({"success": True})
 
 
-@app.route("/recruitment/submit", methods=["POST"])
+# --- Submit ---
+
+@app.route("/recruitment-sma-mayor/submit", methods=["POST"])
+@app.route("/recruitment-sma-cgc/submit", methods=["POST"])
 def recruitment_submit():
     try:
-        session_id = session.get("recruit_session_id")
-        progress = recruit_progress.load(session_id) if session_id else None
+        school = _recruit_school_from_url()
+        sk = _session_key("recruit_session_id", school)
+        submitted_key = _session_key("recruit_submitted", school)
+
+        session_id = session.get(sk)
+        pm = get_recruit_progress(school)
+        sheets = get_recruit_sheets(school)
+        progress = pm.load(session_id) if session_id else None
 
         nama = request.form.get("nama") or (progress.get("nama") if progress else "")
         kelas = request.form.get("kelas") or (progress.get("kelas") if progress else "")
@@ -844,8 +914,9 @@ def recruitment_submit():
         pengalaman = request.form.get("pengalaman") or (progress.get("pengalaman") if progress else "")
         prioritas = request.form.get("prioritas") or (progress.get("prioritas") if progress else "")
         google_drive_link = request.form.get("google_drive_link") or (progress.get("google_drive_link") if progress else "")
+        sertifikat_link = request.form.get("sertifikat_link") or (progress.get("sertifikat_link") if progress else "")
 
-        if session.get("recruit_submitted"):
+        if session.get(submitted_key):
             return jsonify({"success": False, "message": "Anda sudah melakukan pendaftaran sebelumnya. Tidak dapat mendaftar ulang."}), 400
 
         errors_step1 = ValidationHelper.validate_step1({"nama": nama, "kelas": kelas})
@@ -878,22 +949,27 @@ def recruitment_submit():
             "pengalaman": pengalaman,
             "prioritas": prioritas,
             "google_drive_link": google_drive_link,
+            "sertifikat_link": sertifikat_link,
         }
 
+        school_config = load_school_json(school)
+        if not school_config:
+            return jsonify({"success": False, "message": "Konfigurasi sekolah tidak ditemukan"}), 500
+
         sekbid_ids = []
-        all_sekbid = ConfigLoader.load_sekbid()
+        all_sekbid = school_config.get("sekbid", {})
         for item in sekbid_list:
             for key, val in all_sekbid.items():
                 if val.get("id") == item:
                     sekbid_ids.append(val["id"])
                     break
 
-        success, message = recruit_sheets.save_submission(sekbid_ids or sekbid_list, data)
+        success, message = submit_recruitment(school_config, data, sekbid_ids or sekbid_list)
         if not success:
             return jsonify({"success": False, "message": message}), 500
 
-        session["recruit_submitted"] = True
-        recruit_progress.clear(session_id)
+        session[submitted_key] = True
+        pm.clear(session_id)
 
         return jsonify({"success": True, "message": "Pendaftaran berhasil dikirim! Tim kami akan meninjau dan menghubungi Anda."})
 

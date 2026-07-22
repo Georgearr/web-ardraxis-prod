@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Recruitment OSIS{% endblock %}
+{% block title %}{{ school_config.title }}{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/recruitment.css') }}" />
@@ -11,8 +11,8 @@
   <div class="recruit-container">
 
     <div class="recruit-header">
-      <h1>Recruitment OSIS</h1>
-      <p>Bergabunglah menjadi bagian dari OSIS SMA IGS periode 2026/2027</p>
+      <h1>{{ school_config.title }}</h1>
+      <p>{{ school_config.subtitle }}</p>
     </div>
 
     <div id="recruit-progress-bar" class="recruit-progress-bar">
@@ -51,13 +51,13 @@
 
       <div class="recruit-hero">
         <span class="recruit-hero-icon"><i class="bx bx-group"></i></span>
-        <h1>Rekrutmen Pengurus OSIS</h1>
-        <p>Kami mencari siswa-siswi terbaik SMA Ignatius Global School untuk bergabung dalam kabinet OSIS SMA IGS. Jadilah bagian dari perubahan dan pengembangan diri!</p>
+        <h1>{{ school_config.hero_title }}</h1>
+        <p>{{ school_config.hero_text }}</p>
       </div>
 
       <div class="recruit-card">
         <h2><i class="bx bx-list-check" style="color:var(--recruit-primary);margin-right:8px;"></i> Peraturan yang WAJIB Diketahui</h2>
-        <p style="margin-bottom:16px;">Berikut peraturan yang WAJIB diketahui sebelum mendaftar OSIS SMA IGS 2026/2027.</p>
+        <p style="margin-bottom:16px;">Berikut peraturan yang WAJIB diketahui sebelum mendaftar {{ school_config.name }} 2026/2027.</p>
         <ul class="recruit-requirements">
           <li>Anggota OSIS dilarang untuk menjalin hubungan pasangan dengan orang lain, baik di dalam maupun di luar organisasi, selama masa jabatan berlangsung.</li>
           <li>Anggota OSIS wajib mengikuti peraturan yang berlaku di sekolah tanpa terkecuali.</li>
@@ -252,7 +252,7 @@
         <div class="recruit-success-page">
           <i class="bx bx-check-circle recruit-success-icon"></i>
           <h2>Pendaftaran Berhasil!</h2>
-          <p>Terima kasih telah mendaftar sebagai pengurus OSIS SMA Ignatius Global School.</p>
+          <p>{{ school_config.success_text }}</p>
           <p>Tim kami akan meninjau pendaftaran Anda dan menghubungi melalui email yang didaftarkan.</p>
           <p style="margin-top:16px;font-weight:600;color:var(--recruit-primary);">Tetap pantau website dan media sosial OSIS untuk informasi selanjutnya!</p>
           <div style="margin-top:28px;">
@@ -284,6 +284,8 @@
 {% block extra_js %}
 <script>
   window.RECRUIT_SEKBID_LIST = {{ sekbid_list | tojson }};
+  window.RECRUITMENT_API_PREFIX = "{{ recruitment_api_prefix | safe }}";
+  window.RECRUITMENT_SCHOOL_CONFIG = {{ school_config | tojson }};
 </script>
 <script src="{{ url_for('static', filename='js/recruitment.js') }}"></script>
 {% endblock %}

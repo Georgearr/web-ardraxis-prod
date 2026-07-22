@@ -8,24 +8,73 @@ RECRUITMENT_ENABLED = True
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-SEKBID_JSON_PATH = os.path.join(BASE_DIR, "config", "recruitment_sekbid.json")
-
-PROGRESS_DIR = os.path.join(BASE_DIR, "progress_data")
-
-SPREADSHEET_ID = os.getenv("RECRUITMENT_SPREADSHEET_ID", "")
-
 AUTOSAVE_DELAY = 1
 SESSION_TIMEOUT = 86400
 
-SEKBID_SHEETS = {
-    "sekbid_1": "Sekbid_1_Keimanan",
-    "sekbid_2": "Sekbid_2_Budi_Pekerti",
-    "sekbid_3": "Sekbid_3_Kepribadian",
-    "sekbid_4": "Sekbid_4_Demokrasi",
-    "sekbid_5": "Sekbid_5_Kewirausahaan",
-    "sekbid_6": "Sekbid_6_Jasmani",
-    "sekbid_7": "Sekbid_7_Sastra_Budaya",
-    "sekbid_8": "Sekbid_8_Teknologi",
-    "sekbid_9": "Sekbid_9_Bahasa_Asing",
-    "sekbid_10": "Sekbid_10_Sosial",
-}
+VALID_SCHOOLS = {"sma-mayor", "sma-cgc"}
+
+
+def get_sekbid_json_path(school_key=None):
+    if school_key:
+        safe = school_key.replace("-", "_")
+        return os.path.join(BASE_DIR, "config", f"recruitment_{safe}.json")
+    return os.path.join(BASE_DIR, "config", "recruitment_sekbid.json")
+
+
+def get_progress_dir(school_key=None):
+    base = os.path.join(BASE_DIR, "progress_data")
+    if school_key:
+        return os.path.join(base, school_key)
+    return base
+
+
+def get_spreadsheet_id(school_key=None):
+    env_key = f"RECRUITMENT_SPREADSHEET_ID_{school_key.upper().replace('-', '_')}" if school_key else "RECRUITMENT_SPREADSHEET_ID"
+    return os.getenv(env_key, "")
+
+
+def get_school_config_path(school_key):
+    return get_sekbid_json_path(school_key)
+
+
+def load_school_json(school_key):
+    path = get_school_config_path(school_key)
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return None
+
+
+def get_sekbid_data(school_key=None):
+    path = get_sekbid_json_path(school_key)
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+            if "sekbid" in data:
+                return data["sekbid"]
+            return data
+    except Exception:
+        return {}
+
+
+def get_google_config(school_key):
+    data = load_school_json(school_key)
+    if data and "google" in data:
+        return data["google"]
+    return {"spreadsheet_id": ""}
+
+
+def get_school_metadata(school_key):
+    data = load_school_json(school_key)
+    if data and "school" in data:
+        return data["school"]
+    return {
+        "name": school_key.upper() if school_key else "Sekolah",
+        "short": school_key.split("-")[-1].upper() if school_key and "-" in school_key else "",
+        "title": "Recruitment OSIS",
+        "subtitle": "Bergabunglah menjadi bagian dari OSIS periode 2026/2027",
+        "hero_title": "Rekrutmen Pengurus OSIS",
+        "hero_text": "",
+        "success_text": "Terima kasih telah mendaftar.",
+    }

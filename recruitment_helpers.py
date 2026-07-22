@@ -7,22 +7,19 @@ import gspread
 from google.oauth2.service_account import Credentials
 
 from recruitment_config import (
-    SEKBID_SHEETS, PROGRESS_DIR, SPREADSHEET_ID, SEKBID_JSON_PATH,
+    get_sekbid_data, get_school_metadata, get_progress_dir, get_spreadsheet_id,
+    AUTOSAVE_DELAY,
 )
 
 
 class ConfigLoader:
     @staticmethod
-    def load_sekbid():
-        try:
-            with open(SEKBID_JSON_PATH, "r", encoding="utf-8") as f:
-                return json.load(f)
-        except Exception:
-            return {}
+    def load_sekbid(school_key=None):
+        return get_sekbid_data(school_key)
 
     @staticmethod
-    def get_sekbid_list():
-        data = ConfigLoader.load_sekbid()
+    def get_sekbid_list(school_key=None):
+        data = ConfigLoader.load_sekbid(school_key)
         result = []
         for key, val in data.items():
             result.append({
@@ -35,6 +32,10 @@ class ConfigLoader:
                 "youtube": val.get("youtube", ""),
             })
         return result
+
+    @staticmethod
+    def get_school_config(school_key):
+        return get_school_metadata(school_key)
 
 
 class YouTubeEmbedHelper:
@@ -59,8 +60,9 @@ class YouTubeEmbedHelper:
 
 
 class GoogleSheetsManager:
-    def __init__(self, credentials_path="credentials.json"):
-        self.credentials_path = credentials_path
+    def __init__(self, spreadsheet_id=None):
+        self.spreadsheet_id = spreadsheet_id or get_spreadsheet_id()
+        self.credentials_path = "credentials.json"
         self._client = None
 
     def get_client(self):
@@ -91,11 +93,11 @@ class GoogleSheetsManager:
                 worksheet.update_cell(1, i + 1, headers[i])
 
     def save_submission(self, sekbid_keys, data):
-        if not SPREADSHEET_ID:
+        if not self.spreadsheet_id:
             return False, "Spreadsheet ID not configured"
 
         client = self.get_client()
-        spreadsheet = client.open_by_key(SPREADSHEET_ID)
+        spreadsheet = client.open_by_key(self.spreadsheet_id)
 
         headers = [
             "Timestamp", "Nama Lengkap", "Kelas",
@@ -106,8 +108,8 @@ class GoogleSheetsManager:
             "Link Tugas Sekbid",
         ]
 
-        sekbid_labels = []
         all_sekbid = ConfigLoader.load_sekbid()
+        sekbid_labels = []
         for k in sekbid_keys:
             for name, val in all_sekbid.items():
                 if val.get("id") == k:
@@ -132,7 +134,7 @@ class GoogleSheetsManager:
         ]
 
         for sekbid_key in sekbid_keys:
-            sheet_name = SEKBID_SHEETS.get(sekbid_key, sekbid_key)
+            sheet_name = sekbid_key
             try:
                 worksheet = self.ensure_sheet_exists(spreadsheet, sheet_name)
                 self.ensure_headers(worksheet, headers)
@@ -144,12 +146,13 @@ class GoogleSheetsManager:
 
 
 class ProgressManager:
-    def __init__(self):
-        os.makedirs(PROGRESS_DIR, exist_ok=True)
+    def __init__(self, progress_dir=None):
+        self.progress_dir = progress_dir or get_progress_dir()
+        os.makedirs(self.progress_dir, exist_ok=True)
 
     def _file_path(self, session_id):
         safe = secure_filename(str(session_id))
-        return os.path.join(PROGRESS_DIR, f"{safe}.json")
+        return os.path.join(self.progress_dir, f"{safe}.json")
 
     def save(self, session_id, data):
         file_path = self._file_path(session_id)
