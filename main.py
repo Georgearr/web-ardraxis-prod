@@ -7,8 +7,8 @@ import csv
 import io
 import re
 from datetime import datetime
-import gspread
-from google.oauth2.service_account import Credentials
+# import gspread  # Disabled temporarily (Recruitment migration)
+# from google.oauth2.service_account import Credentials  # Disabled temporarily (Recruitment migration)
 
 # Load environment variables FIRST
 load_dotenv()
@@ -39,7 +39,7 @@ app.secret_key = 'mpls_igs_2026_secret_key_for_session_management'
 # CONFIG
 # ===============================
 app.config['MAX_CONTENT_LENGTH'] = 5 * 1024 * 1024  # 5MB max upload
-app.config['UPLOAD_FOLDER'] = 'static/uploads/valentine'
+# app.config['UPLOAD_FOLDER'] = 'static/uploads/valentine'  # Disabled temporarily (Recruitment migration)
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp", "pdf"}
 
 # ===============================
@@ -68,7 +68,7 @@ def get_mpls_days():
     """Get all valid MPLS event days"""
     return MPLS_CONFIG["event_days"]
 
-os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+# os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)  # Disabled temporarily (Recruitment migration)
 
 def get_recruit_progress(school_key=None):
     return ProgressManager(progress_dir=get_progress_dir(school_key))
@@ -77,18 +77,19 @@ def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 # ===============================
-# GOOGLE SHEETS
+# GOOGLE SHEETS  # Disabled temporarily (Recruitment migration)
 # ===============================
-scope = [
-    "https://www.googleapis.com/auth/spreadsheets",
-    "https://www.googleapis.com/auth/drive"
-]
-
-creds = Credentials.from_service_account_file(
-    "valentine-sheet.json", scopes=scope
-)
-client = gspread.authorize(creds)
-sheet = client.open("Valentine_Order").sheet1
+# scope = [
+#     "https://www.googleapis.com/auth/spreadsheets",
+#     "https://www.googleapis.com/auth/drive"
+# ]
+#
+# creds = Credentials.from_service_account_file(
+#     "valentine-sheet.json", scopes=scope
+# )
+# client = gspread.authorize(creds)
+# sheet = client.open("Valentine_Order").sheet1
+# Disabled temporarily (Recruitment migration)
 
 # ===============================
 # ROUTES HTML
@@ -118,9 +119,9 @@ def meloria():
 def festiora():
     return render_template("e_festiora.html")
 
-@app.route("/cupids_corner")
-def cupids_corner():
-    return render_template("valentine_order.html")
+# @app.route("/cupids_corner")  # Disabled temporarily (Recruitment migration)
+# def cupids_corner():
+#     return "Temporarily Disabled", 404
 
 @app.route("/atthaira")
 def atthaira():
@@ -249,36 +250,37 @@ def get_registration_status(competition):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-@app.route("/valentine_order", methods=["POST"])
-def valentine_order():
-    try:
-        # Get form data
-        name = request.form.get("name")
-        message = request.form.get("message")
-        file = request.files.get("file")
+# @app.route("/valentine_order", methods=["POST"])  # Disabled temporarily (Recruitment migration)
+# def valentine_order():
+#     try:
+#         # Get form data
+#         name = request.form.get("name")
+#         message = request.form.get("message")
+#         file = request.files.get("file")
 
-        # Save file if uploaded
-        file_path = None
-        if file and allowed_file(file.filename):
-            filename = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{file.filename}"
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_path)
+#         # Save file if uploaded
+#         file_path = None
+#         if file and allowed_file(file.filename):
+#             filename = f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_{file.filename}"
+#             file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+#             file.save(file_path)
 
-        # Prepare data for sheets
-        row_data = [
-            datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            name,
-            message,
-            file_path or ""
-        ]
+#         # Prepare data for sheets
+#         row_data = [
+#             datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+#             name,
+#             message,
+#             file_path or ""
+#         ]
 
-        # Append to sheet
-        sheet.append_row(row_data)
+#         # Append to sheet
+#         sheet.append_row(row_data)
 
-        return jsonify({"success": True, "message": "Order submitted successfully!"})
+#         return jsonify({"success": True, "message": "Order submitted successfully!"})
 
-    except Exception as e:
-        return jsonify({"success": False, "message": str(e)}), 500
+#     except Exception as e:
+#         return jsonify({"success": False, "message": str(e)}), 500
+# Disabled temporarily (Recruitment migration)
 
 # ===============================
 # STUDENTS & ATTENDANCE SYSTEM
@@ -976,4 +978,4 @@ def recruitment_submit():
 # RUN
 # ===============================
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
