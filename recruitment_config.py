@@ -28,17 +28,8 @@ def get_progress_dir(school_key=None):
     return base
 
 
-def get_spreadsheet_id(school_key=None):
-    env_key = f"RECRUITMENT_SPREADSHEET_ID_{school_key.upper().replace('-', '_')}" if school_key else "RECRUITMENT_SPREADSHEET_ID"
-    return os.getenv(env_key, "")
-
-
-def get_school_config_path(school_key):
-    return get_sekbid_json_path(school_key)
-
-
 def load_school_json(school_key):
-    path = get_school_config_path(school_key)
+    path = get_sekbid_json_path(school_key)
     try:
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -56,13 +47,6 @@ def get_sekbid_data(school_key=None):
             return data
     except Exception:
         return {}
-
-
-def get_google_config(school_key):
-    data = load_school_json(school_key)
-    if data and "google" in data:
-        return data["google"]
-    return {"spreadsheet_id": ""}
 
 
 def get_school_metadata(school_key):

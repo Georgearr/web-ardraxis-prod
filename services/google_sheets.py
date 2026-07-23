@@ -1,8 +1,10 @@
 import os
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 import gspread
 from google.oauth2.service_account import Credentials
+from google.auth.exceptions import GoogleAuthError
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -10,9 +12,12 @@ SCOPE = [
 ]
 
 CREDENTIALS_PATHS = [
-    "credentials.json",
+    "secrets/google-service-account.json",
     "config/credentials.json",
+    "credentials.json",
 ]
+
+TIMEZONE = ZoneInfo("Asia/Jakarta")
 
 HEADERS = [
     "Timestamp", "Sekolah", "Nama", "Kelas",
@@ -34,15 +39,26 @@ def _find_credentials():
     return None
 
 
+def _get_credentials_path():
+    path = _find_credentials()
+    if path:
+        return path
+    locations = "\n".join(f"- {p}" for p in CREDENTIALS_PATHS)
+    raise FileNotFoundError(
+        "Google Service Account credentials not found.\n"
+        "Expected locations:\n"
+        f"{locations}"
+    )
+
+
 def get_client():
-    creds_path = _find_credentials()
-    if not creds_path:
-        raise FileNotFoundError(
-            "credentials.json tidak ditemukan. "
-            "Letakkan file Service Account Google di credentials.json atau config/credentials.json"
-        )
+    creds_path = _get_credentials_path()
     creds = Credentials.from_service_account_file(creds_path, scopes=SCOPE)
     return gspread.authorize(creds)
+
+
+def _now_jakarta():
+    return datetime.now(TIMEZONE).strftime("%Y-%m-%d %H:%M:%S")
 
 
 def _ensure_sheet(spreadsheet, sheet_name):
@@ -70,16 +86,29 @@ def submit_recruitment(school_config, form_data, sekbid_keys):
 
     try:
         client = get_client()
+    except FileNotFoundError as e:
+        return False, str(e)
+    except GoogleAuthError as e:
+        return False, f"Google Auth Error: {e}"
+    except Exception as e:
+        return False, f"Gagal memuat kredensial: {e}"
+
+    try:
         spreadsheet = client.open_by_key(spreadsheet_id)
     except gspread.exceptions.SpreadsheetNotFound:
         return False, (
-            f"Spreadsheet dengan ID '{spreadsheet_id}' tidak ditemukan. "
+            f"Spreadsheet dengan ID '{spreadsheet_id}' tidak ditemukan.\n"
             "Periksa apakah ID sudah benar dan Service Account memiliki akses."
         )
-    except FileNotFoundError as e:
-        return False, str(e)
+    except gspread.exceptions.APIError as e:
+        if "403" in str(e) or "permission" in str(e).lower():
+            return False, (
+                "Permission denied.\n"
+                "Please share the spreadsheet with the Service Account email as Editor."
+            )
+        return False, f"Google Sheets API Error: {e}"
     except Exception as e:
-        return False, f"Gagal terhubung ke Google Sheets: {str(e)}"
+        return False, f"Gagal terhubung ke Google Sheets: {e}"
 
     sekbid_data = school_config.get("sekbid", {})
     labels = []
@@ -97,7 +126,7 @@ def submit_recruitment(school_config, form_data, sekbid_keys):
     school_name = school_config.get("school", {}).get("name", "")
 
     row = [
-        datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        _now_jakarta(),
         school_name,
         form_data.get("nama", ""),
         form_data.get("kelas", ""),
@@ -119,7 +148,7 @@ def submit_recruitment(school_config, form_data, sekbid_keys):
             worksheet = _ensure_sheet(spreadsheet, sekbid_key)
             _ensure_headers(worksheet)
             worksheet.append_row(row)
-        except Exception:
+        except Exception as e:
             continue
 
     return True, "Pendaftaran berhasil disimpan"

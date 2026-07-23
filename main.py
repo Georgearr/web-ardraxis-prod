@@ -25,12 +25,11 @@ from photobooth_config import PHOTOBOOTH_BANNER, PHOTOBOOTH_PAGE_SIZE
 from services.google_drive import get_photos, search_photos, clear_cache, fetch_drive_image
 from services.google_sheets import submit_recruitment
 from recruitment_config import (
-    AUTOSAVE_DELAY, SESSION_TIMEOUT, VALID_SCHOOLS,
-    get_sekbid_data, get_school_metadata, get_progress_dir, get_spreadsheet_id,
-    load_school_json,
+    AUTOSAVE_DELAY, VALID_SCHOOLS,
+    get_progress_dir, load_school_json,
 )
 from recruitment_helpers import (
-    GoogleSheetsManager, ProgressManager, ValidationHelper, ConfigLoader,
+    ProgressManager, ValidationHelper, ConfigLoader,
 )
 
 app = Flask(__name__)
@@ -73,9 +72,6 @@ os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
 
 def get_recruit_progress(school_key=None):
     return ProgressManager(progress_dir=get_progress_dir(school_key))
-
-def get_recruit_sheets(school_key=None):
-    return GoogleSheetsManager(spreadsheet_id=get_spreadsheet_id(school_key))
 
 def allowed_file(filename):
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -899,7 +895,6 @@ def recruitment_submit():
 
         session_id = session.get(sk)
         pm = get_recruit_progress(school)
-        sheets = get_recruit_sheets(school)
         progress = pm.load(session_id) if session_id else None
 
         nama = request.form.get("nama") or (progress.get("nama") if progress else "")

@@ -7,7 +7,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 
 from recruitment_config import (
-    get_sekbid_data, get_school_metadata, get_progress_dir, get_spreadsheet_id,
+    get_sekbid_data, get_school_metadata, get_progress_dir,
     AUTOSAVE_DELAY,
 )
 
@@ -60,19 +60,39 @@ class YouTubeEmbedHelper:
 
 
 class GoogleSheetsManager:
+    CREDENTIALS_PATHS = [
+        "secrets/google-service-account.json",
+        "config/credentials.json",
+        "credentials.json",
+    ]
+
     def __init__(self, spreadsheet_id=None):
-        self.spreadsheet_id = spreadsheet_id or get_spreadsheet_id()
-        self.credentials_path = "credentials.json"
+        self.spreadsheet_id = spreadsheet_id or ""
         self._client = None
+
+    @staticmethod
+    def _find_credentials():
+        for path in GoogleSheetsManager.CREDENTIALS_PATHS:
+            if os.path.exists(path):
+                return path
+        return None
 
     def get_client(self):
         if self._client:
             return self._client
+        creds_path = self._find_credentials()
+        if not creds_path:
+            locations = "\n".join(f"- {p}" for p in self.CREDENTIALS_PATHS)
+            raise FileNotFoundError(
+                "Google Service Account credentials not found.\n"
+                "Expected locations:\n"
+                f"{locations}"
+            )
         scope = [
             "https://www.googleapis.com/auth/spreadsheets",
             "https://www.googleapis.com/auth/drive",
         ]
-        creds = Credentials.from_service_account_file(self.credentials_path, scopes=scope)
+        creds = Credentials.from_service_account_file(creds_path, scopes=scope)
         self._client = gspread.authorize(creds)
         return self._client
 
