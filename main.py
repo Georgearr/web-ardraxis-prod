@@ -25,7 +25,7 @@ from photobooth_config import PHOTOBOOTH_BANNER, PHOTOBOOTH_PAGE_SIZE
 from services.google_drive import get_photos, search_photos, clear_cache, fetch_drive_image
 from services.google_sheets import submit_recruitment
 from recruitment_config import (
-    AUTOSAVE_DELAY, VALID_SCHOOLS,
+    AUTOSAVE_DELAY, ENABLE_DUPLICATE_CHECK, VALID_SCHOOLS,
     get_progress_dir, load_school_json,
 )
 from recruitment_helpers import (
@@ -913,7 +913,7 @@ def recruitment_submit():
         google_drive_link = request.form.get("google_drive_link") or (progress.get("google_drive_link") if progress else "")
         sertifikat_link = request.form.get("sertifikat_link") or (progress.get("sertifikat_link") if progress else "")
 
-        if session.get(submitted_key):
+        if ENABLE_DUPLICATE_CHECK and session.get(submitted_key):
             return jsonify({"success": False, "message": "Anda sudah melakukan pendaftaran sebelumnya. Tidak dapat mendaftar ulang."}), 400
 
         errors_step1 = ValidationHelper.validate_step1({"nama": nama, "kelas": kelas})
@@ -965,7 +965,8 @@ def recruitment_submit():
         if not success:
             return jsonify({"success": False, "message": message}), 500
 
-        session[submitted_key] = True
+        if ENABLE_DUPLICATE_CHECK:
+            session[submitted_key] = True
         pm.clear(session_id)
 
         return jsonify({"success": True, "message": "Pendaftaran berhasil dikirim! Tim kami akan meninjau dan menghubungi Anda."})

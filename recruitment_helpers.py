@@ -38,25 +38,27 @@ class ConfigLoader:
         return get_school_metadata(school_key)
 
 
+def normalize_youtube_url(url):
+    if not url:
+        return ""
+    patterns = [
+        r"(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?(?:.*&)?v=([a-zA-Z0-9_-]+)",
+        r"(?:https?:\/\/)?youtu\.be\/([a-zA-Z0-9_-]+)",
+        r"(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]+)",
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, url)
+        if match:
+            return f"https://www.youtube.com/embed/{match.group(1)}"
+    if re.match(r"^[a-zA-Z0-9_-]+$", url):
+        return f"https://www.youtube.com/embed/{url}"
+    return ""
+
+
 class YouTubeEmbedHelper:
     @staticmethod
     def to_embed_url(url):
-        if not url:
-            return ""
-        patterns = [
-            r"(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)",
-            r"(?:https?:\/\/)?youtu\.be\/([a-zA-Z0-9_-]+)",
-            r"(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]+)",
-        ]
-        video_id = None
-        for pattern in patterns:
-            match = re.search(pattern, url)
-            if match:
-                video_id = match.group(1)
-                break
-        if video_id:
-            return f"https://www.youtube.com/embed/{video_id}"
-        return url
+        return normalize_youtube_url(url)
 
 
 class GoogleSheetsManager:

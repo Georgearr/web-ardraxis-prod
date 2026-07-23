@@ -300,9 +300,18 @@
       return sekbidKeys.indexOf(s.id) !== -1 || sekbidKeys.indexOf(s.key) !== -1;
     });
 
+    console.log("[Step5 DEBUG] allSekbid:", allSekbid);
+    console.log("[Step5 DEBUG] sekbidKeys:", sekbidKeys);
+    console.log("[Step5 DEBUG] selected:", selected);
+
     var html = "";
     selected.forEach(function (sekbid, idx) {
-      var embedUrl = toEmbedUrl(sekbid.youtube || "");
+      console.log("[Step5 DEBUG] sekbid[" + idx + "]:", sekbid);
+      console.log("[Step5 DEBUG] sekbid[" + idx + "].youtube:", sekbid.youtube);
+      var videoId = extractYoutubeId(sekbid.youtube || "");
+      var embedUrl = videoId ? "https://www.youtube.com/embed/" + videoId : "";
+      var watchUrl = videoId ? "https://www.youtube.com/watch?v=" + videoId : "";
+      console.log("[Step5 DEBUG] sekbid[" + idx + "].embedUrl:", embedUrl);
       html += '<div class="recruit-step4-sekbid">';
       html += "<h3>" + (idx + 1) + ". " + (sekbid.label || sekbid.key) + "</h3>";
       html += '<div class="recruit-step4-desc">' + sekbid.description + "</div>";
@@ -328,7 +337,8 @@
       }
 
       if (embedUrl) {
-        html += '<div class="recruit-video-wrap"><iframe src="' + embedUrl + '" allowfullscreen loading="lazy"></iframe></div>';
+        html += '<div class="recruit-video-wrap"><iframe src="' + embedUrl + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe></div>';
+        html += '<div class="recruit-video-fallback"><a href="' + watchUrl + '" target="_blank" rel="noopener noreferrer"><i class="bx bx-play-circle"></i> Tonton di YouTube</a></div>';
       }
 
       html += '<div class="recruit-form-group">';
@@ -362,16 +372,21 @@
     return Promise.resolve();
   }
 
-  function toEmbedUrl(url) {
+  function extractYoutubeId(url) {
     if (!url) return "";
-    var match;
-    match = url.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/);
-    if (match) return "https://www.youtube.com/embed/" + match[1];
-    match = url.match(/(?:https?:\/\/)?youtu\.be\/([a-zA-Z0-9_-]+)/);
-    if (match) return "https://www.youtube.com/embed/" + match[1];
-    match = url.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]+)/);
-    if (match) return "https://www.youtube.com/embed/" + match[1];
-    return url;
+    var id = null;
+    var m;
+    m = url.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?(?:.*&)?v=([a-zA-Z0-9_-]+)/);
+    if (m) id = m[1];
+    if (!id) { m = url.match(/(?:https?:\/\/)?youtu\.be\/([a-zA-Z0-9_-]+)/); if (m) id = m[1]; }
+    if (!id) { m = url.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/embed\/([a-zA-Z0-9_-]+)/); if (m) id = m[1]; }
+    if (!id && /^[a-zA-Z0-9_-]+$/.test(url)) id = url;
+    return id;
+  }
+
+  function normalizeYoutubeUrl(url) {
+    var id = extractYoutubeId(url);
+    return id ? "https://www.youtube.com/embed/" + id : "";
   }
 
   function buildReview() {

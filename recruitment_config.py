@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 RECRUITMENT_ENABLED = True
+ENABLE_DUPLICATE_CHECK = False
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -60,5 +61,7 @@ def get_school_metadata(school_key):
         "subtitle": "Bergabunglah menjadi bagian dari OSIS periode 2026/2027",
         "hero_title": "Rekrutmen Pengurus OSIS",
         "hero_text": "",
-        "success_text": "Terima kasih telah mendaftar.",
+        "success_title": "Pendaftaran Berhasil!",
+        "success_message": "Terima kasih telah mendaftar.",
+        "line_group_url": "",
     }

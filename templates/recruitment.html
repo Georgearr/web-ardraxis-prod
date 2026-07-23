@@ -105,7 +105,7 @@
           </div>
           <div class="recruit-form-group">
             <label for="kelas">Kelas</label>
-            <input type="text" id="kelas" name="kelas" class="recruit-input" placeholder="Contoh: X-A, XI-B, XII-C" required />
+            <input type="text" id="kelas" name="kelas" class="recruit-input" placeholder="Contoh: 10 Internasional, 11.2 (Teknik 1), 11 Internasional" required />
             <div class="recruit-error-text" data-field="kelas"></div>
           </div>
         </form>
@@ -251,13 +251,12 @@
       <div class="recruit-card">
         <div class="recruit-success-page">
           <i class="bx bx-check-circle recruit-success-icon"></i>
-          <h2>Pendaftaran Berhasil!</h2>
-          <p>{{ school_config.success_text }}</p>
-          <p>Tim kami akan meninjau pendaftaran Anda dan menghubungi melalui email yang didaftarkan.</p>
+          <h2>{{ school_config.success_title }}</h2>
+          <p>{{ school_config.success_message }}</p>
           <p style="margin-top:16px;font-weight:600;color:var(--recruit-primary);">Tetap pantau website dan media sosial OSIS untuk informasi selanjutnya!</p>
           <div style="margin-top:28px;">
-            <a href="{{ url_for('home') }}" class="recruit-btn recruit-btn-secondary">
-              <i class="bx bx-home"></i> Kembali ke Beranda
+            <a href="{{ school_config.line_group_url }}" target="_blank" rel="noopener noreferrer" class="recruit-btn recruit-btn-secondary">
+              <i class="bx bxl-line"></i> Join Grup LINE
             </a>
           </div>
         </div>

@@ -704,6 +704,32 @@
   border: none;
 }
 
+.recruit-video-fallback {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.recruit-video-fallback a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--recruit-primary);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.recruit-video-fallback a:hover {
+  background: rgba(29, 105, 110, 0.08);
+}
+
+.recruit-video-fallback i {
+  font-size: 18px;
+}
+
 .recruit-step4-sekbid {
   margin-bottom: 28px;
   padding-bottom: 20px;
