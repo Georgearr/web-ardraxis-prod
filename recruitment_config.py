@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 RECRUITMENT_ENABLED = True
+RECRUITMENT_STATUS = "closed"  # "open" or "closed"
 ENABLE_DUPLICATE_CHECK = False
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))

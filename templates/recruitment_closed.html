@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block title %}Pendaftaran Ditutup{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/recruitment.css') }}" />
+<style>
+  .recruit-closed-icon {
+    font-size: 5rem;
+    color: var(--recruit-primary);
+    margin-bottom: 20px;
+    display: block;
+    animation: recruitFadeIn 0.6s ease-out;
+  }
+  .recruit-closed-icon i {
+    filter: drop-shadow(0 4px 12px rgba(29, 105, 110, 0.3));
+  }
+  .recruit-closed-title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--recruit-primary);
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .recruit-closed-body {
+    font-size: 1.05rem;
+    color: var(--recruit-text-light);
+    line-height: 1.8;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .recruit-closed-body p {
+    margin-bottom: 16px;
+  }
+  .recruit-closed-signature {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 2px solid var(--recruit-border);
+    font-style: italic;
+    color: var(--recruit-primary);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  @media (max-width: 768px) {
+    .recruit-closed-title {
+      font-size: 2rem;
+    }
+    .recruit-closed-body {
+      font-size: 0.95rem;
+    }
+  }
+  @media (max-width: 480px) {
+    .recruit-closed-title {
+      font-size: 1.6rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block isi %}
+<div class="recruit-page">
+  <div class="recruit-container">
+    <div class="recruit-header">
+      <h1>{{ school_config.title }}</h1>
+      <p>{{ school_config.subtitle }}</p>
+    </div>
+
+    <div class="recruit-card" style="text-align:center;padding:60px 40px;">
+      <span class="recruit-closed-icon"><i class="bx bx-check-circle"></i></span>
+      <h1 class="recruit-closed-title">Pendaftaran Sudah Ditutup!</h1>
+      <div class="recruit-closed-body">
+        <p>Terima kasih kepada seluruh siswa-siswi SMA Ignatius Global School yang telah mengikuti Rekrutmen Pengurus OSIS Periode 2026/2027.</p>
+        <p>Kami mengapresiasi semangat, dedikasi, dan usaha yang telah kalian tunjukkan selama proses pendaftaran. Seluruh berkas yang telah dikirim akan diproses oleh panitia sesuai dengan tahapan seleksi.</p>
+        <p>Silakan menunggu pengumuman resmi melalui grup LINE.</p>
+        <p>Sekali lagi, terima kasih atas partisipasi dan semangat kalian. Sampai bertemu di kesempatan berikutnya!</p>
+      </div>
+      <div class="recruit-closed-signature">
+        ~ Multimedia Website &amp; Kabinet ARDRAXIS
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

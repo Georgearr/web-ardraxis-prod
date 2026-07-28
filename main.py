@@ -25,7 +25,7 @@ from photobooth_config import PHOTOBOOTH_BANNER, PHOTOBOOTH_PAGE_SIZE
 from services.google_drive import get_photos, search_photos, clear_cache, fetch_drive_image
 from services.google_sheets import submit_recruitment
 from recruitment_config import (
-    AUTOSAVE_DELAY, ENABLE_DUPLICATE_CHECK, VALID_SCHOOLS,
+    RECRUITMENT_STATUS, AUTOSAVE_DELAY, ENABLE_DUPLICATE_CHECK, VALID_SCHOOLS,
     get_progress_dir, load_school_json,
 )
 from recruitment_helpers import (
@@ -801,9 +801,21 @@ def _session_key(base, school):
     return f"{base}_{school}" if school else base
 
 
+def _recruitment_open_required():
+    if RECRUITMENT_STATUS != "open":
+        return jsonify({"success": False, "message": "Pendaftaran sudah ditutup."}), 403
+    return None
+
+
 def _render_recruitment(school_key):
-    sekbid_list = ConfigLoader.get_sekbid_list(school_key)
     school_cfg = ConfigLoader.get_school_config(school_key)
+    if RECRUITMENT_STATUS == "closed":
+        return render_template(
+            "recruitment_closed.html",
+            school_config=school_cfg,
+            recruitment_api_prefix=f"/recruitment-{school_key}" if school_key else "/recruitment",
+        )
+    sekbid_list = ConfigLoader.get_sekbid_list(school_key)
     return render_template(
         "recruitment.html",
         sekbid_list=sekbid_list,
@@ -837,6 +849,9 @@ def recruitment_sma_cgc():
 @app.route("/recruitment-sma-mayor/progress")
 @app.route("/recruitment-sma-cgc/progress")
 def recruitment_progress():
+    closed = _recruitment_open_required()
+    if closed:
+        return closed
     school = _recruit_school_from_url()
     sk = _session_key("recruit_session_id", school)
     session_id = session.get(sk)
@@ -852,6 +867,9 @@ def recruitment_progress():
 @app.route("/recruitment-sma-mayor/autosave", methods=["POST"])
 @app.route("/recruitment-sma-cgc/autosave", methods=["POST"])
 def recruitment_autosave():
+    closed = _recruitment_open_required()
+    if closed:
+        return closed
     try:
         data = request.get_json()
         if not data or "progress" not in data:
@@ -875,6 +893,9 @@ def recruitment_autosave():
 @app.route("/recruitment-sma-mayor/clear", methods=["POST"])
 @app.route("/recruitment-sma-cgc/clear", methods=["POST"])
 def recruitment_clear():
+    closed = _recruitment_open_required()
+    if closed:
+        return closed
     school = _recruit_school_from_url()
     sk = _session_key("recruit_session_id", school)
     session_id = session.get(sk)
@@ -890,6 +911,9 @@ def recruitment_clear():
 @app.route("/recruitment-sma-mayor/submit", methods=["POST"])
 @app.route("/recruitment-sma-cgc/submit", methods=["POST"])
 def recruitment_submit():
+    closed = _recruitment_open_required()
+    if closed:
+        return closed
     try:
         school = _recruit_school_from_url()
         sk = _session_key("recruit_session_id", school)
