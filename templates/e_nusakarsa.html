@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='css/e_nusakarsa.css') }}?v=1.1"
+/>
+{% endblock %}
+
+{% block isi %}
+<!-- Banner Section -->
+<section class="banner">
+  <img
+    src="{{ url_for('static', filename='img/banner/nusakarsa_banner.png') }}"
+    alt="Nusakarsa Banner"
+  />
+  <section class="gradient-banner"></section>
+</section>
+
+<!-- Deadline Badge -->
+<div class="deadline-container">
+  <div class="deadline-badge">
+    <h2>Starts • August 14, 2026</h2>
+    <p>See you in the event!</p>
+  </div>
+</div>
+
+<!-- About Section -->
+<section class="about">
+  <h1 class="about-title hidden">About {% block title %} Nusakarsa {% endblock %}</h1>
+  <div class="about-desc hidden">placeholder description</div>
+  <div class="about-panitia-row">
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Ketua Panitia</span></div>
+      <div class="about-panitia-name">Putri Syifa Azzahra</div>
+    </div>
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Wakil Ketua Panitia</span></div>
+      <div class="about-panitia-name">Khaeirin Alya Al Ghaffar</div>
+    </div>
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Wakil Ketua Panitia</span></div>
+      <div class="about-panitia-name">Syarafana Aziza</div>
+    </div>
+    <div class="about-panitia-item hidden">
+      <div><span class="about-panitia-role">Ketua Acara</span></div>
+      <div class="about-panitia-name">Naura Syifa Mazzayah</div>
+    </div>
+  </div>
+</section>
+
+<!-- Content Section -->
+<section class="content">
+  <div class="header">
+    <h1 class="hidden">Competitions</h1>
+  </div>
+  <div class="posters-grid">
+    {% set lomba = [
+      {'file': '', 'name': 'Hias Bekal', 'endpoint': 'hias_bekal'},
+      {'file': '', 'name': 'Nusantara in Colors', 'endpoint': 'nusakarsa'},
+      {'file': '', 'name': 'Tri Lomba', 'endpoint': 'nusakarsa'},
+      {'file': '', 'name': 'Got Talent Nusantara', 'endpoint': 'nusakarsa'},
+      {'file': '', 'name': 'Jejak Juang Cerdas', 'endpoint': 'nusakarsa'},
+      {'file': '', 'name': 'Mystery Mission', 'endpoint': 'nusakarsa'},
+      {'file': '', 'name': 'Balon Berantai', 'endpoint': 'nusakarsa'},
+      {'file': '', 'name': 'Makan Kerupuk', 'endpoint': 'nusakarsa'},
+      {'file': '', 'name': 'Sarung Sigap', 'endpoint': 'nusakarsa'},
+      {'file': '', 'name': 'Fashion Show', 'endpoint': 'nusakarsa'},
+    ] %}
+
+    {% for poster in lomba %}
+    <div class="poster-card" data-aos="fade-up">
+      <a href="{{ url_for( poster.endpoint ) }}" class="poster-link">
+        <div class="poster-image-wrapper">
+          <img
+            src="{{ url_for('static', filename='img/nusakarsa/' + poster.file) }}"
+            alt="{{ poster.name }}"
+            class="poster-image"
+            loading="lazy"
+          />
+          <div class="poster-overlay">
+            <div class="poster-info">
+              <h3 class="poster-name">{{ poster.name }}</h3>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div><br>
+
+  <div class="header" style="margin-top: 20px;">
+    <h1 class="hidden">Fun Activities</h1>
+  </div>
+  <div class="posters-grid">
+    {% set fun_activities = [
+      {'file': '', 'name': 'BTB'},
+      {'file': '', 'name': 'Mini Cinema'},
+      {'file': '', 'name': 'Finding Number'},
+      {'file': '', 'name': 'Sambung Lagu'},
+      {'file': '', 'name': 'Rona Wastra'},
+      {'file': '', 'name': 'Face Painting'},
+    ] %}
+
+    {% for poster in fun_activities %}
+    <div class="poster-card" data-aos="fade-up">
+      <a href="#" class="poster-link">
+        <div class="poster-image-wrapper">
+          <img
+            src="{{ url_for('static', filename='img/nusakarsa/' + poster.file) }}"
+            alt="{{ poster.name }}"
+            class="poster-image"
+            loading="lazy"
+          />
+          <div class="poster-overlay">
+            <div class="poster-info">
+              <h3 class="poster-name">{{ poster.name }}</h3>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock isi %}
+
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='js/detail.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/shown_up.js') }}"></script>
+{% endblock %}

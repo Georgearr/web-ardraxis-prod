@@ -14,6 +14,7 @@ from datetime import datetime
 load_dotenv()
 
 from salvatore_sheets import save_registration, get_registration_count, get_google_sheets_client, SHEETS, PARTICIPANT_LIMITS
+from nusakarsa_sheets import save_registration, get_registration_count, get_google_sheets_client, SHEETS, PARTICIPANT_LIMITS
 from ravenith_config import (
     RAVENITH_APPS_SCRIPT_URL,
     RAVENITH_BANNER,
@@ -132,6 +133,65 @@ def salvatore():
     return render_template("e_salvatore.html")
 
 # ===============================
+# NUSAKARSA
+# ===============================
+
+@app.route("/nusakarsa")
+def nusakarsa():
+    return render_template("e_nusakarsa.html")
+
+@app.route("/hias_bekal")
+def hias_bekal():
+    return render_template("e_nusakarsa/hias_bekal.html")
+
+@app.route("/register/<competition>", methods=["POST"])
+def register_competition(competition):
+    try:
+        data = request.form.to_dict()
+        with open('nusakarsa_debug.log', 'a') as f:
+            f.write(f"[REGISTER] Competition: {competition}\n")
+            f.write(f"[REGISTER] Data: {data}\n")
+        result = save_registration(competition, data)
+        with open('nusakarsa_debug.log', 'a') as f:
+            f.write(f"[REGISTER] Result: {result}\n")
+        
+        if result == "limit_reached":
+            return jsonify({"success": False, "message": "Sorry, the registration limit for this competition has been reached."}), 400
+        elif result:
+            return jsonify({"success": True, "message": "Registration successful!"})
+        else:
+            return jsonify({"success": False, "message": "Failed to save registration to spreadsheet."}), 500
+    except Exception as e:
+        with open('nusakarsa_debug.log', 'a') as f:
+            f.write(f"[REGISTER ERROR] {str(e)}\n")
+        return jsonify({"success": False, "message": f"Error: {str(e)}"}), 500
+
+@app.route("/api/registration-status/<competition>")
+def get_registration_status(competition):
+    """Get current registration count and limit for a competition."""
+    try:
+        if competition not in SHEETS:
+            return jsonify({"error": "Unknown competition"}), 404
+        
+        limit = PARTICIPANT_LIMITS.get(competition, 0)
+        try:
+            client = get_google_sheets_client()
+            current_count = get_registration_count(client, SHEETS[competition])
+        except Exception as e:
+            # If we can't get the count, return limit as 0 (unlimited) to be safe
+            current_count = 0
+        
+        return jsonify({
+            "competition": competition,
+            "current_count": current_count,
+            "limit": limit,
+            "spots_left": max(0, limit - current_count) if limit > 0 else -1,  # -1 means unlimited
+            "is_full": limit > 0 and current_count >= limit
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+# ===============================
 # RAVENITH
 # ===============================
 
@@ -203,52 +263,53 @@ def api_photobooth_refresh():
 # API ROUTES
 # ===============================
 
-@app.route("/register/<competition>", methods=["POST"])
-def register_competition(competition):
-    try:
-        data = request.form.to_dict()
-        with open('salvatore_debug.log', 'a') as f:
-            f.write(f"[REGISTER] Competition: {competition}\n")
-            f.write(f"[REGISTER] Data: {data}\n")
-        result = save_registration(competition, data)
-        with open('salvatore_debug.log', 'a') as f:
-            f.write(f"[REGISTER] Result: {result}\n")
+# === Reused for Nusakarsa ===
+# @app.route("/register/<competition>", methods=["POST"])
+# def register_competition(competition):
+#     try:
+#         data = request.form.to_dict()
+#         with open('salvatore_debug.log', 'a') as f:
+#             f.write(f"[REGISTER] Competition: {competition}\n")
+#             f.write(f"[REGISTER] Data: {data}\n")
+#         result = save_registration(competition, data)
+#         with open('salvatore_debug.log', 'a') as f:
+#             f.write(f"[REGISTER] Result: {result}\n")
         
-        if result == "limit_reached":
-            return jsonify({"success": False, "message": "Sorry, the registration limit for this competition has been reached."}), 400
-        elif result:
-            return jsonify({"success": True, "message": "Registration successful!"})
-        else:
-            return jsonify({"success": False, "message": "Failed to save registration to spreadsheet."}), 500
-    except Exception as e:
-        with open('salvatore_debug.log', 'a') as f:
-            f.write(f"[REGISTER ERROR] {str(e)}\n")
-        return jsonify({"success": False, "message": f"Error: {str(e)}"}), 500
+#         if result == "limit_reached":
+#             return jsonify({"success": False, "message": "Sorry, the registration limit for this competition has been reached."}), 400
+#         elif result:
+#             return jsonify({"success": True, "message": "Registration successful!"})
+#         else:
+#             return jsonify({"success": False, "message": "Failed to save registration to spreadsheet."}), 500
+#     except Exception as e:
+#         with open('salvatore_debug.log', 'a') as f:
+#             f.write(f"[REGISTER ERROR] {str(e)}\n")
+#         return jsonify({"success": False, "message": f"Error: {str(e)}"}), 500
 
-@app.route("/api/registration-status/<competition>")
-def get_registration_status(competition):
-    """Get current registration count and limit for a competition."""
-    try:
-        if competition not in SHEETS:
-            return jsonify({"error": "Unknown competition"}), 404
+# @app.route("/api/registration-status/<competition>")
+# def get_registration_status(competition):
+#     """Get current registration count and limit for a competition."""
+#     try:
+#         if competition not in SHEETS:
+#             return jsonify({"error": "Unknown competition"}), 404
         
-        limit = PARTICIPANT_LIMITS.get(competition, 0)
-        try:
-            client = get_google_sheets_client()
-            current_count = get_registration_count(client, SHEETS[competition])
-        except Exception as e:
-            # If we can't get the count, return limit as 0 (unlimited) to be safe
-            current_count = 0
+#         limit = PARTICIPANT_LIMITS.get(competition, 0)
+#         try:
+#             client = get_google_sheets_client()
+#             current_count = get_registration_count(client, SHEETS[competition])
+#         except Exception as e:
+#             # If we can't get the count, return limit as 0 (unlimited) to be safe
+#             current_count = 0
         
-        return jsonify({
-            "competition": competition,
-            "current_count": current_count,
-            "limit": limit,
-            "spots_left": max(0, limit - current_count) if limit > 0 else -1,  # -1 means unlimited
-            "is_full": limit > 0 and current_count >= limit
-        })
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+#         return jsonify({
+#             "competition": competition,
+#             "current_count": current_count,
+#             "limit": limit,
+#             "spots_left": max(0, limit - current_count) if limit > 0 else -1,  # -1 means unlimited
+#             "is_full": limit > 0 and current_count >= limit
+#         })
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
 
 # @app.route("/valentine_order", methods=["POST"])  # Disabled temporarily (Recruitment migration)
 # def valentine_order():

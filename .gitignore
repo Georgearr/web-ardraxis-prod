@@ -4,10 +4,12 @@ config/credentials.json
 secrets/google-service-account.json
 e-festiora-sheets-3bfd5f4f75a2.json
 e-salvatore-bot-adffecd586f0.json
+e-nusakarsa-bot-65a6ecc68313.json
 e-salvatore-sheets.json
 valentine-sheet.json
 .DS_Store
 salvatore_debug.log
+nusakarsa_debug.log
 .env
 
 # Local data storage (contains user registration data)

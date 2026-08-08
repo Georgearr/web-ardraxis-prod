@@ -1,0 +1,183 @@
+{% extends "layout.html" %}
+
+{% block extra_css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='css/e_nusakarsa_regist.css') }}"
+/>
+{% endblock %}
+
+{% block isi %}
+<div class="activity-container">
+  <div class="activity">
+    <div class="activity-left">
+      {% block poster %} {% endblock %}
+    </div>
+    <div class="activity-right">
+      <!-- Registration Status -->
+      <div id="registration-status" class="registration-status" style="margin-bottom: 20px; padding: 15px; background-color: rgba(255,255,255,0.1); border-radius: 8px; text-align: center;">
+        <p>Loading registration status...</p>
+      </div>
+      
+      {% block form %} {% endblock %}
+      <a href="{{ url_for('nusakarsa' ) }}"><button>Back to Nusakarsa</button></a>
+    </div>
+  </div>
+</div>
+
+<!-- Success Modal -->
+<div id="successModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Registration Successful!</h2>
+    <p>Join our LINE group for updates and announcements:</p>
+    <a id="lineGroupLink" href="#" target="_blank">Join LINE Group</a>
+    <p style="margin-top: 15px; font-size: 0.9rem; color: #ffe6da;">
+      If the link doesn't work, copy and paste this URL manually:<br>
+      <span id="lineGroupUrl" style="word-break: break-all; background-color: rgba(255,255,255,0.1); padding: 5px; border-radius: 3px; font-family: monospace;"></span>
+    </p>
+  </div>
+</div>
+{% endblock isi %}
+
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='js/detail.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/shown_up.js') }}"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById('form');
+      const modal = document.getElementById('successModal');
+      const closeBtn = document.querySelector('.close');
+      const lineGroupLink = document.getElementById('lineGroupLink');
+      const lineGroupUrl = document.getElementById('lineGroupUrl');
+      const statusDiv = document.getElementById('registration-status');
+      
+      // LINE group links for each competition
+      const lineGroups = {
+        "hias_bekal": "Hias Bekal",
+        "nusantara_in_colors": "Nusantara in Colors",
+        "tri_lomba": "Tri Lomba",
+        "got_talent_nusantara": "Got Talent Nusantara",
+        "jejak_juang_cerdas": "Jejak Juang Cerdas",
+        "mystery_mission": "Mystery Mission",
+        "balon_berantai": "Balon Berantai",
+        "makan_kerupuk": "Makan Kerupuk",
+        "sarung_sigap": "Sarung Sigap",
+        "fashion_show": "Fashion Show",
+      };
+      
+      // Get competition from URL
+      const competition = window.location.pathname.split('/').pop();
+      
+      // Load registration status
+      fetch(`/api/registration-status/${competition}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.error) {
+            statusDiv.innerHTML = '<p style="color: #ff6b6b;">Unable to load registration status.</p>';
+            return;
+          }
+          
+          const { current_count, limit, spots_left, is_full } = data;
+          
+          let statusHtml = `<p><strong>Current Registrations:</strong> ${current_count}`;
+          
+          if (limit > 0) {
+            statusHtml += ` / ${limit}`;
+            if (spots_left > 0) {
+              statusHtml += ` (${spots_left} spots left)`;
+            } else if (is_full) {
+              statusHtml += ' (FULL)';
+              // Disable form if full
+              if (form) {
+                form.querySelector('button').disabled = true;
+                form.querySelector('button').textContent = 'Registration Full';
+                form.querySelector('button').style.backgroundColor = '#666';
+              }
+            }
+          } else {
+            statusHtml += ' (No limit)';
+          }
+          
+          statusHtml += '</p>';
+          statusDiv.innerHTML = statusHtml;
+          
+          // Update status color
+          if (is_full) {
+            statusDiv.style.backgroundColor = 'rgba(255,107,107,0.2)';
+            statusDiv.style.border = '1px solid #ff6b6b';
+          } else if (spots_left <= 5 && limit > 0) {
+            statusDiv.style.backgroundColor = 'rgba(255,193,7,0.2)';
+            statusDiv.style.border = '1px solid #ffc107';
+          } else {
+            statusDiv.style.backgroundColor = 'rgba(40,167,69,0.2)';
+            statusDiv.style.border = '1px solid #28a745';
+          }
+        })
+        .catch(error => {
+          console.error('Error loading registration status:', error);
+          statusDiv.innerHTML = '<p style="color: #ff6b6b;">Unable to load registration status.</p>';
+        });
+      
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const button = form.querySelector('button');
+          const formData = new FormData(form);
+          
+          // Disable button and change text
+          button.disabled = true;
+          button.textContent = 'Sending...';
+          
+          fetch(`/register/${competition}`, {
+            method: 'POST',
+            body: formData
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // Show modal with LINE group link
+              const lineLink = lineGroups[competition] || '#';
+              lineGroupLink.href = lineLink;
+              lineGroupUrl.textContent = lineLink;
+              modal.style.display = 'block';
+              
+              // Reset form
+              form.reset();
+            } else {
+              // Handle different error types
+              if (data.message && data.message.includes('limit')) {
+                alert('Registration failed: ' + data.message + '\n\nPlease try registering for a different competition or contact the organizers.');
+              } else {
+                alert('Registration failed: ' + data.message);
+              }
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+          })
+          .finally(() => {
+            // Re-enable button
+            button.disabled = false;
+            button.textContent = 'Register';
+          });
+        });
+      }
+      
+      // Close modal when clicking X
+      closeBtn.onclick = function() {
+        modal.style.display = 'none';
+      };
+      
+      // Close modal when clicking outside
+      window.onclick = function(event) {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      };
+    });
+  </script>
+{% endblock %}
