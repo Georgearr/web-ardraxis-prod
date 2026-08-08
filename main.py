@@ -144,6 +144,42 @@ def nusakarsa():
 def hias_bekal():
     return render_template("e_nusakarsa/hias_bekal.html")
 
+@app.route("/nusantara_in_colors")
+def nusantara_in_colors():
+    return render_template("e_nusakarsa/nusantara_in_colors.html")
+
+@app.route("/tri_lomba")
+def tri_lomba():
+    return render_template("e_nusakarsa/tri_lomba.html")
+
+@app.route("/got_talent_nusantara")
+def got_talent_nusantara():
+    return render_template("e_nusakarsa/got_talent_nusantara.html")
+
+@app.route("/jejak_juang_cerdas")
+def jejak_juang_cerdas():
+    return render_template("e_nusakarsa/jejak_juang_cerdas.html")
+
+@app.route("/mystery_mission")
+def mystery_mission():
+    return render_template("e_nusakarsa/mystery_mission.html")
+
+@app.route("/balon_berantai")
+def balon_berantai():
+    return render_template("e_nusakarsa/balon_berantai.html")
+
+@app.route("/makan_kerupuk")
+def makan_kerupuk():
+    return render_template("e_nusakarsa/makan_kerupuk.html")
+
+@app.route("/sarung_sigap")
+def sarung_sigap():
+    return render_template("e_nusakarsa/sarung_sigap.html")
+
+@app.route("/fashion_show")
+def fashion_show():
+    return render_template("e_nusakarsa/fashion_show.html")
+
 @app.route("/register/<competition>", methods=["POST"])
 def register_competition(competition):
     try:

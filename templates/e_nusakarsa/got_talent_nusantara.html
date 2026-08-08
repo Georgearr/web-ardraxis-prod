@@ -1,0 +1,19 @@
+{% extends 'e_nusakarsa/regist_layout.html' %}
+
+{% block poster %}
+  <img
+    src="{{ url_for('static', filename='') }}"
+    alt="Got Talent Nusantara"
+  >
+{% endblock %}
+
+{% block title %} Got Talent Nusantara {% endblock %}
+
+{% block form %}
+  <form class="form" id="form">
+    <label for="nama">Nama Lengkap : </label><br>
+    <input type="text" name="nama" required><br><br>
+    
+    <button>Register</button>
+  </form>
+{% endblock %}

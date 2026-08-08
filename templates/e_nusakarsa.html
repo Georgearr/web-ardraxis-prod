@@ -58,15 +58,15 @@
   <div class="posters-grid">
     {% set lomba = [
       {'file': '', 'name': 'Hias Bekal', 'endpoint': 'hias_bekal'},
-      {'file': '', 'name': 'Nusantara in Colors', 'endpoint': 'nusakarsa'},
-      {'file': '', 'name': 'Tri Lomba', 'endpoint': 'nusakarsa'},
-      {'file': '', 'name': 'Got Talent Nusantara', 'endpoint': 'nusakarsa'},
-      {'file': '', 'name': 'Jejak Juang Cerdas', 'endpoint': 'nusakarsa'},
-      {'file': '', 'name': 'Mystery Mission', 'endpoint': 'nusakarsa'},
-      {'file': '', 'name': 'Balon Berantai', 'endpoint': 'nusakarsa'},
-      {'file': '', 'name': 'Makan Kerupuk', 'endpoint': 'nusakarsa'},
-      {'file': '', 'name': 'Sarung Sigap', 'endpoint': 'nusakarsa'},
-      {'file': '', 'name': 'Fashion Show', 'endpoint': 'nusakarsa'},
+      {'file': '', 'name': 'Nusantara in Colors', 'endpoint': 'nusantara_in_colors'},
+      {'file': '', 'name': 'Tri Lomba', 'endpoint': 'tri_lomba'},
+      {'file': '', 'name': 'Got Talent Nusantara', 'endpoint': 'got_talent_nusantara'},
+      {'file': '', 'name': 'Jejak Juang Cerdas', 'endpoint': 'jejak_juang_cerdas'},
+      {'file': '', 'name': 'Mystery Mission', 'endpoint': 'mystery_mission'},
+      {'file': '', 'name': 'Balon Berantai', 'endpoint': 'balon_berantai'},
+      {'file': '', 'name': 'Makan Kerupuk', 'endpoint': 'makan_kerupuk'},
+      {'file': '', 'name': 'Sarung Sigap', 'endpoint': 'sarung_sigap'},
+      {'file': '', 'name': 'Fashion Show', 'endpoint': 'fashion_show'},
     ] %}
 
     {% for poster in lomba %}
@@ -104,22 +104,20 @@
     ] %}
 
     {% for poster in fun_activities %}
-    <div class="poster-card" data-aos="fade-up">
-      <a href="#" class="poster-link">
-        <div class="poster-image-wrapper">
-          <img
-            src="{{ url_for('static', filename='img/nusakarsa/' + poster.file) }}"
-            alt="{{ poster.name }}"
-            class="poster-image"
-            loading="lazy"
-          />
-          <div class="poster-overlay">
-            <div class="poster-info">
-              <h3 class="poster-name">{{ poster.name }}</h3>
-            </div>
+    <div class="poster-card" data-aos="fade-up" style="cursor: default;">
+      <div class="poster-image-wrapper">
+        <img
+          src="{{ url_for('static', filename='img/nusakarsa/' + poster.file) }}"
+          alt="{{ poster.name }}"
+          class="poster-image"
+          loading="lazy"
+        />
+        <div class="poster-overlay">
+          <div class="poster-info">
+            <h3 class="poster-name">{{ poster.name }}</h3>
           </div>
         </div>
-      </a>
+      </div>
     </div>
     {% endfor %}
   </div>

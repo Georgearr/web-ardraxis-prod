@@ -198,7 +198,7 @@ li {
 }
 
 .modal-content {
-  background-color: #ffa882;
+  background-color: #ff3939;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
@@ -235,7 +235,7 @@ li {
 
 .modal-content a {
   display: inline-block;
-  background-color: #ff976b;
+  background-color: #ff7d7d;
   color: white;
   padding: 10px 20px;
   text-decoration: none;
@@ -245,7 +245,7 @@ li {
 }
 
 .modal-content a:hover {
-  background-color: #ff7d46;
+  background-color: #a93636;
   color: white;
 }
 
