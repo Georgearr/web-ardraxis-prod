@@ -195,7 +195,7 @@ section.content h2 {
   margin-top: 15vh;
 }
 
-.deadline-badge {
+.deadline-badge {line
   display: inline-block;
   background: var(--primary);
   color: #fff;
