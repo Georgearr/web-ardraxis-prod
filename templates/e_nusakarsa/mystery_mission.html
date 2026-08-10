@@ -6,9 +6,10 @@
 {% block comp_meta %} Maks. 10 tim &bull; 3 orang/tim {% endblock %}
 
 {% block poster %}
-  <div class="poster-placeholder">
-    <h2>MISI MISTERI</h2>
-  </div>
+  <img
+    src="{{ url_for('static', filename='img/nusakarsa/mystery_mission.png') }}"
+    alt="Poster Mystery Mission"
+  />
 {% endblock %}
 
 {% block form %}

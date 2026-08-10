@@ -6,20 +6,21 @@
 {% block comp_meta %} Maks. 22 tim &bull; 2 orang/tim {% endblock %}
 
 {% block poster %}
-  <div class="poster-placeholder">
-    <h2>KERUPUK</h2>
-  </div>
+  <img
+    src="{{ url_for('static', filename='img/nusakarsa/makan_kerupuk.jpg') }}"
+    alt="Poster Makan Kerupuk"
+  />
 {% endblock %}
 
 {% block form %}
   <form class="form" id="form">
-    <label for="kelas">Kelas : </label><br>
-    <input type="text" id="kelas" name="kelas" required><br><br>
-
-    <label for="ketua">Ketua : </label><br>
+    <label for="ketua">Nama Lengkap: </label><br>
     <input type="text" id="ketua" name="ketua" required><br><br>
 
-    <label for="anggota1">Anggota 1 : </label><br>
+    <label for="kelas">Kelas: </label><br>
+    <input type="text" id="kelas" name="kelas" required><br><br>
+
+    <label for="anggota1">ID Line: </label><br>
     <input type="text" id="anggota1" name="anggota1" required><br><br>
 
     <button>Register</button>
