@@ -6,9 +6,10 @@
 {% block comp_meta %} Maks. 12 tim &bull; 4 orang/tim {% endblock %}
 
 {% block poster %}
-  <div class="poster-placeholder">
-    <h2>SARUNG SIGAP</h2>
-  </div>
+  <img
+    src="{{ url_for('static', filename='img/nusakarsa/sarung_sigap.jpg') }}"
+    alt="Poster Sarung Sigap"
+  />
 {% endblock %}
 
 {% block form %}
@@ -16,16 +17,16 @@
     <label for="kelas">Kelas : </label><br>
     <input type="text" id="kelas" name="kelas" required><br><br>
 
-    <label for="ketua">Ketua : </label><br>
+    <label for="ketua">Ketua: </label><br>
     <input type="text" id="ketua" name="ketua" required><br><br>
 
-    <label for="anggota1">Anggota 1 : </label><br>
+    <label for="anggota1">Anggota 1: </label><br>
     <input type="text" id="anggota1" name="anggota1" required><br><br>
 
-    <label for="anggota2">Anggota 2 : </label><br>
+    <label for="anggota2">Anggota 2: </label><br>
     <input type="text" id="anggota2" name="anggota2" required><br><br>
 
-    <label for="anggota3">Anggota 3 : </label><br>
+    <label for="anggota3">Anggota 3: </label><br>
     <input type="text" id="anggota3" name="anggota3" required><br><br>
 
     <button>Register</button>

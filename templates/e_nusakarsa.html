@@ -28,8 +28,8 @@
 
 <!-- About Section -->
 <section class="about">
-  <h1 class="about-title hidden">About {% block title %} Nusakarsa {% endblock %}</h1>
-  <div class="about-desc hidden">placeholder description</div>
+  <h1 class="about-title hidden">{% block title %} NUSAKARSA {% endblock %}</h1>
+  <!-- <div class="about-desc hidden">placeholder description</div> -->
   <div class="about-panitia-row">
     <div class="about-panitia-item hidden">
       <div><span class="about-panitia-role">Ketua Panitia</span></div>
@@ -60,13 +60,13 @@
     {'file': 'balon_berantai.jpg', 'name': 'Balon Berantai', 'endpoint': 'balon_berantai'},
     {'file': 'mystery_mission.png', 'name': 'Misi Misteri', 'endpoint': 'mystery_mission'},
     {'file': 'makan_kerupuk.jpg', 'name': 'Kerupuk', 'endpoint': 'makan_kerupuk'},
-    {'file': '', 'name': 'Poster', 'endpoint': 'poster'},
-    {'file': '', 'name': 'Fashion Show', 'endpoint': 'fashion_show'},
-    {'file': '', 'name': 'Sarung Sigap', 'endpoint': 'sarung_sigap'},
-    {'file': '', 'name': 'Tri Lomba', 'endpoint': 'tri_lomba'},
-    {'file': '', 'name': 'Got Talent', 'endpoint': 'got_talent_nusantara'},
-    {'file': '', 'name': 'Hias Bekal', 'endpoint': 'hias_bekal'},
-    {'file': '', 'name': 'Jejak Juang Cerdas', 'endpoint': 'jejak_juang_cerdas'}
+    {'file': 'poster.png', 'name': 'Poster', 'endpoint': 'poster'},
+    {'file': 'fashion_show.jpg', 'name': 'Fashion Show', 'endpoint': 'fashion_show'},
+    {'file': 'sarung_sigap.jpg', 'name': 'Sarung Sigap', 'endpoint': 'sarung_sigap'},
+    {'file': 'trilomba.jpg', 'name': 'Tri Lomba', 'endpoint': 'tri_lomba'},
+    {'file': 'got_talent.jpeg', 'name': 'Got Talent', 'endpoint': 'got_talent_nusantara'},
+    {'file': 'hias_bekal.png', 'name': 'Hias Bekal', 'endpoint': 'hias_bekal'},
+    {'file': 'jejak_juang_cerdas.png', 'name': 'Jejak Juang Cerdas', 'endpoint': 'jejak_juang_cerdas'}
   ] %}
 
     {% for poster in lomba %}
@@ -91,16 +91,15 @@
   </div><br>
 
   <div class="header" style="margin-top: 20px;">
-    <h1 class="hidden">Fun Activities</h1>
+    <h1 class="hidden">Fun Activities <br> <span style="font-size: 18px;">(Daftar saat Hari-H Event)</span></h1>
   </div>
   <div class="posters-grid">
     {% set fun_activities = [
-      {'file': '', 'name': 'BTB'},
-      {'file': '', 'name': 'Mini Cinema'},
-      {'file': '', 'name': 'Finding Number'},
-      {'file': '', 'name': 'Sambung Lagu'},
-      {'file': '', 'name': 'Rona Wastra'},
-      {'file': '', 'name': 'Face Painting'},
+      {'file': 'btb.png', 'name': 'BTB'},
+      {'file': 'mini_cinema.png', 'name': 'Mini Cinema'},
+      {'file': 'sambung_lagu.jpg', 'name': 'Sambung Lagu'},
+      {'file': 'rona_wastra.jpg', 'name': 'Rona Wastra'},
+      {'file': 'face_painting.jpg', 'name': 'Face Painting'},
     ] %}
 
     {% for poster in fun_activities %}

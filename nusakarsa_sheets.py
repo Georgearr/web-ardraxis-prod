@@ -48,7 +48,7 @@ SHEETS = {
 # Set to 0 or omit from dictionary for unlimited registrations
 PARTICIPANT_LIMITS = {
     "balon_berantai": 15,
-    "mystery_mission": 10,
+    "mystery_mission": 12,
     "makan_kerupuk": 22,
     "poster": 15,
     "fashion_show": 0,  # Entire class, no limit
