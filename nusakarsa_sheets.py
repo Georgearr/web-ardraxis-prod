@@ -32,31 +32,31 @@ else:
 
 # Sheet names for each competition
 SHEETS = {
-    "hias_bekal": "Hias Bekal",
-    "nusantara_in_colors": "Nusantara in Colors",
-    "tri_lomba": "Tri Lomba",
-    "got_talent_nusantara": "Got Talent Nusantara",
-    "jejak_juang_cerdas": "Jejak Juang Cerdas",
-    "mystery_mission": "Mystery Mission",
     "balon_berantai": "Balon Berantai",
-    "makan_kerupuk": "Makan Kerupuk",
-    "sarung_sigap": "Sarung Sigap",
+    "mystery_mission": "Misi Misteri",
+    "makan_kerupuk": "Kerupuk",
+    "poster": "Poster",
     "fashion_show": "Fashion Show",
+    "sarung_sigap": "Sarung Sigap",
+    "tri_lomba": "Tri Lomba",
+    "got_talent_nusantara": "Got Talent",
+    "hias_bekal": "Hias Bekal",
+    "jejak_juang_cerdas": "Jejak Juang Cerdas",
 }
 
 # Participant limits for each competition
 # Set to 0 or omit from dictionary for unlimited registrations
 PARTICIPANT_LIMITS = {
-    "hias_bekal": 0,
-    "nusantara_in_colors": 0,
-    "tri_lomba": 0,
-    "got_talent_nusantara": 0,
-    "jejak_juang_cerdas": 0,
-    "mystery_mission": 0,
-    "balon_berantai": 0,
-    "makan_kerupuk": 0,
-    "sarung_sigap": 0,
-    "fashion_show": 0,
+    "balon_berantai": 15,
+    "mystery_mission": 10,
+    "makan_kerupuk": 22,
+    "poster": 15,
+    "fashion_show": 0,  # Entire class, no limit
+    "sarung_sigap": 12,
+    "tri_lomba": 12,
+    "got_talent_nusantara": 15,
+    "hias_bekal": 15,
+    "jejak_juang_cerdas": 15,
 }
 
 def get_google_sheets_client():
@@ -223,45 +223,94 @@ def save_registration(competition, data_dict):
             with open('nusakarsa_debug.log', 'a', encoding='utf-8') as f:
                 f.write(f"[save_registration] Error checking limit: {e}\n")
             # Continue with registration if we can't check the limit (fail open)
-        if competition == "hias_bekal":
+        
+        # Map form data to row data based on competition
+        if competition == "balon_berantai":
+            # Max 15 teams, 5 members: Kelas, Ketua, Anggota 1-4
             row_data = [
-                data_dict.get("nama", "")
-            ]
-        elif competition == "nusantara_in_colors":
-            row_data = [
-                data_dict.get("nama", "")
-            ]
-        elif competition == "tri_lomba":
-            row_data = [
-                data_dict.get("nama", "")
-            ]
-        elif competition == "got_talent_nusantara":
-            row_data = [
-                data_dict.get("nama", "")
-            ]
-        elif competition == "jejak_juang_cerdas":
-            row_data = [
-                data_dict.get("nama", "")
+                data_dict.get("kelas", ""),
+                data_dict.get("ketua", ""),
+                data_dict.get("anggota1", ""),
+                data_dict.get("anggota2", ""),
+                data_dict.get("anggota3", ""),
+                data_dict.get("anggota4", ""),
             ]
         elif competition == "mystery_mission":
+            # Max 10 teams, 3 members: Kelas, Ketua, Anggota 1-2
             row_data = [
-                data_dict.get("nama", "")
-            ]
-        elif competition == "balon_berantai":
-            row_data = [
-                data_dict.get("nama", "")
+                data_dict.get("kelas", ""),
+                data_dict.get("ketua", ""),
+                data_dict.get("anggota1", ""),
+                data_dict.get("anggota2", ""),
             ]
         elif competition == "makan_kerupuk":
+            # Max 22 teams, 2 members: Kelas, Ketua, Anggota 1
             row_data = [
-                data_dict.get("nama", "")
+                data_dict.get("kelas", ""),
+                data_dict.get("ketua", ""),
+                data_dict.get("anggota1", ""),
             ]
-        elif competition == "sarung_sigap":
+        elif competition == "poster":
+            # Max 15 participants, 1 person: Kelas, Nama Peserta
             row_data = [
-                data_dict.get("nama", "")
+                data_dict.get("kelas", ""),
+                data_dict.get("nama_peserta", ""),
             ]
         elif competition == "fashion_show":
+            # Entire class, 2 members: Kelas, Anggota 1, Anggota 2
             row_data = [
-                data_dict.get("nama", "")
+                data_dict.get("kelas", ""),
+                data_dict.get("anggota1", ""),
+                data_dict.get("anggota2", ""),
+            ]
+        elif competition == "sarung_sigap":
+            # Max 12 teams, 4 members: Kelas, Ketua, Anggota 1-3
+            row_data = [
+                data_dict.get("kelas", ""),
+                data_dict.get("ketua", ""),
+                data_dict.get("anggota1", ""),
+                data_dict.get("anggota2", ""),
+                data_dict.get("anggota3", ""),
+            ]
+        elif competition == "tri_lomba":
+            # Max 12 teams, 5 members: Kelas, Ketua, Anggota 1-4
+            row_data = [
+                data_dict.get("kelas", ""),
+                data_dict.get("ketua", ""),
+                data_dict.get("anggota1", ""),
+                data_dict.get("anggota2", ""),
+                data_dict.get("anggota3", ""),
+                data_dict.get("anggota4", ""),
+            ]
+        elif competition == "got_talent_nusantara":
+            # Max 15 teams, max 5 members: Nama Kelompok, Kelas, Anggota 1-5
+            row_data = [
+                data_dict.get("nama_kelompok", ""),
+                data_dict.get("kelas", ""),
+                data_dict.get("anggota1", ""),
+                data_dict.get("anggota2", ""),
+                data_dict.get("anggota3", ""),
+                data_dict.get("anggota4", ""),
+                data_dict.get("anggota5", ""),
+            ]
+        elif competition == "hias_bekal":
+            # Max 15 teams, max 3 members: Nama Kelompok, Kelas, Ketua, Anggota 1-2
+            row_data = [
+                data_dict.get("nama_kelompok", ""),
+                data_dict.get("kelas", ""),
+                data_dict.get("ketua", ""),
+                data_dict.get("anggota1", ""),
+                data_dict.get("anggota2", ""),
+            ]
+        elif competition == "jejak_juang_cerdas":
+            # Max 15 teams, 5 members: Kelas, Ketua, Anggota 1-4
+            row_data = [
+                data_dict.get("kelas", ""),
+                data_dict.get("ketua", ""),
+                data_dict.get("anggota1", ""),
+                data_dict.get("anggota2", ""),
+                data_dict.get("anggota3", ""),
+                data_dict.get("anggota4", ""),
             ]
         else:
             error_msg = f"No data mapping for competition: {competition}"

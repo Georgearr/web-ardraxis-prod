@@ -1,19 +1,30 @@
 {% extends 'e_nusakarsa/regist_layout.html' %}
 
-{% block poster %}
-  <img
-    src="{{ url_for('static', filename='') }}"
-    alt="Mystery Mission"
-  >
-{% endblock %}
+{% block title %} Misi Misteri {% endblock %}
 
-{% block title %} Mystery Mission {% endblock %}
+{% block comp_title %} Misi Misteri {% endblock %}
+{% block comp_meta %} Maks. 10 tim &bull; 3 orang/tim {% endblock %}
+
+{% block poster %}
+  <div class="poster-placeholder">
+    <h2>MISI MISTERI</h2>
+  </div>
+{% endblock %}
 
 {% block form %}
   <form class="form" id="form">
-    <label for="nama">Nama Lengkap : </label><br>
-    <input type="text" name="nama" required><br><br>
-    
+    <label for="kelas">Kelas : </label><br>
+    <input type="text" id="kelas" name="kelas" required><br><br>
+
+    <label for="ketua">Ketua : </label><br>
+    <input type="text" id="ketua" name="ketua" required><br><br>
+
+    <label for="anggota1">Anggota 1 : </label><br>
+    <input type="text" id="anggota1" name="anggota1" required><br><br>
+
+    <label for="anggota2">Anggota 2 : </label><br>
+    <input type="text" id="anggota2" name="anggota2" required><br><br>
+
     <button>Register</button>
   </form>
 {% endblock %}

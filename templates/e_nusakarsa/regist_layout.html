@@ -15,8 +15,16 @@
       {% block poster %} {% endblock %}
     </div>
     <div class="activity-right">
+      <div class="regist-header">
+        <h1 class="regist-title">{% block comp_title %}{% endblock %}</h1>
+        <p class="regist-meta">{% block comp_meta %}{% endblock %}</p>
+      </div>
+
+      <!-- Optional alert (e.g. Fashion Show wajib seluruh kelas) -->
+      {% block alert %}{% endblock %}
+
       <!-- Registration Status -->
-      <div id="registration-status" class="registration-status" style="margin-bottom: 20px; padding: 15px; background-color: rgba(255,255,255,0.1); border-radius: 8px; text-align: center;">
+      <div id="registration-status" class="registration-status">
         <p>Loading registration status...</p>
       </div>
       
@@ -55,16 +63,16 @@
       
       // LINE group links for each competition
       const lineGroups = {
-        "hias_bekal": "Hias Bekal",
-        "nusantara_in_colors": "Nusantara in Colors",
-        "tri_lomba": "Tri Lomba",
-        "got_talent_nusantara": "Got Talent Nusantara",
-        "jejak_juang_cerdas": "Jejak Juang Cerdas",
-        "mystery_mission": "Mystery Mission",
         "balon_berantai": "Balon Berantai",
-        "makan_kerupuk": "Makan Kerupuk",
-        "sarung_sigap": "Sarung Sigap",
+        "mystery_mission": "Misi Misteri",
+        "makan_kerupuk": "Kerupuk",
+        "poster": "Poster",
         "fashion_show": "Fashion Show",
+        "sarung_sigap": "Sarung Sigap",
+        "tri_lomba": "Tri Lomba",
+        "got_talent_nusantara": "Got Talent",
+        "hias_bekal": "Hias Bekal",
+        "jejak_juang_cerdas": "Jejak Juang Cerdas",
       };
       
       // Get competition from URL

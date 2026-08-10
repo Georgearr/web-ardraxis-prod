@@ -1,17 +1,16 @@
-/* Root Variables - Color Scheme */
-
+/* Root Variables - Red-White Indonesia Theme */
 :root {
   /* Primary colors */
-  --bg-color: #ffd5d5;
-  --container-bg-color: #ff2e2e;
-  --container-bg-color-dark: #ff9696;
-  --primary: #ff1e1e;
-  --primary-dark: #b10000;
+  --bg-color: transparent;
+  --container-bg-color: rgba(255, 255, 255, 0.92);
+  --container-bg-color-dark: rgba(250, 250, 250, 0.95);
+  --primary: #b71c1c;
+  --primary-dark: #8b0000;
   --text-color-glow: #fef2f2;
   /* UI colors */
-  --nav-headings: white;
+  --nav-headings: #b71c1c;
   /* Navbar footer */
-  --navbar-hover: #ffc1c1;
+  --navbar-hover: #ef5350;
 }
 
 /* Reset and Base Styles */
@@ -24,8 +23,8 @@
 html,
 body {
   background-color: var(--bg-color);
-  color: white;
-  width: 100vw;
+  color: #1a1a1a;
+  width: 100%;
   overflow-x: hidden;
 }
 
@@ -36,7 +35,8 @@ li {
 
 /* Recolors */
 .navbar {
-  background-color: var(--primary);
+  background-color: rgba(183, 28, 28, 0.92);
+  backdrop-filter: blur(10px);
 }
 
 /* Animasi nyala (fade-in) */
@@ -88,18 +88,19 @@ li {
 }
 
 .footer {
-  background: linear-gradient(to bottom, var(--container-bg-color), var(--container-bg-color-dark));
+  background: #BD2E2E;
 }
 
 /* Registration Page */
 .activity-container {
-  width: 90vw;
-  max-width: 90vw;
-  margin: 5vw;
-  background: linear-gradient(to bottom, var(--container-bg-color), var(--container-bg-color-dark));
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+  width: 92%;
+  max-width: 1100px;
+  margin: 5rem auto;
+  background: var(--container-bg-color);
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(183, 28, 28, 0.1);
   border-radius: 20px;
-  padding: 2vw;
+  padding: 2rem;
 }
 
 .activity {
@@ -121,15 +122,82 @@ li {
   width: 100%;
 }
 
+.activity-left .poster-placeholder {
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  background: #b71c1c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  border: 1px solid rgba(183, 28, 28, 0.15);
+}
+
+.poster-placeholder h2 {
+  color: #ffffff;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  word-break: break-word;
+}
+
 .activity-right {
   width: 60%;
+  text-align: center;
+}
+
+/* Competition header (name + member/limit info) */
+.regist-header {
+  margin-bottom: 20px;
+}
+
+.regist-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #b71c1c;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.regist-meta {
+  font-size: 1.05rem;
+  color: #555;
+  background: rgba(183, 28, 28, 0.08);
+  border: 1px solid rgba(183, 28, 28, 0.15);
+  padding: 10px 18px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+/* Alert banner (e.g. Fashion Show wajib seluruh kelas) */
+.alert-banner {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: rgba(183, 28, 28, 0.1);
+  border: 1px solid #b71c1c;
+  border-radius: 10px;
+  color: #b71c1c;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+/* Registration status */
+.registration-status {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(183, 28, 28, 0.15);
+  border-radius: 8px;
   text-align: center;
 }
 
 .activity-right button {
   width: 200px;
   color: #fff;
-  background-color: #ff4e4e;
+  background-color: #b71c1c;
   border-radius: 10px;
   border: none;
   font-size: 1.15rem;
@@ -140,7 +208,7 @@ li {
 }
 
 .activity-right button:hover {
-  background-color: #b02020;
+  background-color: #8b0000;
   transform: scale(1.02);
 }
 
@@ -148,7 +216,8 @@ li {
 .form {
   font-weight: 550;
   width: 100%;
-  background-color: var(--primary);
+  background-color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(183, 28, 28, 0.15);
   padding: 20px;
   border-radius: 10px;
   margin-top: 20px;
@@ -167,21 +236,27 @@ li {
   padding: 10px;
   font-size: 1rem;
   border-radius: 10px;
-  border: none;
+  border: 1px solid #ccc;
+  color: #1a1a1a;
 }
 
 .form select {
   padding-right: 20px;
 }
 
+.form label {
+  color: #1a1a1a;
+}
+
 .form button {
   width: 100%;
   color: #fff;
-  background-color: #b10000;
+  background-color: #b71c1c;
+  border: none;
 }
 
 .form button:hover {
-  background-color: #7e0000;
+  background-color: #8b0000;
 }
 
 /* Modal Styles */
@@ -198,20 +273,20 @@ li {
 }
 
 .modal-content {
-  background-color: #ff3939;
+  background-color: #ffffff;
   margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid rgba(183, 28, 28, 0.2);
   border-radius: 10px;
   width: 80%;
   max-width: 500px;
   text-align: center;
-  box-shadow: 0px 0px 20px var(--text-color-glow);
-  color: white;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  color: #1a1a1a;
 }
 
 .close {
-  color: #505050;
+  color: #b71c1c;
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -220,12 +295,13 @@ li {
 
 .close:hover,
 .close:focus {
-  color: black;
+  color: #8b0000;
   text-decoration: none;
 }
 
 .modal-content h2 {
   margin-bottom: 15px;
+  color: #b71c1c;
 }
 
 .modal-content p {
@@ -235,7 +311,7 @@ li {
 
 .modal-content a {
   display: inline-block;
-  background-color: #ff7d7d;
+  background-color: #b71c1c;
   color: white;
   padding: 10px 20px;
   text-decoration: none;
@@ -245,7 +321,7 @@ li {
 }
 
 .modal-content a:hover {
-  background-color: #a93636;
+  background-color: #8b0000;
   color: white;
 }
 
@@ -262,6 +338,12 @@ li {
 }
 
 @media screen and (max-width: 768px) {
+  .activity-container {
+    width: 95%;
+    margin: 4rem auto;
+    padding: 1.25rem;
+  }
+
   .activity {
     flex-direction: column;
     align-items: center;
@@ -279,6 +361,10 @@ li {
     width: 100%;
   }
 
+  .regist-title {
+    font-size: 1.6rem;
+  }
+
   .activity-left img {
     width: 80vw;
   }
@@ -289,6 +375,14 @@ li {
 }
 
 @media screen and (max-width: 480px) {
+  .activity-container {
+    padding: 1rem;
+  }
+
+  .regist-meta {
+    font-size: 0.95rem;
+  }
+
   .activity {
     flex-direction: column;
     align-items: center;

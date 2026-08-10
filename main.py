@@ -140,45 +140,62 @@ def salvatore():
 def nusakarsa():
     return render_template("e_nusakarsa.html")
 
+NUSAKARSA_COMPETITIONS = {
+    "balon_berantai": "e_nusakarsa/balon_berantai.html",
+    "mystery_mission": "e_nusakarsa/mystery_mission.html",
+    "makan_kerupuk": "e_nusakarsa/makan_kerupuk.html",
+    "poster": "e_nusakarsa/poster.html",
+    "fashion_show": "e_nusakarsa/fashion_show.html",
+    "sarung_sigap": "e_nusakarsa/sarung_sigap.html",
+    "tri_lomba": "e_nusakarsa/tri_lomba.html",
+    "got_talent_nusantara": "e_nusakarsa/got_talent_nusantara.html",
+    "hias_bekal": "e_nusakarsa/hias_bekal.html",
+    "jejak_juang_cerdas": "e_nusakarsa/jejak_juang_cerdas.html",
+}
+
+@app.route("/balon_berantai")
+def balon_berantai():
+    return render_template(NUSAKARSA_COMPETITIONS["balon_berantai"])
+
+@app.route("/mystery_mission")
+def mystery_mission():
+    return render_template(NUSAKARSA_COMPETITIONS["mystery_mission"])
+
+@app.route("/makan_kerupuk")
+def makan_kerupuk():
+    return render_template(NUSAKARSA_COMPETITIONS["makan_kerupuk"])
+
+@app.route("/poster")
+def poster():
+    return render_template(NUSAKARSA_COMPETITIONS["poster"])
+
+@app.route("/fashion_show")
+def fashion_show():
+    return render_template(NUSAKARSA_COMPETITIONS["fashion_show"])
+
+@app.route("/sarung_sigap")
+def sarung_sigap():
+    return render_template(NUSAKARSA_COMPETITIONS["sarung_sigap"])
+
+@app.route("/tri_lomba")
+def tri_lomba():
+    return render_template(NUSAKARSA_COMPETITIONS["tri_lomba"])
+
+@app.route("/got_talent_nusantara")
+def got_talent_nusantara():
+    return render_template(NUSAKARSA_COMPETITIONS["got_talent_nusantara"])
+
+@app.route("/jejak_juang_cerdas")
+def jejak_juang_cerdas():
+    return render_template(NUSAKARSA_COMPETITIONS["jejak_juang_cerdas"])
+
 @app.route("/hias_bekal")
 def hias_bekal():
-    return render_template("e_nusakarsa/hias_bekal.html")
+    return render_template(NUSAKARSA_COMPETITIONS["hias_bekal"])
 
 @app.route("/nusantara_in_colors")
 def nusantara_in_colors():
     return render_template("e_nusakarsa/nusantara_in_colors.html")
-
-@app.route("/tri_lomba")
-def tri_lomba():
-    return render_template("e_nusakarsa/tri_lomba.html")
-
-@app.route("/got_talent_nusantara")
-def got_talent_nusantara():
-    return render_template("e_nusakarsa/got_talent_nusantara.html")
-
-@app.route("/jejak_juang_cerdas")
-def jejak_juang_cerdas():
-    return render_template("e_nusakarsa/jejak_juang_cerdas.html")
-
-@app.route("/mystery_mission")
-def mystery_mission():
-    return render_template("e_nusakarsa/mystery_mission.html")
-
-@app.route("/balon_berantai")
-def balon_berantai():
-    return render_template("e_nusakarsa/balon_berantai.html")
-
-@app.route("/makan_kerupuk")
-def makan_kerupuk():
-    return render_template("e_nusakarsa/makan_kerupuk.html")
-
-@app.route("/sarung_sigap")
-def sarung_sigap():
-    return render_template("e_nusakarsa/sarung_sigap.html")
-
-@app.route("/fashion_show")
-def fashion_show():
-    return render_template("e_nusakarsa/fashion_show.html")
 
 @app.route("/register/<competition>", methods=["POST"])
 def register_competition(competition):

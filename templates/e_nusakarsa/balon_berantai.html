@@ -1,19 +1,36 @@
 {% extends 'e_nusakarsa/regist_layout.html' %}
 
-{% block poster %}
-  <img
-    src="{{ url_for('static', filename='') }}"
-    alt="Balon Berantai"
-  >
-{% endblock %}
-
 {% block title %} Balon Berantai {% endblock %}
+
+{% block comp_title %} Balon Berantai {% endblock %}
+{% block comp_meta %} Maks. 15 tim &bull; 5 orang/tim {% endblock %}
+
+{% block poster %}
+  <div class="poster-placeholder">
+    <h2>BALON BERANTAI</h2>
+  </div>
+{% endblock %}
 
 {% block form %}
   <form class="form" id="form">
-    <label for="nama">Nama Lengkap : </label><br>
-    <input type="text" name="nama" required><br><br>
-    
+    <label for="kelas">Kelas : </label><br>
+    <input type="text" id="kelas" name="kelas" required><br><br>
+
+    <label for="ketua">Ketua : </label><br>
+    <input type="text" id="ketua" name="ketua" required><br><br>
+
+    <label for="anggota1">Anggota 1 : </label><br>
+    <input type="text" id="anggota1" name="anggota1" required><br><br>
+
+    <label for="anggota2">Anggota 2 : </label><br>
+    <input type="text" id="anggota2" name="anggota2" required><br><br>
+
+    <label for="anggota3">Anggota 3 : </label><br>
+    <input type="text" id="anggota3" name="anggota3" required><br><br>
+
+    <label for="anggota4">Anggota 4 : </label><br>
+    <input type="text" id="anggota4" name="anggota4" required><br><br>
+
     <button>Register</button>
   </form>
 {% endblock %}

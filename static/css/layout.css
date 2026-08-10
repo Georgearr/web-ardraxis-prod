@@ -10,8 +10,9 @@
   
   body {
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-    color: #0f172a;
-    background: #f8fafc;
+    color: #1a1a1a;
+    background: #ffffff;
+    min-height: 100vh;
   }
   
   /* ============================================
@@ -22,11 +23,11 @@
     top: 0;
     z-index: 50;
     width: 100%;
-    background: rgb(29, 105, 110); /* slate-900, semi-transparent */
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(183, 28, 28, 0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     font-family: sans-serif;
-    box-shadow: 0 3px 25px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 3px 25px rgba(0, 0, 0, 0.3);
   }
   
   
@@ -75,7 +76,7 @@
     color: white;
     font-weight: 900;
     letter-spacing: 0.5px;
-    text-shadow: 0 0 5px #0e3a42, 0 0 1px #0e3a42, 0 0 1.5px #0e3a42,
+    text-shadow: 0 0 5px #b71c1c, 0 0 1px #b71c1c, 0 0 1.5px #b71c1c,
       0 0 2px white;
   }
   .brand:hover {
@@ -96,7 +97,7 @@
       text-shadow: none;
     }
     to {
-      text-shadow: 0 0 5px #5197a3, 0 0 10px #0e3a42, 0 0 15px hsl(189, 50%, 48%),
+      text-shadow: 0 0 5px #ef5350, 0 0 10px #b71c1c, 0 0 15px #c62828,
         0 0 20px white;
     }
   }
@@ -104,7 +105,7 @@
   /* Animasi mati (fade-out) */
   @keyframes glowDown {
     from {
-      text-shadow: 0 0 5px #5197a3, 0 0 10px #0e3a42, 0 0 15px hsl(189, 50%, 48%),
+      text-shadow: 0 0 5px #ef5350, 0 0 10px #b71c1c, 0 0 15px #c62828,
         0 0 20px white;
     }
     to {
@@ -148,16 +149,16 @@
       text-shadow: none;
     }
     to {
-      text-shadow: 0 0 5px #96cccd, 0 0 10px #96cccd, 0 0 20px #96cccd,
-        0 0 40px #96cccd;
+      text-shadow: 0 0 5px #ef5350, 0 0 10px #ef5350, 0 0 20px #ef5350,
+        0 0 40px #ef5350;
     }
   }
   
   /* Animasi mati (fade-out) */
   @keyframes glowFadeOut {
     from {
-      text-shadow: 0 0 5px #96cccd, 0 0 10px #96cccd, 0 0 20px #96cccd,
-        0 0 40px #96cccd;
+      text-shadow: 0 0 5px #ef5350, 0 0 10px #ef5350, 0 0 20px #ef5350,
+        0 0 40px #ef5350;
     }
     to {
       text-shadow: none;
@@ -240,7 +241,7 @@
     right: -300px;
     width: 300px;
     height: 100%;
-    background: linear-gradient(to bottom, rgb(29, 105, 110), rgb(48, 171, 180));
+    background: #b71c1c;
     z-index: 1000;
     transition: right 0.3s ease;
     overflow-y: auto;
@@ -257,7 +258,7 @@
     gap: 12px;
     padding: 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(29, 105, 110, 0.9);
+    background: rgba(183, 28, 28, 0.9);
   }
   
   .sidebar-header img {
@@ -272,7 +273,7 @@
     color: white;
     font-weight: 900;
     letter-spacing: 0.5px;
-    text-shadow: 0 0 5px #0e3a42, 0 0 1px #0e3a42, 0 0 1.5px #0e3a42,
+    text-shadow: 0 0 5px #b71c1c, 0 0 1px #b71c1c, 0 0 1.5px #b71c1c,
       0 0 2px white;
     flex: 1;
   }
@@ -319,7 +320,7 @@
     background: rgba(255, 255, 255, 0.1);
     border-left-color: white;
     padding-left: 30px;
-    text-shadow: 0 0 5px #96cccd, 0 0 10px #96cccd;
+    text-shadow: 0 0 5px #ef5350, 0 0 10px #ef5350;
   }
   
   .sidebar-nav a:active {
@@ -330,15 +331,16 @@
      END SIDEBAR SECTION
      ============================================ */
  
-  /* ============================================
-     FOOTER SECTION 
-     ============================================ */
-  
+/* ============================================
+      FOOTER SECTION 
+      ============================================ */
+
   .footer {
-    background: linear-gradient(135deg, #3A7070 0%, #315f5f 55%, #2a5151 100%);
-    color: #ffffff;
+    background: transparent;
+    color: #1a1a1a;
     position: relative;
     overflow: hidden;
+    padding-bottom: 40px;
   }
   
   /* Grid 3 kolom */
@@ -357,12 +359,12 @@
   .footer .footerkiri,
   .footer .footertengah,
   .footer .footerkanan {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(183, 28, 28, 0.2);
     border-radius: 16px;
     padding: 20px;
     backdrop-filter: blur(6px);
-    box-shadow: 0 10px 28px rgba(0, 0, 0, .25);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .15);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -370,7 +372,7 @@
   }
   
   
-  /* ========== KARTU KIRI (Brand) ========== */
+/* ========== KARTU KIRI (Brand) ========== */
   .footer .footerkiriutama {
     display: grid;
     grid-template-rows: auto auto auto;
@@ -379,42 +381,39 @@
     text-align: center;
     width: 100%;
   }
-  
+
   .footer .footerkiriatas img {
     width: 120px;
     height: 120px;
     object-fit: contain;
-    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, .35));
+    filter: drop-shadow(0 8px 18px rgba(183, 28, 28, 0.35));
   }
-  
+
   .footer .footerkiritengah h1 {
     margin: 6px 0 0;
     font-size: 1.8rem;
     letter-spacing: .08em;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #ffffff 0%, #e1f3f3 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #b71c1c;
   }
-  
+
   .footer .footerkiribawah p {
     margin: 4px 0 0;
-    color: #e8f7f7;
+    color: #4a4a4a;
     font-size: .98rem;
     line-height: 1.5;
     opacity: .92;
   }
   
-  /* ========== KARTU TENGAH (Simetris) ========== */
+/* ========== KARTU TENGAH (Simetris) ========== */
   .footer .footertengah {
     padding-top: 26px;
     padding-bottom: 26px;
     width: 100%;
   }
-  
+
   .footer .footertengah1 { display: none; }
-  
+
   .footer .footertengah2 {
     display: grid;
     grid-template-rows: auto auto;
@@ -425,17 +424,17 @@
     width: 100%;
     height: 100%;           /* isi mengisi kartu */
   }
-  
+
   .footer .footertengah2-atas i {
     font-size: 64px !important;
-    color: #ffffff !important;
+    color: #b71c1c !important;
     line-height: 1;
-    filter: drop-shadow(0 6px 14px rgba(0,0,0,.3));
+    filter: drop-shadow(0 6px 14px rgba(183, 28, 28, 0.3));
   }
-  
+
   .footer .footertengah2-bawah p {
     margin: 0;
-    color: #e8f7f7;
+    color: #4a4a4a;
     line-height: 1.6;
     max-width: 28ch;
   }
@@ -457,8 +456,8 @@
   }
   
   .footer .footerkanan .isi1 {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(183, 28, 28, 0.2);
     border-radius: 12px;
     padding: 14px 10px;
     width: 100%;
@@ -472,18 +471,19 @@
   
   .footer .footerkanan .isi1:hover {
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.30);
-    box-shadow: 0 10px 28px rgba(0,0,0,.28);
+    background: rgba(239, 83, 80, 0.1);
+    border-color: rgba(183, 28, 28, 0.4);
+    box-shadow: 0 10px 28px rgba(183, 28, 28, 0.15);
   }
   
   .footer .footerkanan .isi1 i {
     font-size: 24px;
+    color: #b71c1c;
   }
   
   .footer .footerkanan .isi1 p {
     margin: 0;
-    color: #e8f7f7;
+    color: #4a4a4a;
     font-size: .95rem;
   }
   
@@ -699,27 +699,27 @@
      END RESPONSIVE DESIGN
      ============================================ */
   
-  /* INTRO - Responsive Dark Teal */
+/* INTRO - Red-White Indonesia Theme */
   .intro {
     position: fixed;
     inset: 0;
     z-index: 9999;
-  
+
     /* Pusat stabil di mobile */
     display: flex;
     align-items: center;
     justify-content: center;
-  
+
     /* Pastikan selalu setinggi viewport modern */
     min-height: 100svh;
     height: 100dvh;
     box-sizing: border-box;
-  
-    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+
+    background: #b71c1c;
     overflow: hidden;
     padding: max(env(safe-area-inset-top, 16px), 16px) 16px
       max(env(safe-area-inset-bottom, 16px), 16px);
-  
+
     opacity: 1;
     transition: opacity 0.7s ease, visibility 0.7s ease;
     visibility: visible;
@@ -733,28 +733,7 @@
   
   .intro-bg::before,
   .intro-bg::after {
-    content: "";
-    position: absolute;
-    inset: -20%;
-    background: radial-gradient(
-        circle at 20% 80%,
-        rgba(0, 150, 136, 0.12) 0 30%,
-        transparent 60%
-      ),
-      radial-gradient(
-        circle at 80% 20%,
-        rgba(0, 150, 136, 0.1) 0 30%,
-        transparent 60%
-      );
-    filter: blur(10px);
-  }
-  .intro-bg::after {
-    background: radial-gradient(
-      circle at 50% 50%,
-      rgba(255, 255, 255, 0.06) 0 25%,
-      transparent 50%
-    );
-    mix-blend-mode: overlay;
+    display: none;
   }
   
   .intro-inner {
@@ -776,28 +755,25 @@
     animation: dragonEnter 900ms ease-out forwards 150ms;
   }
   
-  /* Judul & Slogan responsif via clamp */
+/* Judul & Slogan responsif via clamp */
   .intro-title {
     margin: 14px 0 6px;
     font-weight: 900;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     font-size: clamp(24px, 7vw, 64px);
-    background: linear-gradient(135deg, #fff 0%, #b2dfdb 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 10px rgba(178, 223, 219, 0.45));
+    color: #ffffff;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.25));
     opacity: 0;
     transform: translateY(12px);
     animation: titleEnter 800ms ease-out forwards 380ms,
       titleGlow 2.6s ease-in-out infinite alternate 1200ms;
   }
-  
+
   .intro-slogan {
     margin: 0;
     font-size: clamp(12px, 3.5vw, 20px);
-    color: #d6f3ef;
+    color: #fafafa;
     opacity: 0;
     letter-spacing: 0.06em;
     transform: translateY(8px);
@@ -828,20 +804,6 @@
     transform: translateY(0);
   }
   
-  /* Particles */
-  .intro::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: radial-gradient(
-      rgba(255, 255, 255, 0.08) 1px,
-      transparent 1px
-    );
-    background-size: 22px 22px;
-    opacity: 0.14;
-    pointer-events: none;
-  }
-  
   /* Keyframes */
   @keyframes dragonEnter {
     from {
@@ -865,10 +827,10 @@
   }
   @keyframes titleGlow {
     from {
-      filter: drop-shadow(0 0 8px rgba(178, 223, 219, 0.35));
+      filter: drop-shadow(0 0 8px rgba(239, 83, 80, 0.35));
     }
     to {
-      filter: drop-shadow(0 0 16px rgba(178, 223, 219, 0.7));
+      filter: drop-shadow(0 0 16px rgba(239, 83, 80, 0.7));
     }
   }
   @keyframes sloganEnter {
@@ -954,10 +916,5 @@
     .intro-slogan {
       opacity: 1;
       transform: none;
-    }
-  }
-  @media (prefers-reduced-data: reduce) {
-    .intro::after {
-      display: none;
     }
   }

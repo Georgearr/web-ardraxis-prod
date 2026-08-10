@@ -1,19 +1,27 @@
 {% extends 'e_nusakarsa/regist_layout.html' %}
 
-{% block poster %}
-  <img
-    src="{{ url_for('static', filename='') }}"
-    alt="Makan Kerupuk"
-  >
-{% endblock %}
+{% block title %} Kerupuk {% endblock %}
 
-{% block title %} Makan Kerupuk {% endblock %}
+{% block comp_title %} Kerupuk {% endblock %}
+{% block comp_meta %} Maks. 22 tim &bull; 2 orang/tim {% endblock %}
+
+{% block poster %}
+  <div class="poster-placeholder">
+    <h2>KERUPUK</h2>
+  </div>
+{% endblock %}
 
 {% block form %}
   <form class="form" id="form">
-    <label for="nama">Nama Lengkap : </label><br>
-    <input type="text" name="nama" required><br><br>
-    
+    <label for="kelas">Kelas : </label><br>
+    <input type="text" id="kelas" name="kelas" required><br><br>
+
+    <label for="ketua">Ketua : </label><br>
+    <input type="text" id="ketua" name="ketua" required><br><br>
+
+    <label for="anggota1">Anggota 1 : </label><br>
+    <input type="text" id="anggota1" name="anggota1" required><br><br>
+
     <button>Register</button>
   </form>
 {% endblock %}

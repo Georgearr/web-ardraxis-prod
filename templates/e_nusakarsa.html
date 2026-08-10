@@ -56,18 +56,18 @@
     <h1 class="hidden">Competitions</h1>
   </div>
   <div class="posters-grid">
-    {% set lomba = [
-      {'file': '', 'name': 'Hias Bekal', 'endpoint': 'hias_bekal'},
-      {'file': '', 'name': 'Nusantara in Colors', 'endpoint': 'nusantara_in_colors'},
-      {'file': '', 'name': 'Tri Lomba', 'endpoint': 'tri_lomba'},
-      {'file': '', 'name': 'Got Talent Nusantara', 'endpoint': 'got_talent_nusantara'},
-      {'file': '', 'name': 'Jejak Juang Cerdas', 'endpoint': 'jejak_juang_cerdas'},
-      {'file': '', 'name': 'Mystery Mission', 'endpoint': 'mystery_mission'},
-      {'file': '', 'name': 'Balon Berantai', 'endpoint': 'balon_berantai'},
-      {'file': '', 'name': 'Makan Kerupuk', 'endpoint': 'makan_kerupuk'},
-      {'file': '', 'name': 'Sarung Sigap', 'endpoint': 'sarung_sigap'},
-      {'file': '', 'name': 'Fashion Show', 'endpoint': 'fashion_show'},
-    ] %}
+  {% set lomba = [
+    {'file': '', 'name': 'Balon Berantai', 'endpoint': 'balon_berantai'},
+    {'file': '', 'name': 'Misi Misteri', 'endpoint': 'mystery_mission'},
+    {'file': '', 'name': 'Kerupuk', 'endpoint': 'makan_kerupuk'},
+    {'file': '', 'name': 'Poster', 'endpoint': 'poster'},
+    {'file': '', 'name': 'Fashion Show', 'endpoint': 'fashion_show'},
+    {'file': '', 'name': 'Sarung Sigap', 'endpoint': 'sarung_sigap'},
+    {'file': '', 'name': 'Tri Lomba', 'endpoint': 'tri_lomba'},
+    {'file': '', 'name': 'Got Talent', 'endpoint': 'got_talent_nusantara'},
+    {'file': '', 'name': 'Hias Bekal', 'endpoint': 'hias_bekal'},
+    {'file': '', 'name': 'Jejak Juang Cerdas', 'endpoint': 'jejak_juang_cerdas'}
+  ] %}
 
     {% for poster in lomba %}
     <div class="poster-card" data-aos="fade-up">

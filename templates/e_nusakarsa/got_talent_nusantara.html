@@ -1,19 +1,39 @@
 {% extends 'e_nusakarsa/regist_layout.html' %}
 
-{% block poster %}
-  <img
-    src="{{ url_for('static', filename='') }}"
-    alt="Got Talent Nusantara"
-  >
-{% endblock %}
+{% block title %} Got Talent {% endblock %}
 
-{% block title %} Got Talent Nusantara {% endblock %}
+{% block comp_title %} Got Talent {% endblock %}
+{% block comp_meta %} Maks. 15 tim &bull; Maks. 5 orang/tim {% endblock %}
+
+{% block poster %}
+  <div class="poster-placeholder">
+    <h2>GOT TALENT</h2>
+  </div>
+{% endblock %}
 
 {% block form %}
   <form class="form" id="form">
-    <label for="nama">Nama Lengkap : </label><br>
-    <input type="text" name="nama" required><br><br>
-    
+    <label for="nama_kelompok">Nama Kelompok : </label><br>
+    <input type="text" id="nama_kelompok" name="nama_kelompok" required><br><br>
+
+    <label for="kelas">Kelas : </label><br>
+    <input type="text" id="kelas" name="kelas" required><br><br>
+
+    <label for="anggota1">Anggota 1 : </label><br>
+    <input type="text" id="anggota1" name="anggota1" required><br><br>
+
+    <label for="anggota2">Anggota 2 (opsional) : </label><br>
+    <input type="text" id="anggota2" name="anggota2"><br><br>
+
+    <label for="anggota3">Anggota 3 (opsional) : </label><br>
+    <input type="text" id="anggota3" name="anggota3"><br><br>
+
+    <label for="anggota4">Anggota 4 (opsional) : </label><br>
+    <input type="text" id="anggota4" name="anggota4"><br><br>
+
+    <label for="anggota5">Anggota 5 (opsional) : </label><br>
+    <input type="text" id="anggota5" name="anggota5"><br><br>
+
     <button>Register</button>
   </form>
 {% endblock %}

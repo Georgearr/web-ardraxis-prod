@@ -1,19 +1,33 @@
 {% extends 'e_nusakarsa/regist_layout.html' %}
 
-{% block poster %}
-  <img
-    src="{{ url_for('static', filename='') }}"
-    alt="Fashion Show"
-  >
+{% block title %} Fashion Show {% endblock %}
+
+{% block comp_title %} Fashion Show {% endblock %}
+{% block comp_meta %} WAJIB seluruh kelas &bull; 2 orang/pendaftaran {% endblock %}
+
+{% block alert %}
+  <div class="alert-banner">
+    Fashion Show WAJIB diikuti oleh seluruh kelas.
+  </div>
 {% endblock %}
 
-{% block title %} Fashion Show {% endblock %}
+{% block poster %}
+  <div class="poster-placeholder">
+    <h2>FASHION SHOW</h2>
+  </div>
+{% endblock %}
 
 {% block form %}
   <form class="form" id="form">
-    <label for="nama">Nama Lengkap : </label><br>
-    <input type="text" name="nama" required><br><br>
-    
+    <label for="kelas">Kelas : </label><br>
+    <input type="text" id="kelas" name="kelas" required><br><br>
+
+    <label for="anggota1">Anggota 1 : </label><br>
+    <input type="text" id="anggota1" name="anggota1" required><br><br>
+
+    <label for="anggota2">Anggota 2 : </label><br>
+    <input type="text" id="anggota2" name="anggota2" required><br><br>
+
     <button>Register</button>
   </form>
 {% endblock %}

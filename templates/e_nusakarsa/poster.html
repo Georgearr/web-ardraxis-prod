@@ -1,0 +1,24 @@
+{% extends 'e_nusakarsa/regist_layout.html' %}
+
+{% block title %} Poster {% endblock %}
+
+{% block comp_title %} Poster {% endblock %}
+{% block comp_meta %} Maks. 15 peserta &bull; 1 orang {% endblock %}
+
+{% block poster %}
+  <div class="poster-placeholder">
+    <h2>POSTER</h2>
+  </div>
+{% endblock %}
+
+{% block form %}
+  <form class="form" id="form">
+    <label for="kelas">Kelas : </label><br>
+    <input type="text" id="kelas" name="kelas" required><br><br>
+
+    <label for="nama_peserta">Nama Peserta : </label><br>
+    <input type="text" id="nama_peserta" name="nama_peserta" required><br><br>
+
+    <button>Register</button>
+  </form>
+{% endblock %}
