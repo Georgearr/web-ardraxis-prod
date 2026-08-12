@@ -38,6 +38,31 @@ p, li {
   font-size: 110%;
 }
 
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  /* Pusat stabil di mobile */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Pastikan selalu setinggi viewport modern */
+  min-height: 100svh;
+  height: 100dvh;
+  box-sizing: border-box;
+
+  background: #b71c1c;
+  overflow: hidden;
+  padding: max(env(safe-area-inset-top, 16px), 16px) 16px
+    max(env(safe-area-inset-bottom, 16px), 16px);
+
+  opacity: 1;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+  visibility: visible;
+}
+
 /* =========================================
    3. Utility Classes & Layouts
 ========================================= */
@@ -195,7 +220,7 @@ section.content h2 {
   margin-top: 15vh;
 }
 
-.deadline-badge {line
+.deadline-badge {
   display: inline-block;
   background: var(--primary);
   color: #fff;
