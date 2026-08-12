@@ -56,7 +56,7 @@ PARTICIPANT_LIMITS = {
     "tri_lomba": 12,
     "got_talent_nusantara": 15,
     "hias_bekal": 15,
-    "jejak_juang_cerdas": 15,
+    "jejak_juang_cerdas": 16,
 }
 
 def get_google_sheets_client():
