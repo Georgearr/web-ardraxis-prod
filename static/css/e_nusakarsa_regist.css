@@ -219,6 +219,20 @@ li {
   text-align: center;
 }
 
+/* Registration closed banner */
+.registration-status.registration-closed {
+  background-color: rgba(183, 28, 28, 0.12);
+  border: 2px solid #b71c1c;
+}
+
+.registration-closed .closed-message {
+  color: #b71c1c;
+  font-weight: 800;
+  font-size: 1.3rem;
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
 .activity-right button {
   width: 200px;
   color: #fff;

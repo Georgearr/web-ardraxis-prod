@@ -87,6 +87,16 @@
             return;
           }
           
+          // Pendaftaran Nusakarsa ditutup secara global
+          if (data.is_open === false) {
+            statusDiv.classList.add('registration-closed');
+            statusDiv.innerHTML = '<p class="closed-message">⚠️ PENDAFTARAN TELAH DITUTUP</p><p>Pendaftaran untuk lomba ini telah ditutup. Terima kasih atas antusiasme kalian!</p>';
+            if (form) {
+              form.style.display = 'none';
+            }
+            return;
+          }
+          
           const { current_count, limit, spots_left, is_full } = data;
           
           let statusHtml = `<p><strong>Current Registrations:</strong> ${current_count}`;
@@ -131,6 +141,12 @@
       if (form) {
         form.addEventListener('submit', function(e) {
           e.preventDefault();
+          
+          // Defense: jangan kirim saat pendaftaran ditutup
+          if (statusDiv.classList.contains('registration-closed')) {
+            alert('Pendaftaran Nusakarsa telah ditutup.');
+            return;
+          }
           
           const button = form.querySelector('button');
           const formData = new FormData(form);

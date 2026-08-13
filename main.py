@@ -14,7 +14,7 @@ from datetime import datetime
 load_dotenv()
 
 from salvatore_sheets import save_registration, get_registration_count, get_google_sheets_client, SHEETS, PARTICIPANT_LIMITS
-from nusakarsa_sheets import save_registration, get_registration_count, get_google_sheets_client, SHEETS, PARTICIPANT_LIMITS
+from nusakarsa_sheets import save_registration, get_registration_count, get_google_sheets_client, SHEETS, PARTICIPANT_LIMITS, NUSAKARSA_REGISTRATION_OPEN
 from ravenith_config import (
     RAVENITH_APPS_SCRIPT_URL,
     RAVENITH_BANNER,
@@ -199,6 +199,8 @@ def nusantara_in_colors():
 
 @app.route("/register/<competition>", methods=["POST"])
 def register_competition(competition):
+    if not NUSAKARSA_REGISTRATION_OPEN:
+        return jsonify({"success": False, "message": "Pendaftaran Nusakarsa telah ditutup."}), 403
     try:
         data = request.form.to_dict()
         with open('nusakarsa_debug.log', 'a') as f:
@@ -223,6 +225,17 @@ def register_competition(competition):
 def get_registration_status(competition):
     """Get current registration count and limit for a competition."""
     try:
+        if not NUSAKARSA_REGISTRATION_OPEN:
+            return jsonify({
+                "competition": competition,
+                "current_count": 0,
+                "limit": 0,
+                "spots_left": -1,
+                "is_full": False,
+                "is_open": False,
+                "status": "closed",
+                "message": "Pendaftaran Nusakarsa telah ditutup."
+            })
         if competition not in SHEETS:
             return jsonify({"error": "Unknown competition"}), 404
         
@@ -239,7 +252,9 @@ def get_registration_status(competition):
             "current_count": current_count,
             "limit": limit,
             "spots_left": max(0, limit - current_count) if limit > 0 else -1,  # -1 means unlimited
-            "is_full": limit > 0 and current_count >= limit
+            "is_full": limit > 0 and current_count >= limit,
+            "is_open": True,
+            "status": "open"
         })
     except Exception as e:
         return jsonify({"error": str(e)}), 500

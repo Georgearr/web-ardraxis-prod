@@ -44,6 +44,12 @@ SHEETS = {
     "jejak_juang_cerdas": "Jejak Juang Cerdas",
 }
 
+# Global registration flag untuk seluruh lomba/event Nusakarsa.
+# Set False untuk MENUTUP pendaftaran semua lomba Nusakarsa.
+# Set True untuk MEMBUKA kembali pendaftaran Nusakarsa.
+# Ubah di sini saja, bukan di frontend / banyak tempat.
+NUSAKARSA_REGISTRATION_OPEN = False
+
 # Participant limits for each competition
 # Set to 0 or omit from dictionary for unlimited registrations
 PARTICIPANT_LIMITS = {
