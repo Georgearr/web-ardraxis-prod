@@ -32,11 +32,11 @@
 body {
   font-family: var(--font-body);
   color: var(--dark-ink);
-  background-color: var(--dark-ink);
+  background-color: #DDD3C4;
   /* Aged Paper Texture Overlay */
   background-image: 
-    linear-gradient(rgba(123, 105, 78, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(123, 105, 78, 0.1) 1px, transparent 1px);
+    linear-gradient(rgba(123, 105, 78, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(123, 105, 78, 0.07) 1px, transparent 1px);
   background-size: 32px 32px;
   line-height: 1.5;
   min-height: 100vh;
@@ -157,18 +157,21 @@ body {
 }
 
 /* Ardraxis Signature Lockup (Top-Right Corner) */
-.logo-group { display: flex; align-items: center; gap: 12px; }
-.ardraxis-lockup { display: flex; align-items: center; gap: 10px; }
-.igs-logo { height: 36px; width: auto; border-radius: 13px; }
-/* Optional subtle container */
-.igs-logo-container { background: rgba(198,161,91,0.08); border: 1px solid rgba(198,161,91,0.15); padding: 4px 6px; border-radius: 12px; }
+.logo-group {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+}
+.ardraxis-lockup { display: flex; align-items: center; gap: 6px; }
+.igs-logo {
+  height: 30px;
+  width: auto;
+  border-radius: 11px;
+  object-fit: contain;
 }
 
 .ardraxis-logo-img {
-  height: 38px;
+  height: 24px;
   width: auto;
   object-fit: contain;
 }
@@ -181,7 +184,7 @@ body {
 
 .ardraxis-title {
   font-family: var(--font-sans-display);
-  font-size: 0.95rem;
+  font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -191,11 +194,11 @@ body {
 
 .ardraxis-tagline {
   font-family: var(--font-body);
-  font-size: 0.72rem;
+  font-size: 0.5rem;
   font-weight: 500;
   letter-spacing: 0.03em;
   color: var(--muted-brown);
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
 @media (max-width: 640px) {
@@ -205,14 +208,17 @@ body {
   .top-meta-bar {
     justify-content: flex-end;
   }
+  .igs-logo {
+    height: 26px;
+  }
   .ardraxis-logo-img {
-    height: 30px;
+    height: 20px;
   }
   .ardraxis-title {
-    font-size: 0.85rem;
+    font-size: 0.6rem;
   }
   .ardraxis-tagline {
-    font-size: 0.65rem;
+    font-size: 0.44rem;
   }
 }
 

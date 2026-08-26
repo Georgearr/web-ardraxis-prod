@@ -33,8 +33,11 @@ from recruitment_helpers import (
     ProgressManager, ValidationHelper, ConfigLoader,
 )
 
+from routes.duta import duta_bp
+
 app = Flask(__name__)
 app.secret_key = 'mpls_igs_2026_secret_key_for_session_management'
+app.register_blueprint(duta_bp)
 
 # ===============================
 # CONFIG
