@@ -25,7 +25,6 @@ TIMEZONE = ZoneInfo("Asia/Jakarta")
 _SHEET_LOCK = threading.Lock()
 
 DUTA_HEADERS = [
-    "application_id",
     "submitted_at",
     "full_name",
     "class",
@@ -98,26 +97,57 @@ def _ensure_applications_sheet(spreadsheet):
     return ws
 
 
-def _generate_application_id(worksheet):
+def _format_programs(programs):
     """
-    Generate Application ID format: IGS-DUTA-2026-XXXX (e.g. IGS-DUTA-2026-0001)
+    Convert list of program dicts into a multi-line plain-text block.
+    Each program is rendered as:
+        Program N
+        Nama Program: ...
+        Tujuan: ...
+        Target: ...
+        Deskripsi: ...
+    Programs are separated by a blank line.
     """
-    records = worksheet.get_all_values()
-    max_seq = 0
+    if not programs:
+        return ""
+    blocks = []
+    for idx, prog in enumerate(programs, 1):
+        if not isinstance(prog, dict):
+            continue
+        lines = [f"Program {idx}"]
+        lines.append(f"Nama Program: {str(prog.get('nama_program', '')).strip()}")
+        lines.append(f"Tujuan: {str(prog.get('tujuan', '')).strip()}")
+        lines.append(f"Target: {str(prog.get('target', '')).strip()}")
+        lines.append(f"Deskripsi: {str(prog.get('deskripsi', '')).strip()}")
+        blocks.append("\n".join(lines))
+    return "\n\n".join(blocks)
 
-    if len(records) > 1:
-        # Check column 0 for existing IDs
-        pattern = re.compile(r"^IGS-DUTA-2026-(\d{4})$")
-        for row in records[1:]:
-            if row and row[0]:
-                match = pattern.match(row[0].strip())
-                if match:
-                    seq = int(match.group(1))
-                    if seq > max_seq:
-                        max_seq = seq
 
-    new_seq = max_seq + 1
-    return f"IGS-DUTA-2026-{new_seq:04d}"
+def _format_experience(has_experience, experiences_text):
+    """
+    Render experience as a plain-text block readable by non-IT admins.
+    """
+    is_yes = has_experience in [True, "true", "Ya", "ya"]
+    if not is_yes:
+        return "Tidak memiliki pengalaman sebelumnya."
+    text = str(experiences_text or "").strip()
+    if not text:
+        return "Tidak memiliki pengalaman sebelumnya."
+    items = [ln.strip() for ln in text.splitlines() if ln.strip()]
+    if not items:
+        return "Tidak memiliki pengalaman sebelumnya."
+    bullet_lines = "\n".join(f"- {item}" for item in items)
+    return f"Ya\nPengalaman:\n{bullet_lines}"
+
+
+def _format_url_list(urls):
+    """
+    Join URL list with newlines, preserving raw URLs.
+    """
+    if not urls:
+        return ""
+    cleaned = [str(u).strip() for u in urls if str(u or "").strip()]
+    return "\n".join(cleaned)
 
 
 def save_duta_application(data):
@@ -136,7 +166,7 @@ def save_duta_application(data):
         "talent_video_urls": list[str],
         "commitment": str
     }
-    Returns: (success: bool, app_id_or_error: str)
+    Returns: (success: bool, error_message: str | None)
     """
     sheets_id = os.environ.get("DUTA_GOOGLE_SHEETS_ID")
 
@@ -158,33 +188,31 @@ def save_duta_application(data):
     with _SHEET_LOCK:
         try:
             ws = _ensure_applications_sheet(spreadsheet)
-            app_id = _generate_application_id(ws)
             submitted_at = _now_jakarta_str()
 
-            has_exp_str = "Ya" if (data.get("has_experience") in [True, "true", "Ya", "ya"]) else "Tidak"
-
-            # Serialize lists cleanly as JSON strings
-            programs_json = json.dumps(data.get("programs", []), ensure_ascii=False)
-            cert_urls_json = json.dumps(data.get("certificate_urls", []), ensure_ascii=False)
-            talent_urls_json = json.dumps(data.get("talent_video_urls", []), ensure_ascii=False)
+            programs_text = _format_programs(data.get("programs", []))
+            experience_text = _format_experience(
+                data.get("has_experience"),
+                data.get("experiences", "")
+            )
+            cert_urls_text = _format_url_list(data.get("certificate_urls", []))
+            talent_urls_text = _format_url_list(data.get("talent_video_urls", []))
 
             row = [
-                app_id,
                 submitted_at,
                 str(data.get("full_name", "")).strip(),
                 str(data.get("class", "")).strip(),
                 str(data.get("vision_mission", "")).strip(),
-                programs_json,
+                programs_text,
                 str(data.get("motivation_letter", "")).strip(),
-                has_exp_str,
-                str(data.get("experiences", "")).strip(),
-                cert_urls_json,
-                talent_urls_json,
+                experience_text,
+                cert_urls_text,
+                talent_urls_text,
                 str(data.get("commitment", "Ya, saya yakin.")).strip(),
                 "Submitted"
             ]
 
             ws.append_row(row)
-            return True, app_id
+            return True, None
         except Exception as e:
             return False, f"Failed to record application to Google Sheets: {str(e)}"

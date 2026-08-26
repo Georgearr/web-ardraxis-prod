@@ -139,7 +139,6 @@ def submit_application():
 
         return jsonify({
             "success": True,
-            "applicationId": result_or_err,
             "message": "Pendaftaran berhasil dikirim!"
         }), 200
 
