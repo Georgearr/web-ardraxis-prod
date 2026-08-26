@@ -460,40 +460,47 @@
 
   </div>
 
-  <!-- Celebratory Success Modal -->
-  <div class="modal-backdrop hidden" id="successModal">
-    <div class="success-paper-poster">
-      <!-- Subtle Songket Geometric Watermark Layer -->
-      <div class="songket-pattern-light"></div>
+<!-- Celebratory Success Modal -->
+<div class="modal-backdrop hidden" id="successModal">
+  <div class="success-paper-poster">
+    <!-- Subtle Songket Geometric Watermark Layer -->
+    <div class="songket-pattern-light"></div>
 
-      <div class="masking-tape tape-top-center"></div>
-      <div class="success-stamp">APPLICATION SENT.</div>
+    <div class="masking-tape tape-top-center"></div>
+    <div class="success-stamp">APPLICATION SENT.</div>
 
-      <h2
-        style="font-family: var(--font-sans-display); font-size: 2.8rem; text-transform: uppercase; margin-bottom: 6px; position: relative; z-index: 2;">
-        YOU DID IT.
-      </h2>
-      <p style="font-size: 0.95rem; color: var(--muted-brown); position: relative; z-index: 2;">
-        Terima kasih telah mendaftarkan diri sebagai Duta Siswa OSIS SMA IGS.
+    <h2
+      style="font-family: var(--font-sans-display); font-size: 2.8rem; text-transform: uppercase; margin-bottom: 6px; position: relative; z-index: 2;">
+      THANK YOU.
+    </h2>
+    <p style="font-size: 0.95rem; color: var(--muted-brown); position: relative; z-index: 2;">
+      Terima kasih telah mendaftarkan diri sebagai Duta Siswa OSIS SMA IGS 2026.
+    </p>
+    <p style="font-size: 0.95rem; color: var(--muted-brown); margin-top: 8px; position: relative; z-index: 2;">
+      Pendaftaran kamu telah berhasil dikirim.
+    </p>
+
+    <div style="margin-top: 24px; position: relative; z-index: 2;">
+      <h3 style="font-family: var(--font-sans-display); font-size: 1.2rem; text-transform: uppercase; margin-bottom: 12px; color: var(--dark-ink);">
+        LANGKAH SELANJUTNYA
+      </h3>
+      <p style="font-size: 0.95rem; color: var(--muted-brown); line-height: 1.6; margin-bottom: 16px;">
+        Bergabung ke grup LINE resmi Duta Siswa IGS untuk mendapatkan informasi mengenai tahapan seleksi dan rangkaian kegiatan selanjutnya.
       </p>
-
-      <div class="app-id-display" id="successAppId" style="position: relative; z-index: 2;">
-        IGS-DUTA-2026-0000
-      </div>
-
-      <button type="button" class="btn-copy-id" id="btnCopyId" style="position: relative; z-index: 2;">
-        📋 Copy Application ID
-      </button>
-
-      <p style="font-size: 0.85rem; color: var(--muted-brown); margin-bottom: 24px; position: relative; z-index: 2;">
-        Simpan nomor pendaftaran ini untuk keperluan selanjutnya.
+      <p style="font-size: 0.85rem; color: var(--muted-brown); font-style: italic; margin-bottom: 24px;">
+        Jangan lupa bergabung ke grup LINE resmi Duta Siswa IGS. Informasi mengenai tahapan seleksi dan kegiatan selanjutnya akan disampaikan melalui grup tersebut.
       </p>
-
-      <a href="/dutasmaigs" class="btn-editorial-cta" style="display: inline-block; padding: 12px 28px;">
-        KEMBALI KE BERANDA
-      </a>
     </div>
+
+    <a href="https://line.me/ti/g/rMkcsGwYpd" target="_blank" rel="noopener noreferrer" class="btn-editorial-cta" style="display: inline-block; padding: 12px 28px; margin-bottom: 16px; background-color: var(--dark-ink); color: var(--warm-paper); border: none;">
+      GABUNG GRUP LINE
+    </a>
+
+    <a href="/dutasmaigs" class="btn-editorial-cta" style="display: inline-block; padding: 12px 28px;">
+      KEMBALI KE BERANDA
+    </a>
   </div>
+</div>
 
   <script src="{{ url_for('static', filename='dutasmaigs/js/app.js') }}"></script>
 </body>

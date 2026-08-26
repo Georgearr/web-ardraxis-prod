@@ -17,8 +17,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const reviewContainer = document.getElementById('reviewContainer');
 
   const successModal = document.getElementById('successModal');
-  const successAppId = document.getElementById('successAppId');
-  const btnCopyId = document.getElementById('btnCopyId');
 
   const visionMissionInput = document.getElementById('vision_mission');
   const vmCounter = document.getElementById('vmCounter');
@@ -551,7 +549,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        successAppId.textContent = result.applicationId;
         successModal.classList.remove('hidden');
         successModal.style.display = 'flex';
       } else {
@@ -564,16 +561,5 @@ document.addEventListener('DOMContentLoaded', () => {
       btnSubmit.disabled = false;
       btnSubmit.innerHTML = 'SUBMIT APPLICATION →';
     }
-  });
-
-  // Copy Application ID
-  btnCopyId?.addEventListener('click', () => {
-    const textToCopy = successAppId.textContent.trim();
-    navigator.clipboard.writeText(textToCopy).then(() => {
-      btnCopyId.textContent = '✅ COPIED TO CLIPBOARD!';
-      setTimeout(() => {
-        btnCopyId.textContent = '📋 Copy Application ID';
-      }, 2500);
-    });
   });
 });
