@@ -1,21 +1,58 @@
-<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'>
-  <g fill='none' stroke='%23C6A15B' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'>
-    <!-- Small floral bud -->
-    <path d='M150,30 C155,35 155,45 150,50 C145,45 145,35 150,30' />
-    <!-- Leaf pair -->
-    <path d='M150,50 C130,70 130,90 150,110 C170,90 170,70 150,50' />
-    <!-- Ornamental flower -->
-    <path d='M150,110 C140,130 140,150 150,170 C160,150 160,130 150,110' />
-    <path d='M150,120 L155,135 L145,135 Z' fill='%237B694E' />
-    <!-- Small star -->
-    <path d='M150,170 L155,178 L145,178 Z' fill='%237B694E' />
-    <!-- Leaf pair (lower) -->
-    <path d='M150,180 C130,200 130,220 150,240 C170,220 170,200 150,180' />
-    <!-- Lower blossom -->
-    <path d='M150,240 C155,245 155,255 150,260 C145,255 145,245 150,240' />
-    <!-- Subtle woven accents (tiny cross stitches) -->
-    <path d='M148,70 L152,74 M152,70 L148,74' stroke-width='0.8' />
-    <path d='M148,150 L152,154 M152,150 L148,154' stroke-width='0.8' />
-    <path d='M148,230 L152,234 M152,230 L148,234' stroke-width='0.8' />
+<svg xmlns='http://www.w3.org/2000/svg' width='240' height='640' viewBox='0 0 240 640'>
+  <!-- Songket vertical woven ornament: blossom - leaves - sulur - bunga - star - flourish -->
+  <g fill='none' stroke='#C6A15B' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'>
+    <!-- small blossom -->
+    <path d='M120 44 C127 52 127 64 120 72 C113 64 113 52 120 44 Z'/>
+    <!-- elongated botanical ornament: layered curved shoots (pucuk rebung) -->
+    <path d='M120 190 C132 214 132 246 120 274 C108 246 108 214 120 190 Z'/>
+    <path d='M120 200 C128 218 128 242 120 264 C112 242 112 218 120 200 Z'/>
+    <path d='M120 210 C124 222 124 238 120 252 C116 238 116 222 120 210 Z'/>
+    <!-- central floral motif: cardinal petals -->
+    <path d='M120 361 C112 349 112 337 120 329 C128 337 128 349 120 361'/>
+    <path d='M120 369 C112 381 112 393 120 401 C128 393 128 381 120 369'/>
+    <path d='M116 365 C104 357 92 357 84 365 C92 373 104 373 116 365'/>
+    <path d='M124 365 C136 357 148 357 156 365 C148 373 136 373 124 365'/>
+    <!-- ornamental star (curved concave points) -->
+    <path d='M120 448 C122 456 126 460 134 462 C126 464 122 468 120 476 C118 468 114 464 106 462 C114 460 118 456 120 448 Z' stroke-width='3.1'/>
+    <!-- terminal bud of lower flourish -->
+    <path d='M120 580 C125 586 125 596 120 602 C115 596 115 586 120 580 Z'/>
   </g>
+  <g fill='none' stroke='#C6B39A' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'>
+    <!-- blossom sepals -->
+    <path d='M120 72 C114 78 110 84 108 92'/>
+    <path d='M120 72 C126 78 130 84 132 92'/>
+    <!-- curved leaf pair -->
+    <path d='M118 112 C98 114 84 126 78 146 C77 152 81 158 87 158 C92 141 103 129 118 124 Z'/>
+    <path d='M122 112 C142 114 156 126 162 146 C163 152 159 158 153 158 C148 141 137 129 122 124 Z'/>
+    <!-- central stem -->
+    <path d='M120 96 C119 124 119 148 120 176'/>
+    <circle cx='120' cy='184' r='1.6' fill='#C6B39A' stroke='none'/>
+    <!-- sulur tendrils -->
+    <path d='M120 232 C136 228 148 232 154 244 C157 250 155 256 149 257 C148 250 144 245 138 244'/>
+    <path d='M120 232 C104 228 92 232 86 244 C83 250 85 256 91 257 C92 250 96 245 102 244'/>
+    <!-- diagonal kelopak petals of central bloom -->
+    <path d='M126 359 Q136 347 148 343 Q144 355 126 359'/>
+    <path d='M114 359 Q104 347 92 343 Q96 355 114 359'/>
+    <path d='M126 371 Q136 383 148 387 Q144 375 126 371'/>
+    <path d='M114 371 Q104 383 92 387 Q96 375 114 371'/>
+    <!-- kelopak under-leaves of bloom -->
+    <path d='M120 404 C112 412 108 420 108 430 C114 424 118 416 120 410'/>
+    <path d='M120 404 C128 412 132 420 132 430 C126 424 122 416 120 410'/>
+    <!-- heart ring of bloom -->
+    <circle cx='120' cy='365' r='8'/>
+    <!-- lower botanical flourish -->
+    <path d='M120 500 C121 528 121 552 120 576'/>
+    <path d='M120 516 C104 520 92 532 88 550 C87 556 91 561 97 560 C101 545 109 534 120 528'/>
+    <path d='M120 516 C136 520 148 532 152 550 C153 556 149 561 143 560 C139 545 131 534 120 528'/>
+    <path d='M120 560 C110 570 106 582 108 594 C113 586 117 578 120 572'/>
+    <path d='M120 560 C130 570 134 582 132 594 C127 586 123 578 120 572'/>
+    <!-- woven cross stitch accent -->
+    <path d='M117.5 489.5 L122.5 494.5 M122.5 489.5 L117.5 494.5' stroke-width='2.2'/>
+  </g>
+  <g fill='#C6B39A'>
+    <circle cx='120' cy='36' r='1.6'/>
+    <circle cx='150' cy='251' r='1.5'/><circle cx='90' cy='251' r='1.5'/>
+    <circle cx='100' cy='462' r='1.4'/><circle cx='140' cy='462' r='1.4'/>
+  </g>
+  <circle cx='120' cy='365' r='3' fill='#C6A15B'/>
 </svg>

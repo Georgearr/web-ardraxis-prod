@@ -50,18 +50,33 @@ body {
   position: relative;
 }
 
-/* Subtle Songket Geometric SVG Pattern Overlays */
+/* Subtle Songket Botanical Pattern Overlays (bunga, daun, sulur linework) */
 .songket-pattern-light {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.06;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%237B694E' stroke-width='1.2'%3E%3Cpath d='M110 0 L220 110 L110 220 L0 110 Z'/%3E%3Cpath d='M110 32 L188 110 L110 188 L32 110 Z'/%3E%3Cpath d='M110 64 L156 110 L110 156 L64 110 Z'/%3E%3Cpolygon points='110,85 118,110 110,135 102,110' stroke='%236D3A3C' stroke-width='1'/%3E%3Ccircle cx='110' cy='110' r='5' fill='%237B694E'/%3E%3Cpath d='M110 0 L110 220 M0 110 L220 110' stroke-dasharray='4 6' stroke-width='0.8'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 220px 220px;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%237B694E' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M120 116 C112 102 112 88 120 76 C128 88 128 102 120 116'/%3E%3Cpath d='M120 124 C112 138 112 152 120 164 C128 152 128 138 120 124'/%3E%3Cpath d='M116 120 C102 112 88 112 76 120 C88 128 102 128 116 120'/%3E%3Cpath d='M124 120 C138 112 152 112 164 120 C152 128 138 128 124 120'/%3E%3Cpath d='M126 114 Q135 100 147 94 Q143 107 126 114'/%3E%3Cpath d='M114 126 Q105 140 93 146 Q97 133 114 126'/%3E%3Cpath d='M114 114 Q100 105 94 93 Q107 97 114 114'/%3E%3Cpath d='M126 126 Q140 135 146 147 Q133 143 126 126'/%3E%3Cpath d='M14 14 C40 22 52 40 56 62 C57 68 54 74 48 76 C44 66 38 58 28 54'/%3E%3Cpath d='M34 34 Q44 31 50 38 Q41 43 34 34'/%3E%3Cpath d='M226 14 C200 22 188 40 184 62 C183 68 186 74 192 76 C196 66 202 58 212 54'/%3E%3Cpath d='M206 34 Q196 31 190 38 Q199 43 206 34'/%3E%3Cpath d='M14 226 C40 218 52 200 56 178 C57 172 54 166 48 164 C44 174 38 182 28 186'/%3E%3Cpath d='M34 206 Q44 209 50 202 Q41 197 34 206'/%3E%3Cpath d='M226 226 C200 218 188 200 184 178 C183 172 186 166 192 164 C196 174 202 182 212 186'/%3E%3Cpath d='M206 206 Q196 209 190 202 Q199 197 206 206'/%3E%3Cpath d='M116 24 Q112 14 118 8 Q122 16 116 24'/%3E%3Cpath d='M124 24 Q128 14 122 8 Q118 16 124 24'/%3E%3Cpath d='M116 216 Q112 226 118 232 Q122 224 116 216'/%3E%3Cpath d='M124 216 Q128 226 122 232 Q118 224 124 216'/%3E%3Cpath d='M24 116 Q14 112 8 118 Q16 122 24 116'/%3E%3Cpath d='M24 124 Q14 128 8 122 Q16 118 24 124'/%3E%3Cpath d='M216 116 Q226 112 232 118 Q224 122 216 116'/%3E%3Cpath d='M216 124 Q226 128 232 122 Q224 118 216 124'/%3E%3C/g%3E%3Ccircle cx='120' cy='120' r='9' fill='none' stroke='%237B694E' stroke-width='1'/%3E%3Ccircle cx='120' cy='120' r='4' fill='%23C6A15B'/%3E%3Cg stroke='%23C6A15B' stroke-width='0.9' stroke-linecap='round'%3E%3Cpath d='M57 117 L63 123 M63 117 L57 123'/%3E%3Cpath d='M177 117 L183 123 M183 117 L177 123'/%3E%3C/g%3E%3Cg fill='%237B694E'%3E%3Ccircle cx='120' cy='58' r='1.4'/%3E%3Ccircle cx='120' cy='182' r='1.4'/%3E%3Ccircle cx='49' cy='77' r='1.4'/%3E%3Ccircle cx='191' cy='77' r='1.4'/%3E%3Ccircle cx='49' cy='163' r='1.4'/%3E%3Ccircle cx='191' cy='163' r='1.4'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 240px 240px;
   border-radius: inherit;
 }
 
 /* Songket Vertical Hero Ornament */
+/* Hero cover instance: partially cropped top-right, secondary to the title */
+.songket-hero-motif {
+  position: absolute;
+  top: -34px;
+  right: -48px;
+  width: 210px;
+  height: 560px;
+  pointer-events: none;
+  opacity: 0.16;
+  z-index: 1; /* behind hero typography (z-index 2) */
+  background-image: url("../img/songket-hero.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
   /* Songket hero motif for dark quote section (large decorative element) */
   .dark-quote-section .songket-hero-motif {
     position: absolute;
@@ -87,7 +102,7 @@ body {
   width: 140px;
   height: 140px;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.08;
   background-image: url("../img/songket-watermark.svg");
   background-size: contain;
   background-repeat: no-repeat;
@@ -95,12 +110,14 @@ body {
 
 /* Songket Section Border */
 .songket-section-border {
-  height: 1px;
+  height: 16px;
   margin: 32px auto;
   width: 60%;
   background-image: url("../img/songket-border.svg");
-  background-repeat: repeat-x;
-  opacity: 0.08;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto 100%;
+  opacity: 0.32;
 }
 
 /* Responsive Adjustments */
@@ -110,12 +127,12 @@ body {
     right: -70px;
     width: 260px;
     height: 260px;
-    opacity: 0.06; /* Form watermark opacity */
+    opacity: 0.08;
   }
   .songket-watermark-corner {
     width: 110px;
     height: 110px;
-    opacity: 0.04;
+    opacity: 0.06;
   }
   .songket-section-border {
     width: 50%;
@@ -126,9 +143,9 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.11;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23C6B39A' stroke-width='1.2'%3E%3Cpath d='M110 0 L220 110 L110 220 L0 110 Z'/%3E%3Cpath d='M110 32 L188 110 L110 188 L32 110 Z'/%3E%3Cpath d='M110 64 L156 110 L110 156 L64 110 Z'/%3E%3Cpolygon points='110,85 118,110 110,135 102,110' stroke='%237B694E' stroke-width='1'/%3E%3Ccircle cx='110' cy='110' r='5' fill='%23C6B39A'/%3E%3Cpath d='M110 0 L110 220 M0 110 L220 110' stroke-dasharray='4 6' stroke-width='0.8'/%3E%3C/g%3E%3C/svg%3E");
-  background-size: 220px 220px;
+  opacity: 0.12;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'%3E%3Cg fill='none' stroke='%23C6B39A' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M120 116 C112 102 112 88 120 76 C128 88 128 102 120 116'/%3E%3Cpath d='M120 124 C112 138 112 152 120 164 C128 152 128 138 120 124'/%3E%3Cpath d='M116 120 C102 112 88 112 76 120 C88 128 102 128 116 120'/%3E%3Cpath d='M124 120 C138 112 152 112 164 120 C152 128 138 128 124 120'/%3E%3Cpath d='M126 114 Q135 100 147 94 Q143 107 126 114'/%3E%3Cpath d='M114 126 Q105 140 93 146 Q97 133 114 126'/%3E%3Cpath d='M114 114 Q100 105 94 93 Q107 97 114 114'/%3E%3Cpath d='M126 126 Q140 135 146 147 Q133 143 126 126'/%3E%3Cpath d='M14 14 C40 22 52 40 56 62 C57 68 54 74 48 76 C44 66 38 58 28 54'/%3E%3Cpath d='M34 34 Q44 31 50 38 Q41 43 34 34'/%3E%3Cpath d='M226 14 C200 22 188 40 184 62 C183 68 186 74 192 76 C196 66 202 58 212 54'/%3E%3Cpath d='M206 34 Q196 31 190 38 Q199 43 206 34'/%3E%3Cpath d='M14 226 C40 218 52 200 56 178 C57 172 54 166 48 164 C44 174 38 182 28 186'/%3E%3Cpath d='M34 206 Q44 209 50 202 Q41 197 34 206'/%3E%3Cpath d='M226 226 C200 218 188 200 184 178 C183 172 186 166 192 164 C196 174 202 182 212 186'/%3E%3Cpath d='M206 206 Q196 209 190 202 Q199 197 206 206'/%3E%3Cpath d='M116 24 Q112 14 118 8 Q122 16 116 24'/%3E%3Cpath d='M124 24 Q128 14 122 8 Q118 16 124 24'/%3E%3Cpath d='M116 216 Q112 226 118 232 Q122 224 116 216'/%3E%3Cpath d='M124 216 Q128 226 122 232 Q118 224 124 216'/%3E%3Cpath d='M24 116 Q14 112 8 118 Q16 122 24 116'/%3E%3Cpath d='M24 124 Q14 128 8 122 Q16 118 24 124'/%3E%3Cpath d='M216 116 Q226 112 232 118 Q224 122 216 116'/%3E%3Cpath d='M216 124 Q226 128 232 122 Q224 118 216 124'/%3E%3C/g%3E%3Ccircle cx='120' cy='120' r='9' fill='none' stroke='%23C6B39A' stroke-width='1'/%3E%3Ccircle cx='120' cy='120' r='4' fill='%23C6A15B'/%3E%3Cg stroke='%23C6A15B' stroke-width='0.9' stroke-linecap='round'%3E%3Cpath d='M57 117 L63 123 M63 117 L57 123'/%3E%3Cpath d='M177 117 L183 123 M183 117 L177 123'/%3E%3C/g%3E%3Cg fill='%23C6B39A'%3E%3Ccircle cx='120' cy='58' r='1.4'/%3E%3Ccircle cx='120' cy='182' r='1.4'/%3E%3Ccircle cx='49' cy='77' r='1.4'/%3E%3Ccircle cx='191' cy='77' r='1.4'/%3E%3Ccircle cx='49' cy='163' r='1.4'/%3E%3Ccircle cx='191' cy='163' r='1.4'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 240px 240px;
   border-radius: inherit;
 }
 
