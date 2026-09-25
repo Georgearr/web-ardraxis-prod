@@ -27,7 +27,7 @@ from services.google_drive import get_photos, search_photos, clear_cache, fetch_
 from services.google_sheets import submit_recruitment
 from recruitment_config import (
     RECRUITMENT_STATUS, AUTOSAVE_DELAY, ENABLE_DUPLICATE_CHECK, VALID_SCHOOLS,
-    get_progress_dir, load_school_json,
+    RECRUITMENT_ROUTE_PREFIXES, get_progress_dir, load_school_json,
 )
 from recruitment_helpers import (
     ProgressManager, ValidationHelper, ConfigLoader,
@@ -923,10 +923,21 @@ def api_mpls_config():
 
 def _recruit_school_from_url():
     path = request.path
+    for school, prefix in sorted(
+        RECRUITMENT_ROUTE_PREFIXES.items(), key=lambda item: len(item[1]), reverse=True
+    ):
+        if path == prefix or path.startswith(prefix + "/"):
+            return school
     for s in VALID_SCHOOLS:
         if path.startswith(f"/recruitment-{s}"):
             return s
     return None
+
+
+def _recruitment_api_prefix(school_key):
+    if school_key and school_key in RECRUITMENT_ROUTE_PREFIXES:
+        return RECRUITMENT_ROUTE_PREFIXES[school_key]
+    return f"/recruitment-{school_key}" if school_key else "/recruitment"
 
 
 def _session_key(base, school):
@@ -945,14 +956,14 @@ def _render_recruitment(school_key):
         return render_template(
             "recruitment_closed.html",
             school_config=school_cfg,
-            recruitment_api_prefix=f"/recruitment-{school_key}" if school_key else "/recruitment",
+            recruitment_api_prefix=_recruitment_api_prefix(school_key),
         )
     sekbid_list = ConfigLoader.get_sekbid_list(school_key)
     return render_template(
         "recruitment.html",
         sekbid_list=sekbid_list,
         autosave_delay=AUTOSAVE_DELAY,
-        recruitment_api_prefix=f"/recruitment-{school_key}" if school_key else "/recruitment",
+        recruitment_api_prefix=_recruitment_api_prefix(school_key),
         school_config=school_cfg,
     )
 
@@ -976,10 +987,22 @@ def recruitment_sma_cgc():
     return _render_recruitment("sma-cgc")
 
 
+@app.route("/jalurundanganmayor")
+def jalur_undangan_mayor():
+    return _render_recruitment("jalurundangan-mayor")
+
+
+@app.route("/jalurundangancgc")
+def jalur_undangan_cgc():
+    return _render_recruitment("jalurundangan-cgc")
+
+
 # --- Progress ---
 
 @app.route("/recruitment-sma-mayor/progress")
 @app.route("/recruitment-sma-cgc/progress")
+@app.route("/jalurundanganmayor/progress")
+@app.route("/jalurundangancgc/progress")
 def recruitment_progress():
     closed = _recruitment_open_required()
     if closed:
@@ -998,6 +1021,8 @@ def recruitment_progress():
 
 @app.route("/recruitment-sma-mayor/autosave", methods=["POST"])
 @app.route("/recruitment-sma-cgc/autosave", methods=["POST"])
+@app.route("/jalurundanganmayor/autosave", methods=["POST"])
+@app.route("/jalurundangancgc/autosave", methods=["POST"])
 def recruitment_autosave():
     closed = _recruitment_open_required()
     if closed:
@@ -1024,6 +1049,8 @@ def recruitment_autosave():
 
 @app.route("/recruitment-sma-mayor/clear", methods=["POST"])
 @app.route("/recruitment-sma-cgc/clear", methods=["POST"])
+@app.route("/jalurundanganmayor/clear", methods=["POST"])
+@app.route("/jalurundangancgc/clear", methods=["POST"])
 def recruitment_clear():
     closed = _recruitment_open_required()
     if closed:
@@ -1042,6 +1069,8 @@ def recruitment_clear():
 
 @app.route("/recruitment-sma-mayor/submit", methods=["POST"])
 @app.route("/recruitment-sma-cgc/submit", methods=["POST"])
+@app.route("/jalurundanganmayor/submit", methods=["POST"])
+@app.route("/jalurundangancgc/submit", methods=["POST"])
 def recruitment_submit():
     closed = _recruitment_open_required()
     if closed:
@@ -1135,4 +1164,4 @@ def recruitment_submit():
 # RUN
 # ===============================
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=8080, debug=True)

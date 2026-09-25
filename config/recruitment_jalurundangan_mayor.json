@@ -1,0 +1,168 @@
+{
+  "school": {
+    "name": "SMA Mayor (Jalur Undangan)",
+    "short": "Mayor",
+    "title": "Jalur Undangan OSIS SMA IGS Mayor",
+    "subtitle": "Pendaftaran jalur undangan OSIS SMA IGS Mayor periode 2026/2027",
+    "hero_title": "Jalur Undangan Pengurus OSIS",
+    "hero_text": "Formulir ini dikhususkan untuk calon pengurus OSIS SMA IGS Mayor yang diundang. Pilih sekbid sesuai kemampuan dan persyaratan yang tertera.",
+    "success_title": "Pendaftaran Berhasil!",
+    "success_message": "Terima kasih telah mendaftar melalui Jalur Undangan OSIS SMA IGS Mayor. Tim kami akan meninjau pendaftaran Anda dan mengumumkan hasilnya sesegera mungkin.",
+    "line_group_url": "https://line.me/ti/g/_U56TnhpPw"
+  },
+  "google": {
+    "spreadsheet_id": "1jo2NEHO27OKvBmKiAyW0BPLfou7zqXZEmiLfsVi7ewM",
+    "apps_script_url": "https://script.google.com/macros/s/AKfycbz4ux_IaRD-VFGx55iCzumA3v3K5M4UTbO2XS8oCDMlZlU3BFQ0zLU7_ySqeijjdah5/exec"
+  },
+  "sekbid": {
+    "Sub Sekbid Desain (DDV)": {
+      "id": "sub_sekbid_desain_ddv",
+      "description": "Calon Sub Sekbid Desain wajib mengerjakan tugas berikut.",
+      "requirements": [
+        "Menggambar dan menganimasikan banner MPLS ukuran 1567x1045 px bertema Adventure Time tanpa menghilangkan citra MPLS.",
+        "Nilai tambah apabila desain kreatif dan inovatif.",
+        "Nilai tambah apabila membuat poster referensi menggunakan Canva atau aplikasi lainnya."
+      ],
+      "youtube": "https://www.youtube.com/watch?v=YXfG3kLfTLA&t=11s",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    },
+    "Hubungan Masyarakat dan Publikasi (HP iPhone)": {
+      "id": "hubungan_masyarakat_dan_publikasi",
+      "description": "Calon Humas dan Publikasi wajib mengerjakan tugas berikut.",
+      "requirements": [
+        "Syarat khusus: memiliki HP iPhone.",
+        "Membuat video promosi mengenai Event Classmeet.",
+        "Membuat 1 desain poster Event Classmeet bertema bebas.",
+        "Cantumkan link Canva dengan akses 'Anyone with the link'.",
+        "Tidak menggunakan AI."
+      ],
+      "youtube": "https://www.youtube.com/watch?v=YXfG3kLfTLA&t=11s",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    },
+    "Komunikasi": {
+      "id": "komunikasi",
+      "description": "Calon Komunikasi wajib mengerjakan tugas berikut.",
+      "requirements": [
+        "Membuat video simulasi MC HUT RI maksimal 5 menit.",
+        "Melampirkan naskah MC.",
+        "Dokumentasi/sertifikat pengalaman MC bersifat opsional."
+      ],
+      "youtube": "https://www.youtube.com/watch?v=YXfG3kLfTLA&t=11s",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    },
+    "Sub Sekbid Producer": {
+      "id": "sub_sekbid_producer",
+      "description": "Calon Producer wajib mengerjakan salah satu bidang berikut.",
+      "requirements": [
+        "Pemeran: Membuat 3 ide alur cerita short movie bertema Valentine, Paskah, dan Prom Night.",
+        "Script Writer: Menuliskan naskah cerita bebas dari awal sampai akhir."
+      ],
+      "youtube": "https://www.youtube.com/watch?v=YXfG3kLfTLA&t=11s",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    },
+    "Sub Sekbid Video Editor (Laptop/HP high-end)": {
+      "id": "sub_sekbid_video_editor",
+      "description": "Calon Video Editor wajib mengerjakan tugas berikut.",
+      "requirements": [
+        "Syarat khusus: memiliki Laptop/HP high-end.",
+        "Membuat video edit bertema bebas dengan durasi maksimal 3 menit."
+      ],
+      "youtube": "https://www.youtube.com/watch?v=YXfG3kLfTLA&t=11s",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    },
+    "Sub Sekbid Dokumentasi (DDV) (kamera mirrorless/DSLR)": {
+      "id": "sub_sekbid_dokumentasi_ddv",
+      "description": "Calon Dokumentasi wajib mengerjakan tugas berikut.",
+      "requirements": [
+        "Syarat khusus: memiliki kamera mirrorless/DSLR.",
+        "Mengirim minimal 4 hasil foto pribadi tanpa editing.",
+        "Mengirim video cinematic durasi 25-30 detik.",
+        "Mengirim dokumen equipment yang dimiliki (kamera, lensa, tripod, gimbal, drone, dll)."
+      ],
+      "youtube": "https://www.youtube.com/watch?v=YXfG3kLfTLA&t=11s",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    },
+    "Sub Sekbid Kreatif (DDV)": {
+      "id": "sub_sekbid_kreatif_ddv",
+      "description": "Calon Kreatif wajib mengerjakan tugas berikut.",
+      "requirements": [
+        "Sketsa ide photobooth 17 Agustus.",
+        "Sketsa ide hadiah pemenang selain piala dan medali.",
+        "Rancangan kasar backdrop tema 17 Agustus.",
+        "Tidak diperbolehkan menggunakan AI.",
+        "Boleh mengumpulkan lebih dari satu sketsa/rancangan."
+      ],
+      "youtube": "https://www.youtube.com/watch?v=YXfG3kLfTLA&t=11s",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    },
+    "Sosial": {
+      "id": "sosial",
+      "description": "Calon Sekbid Sosial wajib mengerjakan tugas berikut.",
+      "requirements": [
+        "Membuat dan menyampaikan speech berdurasi 2-4 menit bertema 'Beyond Kindness: Building a Culture of Care.'"
+      ],
+      "youtube": "https://www.youtube.com/watch?v=YXfG3kLfTLA&t=11s",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    },
+    "Bela Negara": {
+      "id": "bela_negara",
+      "description": "Calon Bela Negara wajib mengerjakan tugas berikut.",
+      "requirements": [
+        "Membuat rundown kegiatan 17 Agustus.",
+        "Membuat tabel penjelasan tata cara pelaksanaan setiap games atau mini games pada rundown.",
+        "Rundown dan tabel games wajib dipisah pada sheet yang berbeda.",
+        "Seluruh tugas dibuat dalam Google Spreadsheet."
+      ],
+      "youtube": "https://www.youtube.com/watch?v=YXfG3kLfTLA&t=11s",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    },
+    "Bahasa": {
+      "id": "bahasa",
+      "description": "Calon Sekbid Bahasa wajib mengerjakan tugas berikut.",
+      "requirements": [
+        "Membuat nama event 17 Agustus yang unik dan bermakna.",
+        "Membuat caption Instagram.",
+        "Membuat speech 3 menit bertema 'Speak with Purpose: The Importance of Communication Skills'."
+      ],
+      "youtube": "https://www.youtube.com/watch?v=YXfG3kLfTLA&t=11s",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    },
+    "Apresiasi Seni dan Olahraga": {
+      "id": "apresiasi_seni_dan_olahraga",
+      "description": "Calon Sekbid Apresiasi Seni dan Olahraga wajib mengerjakan tugas berikut.",
+      "requirements": [
+        "Menjelaskan pemahaman tentang apresiasi seni dan olahraga.",
+        "Membuat video penampilan bakat.",
+        "Folder Google Drive: NAMA LENGKAP_BAKAT YANG DIMILIKI."
+      ],
+      "youtube": "https://www.youtube.com/watch?v=YXfG3kLfTLA&t=11s",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    },
+    "Multimedia Website": {
+      "id": "multimedia_website",
+      "description": "Calon Multimedia Website wajib mengerjakan tugas berikut.",
+      "requirements": [
+        "Membuat website portofolio diri sendiri.",
+        "Cantumkan teknologi (bahasa) yang digunakan.",
+        "Cantumkan pengalaman pemrograman.",
+        "Jika menggunakan LLM, sertakan model dan teknologi yang digunakan.",
+        "Deploy website menggunakan GitHub Pages, Vercel, atau platform deployment lainnya."
+      ],
+      "youtube": "https://www.youtube.com/watch?v=a1FyAjFD74s&pp=0gcJCaMLAYcqIYzv",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    },
+    "Sub Sekbid Illustrator (yang jago design)": {
+      "id": "sub_sekbid_illustrator",
+      "description": "Calon Illustrator wajib mengerjakan tugas berikut.",
+      "requirements": [
+        "Syarat khusus: mahir desain (yang jago design).",
+        "Membuat PPT/Slides minigames Event Paskah.",
+        "Tema dan aplikasi bebas.",
+        "Sekreatif mungkin.",
+        "Nilai tambah jika menggunakan style pubmat."
+      ],
+      "youtube": "https://www.youtube.com/watch?v=YXfG3kLfTLA&t=11s",
+      "question": "KUMPULKAN PORTOFOLIO DIATAS DALAM FORMAT LINK GDRIVE (settings: view only)"
+    }
+  }
+}

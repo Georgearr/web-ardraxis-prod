@@ -13,7 +13,19 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 AUTOSAVE_DELAY = 1
 SESSION_TIMEOUT = 86400
 
-VALID_SCHOOLS = {"sma-mayor", "sma-cgc"}
+VALID_SCHOOLS = {
+    "sma-mayor",
+    "sma-cgc",
+    "jalurundangan-mayor",
+    "jalurundangan-cgc",
+}
+
+RECRUITMENT_ROUTE_PREFIXES = {
+    "sma-mayor": "/recruitment-sma-mayor",
+    "sma-cgc": "/recruitment-sma-cgc",
+    "jalurundangan-mayor": "/jalurundanganmayor",
+    "jalurundangan-cgc": "/jalurundangancgc",
+}
 
 
 def get_sekbid_json_path(school_key=None):
