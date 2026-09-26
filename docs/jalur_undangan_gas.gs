@@ -29,8 +29,7 @@ const HEADERS = [
   "Pengalaman Organisasi",
   "Link Google Drive Sertifikat",
   "Skala Prioritas",
-  "Link Google Drive Tugas Sekbid 1",
-  "Link Google Drive Tugas Sekbid 2",
+  "Link Google Drive Tugas Sekbid",
 ];
 
 const SEKBID_SHEETS = {
@@ -55,6 +54,12 @@ function setupSheets() {
   Object.keys(SEKBID_SHEETS).forEach(function (id) {
     ensureSheet_(ss, SEKBID_SHEETS[id]);
   });
+  const defaultSheet = ss.getSheetByName("Sheet1");
+  if (defaultSheet && defaultSheet.getLastRow() === 0 && ss.getSheets().length > 1) {
+    try {
+      ss.deleteSheet(defaultSheet);
+    } catch (err) {}
+  }
 }
 
 function doPost(e) {
@@ -78,12 +83,14 @@ function doPost(e) {
 }
 
 function doGet() {
-  return json_({ success: true, message: "Jalur Undangan OSIS endpoint aktif" });
+  return json_({ success: true, message: "Endpoint Jalur Undangan OSIS aktif" });
 }
 
 function parseBody_(e) {
   if (!e || !e.postData || !e.postData.contents) {
-    throw new Error("Body kosong");
+    const params = (e && e.parameter) || {};
+    if (params.payload) return JSON.parse(params.payload);
+    return params;
   }
   const raw = e.postData.contents;
   try {
@@ -127,7 +134,6 @@ function buildRow_(data) {
     data.sertifikat_link || "",
     data.prioritas || "",
     data.google_drive_link || "",
-    "",
   ];
 }
 
@@ -136,12 +142,23 @@ function ensureSheet_(ss, name) {
   if (!sheet) {
     sheet = ss.insertSheet(name);
   }
-  const first = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
-  const empty = !first || first.every(function (cell) { return cell === ""; });
+  const lastRow = sheet.getLastRow();
+  let empty = false;
+  if (lastRow === 0) {
+    empty = true;
+  } else {
+    const first = sheet.getRange(1, 1, 1, HEADERS.length).getValues()[0];
+    empty = !first || first.every(function (cell) { return cell === ""; });
+  }
   if (empty) {
     sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight("bold");
+    sheet.getRange(1, 1, 1, HEADERS.length).setBackground("#1a365d");
+    sheet.getRange(1, 1, 1, HEADERS.length).setFontColor("#ffffff");
     sheet.setFrozenRows(1);
+    for (let c = 1; c <= HEADERS.length; c++) {
+      sheet.autoResizeColumn(c);
+    }
   }
   return sheet;
 }

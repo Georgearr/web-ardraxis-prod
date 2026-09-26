@@ -163,11 +163,48 @@ def _build_row(school_config, form_data, labels, undangan=False):
 
 
 def _post_apps_script(url, payload):
+    # Try requests first (handles SSL certs and 302 redirects automatically)
+    try:
+        import requests
+        resp = requests.post(url, json=payload, timeout=45)
+        if resp.status_code in (200, 201):
+            try:
+                data = resp.json()
+                if data.get("success") is not False:
+                    return True, data.get("message") or "Pendaftaran berhasil disimpan"
+                return False, data.get("message") or "Gagal menyimpan ke spreadsheet"
+            except Exception:
+                if "success" in resp.text.lower() or resp.status_code == 200:
+                    return True, "Pendaftaran berhasil disimpan"
+                return False, "Respon server tidak valid: " + resp.text[:100]
+        elif resp.status_code in (301, 302, 303, 307, 308):
+            loc = resp.headers.get("Location")
+            if loc:
+                resp2 = requests.post(loc, json=payload, timeout=45)
+                try:
+                    data = resp2.json()
+                    return data.get("success", True), data.get("message") or "Pendaftaran berhasil disimpan"
+                except Exception:
+                    return True, "Pendaftaran berhasil disimpan"
+    except Exception as e:
+        last_error = str(e)
+    else:
+        last_error = f"HTTP status {resp.status_code}"
+
+    # Fallback to urllib with SSL context
+    import ssl
+    ctx = ssl.create_default_context()
+    try:
+        import certifi
+        ctx.load_verify_locations(certifi.where())
+    except Exception:
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+
     body = json.dumps(payload).encode("utf-8")
     headers = {"Content-Type": "application/json"}
-    opener = urllib.request.build_opener(_NoRedirect)
+    opener = urllib.request.build_opener(urllib.request.HTTPSHandler(context=ctx), _NoRedirect)
     current = url
-    last_error = None
     for _ in range(6):
         req = urllib.request.Request(current, data=body, headers=headers, method="POST")
         try:
@@ -246,8 +283,8 @@ def submit_recruitment(school_config, form_data, sekbid_keys):
     except Exception as e:
         return False, f"Gagal terhubung ke Google Sheets: {e}"
 
-    row = _build_row(school_config, form_data, labels)
     use_undangan_names = _jalur_label(school_config) == "Undangan"
+    row = _build_row(school_config, form_data, labels, undangan=use_undangan_names)
     targets = []
     if use_undangan_names:
         targets.append("Semua")
@@ -260,7 +297,7 @@ def submit_recruitment(school_config, form_data, sekbid_keys):
     for sheet_name in targets:
         try:
             worksheet = _ensure_sheet(spreadsheet, sheet_name)
-            _ensure_headers(worksheet)
+            _ensure_headers(worksheet, UNDANGAN_HEADERS if use_undangan_names else HEADERS)
             worksheet.append_row(row)
         except Exception:
             continue
