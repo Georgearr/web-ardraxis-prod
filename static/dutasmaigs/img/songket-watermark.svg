@@ -1,0 +1,15 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'>
+  <!-- Songket corner sprig: curved pucuk rebung fan with floret -->
+  <g fill='none' stroke='#7B694E' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'>
+    <path d='M10 150 C14 108 30 74 62 52 C66 49 71 51 70 56 C52 84 40 116 36 150'/>
+    <path d='M10 150 C22 118 44 94 78 80 C83 78 86 83 82 87 C56 104 38 126 30 150'/>
+    <path d='M10 150 C28 132 52 120 80 116 C85 115 87 120 83 123 C62 128 44 138 34 150'/>
+    <path d='M64 34 C68 40 68 46 64 50 C60 46 60 40 64 34 Z'/>
+  </g>
+  <g fill='#7B694E'>
+    <circle cx='96' cy='40' r='1.5'/>
+    <circle cx='112' cy='64' r='1.5'/>
+    <circle cx='44' cy='98' r='1.5'/>
+  </g>
+  <path d='M97 93 L103 99 M103 93 L97 99' stroke='#C6A15B' stroke-width='1.9' stroke-linecap='round' fill='none'/>
+</svg>
