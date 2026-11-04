@@ -18,6 +18,15 @@ extra_css %}
     <p class="text-shadow hidden">
       Kabinet OSIS SMA Ignatius Global School Periode 2025/2026
     </p>
+    <button
+      type="button"
+      class="home-cta text-shadow hidden"
+      data-ardrazine-open
+      aria-haspopup="dialog"
+      aria-controls="ardrazine-modal"
+    >
+      Discover Ardrazine
+    </button>
   </div>
 </section>
 <section class="events" id="events">
@@ -290,6 +299,37 @@ extra_css %}
     </div>
   </div>
 </section>
+<div
+  class="ardrazine-modal"
+  id="ardrazine-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="ardrazine-modal-title"
+  hidden
+>
+  <div class="ardrazine-modal-panel">
+    <h2 class="ardrazine-modal-title" id="ardrazine-modal-title">
+      Thankyou Ardraxis!
+    </h2>
+    <p class="ardrazine-modal-text">Check out our 1-year journey recap!</p>
+    <button
+      type="button"
+      class="ardrazine-modal-cta"
+      onclick="window.location.assign('{{ url_for('magazine') }}')"
+    >
+      View Ardrazine
+    </button>
+    <button
+      type="button"
+      class="ardrazine-modal-close"
+      aria-label="Close"
+      data-ardrazine-close
+    >
+      &times;
+    </button>
+  </div>
+</div>
 {% endblock %} {% block extra_js %}
 <script src="{{ url_for('static', filename='js/scroll_reveal.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ardrazine_modal.js') }}"></script>
 {% endblock %}

@@ -1,0 +1,73 @@
+/* =========================================================
+   ARDRAZINE — DIGITAL MAGAZINE
+   ========================================================= */
+.magazine-page {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 116px clamp(16px, 4vw, 48px) clamp(56px, 8vw, 96px);
+  overflow-x: clip;
+}
+
+.magazine-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: clamp(24px, 4vw, 44px);
+  padding-bottom: clamp(18px, 2.6vw, 30px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.14);
+}
+
+.magazine-title {
+  font-family: "Bebas Neue", "Anton", Impact, sans-serif;
+  font-size: clamp(2.75rem, 9vw, 5.5rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #0f172a;
+}
+
+/* ---------- Gallery grid ---------- */
+.mag-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 2.2vw, 30px);
+}
+
+.mag-item {
+  margin: 0;
+  min-width: 0;
+}
+
+.mag-frame {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  background: #eef2f6;
+}
+
+.mag-frame.is-mounted {
+  background: none;
+}
+
+.mag-frame svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 600px) {
+  .magazine-page {
+    padding-top: 96px;
+  }
+
+  .mag-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+}

@@ -1,4 +1,4 @@
-from flask import Flask, Response, make_response, render_template, request, jsonify, abort, session, redirect, url_for
+from flask import Flask, Response, make_response, render_template, stream_template, request, jsonify, abort, session, redirect, url_for
 from dotenv import load_dotenv
 import os
 import random
@@ -25,6 +25,7 @@ from ravenith_config import (
 from photobooth_config import PHOTOBOOTH_BANNER, PHOTOBOOTH_PAGE_SIZE
 from services.google_drive import get_photos, search_photos, clear_cache, fetch_drive_image
 from services.google_sheets import submit_recruitment
+from services.ardrazine import load_magazine_items
 from recruitment_config import (
     RECRUITMENT_STATUS, AUTOSAVE_DELAY, ENABLE_DUPLICATE_CHECK, VALID_SCHOOLS,
     RECRUITMENT_ROUTE_PREFIXES, get_progress_dir, load_school_json,
@@ -110,6 +111,13 @@ def about_us():
 @app.route("/coming_soon")
 def coming_soon():
     return render_template("coming_soon.html")
+
+@app.route("/magazine", methods=["GET"])
+def magazine():
+    return Response(
+        stream_template("magazine.html", items=load_magazine_items()),
+        mimetype="text/html",
+    )
 
 @app.errorhandler(404)
 def handle_404(error):
