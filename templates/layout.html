@@ -47,7 +47,8 @@
       <a href="{{ url_for('home') }}#home">HOME</a>
       <a href="{{ url_for('home') }}#events">EVENTS</a>
       <a href="{{ url_for('about_us') }}">ABOUT US</a>
-      <a href="https://drax.osissmaigs.com" target="_blank">TRY D'RAX</a>
+      <a href="{{ url_for('magazine') }}">ARDRAZINE</a>
+      <a href="https://drax.osissmaigs.com/" target="_blank">TRY D'RAX</a>
     </div>
     <button class="hamburger" onclick="toggleMenu()" aria-label="Toggle menu">
       <span></span>
@@ -73,7 +74,8 @@
       <a href="{{ url_for('home') }}#home">HOME</a>
       <a href="{{ url_for('home') }}#events">EVENTS</a>
       <a href="{{ url_for('about_us') }}">ABOUT US</a>
-      <a href="https://drax.osissmaigs.com" target="_blank">TRY D'RAX</a>
+      <a href="{{ url_for('magazine') }}">ARDRAZINE</a>
+      <a href="https://drax.osissmaigs.com/" target="_blank">TRY D'RAX</a>
     </nav>
   </div>
   {% block isi %}{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}Ardrazine{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/magazine.css') }}" />
+{% endblock %}
+
+{% block isi %}
+<main class="magazine-page">
+  <header class="magazine-header">
+    <h1 class="magazine-title">Ardrazine</h1>
+  </header>
+
+  <div class="mag-grid">
+    {% for item in items %}
+    <figure class="mag-item">
+      <div class="mag-frame"{% if item.ratio %} style="aspect-ratio: {{ item.ratio }}"{% endif %}>
+        <template class="mag-source">{{ item.markup }}</template>
+      </div>
+    </figure>
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/magazine.js') }}"></script>
+{% endblock %}

@@ -2201,3 +2201,197 @@ section.about img {
     display: none;
   }
 }
+
+/* ============================================
+   HOME CTA + ARDRAZINE INVITE MODAL
+   ============================================ */
+
+.home-cta {
+  margin-top: 6px;
+  padding: 14px 30px;
+  border: 1px solid rgba(178, 223, 219, 0.6);
+  border-radius: 8px;
+  background: #f8fafc;
+  color: rgb(29, 105, 110);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.home-cta:hover {
+  background: #b2dfdb;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+
+.home-cta:active {
+  transform: translateY(0);
+}
+
+.home-cta:focus-visible {
+  outline: 2px solid #b2dfdb;
+  outline-offset: 3px;
+}
+
+.ardrazine-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.ardrazine-modal[hidden] {
+  display: none;
+}
+
+.ardrazine-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ardrazine-modal-panel {
+  position: relative;
+  width: min(460px, 100%);
+  padding: clamp(30px, 6vw, 46px) clamp(24px, 5vw, 40px);
+  background: #f8fafc;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 18px;
+  box-shadow: 0 30px 60px -20px rgba(15, 23, 42, 0.45);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(16px) scale(0.97);
+  transition: opacity 0.35s cubic-bezier(0.2, 0.65, 0.3, 1),
+    transform 0.35s cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+
+.ardrazine-modal.is-open .ardrazine-modal-panel {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.ardrazine-modal-title {
+  margin: 0;
+  font-family: "Bebas Neue", "Anton", Impact, sans-serif;
+  font-size: clamp(2.5rem, 9vw, 3.6rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0.04em;
+  color: #0f172a;
+}
+
+.ardrazine-modal-text {
+  margin: 14px 0 0;
+  font-size: 1.05rem;
+  font-weight: 300;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  color: #475569;
+}
+
+.ardrazine-modal-cta {
+  margin-top: 28px;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 8px;
+  background: rgb(29, 105, 110);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.ardrazine-modal-cta:hover {
+  background: rgb(48, 171, 180);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(29, 105, 110, 0.35);
+}
+
+.ardrazine-modal-cta:active {
+  transform: translateY(0);
+}
+
+.ardrazine-modal-cta:focus-visible {
+  outline: 2px solid rgb(48, 171, 180);
+  outline-offset: 3px;
+}
+
+.ardrazine-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #64748b;
+  font-size: 1.7rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.ardrazine-modal-close:hover {
+  background: rgba(15, 23, 42, 0.08);
+  color: #0f172a;
+  transform: rotate(90deg);
+}
+
+.ardrazine-modal-close:focus-visible {
+  outline: 2px solid rgb(48, 171, 180);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .home-cta {
+    padding: 12px 24px;
+    font-size: 0.95rem;
+  }
+
+  .ardrazine-modal {
+    padding: 16px;
+  }
+
+  .ardrazine-modal-title {
+    font-size: clamp(2.1rem, 11vw, 2.8rem);
+  }
+
+  .ardrazine-modal-text {
+    font-size: 0.98rem;
+  }
+
+  .ardrazine-modal-cta {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ardrazine-modal,
+  .ardrazine-modal-panel,
+  .home-cta,
+  .ardrazine-modal-cta,
+  .ardrazine-modal-close {
+    transition: none !important;
+    animation: none !important;
+  }
+}
