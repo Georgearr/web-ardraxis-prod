@@ -54,7 +54,7 @@
 
       <!-- Featured Cover Showcase -->
       <div class="hero-showcase">
-        <div class="cover-card" id="hero-cover-card" data-page="1" title="Klik untuk membuka Cover">
+        <div class="cover-card" id="hero-cover-card" data-page="1" style="aspect-ratio: {{ items[0].ratio }};" title="Klik untuk membuka Cover">
           <div class="cover-shine"></div>
           <picture>
             <source srcset="{{ url_for('static', filename='img/ardrazine/' ~ items[0].filename) }}" type="image/webp">

@@ -352,16 +352,19 @@
     }, { passive: true });
   }
 
-  // Scroll to Top FAB button
-  if (fabTop) {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 400) {
-        fabTop.classList.add("is-visible");
-      } else {
-        fabTop.classList.remove("is-visible");
-      }
-    }, { passive: true });
+  // Floating Controls scroll visibility (appears when scrolled past hero)
+  const floatingControls = document.querySelector(".floating-controls");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 350) {
+      if (floatingControls) floatingControls.classList.add("is-visible");
+      if (fabTop) fabTop.classList.add("is-visible");
+    } else {
+      if (floatingControls) floatingControls.classList.remove("is-visible");
+      if (fabTop) fabTop.classList.remove("is-visible");
+    }
+  }, { passive: true });
 
+  if (fabTop) {
     fabTop.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
