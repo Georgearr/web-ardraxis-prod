@@ -26,7 +26,7 @@
   min-height: 100vh;
   background: var(--mag-bg);
   padding-top: 86px; /* navbar spacing */
-  padding-bottom: 80px;
+  padding-bottom: 40px;
   color: var(--mag-text-main);
   position: relative;
   overflow-x: hidden;
@@ -51,8 +51,8 @@
   position: relative;
   background: linear-gradient(135deg, #0d292b 0%, #16484c 50%, #1d696e 100%);
   color: #ffffff;
-  padding: clamp(40px, 6vw, 75px) clamp(16px, 4vw, 48px);
-  margin-bottom: clamp(36px, 5vw, 60px);
+  padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 32px);
+  margin-bottom: clamp(20px, 3vw, 32px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   overflow: hidden;
 }
@@ -299,8 +299,8 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 16px;
-  margin-bottom: 28px;
-  padding-bottom: 16px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
   border-bottom: 2px solid #e2e8f0;
 }
 
@@ -331,7 +331,7 @@
 .mag-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: clamp(16px, 2.2vw, 28px);
+  gap: clamp(12px, 1.5vw, 20px);
 }
 
 .mag-card {
