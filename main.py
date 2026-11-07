@@ -114,10 +114,8 @@ def coming_soon():
 
 @app.route("/magazine", methods=["GET"])
 def magazine():
-    return Response(
-        stream_template("magazine.html", items=load_magazine_items()),
-        mimetype="text/html",
-    )
+    items = load_magazine_items()
+    return render_template("magazine.html", items=items, total_pages=len(items))
 
 @app.errorhandler(404)
 def handle_404(error):

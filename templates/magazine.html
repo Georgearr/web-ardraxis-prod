@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Ardrazine{% endblock %}
+{% block title %}Ardrazine — Digital Magazine{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/magazine.css') }}" />
@@ -8,18 +8,238 @@
 
 {% block isi %}
 <main class="magazine-page">
-  <header class="magazine-header">
-    <h1 class="magazine-title">Ardrazine</h1>
+  <!-- Hero Section -->
+  <header class="magazine-hero">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <i class="bx bxs-book-open"></i>
+          <span>ARDRAZINE • ANNUAL EDITION 2026/2027</span>
+        </div>
+        <h1 class="hero-title">ARDRAZINE</h1>
+        <p class="hero-subtitle">
+          Majalah Digital Resmi OSIS SMA Ignatius Global School Palembang. Rekapitulasi eksklusif, dokumentasi program kerja, cerita inspiratif, dan jejak langkah satu tahun kepengurusan <strong>ARDRAXIS</strong>.
+        </p>
+
+        <div class="hero-meta-bar">
+          <div class="meta-pill">
+            <i class="bx bx-file"></i>
+            <span><strong>{{ total_pages }}</strong> Halaman</span>
+          </div>
+          <div class="meta-pill">
+            <i class="bx bx-check-shield"></i>
+            <span>Format HD WebP Cepat</span>
+          </div>
+          <div class="meta-pill">
+            <i class="bx bx-calendar-event"></i>
+            <span>1 Tahun Kepengurusan</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <button type="button" class="btn-read-now" id="btn-start-reading">
+            <i class="bx bx-book-reader"></i>
+            <span>Mulai Membaca</span>
+          </button>
+          
+          <div class="jump-wrapper">
+            <label for="quick-jump-select" class="sr-only">Lompat ke Halaman</label>
+            <select id="quick-jump-select" class="quick-jump-select" aria-label="Lompat ke Halaman">
+              <option value="" disabled selected>Lompat ke Halaman...</option>
+              {% for item in items %}
+              <option value="{{ item.order }}">Hal {{ item.order }} — {{ item.label }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Cover Showcase -->
+      <div class="hero-showcase">
+        <div class="cover-card" id="hero-cover-card" data-page="1" title="Klik untuk membuka Cover">
+          <div class="cover-shine"></div>
+          <picture>
+            <source srcset="{{ url_for('static', filename='img/ardrazine/' ~ items[0].filename) }}" type="image/webp">
+            {% if items[0].jpg_filename %}
+            <source srcset="{{ url_for('static', filename='img/ardrazine/' ~ items[0].jpg_filename) }}" type="image/jpeg">
+            {% endif %}
+            <img 
+              src="{{ url_for('static', filename='img/ardrazine/' ~ items[0].filename) }}" 
+              alt="Cover Ardrazine" 
+              class="cover-image"
+              width="{{ items[0].width }}"
+              height="{{ items[0].height }}"
+            />
+          </picture>
+          <div class="cover-badge">
+            <i class="bx bx-expand-alt"></i>
+            <span>Buka E-Magazine</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <div class="mag-grid">
-    {% for item in items %}
-    <figure class="mag-item">
-      <div class="mag-frame"{% if item.ratio %} style="aspect-ratio: {{ item.ratio }}"{% endif %}>
-        <template class="mag-source">{{ item.markup }}</template>
+  <!-- Magazine Gallery Grid Section -->
+  <section class="magazine-gallery-section" id="gallery-section">
+    <div class="gallery-header">
+      <div class="gallery-title-group">
+        <h2 class="gallery-heading">Koleksi Halaman</h2>
+        <p class="gallery-subheading">Jelajahi setiap lembar majalah atau klik halaman manapun untuk masuk ke mode pembaca layar penuh.</p>
       </div>
-    </figure>
-    {% endfor %}
+      <div class="gallery-counter">
+        <span>Menampilkan <strong>{{ total_pages }}</strong> Halaman</span>
+      </div>
+    </div>
+
+    <div class="mag-grid" id="magazine-grid">
+      {% for item in items %}
+      <article 
+        class="mag-card" 
+        data-page="{{ item.order }}"
+        data-title="{{ item.label }}"
+        data-webp="{{ url_for('static', filename='img/ardrazine/' ~ item.filename) }}"
+        {% if item.jpg_filename %}data-jpg="{{ url_for('static', filename='img/ardrazine/' ~ item.jpg_filename) }}"{% endif %}
+      >
+        <div class="card-inner">
+          <div class="card-media" style="aspect-ratio: {{ item.ratio }};">
+            <div class="card-skeleton"></div>
+            <picture>
+              <source srcset="{{ url_for('static', filename='img/ardrazine/' ~ item.filename) }}" type="image/webp">
+              {% if item.jpg_filename %}
+              <source srcset="{{ url_for('static', filename='img/ardrazine/' ~ item.jpg_filename) }}" type="image/jpeg">
+              {% endif %}
+              <img 
+                src="{{ url_for('static', filename='img/ardrazine/' ~ item.filename) }}" 
+                alt="Ardrazine - {{ item.label }}" 
+                class="mag-thumb"
+                loading="lazy"
+                decoding="async"
+                width="{{ item.width }}"
+                height="{{ item.height }}"
+                onload="this.classList.add('is-loaded'); if(this.previousElementSibling) this.previousElementSibling.remove();"
+              />
+            </picture>
+            <div class="card-overlay">
+              <span class="overlay-btn">
+                <i class="bx bx-search-alt"></i>
+                <span>Baca</span>
+              </span>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <span class="card-order">{{ "%02d" % item.order }}</span>
+            <span class="card-label">{{ item.label }}</span>
+          </footer>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <!-- Floating Action Buttons -->
+  <aside class="floating-controls">
+    <button type="button" class="fab-btn fab-reader" id="fab-open-reader" title="Buka Mode Reader" aria-label="Buka Mode Reader">
+      <i class="bx bx-book-open"></i>
+    </button>
+    <button type="button" class="fab-btn fab-top" id="fab-scroll-top" title="Kembali ke Atas" aria-label="Kembali ke Atas">
+      <i class="bx bx-up-arrow-alt"></i>
+    </button>
+  </aside>
+
+  <!-- Interactive Lightbox Reader Modal -->
+  <div 
+    class="reader-modal" 
+    id="reader-modal" 
+    role="dialog" 
+    aria-modal="true" 
+    aria-label="Pembaca Majalah Ardrazine" 
+    hidden
+  >
+    <div class="reader-backdrop" id="reader-backdrop"></div>
+
+    <div class="reader-container">
+      <!-- Top Toolbar -->
+      <header class="reader-toolbar-top">
+        <div class="reader-page-info">
+          <span class="brand-tag">ARDRAZINE</span>
+          <span class="page-indicator">
+            Halaman <strong id="reader-cur-page">1</strong> / <span id="reader-tot-page">{{ total_pages }}</span>
+          </span>
+          <span class="page-title-badge" id="reader-page-title">Cover Depan</span>
+        </div>
+
+        <div class="reader-actions">
+          <button type="button" class="reader-btn" id="reader-zoom-out" title="Perkecil (-)" aria-label="Perkecil">
+            <i class="bx bx-zoom-out"></i>
+          </button>
+          <span class="zoom-level" id="reader-zoom-val">100%</span>
+          <button type="button" class="reader-btn" id="reader-zoom-in" title="Perbesar (+)" aria-label="Perbesar">
+            <i class="bx bx-zoom-in"></i>
+          </button>
+          <button type="button" class="reader-btn" id="reader-zoom-reset" title="Reset Zoom (0)" aria-label="Reset Zoom">
+            <i class="bx bx-reset"></i>
+          </button>
+          <button type="button" class="reader-btn" id="reader-fullscreen" title="Layar Penuh (F)" aria-label="Layar Penuh">
+            <i class="bx bx-fullscreen"></i>
+          </button>
+          <a href="#" class="reader-btn" id="reader-download" download title="Unduh Halaman Ini" aria-label="Unduh Halaman">
+            <i class="bx bx-download"></i>
+          </a>
+          <button type="button" class="reader-btn reader-btn-close" id="reader-close" title="Tutup (Esc)" aria-label="Tutup">
+            <i class="bx bx-x"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Main Stage -->
+      <div class="reader-stage" id="reader-stage">
+        <button type="button" class="reader-nav-btn nav-prev" id="reader-prev-btn" title="Halaman Sebelumnya (←)" aria-label="Halaman Sebelumnya">
+          <i class="bx bx-chevron-left"></i>
+        </button>
+
+        <div class="reader-viewport" id="reader-viewport">
+          <div class="reader-canvas" id="reader-canvas">
+            <img 
+              id="reader-active-img" 
+              src="" 
+              alt="Halaman Majalah" 
+              draggable="false"
+            />
+          </div>
+        </div>
+
+        <button type="button" class="reader-nav-btn nav-next" id="reader-next-btn" title="Halaman Selanjutnya (→)" aria-label="Halaman Selanjutnya">
+          <i class="bx bx-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- Bottom Toolbar & Scrubber -->
+      <footer class="reader-toolbar-bottom">
+        <div class="scrubber-wrapper">
+          <button type="button" class="step-btn" id="reader-step-prev" aria-label="Sebelumnya">
+            <i class="bx bx-skip-previous"></i>
+          </button>
+          <input 
+            type="range" 
+            id="reader-slider" 
+            class="reader-slider" 
+            min="1" 
+            max="{{ total_pages }}" 
+            value="1" 
+            step="1"
+            aria-label="Penggeser Halaman"
+          />
+          <button type="button" class="step-btn" id="reader-step-next" aria-label="Selanjutnya">
+            <i class="bx bx-skip-next"></i>
+          </button>
+        </div>
+
+        <div class="reader-hints">
+          <span>Gunakan panah keyboard <strong>← / →</strong> atau geser layar untuk berpindah halaman. Tekan <strong>Esc</strong> untuk keluar.</span>
+        </div>
+      </footer>
+    </div>
   </div>
 </main>
 {% endblock %}
