@@ -27,10 +27,6 @@
             <span><strong>{{ total_pages }}</strong> Halaman</span>
           </div>
           <div class="meta-pill">
-            <i class="bx bx-check-shield"></i>
-            <span>Format HD WebP Cepat</span>
-          </div>
-          <div class="meta-pill">
             <i class="bx bx-calendar-event"></i>
             <span>1 Tahun Kepengurusan</span>
           </div>
@@ -41,15 +37,17 @@
             <i class="bx bx-book-reader"></i>
             <span>Mulai Membaca</span>
           </button>
-          
+
           <div class="jump-wrapper">
+            <i class="bx bx-list-ol jump-icon" aria-hidden="true"></i>
             <label for="quick-jump-select" class="sr-only">Lompat ke Halaman</label>
             <select id="quick-jump-select" class="quick-jump-select" aria-label="Lompat ke Halaman">
-              <option value="" disabled selected>Lompat ke Halaman...</option>
+              <option value="" disabled selected>Lompat ke halaman</option>
               {% for item in items %}
               <option value="{{ item.order }}">Hal {{ item.order }} — {{ item.label }}</option>
               {% endfor %}
             </select>
+            <i class="bx bx-chevron-down jump-caret" aria-hidden="true"></i>
           </div>
         </div>
       </div>

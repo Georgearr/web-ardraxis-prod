@@ -3,13 +3,14 @@
    ========================================================= */
 .about-page {
   min-height: 100vh;
-  padding: 86px 24px 40px;
+  padding: 50px 24px 40px;
+  margin-top: 0;
   background: radial-gradient(circle at top, #0e7b84 0, #044b51 45%, #022a2e 100%);
   display: flex;
   flex-direction: column;
   gap: 32px;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   color: #f8fafc;
   box-sizing: border-box;
   font-family: 'Bebas Neue', sans-serif;
@@ -22,8 +23,9 @@
   border-radius: 18px;
   background: linear-gradient(135deg, rgba(1, 82, 89, 0.96), rgba(2, 60, 66, 0.96));
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-  padding: 00px 33px 48px;
+  padding: 24px 24px 32px;
   overflow: hidden;
+  margin-top: 0;
 }
 
 .sekbid-title {
