@@ -1345,15 +1345,13 @@
       <h1 class="sekbid-title">${ardraxisCabinet[sekbid].sekbid}</h1>
 
       <div class="sekbid-image-card">
-          <div class="image-carousel-container">
-              <img
-                  src="${staticBase}img/fotokabinet/${ardraxisCabinet[sekbid].sekbid_image[0]}"
-                  alt="${ardraxisCabinet[sekbid].sekbid}"
-                  class="image-carousel-image"
-                  loading="lazy"
-                  decoding="async"
-              />
-          </div>
+          <img
+              src="${staticBase}img/fotokabinet/${ardraxisCabinet[sekbid].sekbid_image[0]}"
+              alt="${ardraxisCabinet[sekbid].sekbid}"
+              class="sekbid-image"
+              loading="lazy"
+              decoding="async"
+          />
       </div>
 
       <div class="sekbid-cloud sekbid-cloud-between-left"></div>
@@ -1386,15 +1384,13 @@
 
                 <div class="sekbid-card-body">
                     <div class="sekbid-card-photo-wrapper">
-                        <div class="carousel-container">
-                            <img
-                                src="${staticBase}img/fotokabinet/${member.images[0]}"
-                                alt="${member.name}"
-                                class="sekbid-card-photo carousel-image"
-                                loading="lazy"
-                                decoding="async"
-                            />
-                        </div>
+                        <img
+                            src="${staticBase}img/fotokabinet/${member.images[0]}"
+                            alt="${member.name}"
+                            class="sekbid-card-photo"
+                            loading="lazy"
+                            decoding="async"
+                        />
                     </div>
                     <p class="sekbid-card-name">${member.name}</p>
                     <p class="sekbid-card-nickname">(${member.nicknames})</p>

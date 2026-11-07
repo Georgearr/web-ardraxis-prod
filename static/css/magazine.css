@@ -52,8 +52,6 @@
   background: linear-gradient(135deg, #0d292b 0%, #16484c 50%, #1d696e 100%);
   color: #ffffff;
   padding: clamp(24px, 4vw, 48px) clamp(16px, 3vw, 32px);
-  /* Offset matches the fixed navbar so the hero sits flush under it. */
-  padding-top: calc(70px + clamp(24px, 4vw, 48px));
   margin-bottom: clamp(20px, 3vw, 32px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   overflow: hidden;
@@ -805,11 +803,7 @@
   }
 }
 
-@media (max-width: 992px) {
-  .magazine-hero {
-    padding-top: calc(55px + clamp(24px, 4vw, 48px));
-  }
-}
+
 
 @media (max-width: 860px) {
   .hero-container {
@@ -855,15 +849,11 @@
   .nav-next { right: 8px; }
 }
 
-@media (max-width: 768px) {
-  .magazine-hero {
-    padding-top: calc(46px + clamp(24px, 4vw, 48px));
-  }
-}
+
 
 @media (max-width: 540px) {
-  .magazine-hero {
-    padding-top: calc(44px + clamp(24px, 4vw, 48px));
+  .magazine-page {
+    padding-top: 0;
   }
 
   .hero-title {

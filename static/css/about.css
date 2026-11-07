@@ -221,63 +221,12 @@
   mix-blend-mode: screen;
 }
 
-.image-carousel-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 500px;
-}
-
-.image-carousel-image {
-  position: absolute;
-  top: 0;
-  left: 0;
+.sekbid-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  transform: translateX(100%);
-  opacity: 0;
-  animation: image-carousel-slide 15s infinite;
-  will-change: transform, opacity;
-  z-index: 1;
-}
-
-.image-carousel-image:nth-child(1) {
-  animation-delay: 0s;
-  transform: translateX(0);
-  opacity: 1;
-}
-
-.image-carousel-image:nth-child(2) {
-  animation-delay: 5s;
-}
-
-.image-carousel-image:nth-child(3) {
-  animation-delay: 10s;
-}
-
-@keyframes image-carousel-slide {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  3% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  30% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  33.33% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
+  display: block;
 }
 
 /* =========================================================
@@ -369,77 +318,12 @@
   box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45);
 }
 
-.carousel-container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
 .sekbid-card-photo {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center top;
   display: block;
-}
-
-.carousel-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  transform: translateX(100%) scale(1.2);
-  opacity: 0;
-  animation: carousel-slide 15s infinite;
-  will-change: transform, opacity;
-}
-
-.carousel-image:nth-child(1) {
-  animation-delay: 0s;
-  transform: translateX(0) scale(1.1);
-  opacity: 1;
-}
-
-.carousel-image:nth-child(2) {
-  animation-delay: 5s;
-}
-
-.carousel-image:nth-child(3) {
-  animation-delay: 10s;
-}
-
-@keyframes carousel-slide {
-  0% {
-    transform: translateX(100%) scale(1.2);
-    opacity: 0;
-  }
-  3% {
-    transform: translateX(0) scale(1.2);
-    opacity: 1;
-  }
-  10% {
-    transform: translateX(0) scale(1.15);
-  }
-  20% {
-    transform: translateX(0) scale(1.1);
-  }
-  30% {
-    transform: translateX(0) scale(1.05);
-    opacity: 1;
-  }
-  31% {
-    transform: translateX(0) scale(1);
-  }
-  33.33% {
-    transform: translateX(-100%) scale(0.9);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(-100%) scale(0.9);
-    opacity: 0;
-  }
 }
 
 .sekbid-card-name {
@@ -684,16 +568,11 @@
     min-height: auto;
   }
 
-  .image-carousel-container {
-    height: auto;
-    min-height: 0;
-    aspect-ratio: 16 / 9;
-  }
-
-  .image-carousel-image {
+  .sekbid-image {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    object-position: center top;
   }
 
   .sekbid-title {
