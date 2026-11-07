@@ -341,6 +341,6 @@ extra_css %}
   </div>
 </div>
 {% endblock %} {% block extra_js %}
-<script src="{{ url_for('static', filename='js/scroll_reveal.js') }}"></script>
-<script src="{{ url_for('static', filename='js/ardrazine_modal.js') }}"></script>
+<script src="{{ url_for('static', filename='js/scroll_reveal.js') }}" defer></script>
+<script src="{{ url_for('static', filename='js/ardrazine_modal.js') }}" defer></script>
 {% endblock %}
